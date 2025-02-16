@@ -1,11 +1,11 @@
 package lotto.model.winning;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.Lottos;
 
 public class WinningLotto {
 
@@ -18,16 +18,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningResultResponses calculateWinning(final Lottos lottos) {
+    public WinningResultResponses calculateWinning(final List<Lotto> lottos) {
         Map<Rank, Integer> ranks = findRanks(lottos);
         return new WinningResultResponses(ranks);
-    }
-
-    private Map<Rank, Integer> findRanks(final Lottos lottos) {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        initRanks(ranks);
-        saveMatchingRanks(lottos, ranks);
-        return ranks;
     }
 
     private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
@@ -36,14 +29,21 @@ public class WinningLotto {
         }
     }
 
+    private Map<Rank, Integer> findRanks(final List<Lotto> lottos) {
+        Map<Rank, Integer> ranks = new HashMap<>();
+        initRanks(ranks);
+        saveMatchingRanks(lottos, ranks);
+        return ranks;
+    }
+
     private void initRanks(final Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
     }
 
-    private void saveMatchingRanks(final Lottos lottos, final Map<Rank, Integer> ranks) {
-        for (Lotto lotto : lottos.getLottos()) {
+    private void saveMatchingRanks(final List<Lotto> lottos, final Map<Rank, Integer> ranks) {
+        for (Lotto lotto : lottos) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
             Rank findRank = Rank.findBy(matchingCount, lotto.hasBonus(bonusNumber));
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);

@@ -1,13 +1,13 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lotto.controller.generator.LottoNumbersGenerator;
 import lotto.model.Money;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoMachine;
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.Lottos;
-import lotto.model.lotto.generator.LottoNumbersGenerator;
 import lotto.model.winning.WinningLotto;
 import lotto.model.winning.WinningResultResponses;
 import lotto.view.InputView;
@@ -26,36 +26,51 @@ public class LottoController {
     public void run() {
         try {
             Money buyingAmount = new Money(inputView.readBuyingAmount());
-            Lottos lottoTickets = issueRandomLottoTickets(buyingAmount);
+            List<Lotto> lottoTickets = issueRandomLottoTickets(buyingAmount);
             printIssuedLottoTickets(lottoTickets);
 
             WinningLotto winningLotto = createWinningLotto();
             WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottoTickets);
-            outputView.printWinningResult(winningResultResponses);
-            outputView.printWinningRatio(
-                    buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
+            printWinningResult(winningResultResponses, buyingAmount);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
         }
     }
 
     private WinningLotto createWinningLotto() {
-        List<Integer> winningLottoNumbers = inputView.readWinningLotto();
-        int bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(winningLottoNumbers), LottoNumber.draw(bonusNumber));
+        Lotto winningLotto = new Lotto(inputView.readWinningLotto());
+        LottoNumber bonusNumber = LottoNumber.draw(inputView.readBonusNumber());
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    private Lottos issueRandomLottoTickets(final Money buyingAmount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.issueAutomatic(buyingAmount, new LottoNumbersGenerator());
+    private List<Lotto> issueRandomLottoTickets(final Money buyingAmount) {
+        LottoMachine lottoMachine = new LottoMachine(buyingAmount);
+        LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
+                LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
+        );
+        outputView.printChangeAmount(lottoMachine.calculateChange());
+        return lottoMachine.issueAutomatic(numbersGenerator);
     }
 
-    private void printIssuedLottoTickets(final Lottos lottoTickets) {
-        List<List<Integer>> issuedLottoNumbers = lottoTickets.getLottos()
-                .stream()
-                .map(Lotto::getNumbers)
-                .toList();
+    private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {
+        List<List<Integer>> issuedLottoNumbers = new ArrayList<>();
+        for (Lotto lottoTicket : lottoTickets) {
+            addSortedLottoNumbers(lottoTicket, issuedLottoNumbers);
+        }
         outputView.printIssuedLottos(issuedLottoNumbers);
+    }
+
+    private void addSortedLottoNumbers(final Lotto lottoTicket, final List<List<Integer>> issuedLottoNumbers) {
+        issuedLottoNumbers.add(new ArrayList<>(lottoTicket.getNumbers())
+                .stream()
+                .sorted()
+                .toList());
+    }
+
+    private void printWinningResult(final WinningResultResponses winningResultResponses, final Money buyingAmount) {
+        outputView.printWinningResult(winningResultResponses);
+        outputView.printWinningRatio(
+                buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
     }
 
 }
