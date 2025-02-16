@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
@@ -7,19 +8,15 @@ public class WinningResult {
 
     private final Map<LottoAward, Integer> winningResult;
 
-    public WinningResult(Map<LottoAward, Integer> winningResult) {
+    public WinningResult(final Map<LottoAward, Integer> winningResult) {
         this.winningResult = winningResult;
     }
 
-    public Map<LottoAward, Integer> getWinningResult() {
-        return this.winningResult;
-    }
-
     public double calculateProfitRate(final LottoPrice lottoPrice) {
-        return lottoPrice.divideFrom(calculateTotalAmount());
+        return lottoPrice.divideFrom(calculateTotalProfit());
     }
 
-    private int calculateTotalAmount() {
+    private int calculateTotalProfit() {
         return winningResult.entrySet().stream()
                 .mapToInt((entry) -> entry.getKey().getAmount() * entry.getValue())
                 .sum();
@@ -36,5 +33,9 @@ public class WinningResult {
     @Override
     public int hashCode() {
         return Objects.hashCode(winningResult);
+    }
+
+    public Map<LottoAward, Integer> getWinningResult() {
+        return Collections.unmodifiableMap(this.winningResult);
     }
 }
