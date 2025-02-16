@@ -19,6 +19,9 @@ import model.LottoFactory;
 
 public class OutputView {
 
+    private OutputView() {
+    }
+
     public static void printLottoPurchaseGuidance() {
         print(LOTTO_PURCHASE_GUIDANCE.getMessage());
     }
