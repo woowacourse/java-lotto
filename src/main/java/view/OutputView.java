@@ -2,7 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.Rank;
-import domain.Ticket;
+import domain.TicketMachine;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +19,8 @@ public class OutputView {
         return new OutputView();
     }
 
-    public void printPurchaseResult(Ticket ticket) {
-        System.out.printf(PURCHASE_RESULT, ticket.getQuantity());
+    public void printPurchaseResult(TicketMachine ticketMachine) {
+        System.out.printf(PURCHASE_RESULT, ticketMachine.getQuantity());
         changeLine();
     }
 

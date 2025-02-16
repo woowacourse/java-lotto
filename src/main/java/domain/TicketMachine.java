@@ -2,18 +2,18 @@ package domain;
 
 import static error.ErrorMessage.INVALID_TICKET_PRICE;
 
-public class Ticket {
+public class TicketMachine {
     private static final int TICKET_PRICE = 1_000;
     private final int quantity;
 
-    private Ticket(int quantity) {
+    private TicketMachine(int quantity) {
         this.quantity = quantity;
     }
 
-    public static Ticket create(int price) {
+    public static TicketMachine create(int price) {
         validatePrice(price);
         int quantity = calculateQuantity(price);
-        return new Ticket(quantity);
+        return new TicketMachine(quantity);
     }
 
     public int getQuantity() {
