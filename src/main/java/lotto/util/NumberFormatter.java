@@ -1,4 +1,4 @@
-package lotto.view.util;
+package lotto.util;
 
 import java.text.NumberFormat;
 import java.util.Locale;

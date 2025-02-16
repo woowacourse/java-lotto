@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import lotto.model.winning.WinningResultResponse;
 import lotto.model.winning.WinningResultResponses;
-import lotto.view.util.NumberFormatter;
+import lotto.util.NumberFormatter;
 
 public class OutputView {
 

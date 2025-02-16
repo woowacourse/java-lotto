@@ -5,7 +5,7 @@ import java.util.List;
 
 import lotto.controller.generator.NumbersGenerator;
 import lotto.model.Money;
-import lotto.view.util.NumberFormatter;
+import lotto.util.NumberFormatter;
 
 public class LottoMachine {
 
