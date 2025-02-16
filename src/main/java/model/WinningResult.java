@@ -13,7 +13,7 @@ public class WinningResult {
         validateRankSize(lottoRanks);
         this.lottoRanks = Map.copyOf(lottoRanks);
     }
-    
+
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
         lottoRanks.forEach((lottoRank, count) -> {
             if (count < 0) {
@@ -29,23 +29,20 @@ public class WinningResult {
             final LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
             lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
         }
+
         return new WinningResult(lottoRanks);
     }
 
     private long calculateRevenue() {
-        long revenue = 0;
-        for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            revenue += entry.getKey().getPrizeMoney() * entry.getValue();
-        }
-        return revenue;
+        return lottoRanks.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
     }
 
     private int calculateTotalLottoCount() {
-        int totalLottoCount = 0;
-        for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            totalLottoCount += entry.getValue();
-        }
-        return totalLottoCount;
+        return lottoRanks.entrySet().stream()
+                .mapToInt(Map.Entry::getValue)
+                .sum();
     }
 
     private int calculateTotalLottoPrice() {
