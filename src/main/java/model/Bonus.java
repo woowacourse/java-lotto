@@ -18,7 +18,7 @@ public class Bonus {
         return new Bonus(number, lotto);
     }
 
-    public Bonus(final Integer number, final Lotto lotto) {
+    private Bonus(final Integer number, final Lotto lotto) {
         validateRange(number);
         validateDuplicateWithLotto(number, lotto);
         this.number = number;
