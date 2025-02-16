@@ -22,10 +22,6 @@ public class LottoFactory {
         createLottos();
     }
 
-    public int getLottoSize() {
-        return lottos.size();
-    }
-
     public void createLottos() {
         int totalLotto = money.calculateTotalLotto();
         for (int i = 0; i < totalLotto; i++) {
@@ -66,5 +62,9 @@ public class LottoFactory {
             result.put(lottoMatch, 0);
         }
         return result;
+    }
+
+    public int getLottoSize() {
+        return lottos.size();
     }
 }
