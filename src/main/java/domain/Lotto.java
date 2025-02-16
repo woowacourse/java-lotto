@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +10,9 @@ public class Lotto {
 
     private Lotto(List<LottoNumber> numbers) {
         validate(numbers);
-        numbers.sort(Comparator.comparingInt(LottoNumber::getValue));
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .sorted(Comparator.comparingInt(LottoNumber::getValue))
+                .toList();
     }
 
     public static Lotto from(List<LottoNumber> numbers) {
@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public List<LottoNumber> getNumbers() {
-        return Collections.unmodifiableList(numbers);
+        return numbers;
     }
 
     private void validate(List<LottoNumber> numbers) {
