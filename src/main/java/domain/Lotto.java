@@ -1,6 +1,5 @@
 package domain;
 
-import infrastructure.constants.Constants;
 import domain.vo.LottoNumber;
 
 import java.util.HashSet;
