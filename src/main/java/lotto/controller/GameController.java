@@ -6,11 +6,18 @@ import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.service.LottoMoneyService;
+import lotto.service.LottoService;
+import lotto.service.WinningLottoService;
 import lotto.util.ObjectCreator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class GameController {
+
+    private final LottoService lottoService = new LottoService();
+    private final LottoMoneyService lottoMoneyService = new LottoMoneyService();
+    private final WinningLottoService winningLottoService = new WinningLottoService();
 
     public void run() {
         LottoMoney lottoMoney = saveLottoMoney();
@@ -36,7 +43,7 @@ public class GameController {
     private LottoMoney createLottoMoney() {
         return ObjectCreator.useInputToCreateObject(() -> {
             String money = InputView.readLottoMoney();
-            return new LottoMoney(money);
+            return lottoMoneyService.createLottoMoney(money);
         });
     }
 
@@ -64,7 +71,7 @@ public class GameController {
     private Lotto createWinningLottoNumbers() {
         return ObjectCreator.useInputToCreateObject(() -> {
             String numbers = InputView.readWinningNumbers();
-            return new Lotto(numbers);
+            return lottoService.createLotto(numbers);
         });
     }
 
@@ -76,10 +83,10 @@ public class GameController {
         return winningLotto;
     }
 
-    private WinningLotto createWinningLottoWithBonus(Lotto winningNumbers){
+    private WinningLotto createWinningLottoWithBonus(Lotto winningNumbers) {
         return ObjectCreator.useInputToCreateObject(() -> {
             String bonus = InputView.readBonusBall();
-            return new WinningLotto(winningNumbers, bonus);
+            return winningLottoService.createWinningLotto(winningNumbers, bonus);
         });
     }
 
