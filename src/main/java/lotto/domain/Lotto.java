@@ -7,7 +7,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = List.copyOf(numbers);
     }
 
     public MatchResultDto deriveMatchResult(WinningNumber winningNumber, BonusNumber bonusNumber) {

@@ -14,7 +14,7 @@ public class WinningNumber {
         validateSize(numbers);
         validateDuplicate(numbers);
         validateRange(numbers);
-        this.winningNumbers = numbers;
+        this.winningNumbers = List.copyOf(numbers);
     }
 
     public int countMatchingNumber(List<Integer> numbers) {
