@@ -4,6 +4,9 @@ import static lotto.common.constant.BusinessRule.*;
 import static lotto.common.constant.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +37,17 @@ class CashierTest {
         assertThatThrownBy(() -> new Cashier(NotDivisibleByLottoPrice))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_NOT_DIVIDED_BY_STANDARD.getMessage());
+    }
+
+    @Test
+    @DisplayName("로또 매칭 결과를 통해, 로또 수익률을 계산한다.")
+    void testCalculateProfit() {
+        Cashier cashier = new Cashier(LOTTO_PRICE * 10);
+        Map<MatchInfo, Integer> map = new HashMap<>();
+        map.put(MatchInfo.MATCH_THREE, 3);
+
+        Profit profit = cashier.calculateProfit(map, cashier.money());
+
+        assertThat(profit.rate()).isEqualTo(1.5);
     }
 }

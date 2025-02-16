@@ -10,23 +10,20 @@ import lotto.domain.MatchCount;
 import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 import lotto.domain.Wallet;
-import lotto.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
-    private final LottoService lottoService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Controller(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public Controller(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
-        Cashier cashier = requestToCashier();
+        Cashier cashier = requestCashier();
         int numberOfLotto = cashier.getNumberOfLotto();
         Wallet wallet = new Wallet(numberOfLotto);
         outputView.print(cashier.getNumberOfLotto() + "개를 구매했습니다.\n");
@@ -36,10 +33,11 @@ public class Controller {
 
         int bonus = requestBonus(matchLotto);
 
-        Map<MatchInfo, Integer> map = getMatchStatisticsMap(wallet, matchLotto, bonus);
+        List<MatchCount> matchCount = wallet.matchCount(matchLotto, bonus);
+        Map<MatchInfo, Integer> map = cashier.convertToMatchResult(matchCount);
         outputView.printStatics(map);
 
-        Profit profit = lottoService.calculateProfit(map, cashier);
+        Profit profit = cashier.calculateProfit(map, cashier.money());
         outputView.printProfit(profit);
     }
 
@@ -55,13 +53,7 @@ public class Controller {
         }
     }
 
-    private Map<MatchInfo, Integer> getMatchStatisticsMap(Wallet wallet, Lotto matchLotto,
-        int bonus) {
-        List<MatchCount> matchCount = wallet.matchCount(matchLotto, bonus);
-        return lottoService.convertToMap(matchCount);
-    }
-
-    private Cashier requestToCashier() {
+    private Cashier requestCashier() {
         while (true) {
             try {
                 int money = requestNumber("구입금액을 입력해 주세요.");

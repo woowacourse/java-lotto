@@ -1,4 +1,10 @@
 package lotto.domain;
 
-public record Profit(double rate, boolean isProfit) {
+import static lotto.common.constant.BusinessRule.*;
+
+public record Profit(double rate) {
+
+    public boolean isProfit() {
+        return rate >= PROFIT_BENCHMARK;
+    }
 }
