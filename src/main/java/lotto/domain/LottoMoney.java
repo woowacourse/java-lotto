@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.util.Constant.DEFAULT_VALUE_ZERO;
 import static lotto.util.Constant.LOTTO_MONEY_UNIT;
 import static lotto.util.ErrorHandler.INVALID_AMOUNT;
 import static lotto.util.ErrorHandler.INVALID_NUMBER;
@@ -31,7 +32,7 @@ public class LottoMoney {
     }
 
     private void validateUnit(int amount) {
-        if (amount % LOTTO_MONEY_UNIT != 0) {
+        if (amount % LOTTO_MONEY_UNIT != DEFAULT_VALUE_ZERO) {
             throw INVALID_UNIT.getException();
         }
     }
