@@ -1,4 +1,4 @@
-package constant;
+package constant.message;
 
 public enum ExceptionMessage {
 
@@ -21,11 +21,19 @@ public enum ExceptionMessage {
     private static final String PREFIX = "[ERROR] ";
     private final String message;
 
-    ExceptionMessage(String message) {
+    ExceptionMessage(final String message) {
         this.message = message;
     }
 
-    public String getMessage(Object... args) {
-        return PREFIX + String.format(message, args);
+    public String getMessage() {
+        return PREFIX + message;
+    }
+
+    public String getMessage(final int arg) {
+        return PREFIX + String.format(message, arg);
+    }
+
+    public String getMessage(final int arg1, final int arg2) {
+        return PREFIX + String.format(message, arg1, arg2);
     }
 }

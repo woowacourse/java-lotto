@@ -1,82 +1,75 @@
 package model;
 
-import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static constant.ExceptionMessage.INVALID_LOTTO_RANGE;
-import static constant.ExceptionMessage.INVALID_LOTTO_SIZE;
-import static constant.ExceptionMessage.INVALID_LOTTO_FORMAT;
-import static constant.ExceptionMessage.DUPLICATE_LOTTO_NUMBER;
+import static constant.message.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_RANGE;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_SIZE;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_FORMAT;
+import static constant.message.ExceptionMessage.DUPLICATE_LOTTO_NUMBER;
 import static constant.LottoConstant.LOTTO_NUMBER_MAX_RANGE;
 import static constant.LottoConstant.LOTTO_NUMBER_MIN_RANGE;
 import static constant.LottoConstant.LOTTO_SEPARATOR;
 import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import util.Parser;
+import util.Validator;
 
 public class Lotto {
 
     private final List<Integer> numbers;
 
     public static Lotto of(final String input) {
-        validateNullOrBlank(input);
-        List<Integer> numbers = parseLotto(input);
+        Validator.validateNullOrBlank(input, INVALID_INPUT_NULL_OR_BLANK.getMessage());
+
+        List<Integer> numbers = Parser.separateBySeparator(input, LOTTO_SEPARATOR).stream()
+                .peek(string -> Validator.validateInteger(string, INVALID_LOTTO_FORMAT.getMessage()))
+                .map(Parser::convertStringToInteger)
+                .toList();
+
+        return from(numbers);
+    }
+
+    public static Lotto from(final List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
-    public Lotto(final List<Integer> numbers) {
-        validateSize(numbers);
-        validateRange(numbers);
-        validateDuplicate(numbers);
+    private Lotto(final List<Integer> numbers) {
+        Validator.validateSize(numbers, LOTTO_TICKET_SIZE, INVALID_LOTTO_SIZE.getMessage(LOTTO_TICKET_SIZE));
+        numbers.forEach(number -> Validator.validateRange(number, LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE,
+                INVALID_LOTTO_RANGE.getMessage(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE)));
+        Validator.validateDuplicate(numbers, DUPLICATE_LOTTO_NUMBER.getMessage());
+
         this.numbers = numbers;
     }
 
-    private static void validateNullOrBlank(String input) {
-        if (input == null || input.isBlank()) {
-            throw new IllegalArgumentException(INVALID_INPUT_NULL_OR_BLANK.getMessage());
+    public boolean contains(final int number) {
+        return numbers.contains(number);
+    }
+
+    public int matchCount(final Lotto issuedTicket) {
+        return (int) issuedTicket.numbers.stream()
+                .filter(this.numbers::contains)
+                .count();
+    }
+
+    public String toString() {
+        return numbers.toString();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
         }
-    }
-
-    private static List<Integer> parseLotto(String input) {
-        return Arrays.stream(input.split(LOTTO_SEPARATOR))
-                .map(String::trim)
-                .map(Lotto::parseInteger)
-                .toList();
-    }
-
-    private static int parseInteger(String input) {
-        validateInteger(input);
-        return Integer.parseInt(input);
-    }
-
-    private static void validateInteger(final String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_LOTTO_FORMAT.getMessage());
+        if (!(object instanceof Lotto other)) {
+            return false;
         }
+        return Objects.equals(numbers, other.numbers);
     }
 
-    private static void validateSize(final List<Integer> inputs) {
-        if (inputs.size() != LOTTO_TICKET_SIZE) {
-            throw new IllegalArgumentException(INVALID_LOTTO_SIZE.getMessage(LOTTO_TICKET_SIZE));
-        }
-    }
-
-    private void validateRange(final List<Integer> inputs) {
-        if (inputs.stream().anyMatch(num -> num < LOTTO_NUMBER_MIN_RANGE || num > LOTTO_NUMBER_MAX_RANGE)) {
-            throw new IllegalArgumentException(
-                    INVALID_LOTTO_RANGE.getMessage(LOTTO_NUMBER_MIN_RANGE, LOTTO_NUMBER_MAX_RANGE));
-        }
-    }
-
-    private void validateDuplicate(final List<Integer> inputs) {
-        if (new HashSet<>(inputs).size() != inputs.size()) {
-            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
-        }
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }

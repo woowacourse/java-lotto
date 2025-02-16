@@ -1,9 +1,9 @@
 package model;
 
-import static constant.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
-import static constant.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
-import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_FORMAT;
-import static constant.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
+import static constant.message.ExceptionMessage.INVALID_INPUT_NULL_OR_BLANK;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_MIN_PURCHASE;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_PURCHASE_FORMAT;
+import static constant.message.ExceptionMessage.INVALID_LOTTO_PURCHASE_UNIT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
