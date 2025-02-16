@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import static lotto.domain.Rank.FIRST_PRIDE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,10 +35,26 @@ class RankTest {
     void 기본_맵을_생성한다() {
 
         //given
-        EnumMap<Rank, Integer> defaultMap = Rank.makeDefaultMap();
+        Map<Rank, Integer> defaultMap = Rank.makeDefaultMap();
 
         //when & then
         assertThat(defaultMap.size()).isEqualTo(6);
-        assertThat(defaultMap.get(Rank.FIRST_PRIDE)).isEqualTo(0);
+        assertThat(defaultMap.get(FIRST_PRIDE)).isEqualTo(0);
+    }
+
+    @DisplayName("로또 결과에 따른 당첨 금액을 반환한다")
+    @Test
+    void 로또_결과에_따른_당첨_금액을_반환한다() {
+
+        //given
+        EnumMap<Rank, Integer> lottoResult = new EnumMap<>(Rank.class);
+        lottoResult.put(FIRST_PRIDE, 1);
+
+        //when
+        int prize = Rank.calculateTotalPrize(lottoResult);
+
+        //then
+        assertThat(prize).isEqualTo(FIRST_PRIDE.getPrize());
+
     }
 }

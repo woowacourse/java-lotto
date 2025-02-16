@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.HashSet;
 import java.util.List;
 import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
@@ -15,8 +16,9 @@ class WinningNumbersTest {
     void 보너스_번호는_당첨_번호와_중복될_수_없다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6))));
 
         //when & then
         assertThatThrownBy(() -> new WinningNumbers(lotto, new LottoNumber(6)))
@@ -29,8 +31,9 @@ class WinningNumbersTest {
     void 로또와_비교하여_같은_숫자의_갯수를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6))));
         WinningNumbers winningNumbers = new WinningNumbers(lotto, new LottoNumber(8));
 
         //when
@@ -46,11 +49,11 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6)));
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6))));
         Lotto lotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(7)));
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(7))));
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, new LottoNumber(7));
 
@@ -67,11 +70,11 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6)));
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6))));
         Lotto lotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(8)));
+                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(8))));
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, new LottoNumber(7));
 

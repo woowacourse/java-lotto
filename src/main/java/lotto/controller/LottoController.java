@@ -1,39 +1,40 @@
-package lotto;
+package lotto.controller;
 
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.function.Supplier;
 import lotto.domain.AmountPaid;
 import lotto.domain.LottoBundle;
-import lotto.domain.Rank;
+import lotto.domain.LottoGenerator;
+import lotto.domain.LottoResult;
 import lotto.domain.WinningNumbers;
 import lotto.exception.LottoException;
-import lotto.service.LottoService;
 import lotto.utils.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
 
-    public LottoMachine(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
         AmountPaid amountPaid = makeAmountPaid();
-        LottoBundle lottoBundle = makeLottoBundle(amountPaid);
-        outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
-        outputView.lottoStatusPrint(lottoBundle);
-        WinningNumbers winningNumbers = makeWinningNumber();
-        EnumMap<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoBundle lottoBundle = lottoGenerator.makeLottoBundle(amountPaid.getLottoQuantity());
 
-        outputView.lottoStatisticsPrint(lottoResult, lottoService.calculateTotalResult(lottoResult, amountPaid));
+        outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
+        outputView.lottoStatusPrint(lottoBundle.getLottoBundle());
+
+        WinningNumbers winningNumbers = makeWinningNumber(lottoGenerator);
+        LottoResult lottoResult = new LottoResult(lottoBundle.makeStatistics(winningNumbers));
+
+        outputView.lottoStatisticsPrint(lottoResult.getResult(),
+                amountPaid.calculateProfitRate(lottoResult.calculateTotalPrize()));
     }
 
 
@@ -47,14 +48,10 @@ public class LottoMachine {
         });
     }
 
-    private LottoBundle makeLottoBundle(AmountPaid amountPaid) {
-        return retryUntilValidInput(() -> lottoService.makeLottoBundle(amountPaid));
-    }
-
-    private WinningNumbers makeWinningNumber() {
+    private WinningNumbers makeWinningNumber(LottoGenerator lottoGenerator) {
         return retryUntilValidInput(() -> {
             try {
-                return lottoService.makeWinningNumbers(inputView.winningNumberInput(), inputView.bonusNumberInput());
+                return lottoGenerator.makeWinningNumbers(inputView.winningNumberInput(), inputView.bonusNumberInput());
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }
