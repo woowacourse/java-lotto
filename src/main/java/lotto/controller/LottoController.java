@@ -40,9 +40,9 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        List<Integer> winningLottoNumbers = inputView.readWinningLotto();
-        int bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(winningLottoNumbers), LottoNumber.draw(bonusNumber));
+        Lotto winningLotto = new Lotto(inputView.readWinningLotto());
+        LottoNumber bonusNumber = LottoNumber.draw(inputView.readBonusNumber());
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
     private Lottos issueRandomLottoTickets(final Money buyingAmount) {
