@@ -1,5 +1,12 @@
 import static org.assertj.core.api.Assertions.assertThat;
 
+import domain.Lotto;
+import domain.LottoManager;
+import domain.Money;
+import domain.Number;
+import domain.WinningInfo;
+import domain.WinningLotto;
+import domain.WinningResult;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,3 +1,8 @@
+package view;
+
+import domain.Lotto;
+import domain.WinningInfo;
+import domain.WinningResult;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

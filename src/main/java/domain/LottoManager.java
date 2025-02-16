@@ -1,5 +1,8 @@
+package domain;
+
 import java.util.ArrayList;
 import java.util.List;
+import util.RandomNumbersGenerator;
 
 public class LottoManager {
     public List<Lotto> generateLottos(final int lottoCount) {

@@ -1,5 +1,12 @@
+import domain.Lotto;
+import domain.LottoManager;
+import domain.Money;
+import domain.WinningLotto;
+import domain.WinningResult;
 import java.io.IOException;
 import java.util.List;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
     private final InputView inputView;

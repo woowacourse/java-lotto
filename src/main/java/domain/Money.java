@@ -1,3 +1,5 @@
+package domain;
+
 public class Money {
     private final int value;
 

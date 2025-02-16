@@ -1,3 +1,5 @@
+package util;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -9,8 +11,8 @@ public class RandomNumbersGenerator {
 
         Random random = new Random();
         Set<Integer> numbers = new HashSet<>();
-        while(numbers.size() < count) {
-            int number = random.nextInt(end-start+1) + start;
+        while (numbers.size() < count) {
+            int number = random.nextInt(end - start + 1) + start;
             numbers.add(number);
         }
         return numbers.stream()

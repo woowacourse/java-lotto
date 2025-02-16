@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.EnumMap;
 
 public class WinningResult {

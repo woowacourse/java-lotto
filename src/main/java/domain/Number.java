@@ -1,3 +1,5 @@
+package domain;
+
 public class Number {
     public static final int MIN = 1;
     public static final int MAX = 45;

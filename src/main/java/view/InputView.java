@@ -1,3 +1,9 @@
+package view;
+
+import domain.Lotto;
+import domain.Money;
+import domain.Number;
+import domain.WinningLotto;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +24,7 @@ public class InputView {
 
     public WinningLotto inputWinningLotto() throws IOException {
         Lotto winningNumbers = inputWinningNumbers();
-        Number bonusNumber = inputBonusNumber();
+        domain.Number bonusNumber = inputBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 
@@ -33,7 +39,7 @@ public class InputView {
         return new Lotto(winningNumbers);
     }
 
-    private Number inputBonusNumber() throws IOException {
+    private domain.Number inputBonusNumber() throws IOException {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusRawInput = bufferedReader.readLine();
         return Number.from(bonusRawInput);

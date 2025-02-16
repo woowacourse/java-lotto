@@ -2,6 +2,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import domain.Lotto;
+import domain.Number;
+import domain.WinningLotto;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +21,7 @@ class WinningLottoTest {
     void should_throw_exception_when_bonus_number_is_in_winning_numbers() {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Number bonusNumber = new Number(1);
+        domain.Number bonusNumber = new Number(1);
 
         // when & then
         assertThatThrownBy(() -> {
@@ -27,9 +30,9 @@ class WinningLottoTest {
     }
 
     static Stream<Arguments> correctMatchedCountArguments() {
-        return Stream.of(arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7)),
+        return Stream.of(arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new domain.Number(7)),
                         new Lotto(List.of(1, 2, 3, 43, 44, 45)), 3),
-                arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7)),
+                arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new domain.Number(7)),
                         new Lotto(List.of(1, 2, 3, 7, 44, 45)), 3)
 
         );
@@ -52,7 +55,7 @@ class WinningLottoTest {
     void should_return_correct_bonus_match(int bonusNumber, boolean expected) {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 45));
-        Number bonus = new Number(bonusNumber);
+        domain.Number bonus = new domain.Number(bonusNumber);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
