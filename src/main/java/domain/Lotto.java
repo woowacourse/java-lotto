@@ -23,6 +23,10 @@ public class Lotto {
         this.numbers = lottoNumbers;
     }
 
+    public boolean isDuplicateNumber(LottoNumber lottoNumber){
+        return numbers.contains(lottoNumber);
+    }
+
     private void validateLottoDuplicate(List<LottoNumber> numbers) {
         HashSet<LottoNumber> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {

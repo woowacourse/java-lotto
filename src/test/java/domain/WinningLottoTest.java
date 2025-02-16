@@ -45,7 +45,7 @@ class WinningLottoTest {
     @Test
     void lottoResultTest() {
         // given
-        Lottos lottos = new Lottos(3000, new RandomNumberGenerate());
+        Lottos lottos = new Lottos(4000, new RandomNumberGenerate());
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // when
         Map<WinningCount, Integer> lottosResult = winningLotto.getLottosResult(lottos);
@@ -54,12 +54,13 @@ class WinningLottoTest {
         assertThat(lottosResult.getOrDefault(WinningCount.THREE, 0)).isEqualTo(1);
         assertThat(lottosResult.getOrDefault(WinningCount.FOUR, 0)).isEqualTo(0);
         assertThat(lottosResult.getOrDefault(WinningCount.FIVE, 0)).isEqualTo(1);
-        assertThat(lottosResult.getOrDefault(WinningCount.FIVE_BONUS, 0)).isEqualTo(0);
+        assertThat(lottosResult.getOrDefault(WinningCount.FIVE_BONUS, 0)).isEqualTo(1);
         assertThat(lottosResult.getOrDefault(WinningCount.SIX, 0)).isEqualTo(1);
     }
 
     static class RandomNumberGenerate implements RandomGenerator {
-        private static List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6, 1, 2, 3, 8, 9, 10, 1, 2, 3, 4, 5, 10);
+        private static List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6, 1, 2, 3, 8, 9, 10, 1, 2, 3, 4, 5, 10,
+                1,2,3,4,5,7);
         private int index = 0;
 
         @Override

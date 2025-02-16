@@ -1,7 +1,6 @@
 package domain;
 
 import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static exception.ExceptionMessage.LOTTO_RANGE_ERROR;
 
 import constant.WinningCount;
 import exception.LottoException;
@@ -11,28 +10,17 @@ import java.util.Map;
 
 public class WinningLotto {
     private final Lotto lotto;
-    private final Integer bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, Integer bonusNumber) {
+    public WinningLotto(List<Integer> numbers, Integer bonus) {
         this.lotto = new Lotto(numbers);
-        validate(bonusNumber);
+        LottoNumber bonusNumber = new LottoNumber(bonus);
+        validateDuplicate(this.lotto, bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public void validate(Integer bonusNumber) {
-        validateBonusNumberRange(bonusNumber);
-        validateDuplicate(bonusNumber);
-    }
-
-    private void validateBonusNumberRange(Integer bonusNumber) {
-        if (bonusNumber < 1 || bonusNumber > 45) {
-            throw LottoException.from(LOTTO_RANGE_ERROR);
-        }
-    }
-
-    private void validateDuplicate(Integer bonusNumber) {
-        List<Integer> lottos = this.lotto.getSortedLottoNumbers();
-        if (lottos.contains(bonusNumber)) {
+    public void validateDuplicate(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.isDuplicateNumber(bonusNumber)) {
             throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
     }
@@ -51,7 +39,7 @@ public class WinningLotto {
         List<Integer> sortedLottoNumbers = lotto.getSortedLottoNumbers();
         int matchedCount = (int) sortedLottoNumbers.stream().filter(this.lotto.getSortedLottoNumbers()::contains)
                 .count();
-        boolean isBonusContained = sortedLottoNumbers.contains(bonusNumber);
+        boolean isBonusContained = sortedLottoNumbers.contains(bonusNumber.getNumber());
         return getWinningCount(matchedCount, isBonusContained);
     }
 
