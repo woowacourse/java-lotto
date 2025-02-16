@@ -13,7 +13,7 @@ class StatisticsServiceTest {
 
     @DisplayName("당첨된 로또 번호 개수 테스트")
     @Test
-    void 당첨번호_매칭_개수_계산_테스트() {
+    void testTheNumberOfWinningLotto() {
         // given
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 8, 9);
@@ -27,7 +27,7 @@ class StatisticsServiceTest {
 
     @DisplayName("보너스 번호가 포함되지 않았을 때 매칭 테스트")
     @Test
-    void 보너스_번호가_포함되지_않았을_때_매칭_테스트() {
+    void testBonusNumberIsNotIncluded() {
         // given
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         int bonusNumber = 7;
@@ -40,7 +40,7 @@ class StatisticsServiceTest {
 
     @DisplayName("2등 로또일 때 매칭 테스트")
     @Test
-    void 로또_2등_테스트() {
+    void test2ndPlace() {
         // given
         List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 9);
@@ -59,7 +59,7 @@ class StatisticsServiceTest {
 
     @DisplayName("당첨된 로또로 등수 계산 테스트")
     @Test
-    void 당첨_통계_계산_테스트() {
+    void testWinningLottoRank() {
         //given
         LottoTicket fifth = LottoTicket.from(List.of(1, 2, 3, 43, 44, 45));
         LottoTicket fourth = LottoTicket.from(List.of(1, 2, 3, 4, 44, 45));
@@ -83,7 +83,7 @@ class StatisticsServiceTest {
 
     @DisplayName("당첨된 로또에 대한 수익률 계산 테스트")
     @Test
-    void 수익률_계산_테스트() {
+    void testWinningStatistics() {
         //given
         LottoTicket fifth = LottoTicket.from(List.of(1, 2, 3, 43, 44, 45));
         LottoTicket fourth = LottoTicket.from(List.of(1, 2, 3, 4, 44, 45));
