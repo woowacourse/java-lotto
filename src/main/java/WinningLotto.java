@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLotto {
-    Lotto winningNumbers;
-    Number bonusNumber;
+    private final Lotto winningNumbers;
+    private final Number bonusNumber;
 
     public WinningLotto(Lotto winningNumbers, Number bonusNumber) {
         validate(winningNumbers, bonusNumber);

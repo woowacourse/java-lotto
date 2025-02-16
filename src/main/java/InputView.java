@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputView {
-    private BufferedReader bufferedReader;
+    private final BufferedReader bufferedReader;
 
     public InputView() {
         bufferedReader = new BufferedReader(new InputStreamReader(System.in));

@@ -1,7 +1,8 @@
 public class Number {
-    private int value;
-    public static int MIN = 1;
-    public static int MAX = 45;
+    public static final int MIN = 1;
+    public static final int MAX = 45;
+
+    private final int value;
 
     public Number(int value) {
         validate(value);

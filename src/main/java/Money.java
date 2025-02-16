@@ -1,5 +1,5 @@
 public class Money {
-    private int value;
+    private final int value;
 
     public static Money of(String input) {
         try {

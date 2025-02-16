@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class LottoController {
-    private InputView inputView;
-    private OutputView outputView;
-    private LottoManager lottoManager;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoManager lottoManager;
 
     public LottoController(InputView inputView, OutputView outputView, LottoManager lottoManager) {
         this.inputView = inputView;
