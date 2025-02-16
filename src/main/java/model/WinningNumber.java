@@ -42,16 +42,4 @@ public class WinningNumber {
             throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
         }
     }
-
-    //TODO : 하기
-//    private void validateNumberType(Runnable task, String winningNumber) {
-//        try {
-//            task.run();
-//        } catch (NumberFormatException e) {
-//            if (winningNumber.length() > 10) {
-//                throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");
-//            }
-//            throw new IllegalArgumentException("당첨 번호는 정수로 입력해주세요.");
-//        }
-//    }
 }

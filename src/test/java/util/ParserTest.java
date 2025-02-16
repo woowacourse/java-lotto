@@ -40,9 +40,18 @@ public class ParserTest {
 
     @DisplayName("여러 개의 문자열을 숫자로 변환할 때 정수가 아닌 값이 있는 경우 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(strings = {"a, 1, 2, 3, 4, 5", "@, 1, 2, 3, 4, 5", "6.0, 1, 2, 3, 4, 5", " , 1, 2, 3, 4, 5", ", 1, 2, 3, 4, 5"})
+    @ValueSource(strings = {"a, 1, 2, 3, 4, 5", "@, 1, 2, 3, 4, 5", "6.0, 1, 2, 3, 4, 5", " , 1, 2, 3, 4, 5",
+            ", 1, 2, 3, 4, 5"})
     void parseNotIntegerNumbers(String winningNumberInput) {
         List<String> numbersInput = List.of(winningNumberInput.split(", "));
+        assertThatThrownBy(() -> Parser.parseNumbers(numbersInput))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("여러 개의 문자열을 숫자로 변환할 때 10자리 이상의 정수를 입력하는 경우 예외가 발생한다")
+    @Test
+    void parseNumbersOverLengthTen() {
+        List<String> numbersInput = new ArrayList<>(Arrays.asList("10000000001"));
         assertThatThrownBy(() -> Parser.parseNumbers(numbersInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }

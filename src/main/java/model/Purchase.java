@@ -21,8 +21,7 @@ public class Purchase {
     }
 
     private void validateRange(int amount) {
-        if (amount < MIN_PURCHASE_AMOUNT
-                || amount > MAX_PURCHASE_AMOUNT) {
+        if (amount < MIN_PURCHASE_AMOUNT || amount > MAX_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException("1000 이상 100000 이하의 정수를 입력해주세요.");
         }
         if (amount % LOTTO_PRICE != 0) {
