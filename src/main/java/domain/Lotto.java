@@ -13,7 +13,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean isUnique(List<Integer> targetNumbers) {
+    public boolean isSameWith(List<Integer> targetNumbers) {
         return new HashSet<>(numbers).containsAll(targetNumbers);
     }
 

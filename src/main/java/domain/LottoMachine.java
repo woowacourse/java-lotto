@@ -24,7 +24,7 @@ public class LottoMachine {
 
     private void validateDuplication(List<Integer> randomNumbers, List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            if (lotto.isUnique(randomNumbers)) {
+            if (lotto.isSameWith(randomNumbers)) {
                 throw new IllegalStateException();
             }
         }
