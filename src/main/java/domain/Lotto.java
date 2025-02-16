@@ -1,9 +1,8 @@
 package domain;
 
-import domain.numbergenerator.NumberGenerator;
 import dto.OutputLottosDto;
 import java.util.List;
-import message.ErrorMessage;
+import constants.ErrorMessage;
 
 public class Lotto {
     private final List<Integer> numbers;

@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Arrays;
 import java.util.List;
-import message.ErrorMessage;
+import constants.ErrorMessage;
 
 public class InputParser {
     public static int parseInt(String text) {

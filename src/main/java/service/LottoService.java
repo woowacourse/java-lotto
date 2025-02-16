@@ -1,5 +1,6 @@
 package service;
 
+import constants.LottoConstants;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
@@ -47,7 +48,7 @@ public class LottoService {
             totalEarnedMoney += prize.getPrizeMoney() * prizeCount;
         }
 
-        int usedMoney = totalPrizeCount * 1000;
+        int usedMoney = totalPrizeCount * LottoConstants.LOTTO_PRICE;
         double rateOfReturn = (double) totalEarnedMoney / usedMoney;
         return Math.floor(rateOfReturn * 100) / 100.0;
     }

@@ -1,6 +1,6 @@
 package domain;
 
-import message.ErrorMessage;
+import constants.ErrorMessage;
 
 public class Money {
     private final int originMoney;

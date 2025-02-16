@@ -1,6 +1,7 @@
 package domain;
 
-import message.ErrorMessage;
+import constants.ErrorMessage;
+import constants.LottoConstants;
 
 public class AnswerLotto {
     private final Lotto lotto;
@@ -30,6 +31,6 @@ public class AnswerLotto {
     }
 
     private boolean isValidNumber(int number) {
-        return number > 0 && number <= 45;
+        return number > 0 && number <= LottoConstants.LOTTO_NUMBER_MAX_THRESHOLD;
     }
 }
