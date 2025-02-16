@@ -1,5 +1,7 @@
 package controller;
 
+import static common.constant.NumberConstants.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +31,8 @@ public class Controller {
     }
 
     public void start() {
-        int lottoCount = inputResponseForBudget().orElse(0);
+        int budget = inputResponseForBudget().orElse(0);
+        int lottoCount = budget / LOTTO_PRICE;
 
         PurchasedLotto purchasedLotto = buyLotto(lottoCount);
         outputView.displayLottoNumbers(purchasedLotto);
@@ -52,7 +55,7 @@ public class Controller {
     }
 
     private Optional<Integer> inputResponseForBudget() {
-        return inputResponse(() -> BudgetParser.parseLottoCount(inputView.askForBudget()));
+        return inputResponse(() -> BudgetParser.parseBudget(inputView.askForBudget()));
     }
 
     private Optional<List<Integer>> inputResponseForWinningNumber() {

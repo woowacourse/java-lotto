@@ -9,14 +9,14 @@ import validator.Validator;
 
 public class BudgetParser {
 
-    public static int parseLottoCount(String input) {
+    public static int parseBudget(String input) {
         Validator.validateEmptyInput(input);
         Validator.validateNumber(input);
         int money = Integer.parseInt(input);
 
         validateMoneyOutOfRange(money);
         validateMoneyIsDivideLottoPrice(money);
-        return money / LOTTO_PRICE;
+        return money;
     }
 
     private static void validateMoneyOutOfRange(int money) {
