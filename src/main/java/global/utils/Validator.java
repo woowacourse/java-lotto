@@ -1,9 +1,9 @@
 package global.utils;
 
-public final class Validator {
+import static global.constant.ErrorMessage.NUMERIC_INPUT_ONLY_MESSAGE;
+import static global.constant.ErrorMessage.RANGE_INPUT_ONLY_MESSAGE;
 
-    private static final String NUMERIC_INPUT_ONLY_MESSAGE = "숫자만 입력할 수 있습니다.";
-    private static final String RANGE_INPUT_ONLY_MESSAGE = "범위 내의 값만 입력할 수 있습니다.";
+public final class Validator {
 
     private Validator() {
     }
@@ -12,13 +12,13 @@ public final class Validator {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NUMERIC_INPUT_ONLY_MESSAGE);
+            throw new IllegalArgumentException(NUMERIC_INPUT_ONLY_MESSAGE.getMessage());
         }
     }
 
     public static void validateNumberRange(final int number, final int min, final int max) {
         if (number > max || number < min) {
-            throw new IllegalArgumentException(RANGE_INPUT_ONLY_MESSAGE);
+            throw new IllegalArgumentException(RANGE_INPUT_ONLY_MESSAGE.getMessage());
         }
     }
 }
