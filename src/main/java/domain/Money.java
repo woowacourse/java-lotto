@@ -2,6 +2,7 @@ package domain;
 
 import global.exception.ExceptionMessage;
 import global.generator.RandomGenerator;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map.Entry;
 
@@ -26,10 +27,9 @@ public class Money {
     }
 
     public double calculateProfit(final EnumMap<Rank, Integer> countRank) {
-        long sum = 0L;
-        for (Entry<Rank, Integer> rankIntegerEntry : countRank.entrySet()) {
-            sum += Rank.calculateTotalPrize(rankIntegerEntry.getKey(), rankIntegerEntry.getValue());
-        }
+        long sum = countRank.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().calculateTotalPrize(entry.getValue()))
+                .sum();
 
         return Math.floor((double) sum / money * 100) / 100;
     }

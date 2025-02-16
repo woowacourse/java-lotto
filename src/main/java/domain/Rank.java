@@ -30,7 +30,7 @@ public enum Rank {
                 .orElse(NONE);
     }
 
-    public static long calculateTotalPrize(final Rank rank, final Integer count) {
-        return (long) rank.prize * count;
+    public long calculateTotalPrize(final Integer count) {
+        return (long) this.prize * count;
     }
 }
