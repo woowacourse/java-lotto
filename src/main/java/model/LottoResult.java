@@ -1,3 +1,7 @@
+package model;
+
+import enums.LottoRanking;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 

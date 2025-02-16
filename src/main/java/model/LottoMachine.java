@@ -1,3 +1,5 @@
+package model;
+
 public class LottoMachine {
 
     private final int ticket;

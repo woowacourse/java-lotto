@@ -1,3 +1,5 @@
+package model;
+
 public class Price {
 
     public static final int LOTTO_PRICE = 1000;

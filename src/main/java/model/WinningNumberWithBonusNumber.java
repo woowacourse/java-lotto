@@ -1,3 +1,5 @@
+package model;
+
 public record WinningNumberWithBonusNumber(
         Lotto winningNumber,
         int bonusNumber

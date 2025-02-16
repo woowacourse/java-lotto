@@ -1,3 +1,6 @@
+import model.Lotto;
+import model.Numbers;
+import model.WinningNumberWithBonusNumber;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

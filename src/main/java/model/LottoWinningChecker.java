@@ -1,3 +1,7 @@
+package model;
+
+import enums.LottoRanking;
+
 import java.util.ArrayList;
 import java.util.List;
 

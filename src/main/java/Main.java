@@ -1,3 +1,5 @@
+import controller.LottoController;
+
 import java.io.IOException;
 
 public class Main {
