@@ -1,11 +1,11 @@
 package domain;
 
+import domain.properties.LottoProperties;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
-    private static final int MAX_QUANTITY = 100;
     private final List<Lotto> lottos;
 
     private Lottos(final List<Lotto> lottos) {
@@ -27,8 +27,8 @@ public class Lottos {
     }
 
     private static void validateQuantity(final int quantity) {
-        if (quantity <= 0 || quantity > MAX_QUANTITY) {
-            throw new IllegalArgumentException("로또는 1장부터 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.");
+        if (quantity <= 0 || quantity > LottoProperties.MAX_QUANTITY) {
+            throw new IllegalArgumentException("로또는 1장부터 최대 " + LottoProperties.MAX_QUANTITY + "장까지 구매 가능합니다.");
         }
     }
 
