@@ -5,6 +5,7 @@ import static constant.LottoConstants.LOTTO_RANGE_MIN;
 import static constant.LottoConstants.LOTTO_SIZE;
 import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
 import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
+import static exception.ErrorMessage.LOTTO_SIZE_ERROR;
 
 import exception.LottoException;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Lotto {
 
     private void validateLottoNumberSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_SIZE.getValue()) {
-            throw new IllegalArgumentException("로또 번호 갯수 오류");
+            throw LottoException.from(LOTTO_SIZE_ERROR);
         }
     }
 
