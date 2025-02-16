@@ -25,7 +25,7 @@ public class WinnerLotto {
     }
 
     public boolean hasBonus(Lotto lotto) {
-        return lotto.getLottoNumbers().contains(bonusNumber);
+        return lotto.contains(bonusNumber);
     }
 
     public static void validateInputWinnerNumbers(String input) {
