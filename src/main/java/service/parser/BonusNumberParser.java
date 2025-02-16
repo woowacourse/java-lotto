@@ -11,7 +11,8 @@ public class BonusNumberParser {
         Validator.checkInvalidNumberForm(input);
 
         int bonusNumber = Integer.parseInt(input);
-        Validator.checkOutOfRange(bonusNumber, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END, "로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
+        Validator.checkOutOfRange(bonusNumber, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
+                "로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
         validateDuplicateWithBonusNumber(winningNumbers, bonusNumber);
 
         return bonusNumber;

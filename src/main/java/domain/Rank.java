@@ -10,15 +10,15 @@ public enum Rank {
     RANK2(5, true, 30000000, "5개 일치, 보너스 볼 일치(30000000원)- "),
     RANK1(6, false, 2000000000, "6개 일치 (2000000000원)- ");
 
-    private int rank;
-    private boolean bonus;
-    private int price;
-    private String msg;
+    private final int matchCount;
+    private final boolean bonus;
+    private final int prize;
+    private final String msg;
 
-    Rank(int rank, boolean bonus, int price, String msg) {
-        this.rank = rank;
+    Rank(int matchCount, boolean bonus, int prize, String msg) {
+        this.matchCount = matchCount;
         this.bonus = bonus;
-        this.price = price;
+        this.prize = prize;
         this.msg = msg;
     }
 
@@ -26,21 +26,21 @@ public enum Rank {
         return msg;
     }
 
-    public int getPrice() {
-        return price;
+    public int getPrize() {
+        return prize;
     }
 
-    public boolean match(int match, boolean bonus) {
+    public boolean match(int matchCount, boolean bonus) {
         if (this == RANK2 || this == RANK3) {
-            return this.rank == match && this.bonus == bonus;
+            return this.matchCount == matchCount && this.bonus == bonus;
         }
 
-        return this.rank == match;
+        return this.matchCount == matchCount;
     }
 
-    public static Rank judge(int matchRank, boolean bonus) {
+    public static Rank judge(int matchCount, boolean bonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.match(matchRank, bonus))
+                .filter(rank -> rank.match(matchCount, bonus))
                 .findFirst()
                 .orElse(MISS);
     }

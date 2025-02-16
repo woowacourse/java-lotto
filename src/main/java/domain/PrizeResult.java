@@ -16,7 +16,7 @@ public class PrizeResult {
     private long calculatePrizeSum() {
         long sum = 0;
         for (Rank rank : Rank.values()) {
-            sum += (long) result.getOrDefault(rank, 0) * rank.getPrice();
+            sum += (long) result.getOrDefault(rank, 0) * rank.getPrize();
         }
         return sum;
     }

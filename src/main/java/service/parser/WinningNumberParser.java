@@ -8,14 +8,14 @@ import validator.Validator;
 public class WinningNumberParser {
 
     public static List<Integer> parseWinningNumbers(String input) {
-        Validator.validateEmptyInput(input); // 공백 검사
+        Validator.validateEmptyInput(input);
         List<String> rawNumbers = Arrays.asList(input.split(","));
-
         validateNotNumber(rawNumbers);
+
         List<Integer> numbers = rawToIntegers(rawNumbers);
         validateLottoNumberCount(numbers);
         validateDuplicate(numbers);
-        validateOutOfRange(rawNumbers, numbers);
+        validateOutOfRange(numbers);
 
         return numbers;
     }
