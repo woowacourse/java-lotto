@@ -14,6 +14,7 @@ public class OutputView {
     private static final String WINNING_RATE_INFORMATION_1 = "총 수익률 %.2f입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     private static final String LOTTO_RESULT_PRINT_FORMAT = "%d개 일치, (%d원)- %d개\n";
     private static final String LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+
     public static void printRandomLotto(final LottoRepository lottoRepository) {
         for (Lotto lotto : lottoRepository.getLottos()) {
             System.out.println(printLotto(lotto));
@@ -50,18 +51,25 @@ public class OutputView {
         System.out.println(makeLottoResult(winningStatistics.getWinningStatistics()));
     }
 
-    public static String makeLottoResult(final Map<RankType, Integer> map){
+    private static String makeLottoResult(final Map<RankType, Integer> map) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(RankType rankType : map.keySet()){
-            if(rankType == RankType.SECOND){
-                stringBuilder.append(String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
-                continue;
-            }
-            stringBuilder.append(String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
+        for (RankType rankType : map.keySet()) {
+            appendLottoResult(map, stringBuilder, rankType);
         }
 
         return stringBuilder.toString();
+    }
+
+    private static void appendLottoResult(Map<RankType, Integer> map, StringBuilder stringBuilder, RankType rankType) {
+        if (rankType == RankType.SECOND) {
+            stringBuilder.append(
+                    String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(),
+                            map.get(rankType)));
+            return;
+        }
+        stringBuilder.append(
+                String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
     }
 
 }
