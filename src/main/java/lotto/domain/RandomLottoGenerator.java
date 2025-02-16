@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.domain.LottoNumber.MAXIMUM_LOTTO_NUMBER;
 import static lotto.domain.LottoNumber.MINIMUM_LOTTO_NUMBER;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,11 +13,10 @@ public class RandomLottoGenerator {
     private static final int START_INDEX = 0;
 
     public List<Lotto> generate(final int count) {
-        final List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(makeRandomNumbers()));
-        }
-        return lottos;
+        return IntStream.range(0, count)
+                .mapToObj(number -> makeRandomNumbers())
+                .map(Lotto::new)
+                .toList();
     }
 
     private List<Integer> makeRandomNumbers() {
