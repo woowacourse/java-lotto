@@ -1,7 +1,8 @@
-package model;
+package domain;
 
 import dto.LottoNumbersResponse;
-import global.utils.Validator;
+import global.utils.Parser;
+import domain.utils.Validator;
 
 import java.util.*;
 
@@ -36,14 +37,21 @@ public class Lotto {
         );
     }
 
-    private List<Integer> generateLotto() {
-        List<Integer> numbers = new ArrayList<>();
+    public static int generateNumber() {
         Random random = new Random();
-        for (int i = 0; i < NUMBER_COUNT; i++) {
-            numbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
+        return random.nextInt(MAX_LOTTO_NUMBER) + 1;
+    }
+
+    private List<Integer> generateLotto() {
+        Set<Integer> numbers = new HashSet<>();
+
+        while (numbers.size() != NUMBER_COUNT) {
+            numbers.add(generateNumber());
         }
 
-        return numbers;
+        return numbers.stream()
+                .sorted()
+                .toList();
     }
 
     private List<Integer> generateCustomLotto(final String input) {
@@ -52,8 +60,8 @@ public class Lotto {
         String[] tokens = input.split(NUMBER_DELIMITER);
         Validator.validateRange(tokens.length, NUMBER_COUNT, NUMBER_COUNT);
 
-        Arrays.stream(tokens).
-                forEach(t -> numbers.add(convertNumber(t)));
+        Arrays.stream(tokens)
+                .forEach(t -> numbers.add(convertNumber(t)));
 
         validateUniqueNumber(numbers);
 
@@ -61,8 +69,7 @@ public class Lotto {
     }
 
     private int convertNumber(String token) {
-        Validator.validateNumeric(token);
-        int number = Integer.parseInt(token);
+        int number = Parser.parseInteger(token);
         Validator.validateRange(number, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
         return number;
     }

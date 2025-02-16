@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,6 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class LottoTest {
+
+    @Test
+    void 랜덤_번호가_1에서_45사이로_1개_발급된다() {
+        final int minNumber = 1;
+        final int maxNumber = 45;
+
+        assertThat(Lotto.generateNumber())
+                .isBetween(minNumber, maxNumber);
+    }
 
     @Test
     void 로또_번호_일치_개수를_비교한다() {

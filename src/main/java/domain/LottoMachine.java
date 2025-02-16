@@ -1,28 +1,28 @@
-package model;
+package domain;
 
 import dto.ReturnOfInvestmentResultResponse;
-import dto.TicketAmountResponse;
+import dto.LottoAmountResponse;
 
-import static global.utils.Validator.validateDivisibility;
-import static global.utils.Validator.validateRange;
+import static domain.utils.Validator.validateDivisibility;
+import static domain.utils.Validator.validateRange;
 
-public class Ticket {
+public class LottoMachine {
 
-    private static final int TICKET_PRICE = 1_000;
+    private static final int LOTTO_PRICE = 1_000;
 
     private final int purchaseMoney;
 
-    public Ticket(final int purchaseMoney) {
+    public LottoMachine(final int purchaseMoney) {
         validatePurchaseMoney(purchaseMoney);
         this.purchaseMoney = purchaseMoney;
     }
 
     public int getTicketAmount() {
-        return purchaseMoney / TICKET_PRICE;
+        return purchaseMoney / LOTTO_PRICE;
     }
 
-    public TicketAmountResponse createTicketResponse() {
-        return new TicketAmountResponse(getTicketAmount());
+    public LottoAmountResponse createLottoAmountResponse() {
+        return new LottoAmountResponse(getTicketAmount());
     }
 
     public ReturnOfInvestmentResultResponse createReturnOfInvestmentResponse(final int totalPrice) {
@@ -31,8 +31,8 @@ public class Ticket {
     }
 
     private static void validatePurchaseMoney(final int purchaseMoney) {
-        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
-        validateDivisibility(purchaseMoney, TICKET_PRICE);
+        validateRange(purchaseMoney, LOTTO_PRICE, Integer.MAX_VALUE);
+        validateDivisibility(purchaseMoney, LOTTO_PRICE);
     }
 
     private double calculateReturnOfInvestment(final int totalPrice) {
