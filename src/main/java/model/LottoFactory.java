@@ -8,12 +8,12 @@ import static constant.LottoConstant.LOTTO_TICKET_SIZE;
 import static constant.LottoConstant.PROFIT;
 import static model.Prize.initialize;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoFactory {
 
@@ -37,6 +37,7 @@ public class LottoFactory {
             int matchCount = lotto.matchCount(issuedTicket);
             boolean matchesBonus = bonus.isContainedIn(lotto);
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
+
             prizes.put(foundPrize, prizes.get(foundPrize) + 1);
         }
 
@@ -69,24 +70,20 @@ public class LottoFactory {
     }
 
     private List<Lotto> issueLottoTickets() {
-        List<Lotto> issuedLottoTickets = new ArrayList<>();
-        for (int i = 0; i < lottoCount; i++) {
-            issuedLottoTickets.add(issueLottoTicket());
-        }
-        return issuedLottoTickets;
+        return Stream.generate(this::issueLottoTicket)
+                .limit(lottoCount)
+                .toList();
     }
 
     private Lotto issueLottoTicket() {
-        HashSet<Integer> issuedTicketSet = new HashSet<>();
-        while (issuedTicketSet.size() < LOTTO_TICKET_SIZE) {
-            issuedTicketSet.add(getRandomNumber());
+        HashSet<Integer> issuedTicketNumbers = new HashSet<>();
+        while (issuedTicketNumbers.size() < LOTTO_TICKET_SIZE) {
+            issuedTicketNumbers.add(getRandomNumber());
         }
 
-        String issuedTicket = issuedTicketSet.stream()
+        return Lotto.of(issuedTicketNumbers.stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(LOTTO_SEPARATOR));
-
-        return Lotto.of(issuedTicket);
+                .collect(Collectors.joining(LOTTO_SEPARATOR)));
     }
 
     private int getRandomNumber() {
