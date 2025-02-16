@@ -32,9 +32,11 @@ class LottosTest {
     void 내가_구매한_모든_로또에_대해서_통계_확인한다() {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto);
         Map<Prize, Integer> result = lottoEvaluator.getResult(lottos);
-        assertThat(result.get(Prize._5TH)).isEqualTo(1);
-        assertThat(result.get(Prize._4TH)).isEqualTo(2);
-        assertThat(result.get(Prize._2ND)).isEqualTo(1);
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(result.get(Prize._5TH)).isOne();
+        softly.assertThat(result.get(Prize._4TH)).isEqualTo(2);
+        softly.assertThat(result.get(Prize._2ND)).isOne();
+        softly.assertAll();
     }
 
     @Test
