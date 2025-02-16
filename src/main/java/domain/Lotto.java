@@ -1,30 +1,42 @@
 package domain;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public Lotto(List<Integer> numbers) {
+    private Lotto(List<LottoNumber> numbers) {
         validate(numbers);
-
-        numbers.sort(Comparator.naturalOrder());
+        numbers.sort(Comparator.comparingInt(LottoNumber::getValue));
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public static Lotto from(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
-    private void validate(List<Integer> numbers) {
-        validateDistinct(numbers);
+    public List<LottoNumber> getNumbers() {
+        return Collections.unmodifiableList(numbers);
+    }
+
+    private void validate(List<LottoNumber> numbers) {
         validateSize(numbers);
-        validateRange(numbers);
+        validateDistinct(numbers);
     }
 
-    private void validateDistinct(List<Integer> numbers) {
+    private static void validateSize(List<LottoNumber> numbers) {
+        if (numbers.size() != LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
+            throw new IllegalArgumentException(
+                    "로또 번호는 " + LottoRule.LOTTO_SELECTION_SIZE.getValue() + "개여야 합니다. "
+                            + "입력된 개수: " + numbers.size());
+        }
+    }
+
+    private void validateDistinct(List<LottoNumber> numbers) {
         long distinctCount = numbers.stream()
                 .distinct()
                 .count();
@@ -34,29 +46,10 @@ public class Lotto {
         }
     }
 
-    private static void validateSize(List<Integer> numbers) {
-        if (numbers.size() != LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
-            throw new IllegalArgumentException(
-                    "로또 번호는 " + LottoRule.LOTTO_SELECTION_SIZE.getValue() + "개여야 합니다. "
-                            + "입력된 개수: " + numbers.size());
-        }
-    }
-
-    private static void validateRange(List<Integer> numbers) {
-        boolean isValidRange = numbers.stream()
-                .allMatch(LottoRule::isLottoRange);
-
-        if (isValidRange) {
-            return;
-        }
-        throw new IllegalArgumentException("로또 번호는 "
-                + LottoRule.MIN_LOTTO_NUMBER.getValue() + "부터 "
-                + LottoRule.MAX_LOTTO_NUMBER.getValue() + " 사이의 숫자여야 합니다. "
-                + "입력된 번호: " + numbers);
-    }
-
     @Override
     public String toString() {
-        return "[" + String.join(", ", numbers.stream().map(String::valueOf).toList()) + "]";
+        return "[" + numbers.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ")) + "]";
     }
 }

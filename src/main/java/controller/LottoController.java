@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.LottoResult;
 import domain.Lottos;
 import domain.Money;
@@ -45,7 +46,7 @@ public class LottoController {
 
     private Money getMoney() throws IOException {
         String money = inputHandler.readMoney();
-        return new Money(money);
+        return Money.from(Integer.parseInt(money));
     }
 
     private void displayLottoInfo(Lottos lottos) {
@@ -62,16 +63,18 @@ public class LottoController {
     private Lotto getWinningNumber() throws IOException {
         String winningNumber = inputHandler.readWinningNumber();
 
-        return new Lotto(Arrays.stream(winningNumber.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .collect(Collectors.toList()));
+        return Lotto.from(
+                Arrays.stream(winningNumber.split(","))
+                        .map(String::trim)
+                        .map(Integer::parseInt)
+                        .map(LottoNumber::from)
+                        .collect(Collectors.toList()));
     }
 
-    private int getBonusNumber() throws IOException {
+    private LottoNumber getBonusNumber() throws IOException {
         String bonusNumber = inputHandler.readBonusNumber();
 
-        return Integer.parseInt(bonusNumber);
+        return LottoNumber.from(Integer.parseInt(bonusNumber));
     }
 
     private void displayLottoResult(LottoResult lottoResult, Money money) {

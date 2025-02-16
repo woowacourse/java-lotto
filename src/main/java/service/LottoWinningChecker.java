@@ -1,6 +1,7 @@
 package service;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.LottoRanking;
 import domain.LottoResult;
 import domain.Lottos;
@@ -22,7 +23,7 @@ public class LottoWinningChecker {
 
 
     private LottoRanking check(Lotto lotto, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
-        List<Integer> numbers = new ArrayList<>(lotto.getNumbers());
+        List<LottoNumber> numbers = new ArrayList<>(lotto.getNumbers());
         numbers.retainAll(winningNumberWithBonusNumber.winningNumber().getNumbers());
 
         int correctCount = numbers.size();
