@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputValidator {
-    public static final String BONUS_INPUT_ERROR = "보너스 번호는 숫자를 입력해주세요.\n";
     private static final String WINNING_NUMBERS_INPUT_ERROR_MESSAGE = "당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
     private static final String PURCHASE_AMOUNT_INPUT_ERROR = "숫자로 된 금액을 입력해주세요.\n";
     private static final String WINNING_NUMBER_INPUT_ERROR = ",로 구분한 6개의 숫자를 입력해주세요.\n";
+    public static final String BONUS_INPUT_ERROR = "보너스 번호는 숫자를 입력해주세요.\n";
 
     public int validatePurchaseAmount(String input) {
         if (!isNumber(input)) {
@@ -29,7 +29,7 @@ public class InputValidator {
     }
 
     public int validateBonusInput(String input) {
-        if (!isNumber(input)) {
+        if(!isNumber(input)) {
             throw new IllegalArgumentException(BONUS_INPUT_ERROR);
         }
 
