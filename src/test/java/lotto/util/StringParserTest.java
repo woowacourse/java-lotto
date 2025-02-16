@@ -2,13 +2,11 @@ package lotto.util;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringParserTest {
 
     @Test
-    @DisplayName("입력값을 숫자로 파싱한다.")
     void 입력값을_숫자로_파싱한다() {
         // Given
         final String input = "11";
