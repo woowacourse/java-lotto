@@ -21,7 +21,7 @@ public enum OutputViewMessage {
 
     private final String message;
 
-    OutputViewMessage(String message) {
+    OutputViewMessage(final String message) {
         this.message = message;
     }
 
@@ -29,15 +29,15 @@ public enum OutputViewMessage {
         return message;
     }
 
-    public String getMessage(int arg) {
+    public String getMessage(final int arg) {
         return String.format(message, arg);
     }
 
-    public String getMessage(String arg) {
+    public String getMessage(final String arg) {
         return String.format(message, arg);
     }
 
-    public String getMessage(double arg1, String arg2) {
+    public String getMessage(final double arg1, final String arg2) {
         return String.format(message, arg1, arg2);
     }
 }

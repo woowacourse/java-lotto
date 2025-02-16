@@ -38,11 +38,11 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public boolean contains(int number) {
+    public boolean contains(final int number) {
         return numbers.contains(number);
     }
 
-    public int matchCount(Lotto issuedTicket) {
+    public int matchCount(final Lotto issuedTicket) {
         return (int) issuedTicket.numbers.stream()
                 .filter(this.numbers::contains)
                 .count();

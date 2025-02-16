@@ -7,7 +7,7 @@ public enum InputPattern {
 
     private final String content;
 
-    InputPattern(String content) {
+    InputPattern(final String content) {
         this.content = content;
     }
 

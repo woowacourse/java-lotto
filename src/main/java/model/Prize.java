@@ -31,7 +31,7 @@ public enum Prize {
         return enumMap;
     }
 
-    public static Prize find(int matchCount, boolean bonusMatch) {
+    public static Prize find(final int matchCount, final boolean bonusMatch) {
         return Arrays.stream(values())
                 .filter(prize -> prize.matchCount == matchCount)
                 .filter(prize -> !prize.bonusMatch || bonusMatch)

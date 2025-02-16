@@ -30,11 +30,11 @@ public class Bonus {
         this.number = number;
     }
 
-    public boolean isEqualTo(int bonusNumber) {
+    public boolean isEqualTo(final int bonusNumber) {
         return ((Integer) number).equals(bonusNumber);
     }
 
-    public boolean isContainedIn(Lotto lotto) {
+    public boolean isContainedIn(final Lotto lotto) {
         return lotto.contains(number);
     }
 }

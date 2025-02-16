@@ -21,7 +21,7 @@ public class LottoPurchase {
         return new LottoPurchase(amount);
     }
 
-    private LottoPurchase(int amount) {
+    private LottoPurchase(final int amount) {
         Validator.validateMinimum(amount, LOTTO_PURCHASE_MIN_AMOUNT,
                 INVALID_LOTTO_MIN_PURCHASE.getMessage(LOTTO_PURCHASE_MIN_AMOUNT));
         Validator.validateUnit(amount, LOTTO_PURCHASE_MIN_AMOUNT,

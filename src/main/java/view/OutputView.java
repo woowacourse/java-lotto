@@ -44,7 +44,7 @@ public class OutputView {
         printNewLine();
     }
 
-    public static void printStatistics(EnumMap<Prize, Integer> prizes) {
+    public static void printStatistics(final EnumMap<Prize, Integer> prizes) {
         printNewLine();
         print(WINNING_STATISTIC_TITLE.getMessage());
         print(WINNING_STATISTICS_SEPARATOR.getMessage());
@@ -55,7 +55,7 @@ public class OutputView {
         print(FIRST_PLACE_STATISTICS.getMessage(prizes.get(Prize.FIRST_PLACE)));
     }
 
-    public static void printBenefit(LottoFactory lottoFactory, EnumMap<Prize, Integer> prizes) {
+    public static void printBenefit(final LottoFactory lottoFactory, final EnumMap<Prize, Integer> prizes) {
         double winningAmount = lottoFactory.getWinningAmount(prizes);
         String result = lottoFactory.lossOrGain(winningAmount);
         print(TOTAL_PROFIT_RATE_RESULT.getMessage(winningAmount, result));

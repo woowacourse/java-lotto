@@ -21,7 +21,7 @@ public enum ExceptionMessage {
     private static final String PREFIX = "[ERROR] ";
     private final String message;
 
-    ExceptionMessage(String message) {
+    ExceptionMessage(final String message) {
         this.message = message;
     }
 
@@ -29,11 +29,11 @@ public enum ExceptionMessage {
         return PREFIX + message;
     }
 
-    public String getMessage(int arg) {
+    public String getMessage(final int arg) {
         return PREFIX + String.format(message, arg);
     }
 
-    public String getMessage(int arg1, int arg2) {
+    public String getMessage(final int arg1, final int arg2) {
         return PREFIX + String.format(message, arg1, arg2);
     }
 }
