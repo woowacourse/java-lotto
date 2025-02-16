@@ -49,7 +49,7 @@ public enum Rank {
     }
 
     private static Rank checkEqualFive(boolean matchBonus) {
-        if (matchBonus) {
+        if (matchBonus == SECOND.matchBonus) {
             return SECOND;
         }
         return THIRD;
