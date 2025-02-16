@@ -2,19 +2,15 @@ package lotto.domain;
 
 import static lotto.util.Constant.DEFAULT_VALUE_ZERO;
 import static lotto.util.Constant.LOTTO_MONEY_UNIT;
-import static lotto.util.ErrorHandler.INVALID_AMOUNT;
-import static lotto.util.ErrorHandler.INVALID_NUMBER;
-import static lotto.util.ErrorHandler.INVALID_UNIT;
-
-import lotto.util.StringConverter;
+import static lotto.util.ExceptionHandler.INVALID_LOTTO_MONEY_AMOUNT;
+import static lotto.util.ExceptionHandler.INVALID_LOTTO_MONEY_UNIT;
 
 public class LottoMoney {
 
     private final int lottoMoney;
     private final int ticketBuyAmount;
 
-    public LottoMoney(String input) {
-        int amount = StringConverter.parseToInt(input, INVALID_NUMBER);
+    public LottoMoney(int amount) {
         validate(amount);
         this.lottoMoney = amount;
         this.ticketBuyAmount = amount / LOTTO_MONEY_UNIT;
@@ -27,13 +23,13 @@ public class LottoMoney {
 
     private void validateAmount(int amount) {
         if (amount < LOTTO_MONEY_UNIT) {
-            throw INVALID_AMOUNT.getException();
+            throw INVALID_LOTTO_MONEY_AMOUNT.getException();
         }
     }
 
     private void validateUnit(int amount) {
         if (amount % LOTTO_MONEY_UNIT != DEFAULT_VALUE_ZERO) {
-            throw INVALID_UNIT.getException();
+            throw INVALID_LOTTO_MONEY_UNIT.getException();
         }
     }
 
