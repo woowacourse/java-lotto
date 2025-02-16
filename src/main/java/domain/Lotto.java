@@ -8,8 +8,6 @@ import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
 import static exception.ErrorMessage.LOTTO_SIZE_ERROR;
 
 import exception.LottoException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
