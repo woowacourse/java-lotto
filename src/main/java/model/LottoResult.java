@@ -1,31 +1,40 @@
 package model;
 
+import dto.LottoResultDto;
 import java.util.EnumMap;
 import java.util.Map.Entry;
 
 public class LottoResult {
     private final EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
-    private final double profitRate;
 
     public LottoResult(UserLotto userLotto, WinningLotto winningLotto) {
         initRank();
-        calculateRanks(userLotto, winningLotto);
-        profitRate = calculateProfitRate(userLotto.getPurchaseAmount(), getProfit());
+        userLotto.calculateLottoResult(ranks, winningLotto);
     }
 
-    public EnumMap<Rank, Integer> getRanks() {
-        return ranks;
+    public LottoResultDto toDto() {
+        return new LottoResultDto(ranks, getProfitRate());
     }
 
-    public double getProfitRate() {
-        return profitRate;
+    private double getProfitRate() {
+        long profit = calculateProfit();
+        if(profit == 0) return 0.0;
+        return (double) calculateProfit() / calculatePurchaseAmount();
     }
 
-    private double calculateProfitRate(int purchaseAmount, long winningLotto) {
-        return (double) winningLotto / purchaseAmount;
+    private int calculatePurchaseAmount() {
+        int purchaseCount = 0;
+        for (Rank rank : ranks.keySet()) {
+            if (rank.equals(Rank.FAIL)) {
+                continue;
+            }
+            purchaseCount += ranks.get(rank);
+        }
+
+        return purchaseCount * 1000;
     }
 
-    private long getProfit() {
+    private long calculateProfit() {
         long profit = 0;
         for (Entry<Rank, Integer> entry : ranks.entrySet()) {
             Rank rank = entry.getKey();
@@ -33,13 +42,6 @@ public class LottoResult {
             profit += (long) rank.getWinningAmount() * rankCount;
         }
         return profit;
-    }
-
-    private void calculateRanks(UserLotto userLotto, WinningLotto winningLotto) {
-        for (Lotto lotto : userLotto.getLottos()) {
-            Rank rank = lotto.getRank(winningLotto);
-            ranks.put(rank, ranks.get(rank) + 1);
-        }
     }
 
     private void initRank() {
