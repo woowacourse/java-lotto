@@ -17,9 +17,10 @@ import java.util.stream.Collectors;
 
 public class LottoFactory {
 
+    private static final Random random = new Random();
+
     private final int lottoCount;
     private final List<Lotto> issuedLottoTickets;
-    private final Random random = new Random();
 
     public static LottoFactory of(final LottoPurchase lottoPurchase) {
         return new LottoFactory(lottoPurchase.calculateLottoCount());
