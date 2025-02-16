@@ -5,16 +5,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class InputParserTest {
+class LottoParserTest {
 
-    private InputParser inputParser = new InputParser();
+    private LottoParser lottoParser = new LottoParser();
 
     @Test
     void 입력한_당첨번호들을_정수_리스트로_반환한다() {
         //given
         String rawWinningNumbers = "1, 2, 3, 4, 5, 6";
         //when
-        List<Integer> parsedWinningNumbers = inputParser.parseWinningNumbers(rawWinningNumbers);
+        List<Integer> parsedWinningNumbers = lottoParser.parseWinningNumbers(rawWinningNumbers);
         //then
         assertThat(parsedWinningNumbers).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
@@ -24,7 +24,7 @@ class InputParserTest {
         //given
         String rawBonusNumber = "1";
         //when
-        int parsedBonusNumber = inputParser.parseBonusNumber(rawBonusNumber);
+        int parsedBonusNumber = lottoParser.parseBonusNumber(rawBonusNumber);
         //then
         assertThat(parsedBonusNumber).isEqualTo(1);
     }
