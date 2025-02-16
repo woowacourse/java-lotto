@@ -1,9 +1,9 @@
 package domain;
 
 public class Purchase {
-    private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_PURCHASE_AMOUNT = 1000;
-    private static final int MAX_PURCHASE_AMOUNT = 100000;
+    private static final int LOTTO_PRICE = 1_000;
+    private static final int MIN_PURCHASE_AMOUNT = 1_000;
+    private static final int MAX_PURCHASE_AMOUNT = 100_000;
 
     private final int amount;
 
