@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -44,9 +44,11 @@ public enum LottoRank {
     public static Map<LottoRank, String> getRankInfo() {
         return Arrays.stream(values())
                 .filter(lottoRank -> lottoRank != NONE)
-                .collect(Collectors.toMap(Function.identity(), LottoRank::generateRankMessage,
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        LottoRank::generateRankMessage,
                         (oldValue, newValue) -> oldValue,
-                        LinkedHashMap::new
+                        () -> new EnumMap<>(LottoRank.class)
                 ));
     }
 
