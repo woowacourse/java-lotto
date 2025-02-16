@@ -10,7 +10,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         numbers.forEach(number -> Validator.checkOutOfRange(number, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
-                        "로또의 숫자가 1~45의 유효 범위를 벗어납니다."));
+                String.format("로또의 숫자가 %d~%d의 유효 범위를 벗어납니다.", LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END)));
         this.numbers = numbers;
     }
 
