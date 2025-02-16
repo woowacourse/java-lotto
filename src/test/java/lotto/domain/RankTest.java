@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +14,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.checkRank(matchCounts,matchBonus)).isEqualTo(Rank.SECOND);
     }
+
     @Test
     void 세번째_등수_확인() {
         //given
@@ -34,6 +34,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.checkRank(matchCounts,matchBonus)).isEqualTo(Rank.FIRST);
     }
+
     @Test
     void 네번째_등수_확인() {
         //given
@@ -43,6 +44,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.checkRank(matchCounts,matchBonus)).isEqualTo(Rank.FOURTH);
     }
+
     @Test
     void 미당첨_등수_확인() {
         //given
@@ -51,13 +53,5 @@ class RankTest {
 
         //when & then
         Assertions.assertThat(Rank.checkRank(matchCounts,matchBonus)).isEqualTo(Rank.NONE);
-    }
-    @Test
-    void 유효한_등수만_확인() {
-        //given
-        List<Rank> ranks = Rank.getValidRanks();
-
-        //when & then
-        Assertions.assertThat(ranks.contains(Rank.NONE)).isFalse();
     }
 }

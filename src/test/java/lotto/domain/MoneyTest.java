@@ -42,6 +42,7 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
     @Test
     void 구입_금액_숫자_검증() {
         //given
@@ -51,6 +52,7 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
     @Test
     void 구입_금액_음수_검증() {
         //given
@@ -60,6 +62,7 @@ class MoneyTest {
         assertThatThrownBy(() -> new Money(invalidMoney))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
     @Test
     void 구입_금액_최대_검증() {
         //given

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 class LottosTest {
 
-
     @DisplayName("당첨 번호가 4,5,6,7,8,9이고, 사용자가 구매한 로또가 1,2,3,4,5,6일 때 5등 당첨 확인")
     @Test
     void 로또_당첨_확인() {
