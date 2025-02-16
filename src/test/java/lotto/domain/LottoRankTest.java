@@ -33,12 +33,32 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 3등 당첨 테스트")
-    void findRank_First_Place() {
+    void findThirdRank() {
         MatchResultDto matchResultDto = new MatchResultDto(5, false);
 
         LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
 
         assertThat(lottoRank.getWinningAmount()).isEqualTo(1_500_000L);
+    }
+
+    @Test
+    @DisplayName("로또 4등 당첨 테스트")
+    void findForthRank() {
+        MatchResultDto matchResultDto = new MatchResultDto(4, false);
+
+        LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
+
+        assertThat(lottoRank.getWinningAmount()).isEqualTo(50_000L);
+    }
+
+    @Test
+    @DisplayName("로또 5등 당첨 테스트")
+    void findFifthRank() {
+        MatchResultDto matchResultDto = new MatchResultDto(3, false);
+
+        LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
+
+        assertThat(lottoRank.getWinningAmount()).isEqualTo(5_000L);
     }
 
     @Test
