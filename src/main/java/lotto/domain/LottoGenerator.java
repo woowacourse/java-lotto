@@ -11,7 +11,7 @@ import lotto.utils.Splitter;
 
 public class LottoGenerator {
 
-    public LottoBundle makeLottoBundle(AmountPaid amount, int lottoQuantity) {
+    public LottoBundle makeLottoBundle(int lottoQuantity) {
         return new LottoBundle(Stream.generate(this::makeLotto)
                 .limit(lottoQuantity)
                 .collect(Collectors.toList()));

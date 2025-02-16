@@ -25,7 +25,7 @@ public class LottoController {
     public void run() {
         AmountPaid amountPaid = makeAmountPaid();
         LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoBundle lottoBundle = lottoGenerator.makeLottoBundle(amountPaid, amountPaid.getLottoQuantity());
+        LottoBundle lottoBundle = lottoGenerator.makeLottoBundle(amountPaid.getLottoQuantity());
 
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle.getLottoBundle());
