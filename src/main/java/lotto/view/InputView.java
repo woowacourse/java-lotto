@@ -3,7 +3,6 @@ package lotto.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import lotto.util.InputValidator;
 
 public class InputView {
 
