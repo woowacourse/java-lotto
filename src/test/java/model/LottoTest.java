@@ -9,6 +9,15 @@ import org.junit.jupiter.params.provider.CsvSource;
 class LottoTest {
 
     @Test
+    void 랜덤_번호가_1에서_45사이로_1개_발급된다() {
+        final int minNumber = 1;
+        final int maxNumber = 45;
+
+        assertThat(Lotto.generateNumber())
+                .isBetween(minNumber, maxNumber);
+    }
+
+    @Test
     void 로또_번호_일치_개수를_비교한다() {
         final String mainNumbers = "1, 2, 3, 4, 5, 30";
         final String subNumbers = "1, 2, 3, 4, 5, 7";
