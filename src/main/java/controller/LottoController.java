@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.List;
 import model.LottoResult;
 import model.RandomNumberGenerator;
 import model.UserLotto;
@@ -21,34 +22,19 @@ public class LottoController {
 
     public void run() {
         UserLotto userLotto = getUserLotto();
-        outputView.printPurchaseLottos(userLotto.getSortedLottosDto());
+        outputView.printPurchaseLottos(userLotto.toDto());
 
         WinningLotto winningLotto = getWinningLotto();
-        setBonus(winningLotto);
 
         LottoResult lottoResult = new LottoResult(userLotto, winningLotto);
-        outputView.printResultRanks(lottoResult.getRanks());
-        outputView.printProfitRate(lottoResult.getProfitRate());
-    }
-
-    private void setBonus(WinningLotto winningLotto) {
-        while (true) {
-            try {
-                outputView.printBonusGuide();
-                String bonusInput = inputView.getBonusInput();
-                winningLotto.setBonus(bonusInput);
-                return;
-            } catch (IllegalArgumentException ex) {
-                outputView.printError(ex.getMessage());
-            }
-        }
+        outputView.printResultRanks(lottoResult.toDto());
     }
 
     private UserLotto getUserLotto() {
         while (true) {
             try {
                 outputView.printPurchaseAmountGuide();
-                String purchaseAmountInput = inputView.getPurchaseAmountInput();
+                int purchaseAmountInput = inputView.getPurchaseAmountInput();
                 return new UserLotto(randomNumberGenerator, purchaseAmountInput);
             } catch (IllegalArgumentException ex) {
                 outputView.printError(ex.getMessage());
@@ -60,8 +46,10 @@ public class LottoController {
         while (true) {
             try {
                 outputView.printWinningNumberGuide();
-                String winningNumberInput = inputView.getWinningNumberInput();
-                return new WinningLotto(winningNumberInput);
+                List<Integer> winningNumberInput = inputView.getWinningNumberInput();
+                outputView.printBonusGuide();
+                int bonusInput = inputView.getBonusInput();
+                return new WinningLotto(winningNumberInput, bonusInput);
             } catch (IllegalArgumentException ex) {
                 outputView.printError(ex.getMessage());
             }
