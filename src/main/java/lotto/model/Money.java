@@ -10,8 +10,8 @@ public class Money {
     }
 
     private void validateLessThanZero(final int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("금액은 0원 미만일 수 없습니다.");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("금액은 0원 이하일 수 없습니다.");
         }
     }
 

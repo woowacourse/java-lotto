@@ -3,8 +3,8 @@ package lotto.model.lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-import lotto.model.Money;
 import lotto.controller.generator.NumbersGenerator;
+import lotto.model.Money;
 
 public class LottoMachine {
 

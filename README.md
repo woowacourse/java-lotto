@@ -22,6 +22,7 @@
 ## 예외처리
 - [x] 구매 금액 예외처리
   - 구매 금액 입력을 숫자로 변환할 수 없으면 `IllegalArgumentException`을 발생시킨다. 
+  - 구매 금액이 0원 이하이면 `IllegalArgumentException`을 발생시킨다. 
 - [x] 로또 번호 예외처리
   - 개수가 6개가 아닌 경우 `IllegalArgumentException`을 발생시킨다.
   - 범위가 1이상 45이하가 아닌 경우 `IllegalArgumentException`을 발생시킨다.

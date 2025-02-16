@@ -11,7 +11,7 @@ class MoneyTest {
     @DisplayName("음수가 들어오면 돈을 생성할 수 없다.")
     @Test
     void createMoneyWithNegative() {
-        assertThatThrownBy(() -> new Money(-1))
+        assertThatThrownBy(() -> new Money(0))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
