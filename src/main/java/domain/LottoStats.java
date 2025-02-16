@@ -29,25 +29,15 @@ public class LottoStats {
         return totalPrize;
     }
 
-    public String toString() {
-        StringBuilder stats = new StringBuilder();
-        for (Rank lottoRank : Rank.values()) {
-            stats.append(getStatus(lottoRank));
-        }
-        return stats.toString();
-    }
-
-    private String getStatus(Rank lottoRank) {
-        if (lottoRank == Rank.NONE) return "";
-        return lottoRank.getMessage() +
-                getRankCount(lottoRank) + "개\n";
+    public int getStatus(Rank lottoRank) {
+        return getRankCount(lottoRank);
     }
 
     private Integer getRankCount(Rank lottoRank) {
         return rank.getOrDefault(lottoRank, 0);
     }
 
-    public String getEarningRate(int purchaseAmount) {
-        return String.format("%.2f", Math.floor(1. * getTotalPrize() / purchaseAmount * 100) / 100);
+    public Double getEarningRate(int purchaseAmount) {
+        return Math.floor(1. * getTotalPrize() / purchaseAmount * 100) / 100;
     }
 }
