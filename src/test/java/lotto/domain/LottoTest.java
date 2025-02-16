@@ -59,7 +59,7 @@ class LottoTest {
 
         List<Integer> sortedList = list.stream().sorted().toList();
 
-        assertThat(lotto.toString()).isEqualTo(sortedList.toString());
+        assertThat(lotto.getNumbers()).isEqualTo(sortedList);
     }
 
 }

@@ -10,6 +10,7 @@ import lotto.domain.WinningInform;
 import lotto.domain.Lotto;
 import lotto.domain.Wallet;
 import lotto.domain.Profit;
+import lotto.dto.WalletDto;
 import lotto.view.OutputView;
 
 public class Controller {
@@ -28,7 +29,7 @@ public class Controller {
         LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
         List<Lotto> lottos = lottoShop.buyLottos(money);
         Wallet wallet = new Wallet(lottos);
-        outputView.print(wallet.toString());
+        outputView.printWallet(WalletDto.from(wallet));
 
         WinningInform winningInform = inputController.getWinningInform();
 
