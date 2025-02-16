@@ -76,7 +76,7 @@ class LottoRankTest {
     void getRankInfo() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertFalse(rankInfo.containsKey(LottoRank.NO_REWARD));
+        assertFalse(rankInfo.containsKey(LottoRank.NONE));
     }
 
     @Test
@@ -84,7 +84,7 @@ class LottoRankTest {
     void getRankMessage() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertEquals("6개 일치 (2000000000원)", rankInfo.get(LottoRank.FIRST_PLACE));
-        assertEquals("5개 일치, 보너스 볼 일치(30000000원)", rankInfo.get(LottoRank.SECOND_PLACE));
+        assertEquals("6개 일치 (2000000000원)", rankInfo.get(LottoRank.FIRST));
+        assertEquals("5개 일치, 보너스 볼 일치(30000000원)", rankInfo.get(LottoRank.SECOND));
     }
 }

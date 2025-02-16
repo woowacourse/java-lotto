@@ -7,12 +7,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LottoRank {
-    NO_REWARD(0, 0L, false),
-    FIFTH_PLACE(3, 5_000L, false),
-    FORTH_PLACE(4, 50_000L, false),
-    THIRD_PLACE(5, 1_500_000L, false),
-    SECOND_PLACE(5, 30_000_000L, true),
-    FIRST_PLACE(6, 2_000_000_000L, false);
+    NONE(0, 0L, false),
+    FIFTH(3, 5_000L, false),
+    FORTH(4, 50_000L, false),
+    THIRD(5, 1_500_000L, false),
+    SECOND(5, 30_000_000L, true),
+    FIRST(6, 2_000_000_000L, false);
 
     private final int matchCount;
     private final long winningAmount;
@@ -38,12 +38,12 @@ public enum LottoRank {
                 .filter(rank -> rank.matchCount == matchResultDto.getMatchCount())
                 .filter(rank -> rank.containsBonus == matchResultDto.isContainsBonusNumber())
                 .findAny()
-                .orElse(NO_REWARD);
+                .orElse(NONE);
     }
 
     public static Map<LottoRank, String> getRankInfo() {
         return Arrays.stream(values())
-                .filter(lottoRank -> lottoRank != NO_REWARD)
+                .filter(lottoRank -> lottoRank != NONE)
                 .collect(Collectors.toMap(Function.identity(), LottoRank::generateRankMessage,
                         (oldValue, newValue) -> oldValue,
                         LinkedHashMap::new
@@ -51,7 +51,7 @@ public enum LottoRank {
     }
 
     private String generateRankMessage() {
-        if (this == LottoRank.SECOND_PLACE) {
+        if (this == LottoRank.SECOND) {
             return String.format("%d개 일치, 보너스 볼 일치(%d원)", getMatchCount(), getWinningAmount());
         }
 
