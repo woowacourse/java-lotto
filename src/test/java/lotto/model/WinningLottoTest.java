@@ -3,6 +3,7 @@ package lotto.model;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,5 @@ class WinningLottoTest {
                 .hasMessage("로또 번호와 보너스 번호는 중복될 수 없습니다.");
 
     }
-
 
 }

@@ -77,5 +77,4 @@ public class WinningResults {
     public List<WinningResult> getResults() {
         return results;
     }
-
 }

@@ -26,6 +26,7 @@ public class LottoController {
 
     public void run() {
         try {
+
             Money money = new Money(parseInt(inputView.readPurchaseMoney()));
             issueLottoTickets(money);
             printIssuedLottoTickets();
