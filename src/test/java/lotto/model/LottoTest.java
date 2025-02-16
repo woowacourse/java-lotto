@@ -38,7 +38,7 @@ class LottoTest {
 
     @DisplayName("다른 로또와 매칭되는 번호의 개수를 계산해 반환한다.")
     @Test
-    void 다른_로또와_매칭되는_번호의_개수를_계산해_반환한다() {
+    void returnMatchingCountWithAnotherLotto() {
         Lotto lotto = new Lotto(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
@@ -62,7 +62,7 @@ class LottoTest {
     @DisplayName("번호를 알려주면 존재 여부를 알려준다.")
     @CsvSource(value = {"1,true", "7,false"})
     @ParameterizedTest
-    void 번호를_알려주면_존재_여부를_알려준다(int number, boolean expected) {
+    void checkIfExistNumber(int number, boolean expected) {
         Lotto lotto = new Lotto(List.of(
                 new LottoNumber(1),
                 new LottoNumber(2),
