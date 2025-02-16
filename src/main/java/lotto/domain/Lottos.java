@@ -10,7 +10,7 @@ import lotto.domain.util.LottoGenerator;
 public class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(LottoGenerator generator, int payment) {
+    public Lottos(final LottoGenerator generator, final int payment) {
         validate(payment);
         int count = payment / Lotto.PRICE;
         for (int i = 0; i < count; i++) {
@@ -18,15 +18,15 @@ public class Lottos {
         }
     }
 
-    private void validate(int payment) {
+    private void validate(final int payment) {
         if (payment % Lotto.PRICE != 0) {
             throw new IllegalArgumentException(String.format("[ERROR] 구입 금액은 %,d원 단위로 입력해야 합니다.", Lotto.PRICE));
         }
     }
 
-    public Map<Rank, Long> getRankCount(WinningLotto winningLotto) {
+    public Map<Rank, Long> calculateWinnings(final WinningLotto winningLotto) {
         return lottos.stream()
-                .map(winningLotto::getRank)
+                .map(winningLotto::calculateWinning)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 

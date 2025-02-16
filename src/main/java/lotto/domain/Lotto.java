@@ -10,20 +10,20 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public   Lotto(LottoGenerator generator) {
+    public Lotto(final LottoGenerator generator) {
         this.numbers = generator.generate(LOTTO_NUMBER_COUNT).stream()
                 .sorted()
                 .toList();
     }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(final List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers.stream()
-            .map(LottoNumber::of)
-            .toList();
+                .map(LottoNumber::of)
+                .toList();
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validate(final List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(String.format("[ERROR] 로또 번호는 %d개를 입력해야 합니다.", LOTTO_NUMBER_COUNT));
         }
@@ -33,13 +33,13 @@ public class Lotto {
         }
     }
 
-    public int findMatchCount(Lotto lotto) {
+    public int findMatchCount(final Lotto lotto) {
         return (int) IntStream.range(0, numbers.size())
-            .filter(i -> lotto.numbers.contains(numbers.get(i)))
-            .count();
+                .filter(i -> lotto.numbers.contains(numbers.get(i)))
+                .count();
     }
 
-    public boolean containsNumber(LottoNumber number) {
+    public boolean containsNumber(final LottoNumber number) {
         return numbers.contains(number);
     }
 

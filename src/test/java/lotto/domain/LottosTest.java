@@ -16,7 +16,7 @@ public class LottosTest {
     void 당첨_결과를_구한다() {
         Lottos lottos = new Lottos(generator, 2000);
         WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), 7);
-        assertThat(lottos.getRankCount(winningLotto).get(Rank.FIRST))
+        assertThat(lottos.calculateWinnings(winningLotto).get(Rank.FIRST))
             .isEqualTo(1);
     }
 

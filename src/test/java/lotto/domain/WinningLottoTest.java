@@ -13,7 +13,7 @@ class WinningLottoTest {
     void 당첨_결과를_구한다() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
         WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1,2,3,4,5,7)), 6);
-        assertThat(winningLotto.getRank(lotto)).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.calculateWinning(lotto)).isEqualTo(Rank.SECOND);
     }
 
     @Test

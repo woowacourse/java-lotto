@@ -20,7 +20,7 @@ public enum Rank {
         this.price = price;
     }
 
-    public static Rank of(int matchCount, boolean matchBonus) {
+    public static Rank of(final int matchCount, final boolean matchBonus) {
         Rank found = Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
@@ -32,7 +32,7 @@ public enum Rank {
         return found;
     }
 
-    public long multiplyPrice(Long value) {
+    public long multiplyPrice(final Long value) {
         return this.price * value;
     }
 

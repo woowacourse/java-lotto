@@ -28,13 +28,13 @@ public class LottoService {
         return LottosResponse.from(lottos);
     }
 
-    public void setWinningLotto(WinningBallsRequest request) {
-        winningLotto = new WinningLotto(new Lotto(request.winningNumbers()), request.bonusNumber());
+    public void initWinningLotto(WinningBallsRequest request) {
+        this.winningLotto = new WinningLotto(new Lotto(request.winningNumbers()), request.bonusNumber());
     }
 
-    public ResultResponse getResult() {
-        Map<Rank, Long> rankCount = lottos.getRankCount(winningLotto);
+    public ResultResponse calculateResult() {
+        Map<Rank, Long> rankCount = this.lottos.calculateWinnings(winningLotto);
         LottoResult result = new LottoResult(rankCount);
-        return ResultResponse.of(rankCount, result.calculateRateOfReturn(bank.getUsedMoney()));
+        return ResultResponse.of(rankCount, result.calculateRateOfReturn(this.bank.getUsedMoney()));
     }
 }

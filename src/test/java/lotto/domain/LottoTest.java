@@ -27,9 +27,9 @@ public class LottoTest {
     @Test
     void 로또_번호의_등수를_판정한다() {
         WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
-        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
-        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
-        assertThat(winningLotto.getRank(new Lotto(List.of(1, 2, 3, 4, 5, 8)))).isEqualTo(Rank.THIRD);
+        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
+        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
+        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 8)))).isEqualTo(Rank.THIRD);
     }
 
     @Test
