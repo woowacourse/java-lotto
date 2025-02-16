@@ -41,8 +41,7 @@ public class LottoController {
     private Lottos createLottosFromRandomNumber(Amount amount) {
         LottosFactory lottosFactory = new LottosFactory(new RandomGenerator());
         Lottos lottos = lottosFactory.from(amount);
-        outputView.printLottos(new LottosDto(lottos));
-
+        outputView.printLottos(LottosDto.from(lottos));
         return lottos;
     }
 

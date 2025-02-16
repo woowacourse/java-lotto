@@ -6,8 +6,8 @@ import java.util.List;
 public record LottosDto(
         List<LottoDto> getLottoDtos
 ) {
-    public LottosDto(Lottos lottos) {
-        this(lottos.getLottos().stream()
+    public static LottosDto from(Lottos lottos){
+        return new LottosDto(lottos.getLottos().stream()
                 .map(LottoDto::new)
                 .toList());
     }
