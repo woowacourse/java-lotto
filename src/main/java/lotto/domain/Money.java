@@ -9,11 +9,11 @@ public record Money(int money) {
         validate(money);
     }
 
-
     private void validate(int money) {
         validateEnoughMoney(money);
         validateDivided(money);
     }
+
     private void validateEnoughMoney(int money) {
         if (isNotEnough(money)) {
             throw new IllegalArgumentException(ERROR_MONEY_NOT_ENOUGH);
