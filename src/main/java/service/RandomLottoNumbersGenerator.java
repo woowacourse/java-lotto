@@ -22,7 +22,7 @@ public class RandomLottoNumbersGenerator implements RandomNumbersGenerator {
         return numbers.stream().toList();
     }
 
-    private static void validate(int start, int end, int count) {
+    private void validate(int start, int end, int count) {
         if (end - start + 1 < count) {
             throw new IllegalArgumentException("난수 생성 범위가 생성 가능 개수보다 적습니다.");
         }
