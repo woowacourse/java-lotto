@@ -33,8 +33,8 @@ public class WinningNumbers {
     }
 
     private void validateDuplicate(final List<LottoNumber> winningNumbers) {
-        final Set<LottoNumber> set = new HashSet<>(winningNumbers);
-        if (set.size() != winningNumbers.size()) {
+        final Set<LottoNumber> removedDuplicate = new HashSet<>(winningNumbers);
+        if (removedDuplicate.size() != winningNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.WINNING_NUMBERS_IS_DUPLICATION.getMessage());
         }
     }
@@ -44,7 +44,7 @@ public class WinningNumbers {
             throw new IllegalArgumentException(ErrorType.BONUS_BALL_IS_DUPLICATION.getMessage());
         }
     }
-    
+
     public int calculateLottoMatchCount(final List<LottoNumber> lottoNumbers) {
         int count = 0;
         for (final LottoNumber lottoNumber : lottoNumbers) {
