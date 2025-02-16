@@ -34,7 +34,7 @@ class LottoMachineTest {
                 new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Lotto(List.of(1, 2, 3, 4, 5, 7)),
                 new Lotto(List.of(1, 2, 3, 4, 5, 8)), new Lotto(List.of(1, 2, 3, 4, 8, 9)),
                 new Lotto(List.of(1, 2, 3, 8, 9, 10)), new Lotto(List.of(8, 9, 10, 11, 12, 13)));
-        WinningLotto givenWinningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto givenWinningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         List<WinningTier> expectedWiningTier = List.of(
                 WinningTier.FIRST, WinningTier.SECOND, WinningTier.THIRD, WinningTier.FOURTH, WinningTier.FIFTH);
 

@@ -41,7 +41,7 @@ public class LottoController {
     private List<WinningTier> findWinningTiers(List<Lotto> lottos) {
         List<Integer> winningNumbers = inputView.readWinningNumbers();
         int bonusNumber = inputView.readBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(new Lotto(winningNumbers), bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
         return lottoMachine.findWinningTiers(lottos, winningLotto);
     }
 
