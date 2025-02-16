@@ -37,7 +37,7 @@ public class Controller {
         Map<MatchInfo, Integer> matchResult = cashier.convertToMatchResult(matchCount);
         outputView.printStatics(matchResult);
 
-        Profit profit = cashier.calculateProfit(matchResult, cashier.money());
+        Profit profit = cashier.calculateProfit(matchResult);
         outputView.printProfit(profit);
     }
 

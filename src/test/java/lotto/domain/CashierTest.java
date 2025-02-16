@@ -46,7 +46,7 @@ class CashierTest {
         Map<MatchInfo, Integer> map = new HashMap<>();
         map.put(MatchInfo.MATCH_THREE, 3);
 
-        Profit profit = cashier.calculateProfit(map, cashier.money());
+        Profit profit = cashier.calculateProfit(map);
 
         assertThat(profit.rate()).isEqualTo(1.5);
     }

@@ -48,7 +48,7 @@ public record Cashier(int money) {
             ));
     }
 
-    public Profit calculateProfit(Map<MatchInfo, Integer> map, int money) {
+    public Profit calculateProfit(Map<MatchInfo, Integer> map) {
         double result = map.entrySet().stream()
             .mapToDouble(e -> e.getKey().getMoney() * e.getValue())
             .sum() / money;
