@@ -16,7 +16,25 @@ public enum LottoRule {
         return value;
     }
 
-    public static boolean isLottoRange(int number) {
-        return number >= MIN_LOTTO_NUMBER.value && number <= MAX_LOTTO_NUMBER.value;
+    static {
+        validateRange();
+        validateCount();
+    }
+
+    private static void validateRange() {
+        if (MIN_LOTTO_NUMBER.value > MAX_LOTTO_NUMBER.value) {
+            throw new IllegalArgumentException(
+                    "최소 값(" + MIN_LOTTO_NUMBER.value + ")이 최대 값(" + MAX_LOTTO_NUMBER.value + ")보다 클 수 없습니다."
+            );
+        }
+    }
+
+    private static void validateCount() {
+        if ((MAX_LOTTO_NUMBER.value - MIN_LOTTO_NUMBER.value + 1) < LOTTO_SELECTION_SIZE.value) {
+            throw new IllegalArgumentException(
+                    "생성하려는 개수(" + LOTTO_SELECTION_SIZE.value + ")가 " +
+                            "지정된 범위 [" + MIN_LOTTO_NUMBER.value + " ~ " + MAX_LOTTO_NUMBER.value + "]보다 큽니다."
+            );
+        }
     }
 }

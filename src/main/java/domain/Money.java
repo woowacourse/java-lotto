@@ -4,20 +4,22 @@ public class Money {
 
     private final int amount;
 
-    public Money(String amount) {
+    private Money(int amount) {
         validate(amount);
-        this.amount = Integer.parseInt(amount);
+        this.amount = amount;
+    }
+
+    public static Money from(int amount) {
+        return new Money(amount);
     }
 
     public int getAmount() {
         return amount;
     }
 
-    private void validate(String amount) {
-        int money = parseAndValidateNumber(amount);
-
-        validateZeroAmount(money);
-        validateMultipleOfLottoPrice(money);
+    private void validate(int amount) {
+        validateZeroAmount(amount);
+        validateMultipleOfLottoPrice(amount);
     }
 
     private static void validateMultipleOfLottoPrice(int price) {
@@ -30,14 +32,6 @@ public class Money {
     private static void validateZeroAmount(int amount) {
         if (amount == 0) {
             throw new IllegalArgumentException("구입 금액은 0원일 수 없습니다.");
-        }
-    }
-
-    private int parseAndValidateNumber(String value) {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.");
         }
     }
 }

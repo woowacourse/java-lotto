@@ -1,5 +1,5 @@
-import domain.LottoRanking;
-import domain.LottoResult;
+package domain;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,8 @@ class LottoResultTest {
         int count = lottoResult.getCount();
 
         // then
-        assertThat(count).isEqualTo(LottoRanking.values().length);
+        assertThat(count)
+                .isEqualTo(LottoRanking.values().length);
     }
 
     @Test
@@ -31,7 +32,8 @@ class LottoResultTest {
                 .allMatch(value -> value == 0);
 
         // then
-        assertThat(isAllZero).isTrue();
+        assertThat(isAllZero)
+                .isTrue();
     }
 
     @Test
@@ -44,7 +46,8 @@ class LottoResultTest {
         lottoResult.add(LottoRanking.FIRST);
 
         // then
-        assertThat(lottoResult.result().get(LottoRanking.FIRST)).isEqualTo(1);
+        assertThat(lottoResult.result().get(LottoRanking.FIRST))
+                .isEqualTo(1);
     }
 
     @Test
