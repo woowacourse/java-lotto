@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public class LottoConstants {
     public static final int MIN_NUMBER = 1;

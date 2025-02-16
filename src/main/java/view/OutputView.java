@@ -1,9 +1,9 @@
 package view;
 
 import java.util.List;
-import model.Lotto;
-import model.WinningResult;
-import model.WinningStatus;
+import domain.Lotto;
+import domain.WinningResult;
+import domain.WinningStatus;
 
 public class OutputView {
     public void printPurchaseAmountInstruction() {

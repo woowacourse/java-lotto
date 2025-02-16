@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,7 +18,7 @@ class BonusNumberTest {
 
     @BeforeAll
     static void setWinningNumber() {
-         winningNumberFromTwoToSeven = new WinningNumber("2, 3, 4, 5, 6, 7");
+        winningNumberFromTwoToSeven = new WinningNumber("2, 3, 4, 5, 6, 7");
     }
 
     @DisplayName("보너스 번호를 정상적으로 저장한다")
