@@ -1,27 +1,20 @@
 package lotto.domain;
 
-import static lotto.util.Constant.LOTTO_NUMBER_DELIMITER;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
-import static lotto.util.ErrorHandler.INVALID_RANGE;
-import static lotto.util.ErrorHandler.INVALID_SIZE;
+import static lotto.util.ExceptionHandler.INVALID_LOTTO_NUMBER_RANGE;
+import static lotto.util.ExceptionHandler.INVALID_LOTTO_NUMBER_SIZE;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.util.StringConverter;
 
 public class Lotto {
 
     private List<Integer> lotto = new ArrayList<>();
 
-    public Lotto(String input) {
-        List<Integer> numbers = StringConverter.parseToIntList(input, LOTTO_NUMBER_DELIMITER);
-        validate(numbers);
-        this.lotto = numbers;
-    }
-
     public Lotto(List<Integer> numbers) {
+        validate(numbers);
         this.lotto = numbers;
     }
 
@@ -32,7 +25,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_SIZE) {
-            throw INVALID_SIZE.getException();
+            throw INVALID_LOTTO_NUMBER_SIZE.getException();
         }
     }
 
@@ -44,7 +37,7 @@ public class Lotto {
 
     private void checkRange(int number) {
         if (number < LOTTO_NUMBER_MIN_RANGE || number > LOTTO_NUMBER_MAX_RANGE) {
-            throw INVALID_RANGE.getException();
+            throw INVALID_LOTTO_NUMBER_RANGE.getException();
         }
     }
 

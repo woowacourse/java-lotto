@@ -2,23 +2,20 @@ package lotto.domain;
 
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
-import static lotto.util.ErrorHandler.INVALID_BONUS_DISTINCT;
-import static lotto.util.ErrorHandler.INVALID_BONUS_NUMBER;
-import static lotto.util.ErrorHandler.INVALID_RANGE;
+import static lotto.util.ExceptionHandler.INVALID_BONUS_NUMBER_DISTINCT;
+import static lotto.util.ExceptionHandler.INVALID_LOTTO_NUMBER_RANGE;
 
 import java.util.List;
-import lotto.util.StringConverter;
 
 public class WinningLotto {
 
     private final Lotto winningNumbers;
     private final int bonusBall;
 
-    public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
+    public WinningLotto(Lotto winningNumbers, int bonusBall) {
         this.winningNumbers = winningNumbers;
-        int bonusBallNumber = StringConverter.parseToInt(bonusBallInput, INVALID_BONUS_NUMBER);
-        validateBonusBall(bonusBallNumber);
-        this.bonusBall = bonusBallNumber;
+        validateBonusBall(bonusBall);
+        this.bonusBall = bonusBall;
     }
 
     private void validateBonusBall(int bonusBallNumber) {
@@ -28,14 +25,14 @@ public class WinningLotto {
 
     private void validateRange(int bonusBallNumber) {
         if (bonusBallNumber < LOTTO_NUMBER_MIN_RANGE || bonusBallNumber > LOTTO_NUMBER_MAX_RANGE) {
-            throw INVALID_RANGE.getException();
+            throw INVALID_LOTTO_NUMBER_RANGE.getException();
         }
     }
 
     private void validateDistinct(int bonusBallNumber) {
         List<Integer> winningLottoNumbers = winningNumbers.getLotto();
         if (winningLottoNumbers.contains(bonusBallNumber)) {
-            throw INVALID_BONUS_DISTINCT.getException();
+            throw INVALID_BONUS_NUMBER_DISTINCT.getException();
         }
     }
 

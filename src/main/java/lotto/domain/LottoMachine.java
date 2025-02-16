@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.util.Constant.DEFAULT_VALUE_ZERO;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
@@ -20,7 +21,7 @@ public class LottoMachine {
     private List<Lotto> generateLottoTickets(int ticketNumber) {
         List<Lotto> lottoTickets = new ArrayList<>();
 
-        for (int i = 0; i < ticketNumber; i++) {
+        for (int i = DEFAULT_VALUE_ZERO; i < ticketNumber; i++) {
             List<Integer> lottoTicket = generateLottoTicket();
             lottoTickets.add(new Lotto(lottoTicket));
         }
