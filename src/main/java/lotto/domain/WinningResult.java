@@ -13,10 +13,10 @@ public class WinningResult {
     }
 
     public double calculateProfitRate(final LottoPrice lottoPrice) {
-        return lottoPrice.divideFrom(calculateTotalAmount());
+        return lottoPrice.divideFrom(calculateTotalProfit());
     }
 
-    private int calculateTotalAmount() {
+    private int calculateTotalProfit() {
         return winningResult.entrySet().stream()
                 .mapToInt((entry) -> entry.getKey().getAmount() * entry.getValue())
                 .sum();
