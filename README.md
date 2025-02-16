@@ -12,13 +12,14 @@ static은 여러번 사용되는 필드 등에서는 초기 한번만 메모리�
 
 ### 현재 무분별한 사용
 
-그러나 현재 LottoRandomGenerator의 경우, 현재 모든 필드가 static으로 선언되어 있음    
-LottoRandomGenerator는 특정시점에 한번만 사용되는데 불구하고 static으로 선언되어 있기 때문에 애플리케이션이 실행되자마자 메모리를 점유하게 된다.    
-따라서 필요 시점에 한번만 생성하여 사용하도록 하였음
+그러나 현재 LottoRandomGenerator는 특정시점에 한번만 사용되는데 불구하고 현재 모든 필드가 static으로 선언되어 있음
+(굳이 의미없는 static 사용)
+
+- [x] 필요 시점에 한번만 생성하여 사용하도록 하였음
 
 ## formatter
 
-- formatter 또한 굳이 패키지를 formatter란 이유만으로 선언할 필요가 없음
+- [x] formatter 또한 굳이 패키지를 formatter란 이유만으로 선언할 필요가 없음
 
 ## Repository의 필요성
 

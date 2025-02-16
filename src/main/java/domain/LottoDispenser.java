@@ -40,9 +40,10 @@ public class LottoDispenser {
     }
 
     private List<Lotto> generateLottos(int lottoCount) {
+        LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(LottoRandomGenerator.generateNumbers()));
+            lottos.add(new Lotto(lottoRandomGenerator.generateNumbers()));
         }
         return lottos;
     }
