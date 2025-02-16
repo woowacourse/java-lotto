@@ -37,6 +37,23 @@ public class LottoController {
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
     }
 
+    private LottoPrice getLottoPrice() {
+        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
+        return new LottoPrice(parsedAmount);
+    }
+
+    private int getLottoCount(final LottoPrice lottoPrice) {
+        int lottoCount = lottoPrice.calculateLottoCount();
+        outputView.printLottoCount(lottoCount);
+        return lottoCount;
+    }
+
+    private void printPurchaseLottos(final List<Lotto> lottos) {
+        lottos.stream()
+                .map(Lotto::getNumbers)
+                .forEach(System.out::println);
+    }
+
     private WinningResultCalculator getWinningResultCalculator() {
         Lotto winningLotto = getWinningLotto();
         LottoNumber bonusNumber = getBonusNumber();
@@ -56,22 +73,5 @@ public class LottoController {
         int parsedBonusNumber = StringToIntParser.parseInt(bonusNumberInput);
         LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
         return bonusNumber;
-    }
-
-    private LottoPrice getLottoPrice() {
-        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
-        return new LottoPrice(parsedAmount);
-    }
-
-    private int getLottoCount(final LottoPrice lottoPrice) {
-        int lottoCount = lottoPrice.calculateLottoCount();
-        outputView.printLottoCount(lottoCount);
-        return lottoCount;
-    }
-
-    private void printPurchaseLottos(final List<Lotto> lottos) {
-        lottos.stream()
-                .map(Lotto::getNumbers)
-                .forEach(System.out::println);
     }
 }
