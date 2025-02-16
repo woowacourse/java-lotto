@@ -1,63 +1,60 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoGenerator;
+import domain.LottoResultCalculator;
 import domain.Rank;
-import domain.Ticket;
 import domain.WinningInfo;
 import java.util.List;
 import java.util.Map;
-import service.LottoService;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
+        LottoGenerator lottoGenerator = new LottoGenerator();
+        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator();
+
         int purchaseAmount = inputView.purchaseAmountInput();
-        Ticket ticket = ticketProcess(purchaseAmount);
-        List<Lotto> lottos = lottoProcess(ticket);
-        WinningInfo winningInfo = winningInfoProcess();
-        Map<Rank, Integer> rankResult = calculateRankProcess(winningInfo, lottos);
-        profitProcess(rankResult, purchaseAmount);
+        List<Lotto> lottoBundle = purchaseLottoBundle(lottoGenerator, purchaseAmount);
+        WinningInfo winningInfo = generateWinningInfo(lottoGenerator);
+        Map<Rank, Integer> rankResult = calculateMatchingRank(lottoResultCalculator, winningInfo, lottoBundle);
+        calculateProfit(lottoResultCalculator, rankResult, purchaseAmount);
     }
 
-    private Ticket ticketProcess(int purchaseAmount) {
-        Ticket ticket = lottoService.createTicket(purchaseAmount);
-        outputView.printPurchaseResult(ticket);
-        return ticket;
+    private List<Lotto> purchaseLottoBundle(LottoGenerator lottoGenerator, int purchaseAmount) {
+        int lottoQuantity = lottoGenerator.purchaseLottoByAmount(purchaseAmount);
+        outputView.printPurchaseResult(lottoQuantity);
+        List<Lotto> lottoBundle = lottoGenerator.createLottoBundleForQuantity(lottoQuantity);
+        outputView.printLottos(lottoBundle);
+        return lottoBundle;
     }
 
-    private void profitProcess(Map<Rank, Integer> rankResult, int purchaseAmount) {
-        double calculateRate = lottoService.calculateProfit(rankResult, purchaseAmount);
-        outputView.printProfit(calculateRate);
+    private WinningInfo generateWinningInfo(LottoGenerator lottoGenerator) {
+        String winningNumbers = inputView.winningNumbersInput();
+        Lotto lotto = lottoGenerator.createWinningLotto(winningNumbers);
+        int bonusNumber = inputView.bonusNumberInput();
+        return lottoGenerator.createWinningInfo(lotto, bonusNumber);
     }
 
-    private Map<Rank, Integer> calculateRankProcess(WinningInfo winningInfo, List<Lotto> lottos) {
-        Map<Rank, Integer> rankResult = lottoService.calculateRank(winningInfo, lottos);
+    private Map<Rank, Integer> calculateMatchingRank(LottoResultCalculator lottoResultCalculator,
+                                                     WinningInfo winningInfo, List<Lotto> lottoBundle) {
+        Map<Rank, Integer> rankResult = lottoResultCalculator.calculateMatchingRank(winningInfo, lottoBundle);
         outputView.printWinningStatistic(rankResult);
         return rankResult;
     }
 
-    private WinningInfo winningInfoProcess() {
-        String winningNumbers = inputView.winningNumbersInput();
-        Lotto lotto = lottoService.createLotto(winningNumbers);
-        int bonusNumber = inputView.bonusNumberInput();
-        return lottoService.createWinningNumber(lotto, bonusNumber);
-    }
-
-    private List<Lotto> lottoProcess(Ticket ticket) {
-        lottoService.createLottos(ticket);
-        List<Lotto> lottos = lottoService.getLottos();
-        outputView.printLottos(lottos);
-        return lottos;
+    private void calculateProfit(LottoResultCalculator lottoResultCalculator, Map<Rank, Integer> rankResult,
+                                 int purchaseAmount) {
+        double calculateRate = lottoResultCalculator.calculateProfit(rankResult, purchaseAmount);
+        outputView.printProfit(calculateRate);
     }
 }
