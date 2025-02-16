@@ -1,5 +1,6 @@
 package model;
 
+import exception.CommonExceptionType;
 import exception.LottoExceptionType;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,7 @@ public record Lotto(List<Integer> numbers) {
 
     private static void validateArgumentsSize(final List<Integer> numbers) {
         if (numbers.size() != LottoConstant.SIZE) {
-            throw new IllegalArgumentException(LottoExceptionType.INVALID_LOTTO_SIZE.getMessage(LottoConstant.SIZE));
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_ARGUMENTS_SIZE.getMessage(LottoConstant.SIZE));
         }
     }
 
