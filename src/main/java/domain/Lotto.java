@@ -2,7 +2,7 @@ package domain;
 
 import static global.exception.ExceptionMessage.*;
 
-import domain.dto.GetLottoDto;
+import domain.dto.LottoResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +41,8 @@ public class Lotto {
         return bonus;
     }
 
-    public GetLottoDto getLottoDto() {
-        return new GetLottoDto(numbers);
+    public LottoResponse getLottoDto() {
+        return new LottoResponse(numbers);
     }
 
     public Rank countMatchNumbers(WinningLotto winningLotto) {

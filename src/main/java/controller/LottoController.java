@@ -4,7 +4,7 @@ import domain.Amount;
 import domain.Lottos;
 import domain.factory.LottosFactory;
 import domain.WinningLotto;
-import domain.dto.GetResultDto;
+import domain.dto.ResultResponse;
 import domain.generator.RandomGenerator;
 import view.InputView;
 import view.OutputView;
@@ -48,7 +48,7 @@ public class LottoController {
     }
 
     private void getResult(Lottos lottos, WinningLotto winningLotto, Amount amount) {
-        GetResultDto lottosResult = lottos.getResult(winningLotto, amount);
+        ResultResponse lottosResult = lottos.getResult(winningLotto, amount);
         outputView.printWinningStatistic(lottosResult);
     }
 
