@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    public static final int SIZE = 6;
     private List<LottoNumber> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -38,8 +39,8 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != Constants.LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 구성돼야 합니다.", Constants.LOTTO_SIZE));
+        if (numbers.size() != SIZE) {
+            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 구성돼야 합니다.", SIZE));
         }
     }
 

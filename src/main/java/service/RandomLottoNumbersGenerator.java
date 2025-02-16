@@ -1,6 +1,6 @@
 package service;
 
-import infrastructure.constants.Constants;
+import domain.Lotto;
 import domain.vo.LottoNumber;
 
 import java.util.HashSet;
@@ -11,11 +11,11 @@ import java.util.Set;
 public class RandomLottoNumbersGenerator implements RandomNumbersGenerator {
     @Override
     public List<Integer> generate() {
-        validate(LottoNumber.MIN, LottoNumber.MAX, Constants.LOTTO_SIZE);
+        validate(LottoNumber.MIN, LottoNumber.MAX, Lotto.SIZE);
 
         Random random = new Random();
         Set<Integer> numbers = new HashSet<>();
-        while(numbers.size() < Constants.LOTTO_SIZE) {
+        while(numbers.size() < Lotto.SIZE) {
             int number = random.nextInt(LottoNumber.MAX - LottoNumber.MIN + 1) + LottoNumber.MIN;
             numbers.add(number);
         }
