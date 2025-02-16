@@ -77,7 +77,7 @@ class LottoTest {
         int bonusNumber = 3;
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.contains(bonusNumber)).isEqualTo(true);
     }
 
     @Test
@@ -87,6 +87,6 @@ class LottoTest {
         int bonusNumber = 7;
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.contains(bonusNumber)).isEqualTo(false);
     }
 }

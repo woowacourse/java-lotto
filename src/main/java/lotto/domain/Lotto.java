@@ -13,10 +13,8 @@ public class Lotto {
     private static final String RANGE_ERROR = "1과 45 사이의 수를 입력하셔야 합니다.";
     private static final String NUMBER_FORMAT_ERROR = "당첨 번호는 숫자를 입력하셔야 합니다.";
     private static final String NUMBER_DUPLICATED_ERROR = "로또 숫자는 중복될 수 없습니다.";
-    private static final String BONUS_NUMBER_DUPLICATED_ERROR = "보너스 숫자는 당첨 번호와 중복될 수 없습니다.";
+
     private static final String NUMBER_LENGTH_ERROR = "6자리를 입력하셔야 합니다.";
-
-
 
     private List<Integer> lottoNumber;
     private RandomLottoGenerator randomLottoGenerator;
@@ -30,19 +28,13 @@ public class Lotto {
         validate(winningLottoInput);
     }
 
-    public void checkDuplicate(int bonusNumber) {
-        if (lottoNumber.contains(bonusNumber)) {
-            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATED_ERROR);
-        }
-    }
-
     public int match(Lotto winningLottoNumber) {
         List<Integer> copiedLottoNumber = new ArrayList<>(lottoNumber);
         copiedLottoNumber.retainAll(winningLottoNumber.lottoNumber);
         return copiedLottoNumber.size();
     }
 
-    public boolean checkBonusNumberMatch(int bonusNumber) {
+    public boolean contains(int bonusNumber) {
         return lottoNumber.contains(bonusNumber);
     }
 
