@@ -13,8 +13,10 @@ class LottoResultTest {
     void 수익률을_계산한다() {
         Bank bank = new Bank();
         bank.pay(10000);
+
         LottoResult result = new LottoResult(Map.of(Rank.FIFTH, 1L));
-        BigDecimal rate = result.calculateRateOfReturn(bank.getUsedMoney());
-        assertThat(rate.setScale(2, RoundingMode.HALF_UP).doubleValue()).isEqualTo(0.50);
+        BigDecimal rateOfReturn = result.calculateRateOfReturn(bank.getUsedMoney());
+
+        assertThat(rateOfReturn.setScale(2, RoundingMode.HALF_UP).doubleValue()).isEqualTo(0.50);
     }
 }

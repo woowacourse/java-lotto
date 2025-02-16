@@ -8,9 +8,11 @@ import java.util.List;
 import lotto.domain.util.LottoGenerator;
 import lotto.domain.util.impl.RandomLottoGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottosTest {
-    LottoGenerator generator = new TestLottoGenerator();
+    private final LottoGenerator generator = new TestLottoGenerator();
 
     @Test
     void 당첨_결과를_구한다() {
@@ -26,11 +28,10 @@ public class LottosTest {
         assertThat(lottos.size()).isEqualTo(3);
     }
 
-    @Test
-    void 구입_금액이_1000원으로_나누어떨어지지_않을_경우_예외를_반환한다() {
-        assertThatThrownBy(() -> new Lottos(generator, 3))
-            .isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new Lottos(generator, 3003))
+    @ParameterizedTest
+    @ValueSource(ints = {3, 3003})
+    void 구입_금액이_1000원으로_나누어떨어지지_않을_경우_예외를_반환한다(int payment) {
+        assertThatThrownBy(() -> new Lottos(generator, payment))
             .isInstanceOf(IllegalArgumentException.class);
     }
 
