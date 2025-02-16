@@ -4,13 +4,14 @@ import static util.InputConverter.convertToInteger;
 import static util.InputConverter.convertToList;
 
 import config.Container;
-import java.util.List;
 import domain.Lotto;
 import domain.Lottos;
 import domain.Statistics;
 import domain.WinningLotto;
+import java.util.List;
 import service.LottoGenerateService;
 import service.StatisticsService;
+import util.RandomGenerator;
 import view.ViewFacade;
 
 public class LottoController {
@@ -33,7 +34,8 @@ public class LottoController {
 
     private PurchaseHistory processLottoPurchase() {
         int purchaseAmount = convertToInteger(viewFacade.getPurchaseInput());
-        Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount);
+        Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
+            () -> RandomGenerator.generateNumbers(1, 45, 6));
         viewFacade.printLottos(lottos.toDto());
         return new PurchaseHistory(lottos, purchaseAmount);
     }
