@@ -8,7 +8,12 @@ import domain.Profit;
 import domain.Rank;
 import domain.Ticket;
 import domain.WinningNumber;
-import java.util.Collections;
+import domain.dto.LottoDto;
+import domain.dto.LottoResultDto;
+import domain.dto.LottosDto;
+import domain.dto.TicketDto;
+import domain.dto.WinningNumberDto;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import repository.LottoRepository;
@@ -26,43 +31,56 @@ public class LottoService {
         this.lottoResultRepository = lottoResultRepository;
     }
 
-    public Ticket makeTicket(int purchaseAmount) {
-        return LottoCreator.createTicket(purchaseAmount);
+    public TicketDto makeTicket(int purchaseAmount) {
+        Ticket ticket = LottoCreator.createTicket(purchaseAmount);
+        return TicketDto.from(ticket);
     }
 
-    public Lotto makeLotto(String winningNumbers) {
-        return LottoCreator.createLotto(winningNumbers);
+    public LottoDto makeLotto(String winningNumbers) {
+        Lotto lotto = LottoCreator.createLotto(winningNumbers);
+        return LottoDto.from(lotto.getNumbers());
     }
 
-    public WinningNumber makeWinningNumber(Lotto lotto, int bonusNumber) {
-        return LottoCreator.createWinningNumber(lotto, bonusNumber);
+    public WinningNumberDto makeWinningNumber(LottoDto lottoDto, int bonusNumber) {
+        Lotto lotto = Lotto.from(lottoDto.getNumbers());
+        WinningNumber winningNumber = LottoCreator.createWinningNumber(lotto, bonusNumber);
+        Lotto numbers = winningNumber.getNumbers();
+        return WinningNumberDto.of(numbers.getNumbers(), winningNumber.getBonusNumber());
     }
 
-    public double calculateProfit(Map<Rank, Integer> rankResult, int purchaseAmount) {
-        Profit profit = LottoCreator.createProfit(rankResult, purchaseAmount);
+    public double calculateProfit(LottoResultDto lottoResultDto,  int purchaseAmount) {
+        Profit profit = LottoCreator.createProfit(lottoResultDto.getViewResult(), purchaseAmount);
         return profit.getResult();
     }
 
-    public void calculateRank(WinningNumber winningNumber, List<Lotto> lottos) {
+    public void calculateRank(WinningNumberDto winningNumberDto, LottosDto lottosDto) {
+        Lotto lotto = Lotto.from(winningNumberDto.getNumbers());
+        WinningNumber winningNumber = WinningNumber.of(lotto, winningNumberDto.getBonusNumber());
+        List<List<Integer>> tmpLottos = lottosDto.getLottos();
+        List<Lotto> lottos = new ArrayList<>();
+        for (List<Integer> tmpLotto : tmpLottos) {
+            Lotto generateLotto = Lotto.from(tmpLotto);
+            lottos.add(generateLotto);
+        }
         lottoResultRepository.add(winningNumber, lottos);
     }
 
-    public Map<Rank, Integer> getRankResult() {
+    public LottoResultDto getRankResult() {
         Map<Rank, Integer> calculateResult = lottoResultRepository.getCalculateResult();
-        return Collections.unmodifiableMap(calculateResult);
+        return LottoResultDto.from(calculateResult);
     }
 
-    public void saveLotto(Ticket ticket) {
-        for (int i = 0; i < ticket.getQuantity(); i++) {
+    public void saveLotto(TicketDto ticketDto) {
+        for (int i = 0; i < ticketDto.getTicket(); i++) {
             List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
             Lotto lotto = Lotto.from(numbers);
             lottoRepository.addLotto(lotto);
         }
     }
 
-    public List<Lotto> getLottos() {
+    public LottosDto getLottos() {
         List<Lotto> lottos = lottoRepository.getLottos();
-        return lottos;
+        return LottosDto.from(lottos);
     }
 
 }

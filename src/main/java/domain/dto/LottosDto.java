@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottosViewDto {
+public class LottosDto {
 
     private static final List<List<Integer>> viewLottos = new ArrayList<>();
 
-    private LottosViewDto(List<Lotto> lottos) {
+    private LottosDto(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             viewLottos.add(lotto.getNumbers());
         }
     }
 
-    public static LottosViewDto from(List<Lotto> lottos) {
-        return new LottosViewDto(lottos);
+    public static LottosDto from(List<Lotto> lottos) {
+        return new LottosDto(lottos);
     }
 
     public List<List<Integer>> getLottos() {

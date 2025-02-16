@@ -9,28 +9,43 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class LottoTest {
 
+    @Nested
     @DisplayName("숫자가 6개가 아닐 경우 예외를 발생시킨다.")
-    @Test
-    void 갯수가_6이_아닌_경우() {
+    class validateLength {
 
-        List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        @DisplayName("숫자가_6개를_초과한_경우_예외가_발생해야_한다")
+        @Test
+        void over_6_length() {
+            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                Lotto lotto = Lotto.from(expectedNumbers);
+            });
+            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
+        }
+
+        @DisplayName("숫자가_6개_미만인_경우_예외가_발생해야_한다")
+        @Test
+        void less_6_length() {
+            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                Lotto lotto = Lotto.from(expectedNumbers);
+            });
+            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
+        }
+
+        @DisplayName("숫자가_6개인_경우_로또객체가_성공적으로_생성되어야_한다")
+        @Test
+        void is_6_length() {
+            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6);
             Lotto lotto = Lotto.from(expectedNumbers);
-        });
-        assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
-    }
-
-    @DisplayName("숫자가 6개인 경우 성공")
-    @Test
-    void 성공적으로_생성_되었을_경우() {
-        List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = Lotto.from(expectedNumbers);
-        List<Integer> lottoNumbers = lotto.getNumbers();
-        assertEquals(expectedNumbers, lottoNumbers);
+            List<Integer> lottoNumbers = lotto.getNumbers();
+            assertEquals(expectedNumbers, lottoNumbers);
+        }
     }
 
     @DisplayName("중복되는 숫자를 입력할 경우 예외를 발생시킨다. ")
@@ -43,23 +58,28 @@ public class LottoTest {
         assertThat(exception.getMessage()).isEqualTo(INVALID_DUPLICATE_NUMBER.getMessage());
     }
 
-    @DisplayName("1~45 사이의 숫자일 경우, 테스트를 통과한다.")
-    @Test
-    void 숫자_범위가_유효한_경우() {
-        List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 45);
-        Lotto lotto = Lotto.from(expectedNumbers);
-        List<Integer> numbers = lotto.getNumbers();
-        assertEquals(expectedNumbers, numbers);
-    }
+    @Nested
+    @DisplayName("숫자 생성 테스트")
+    class validateGenerateNumber {
 
-    @DisplayName("1~45 사이 숫자가 아닐 경우 예외를 발생시킨다.")
-    @Test
-    void 숫자_범위가_유효하지_않은_경우() {
-        List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 46);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        @DisplayName("1~45 사이의 숫자일 경우, 로또 객체는 성공적으로 생성되어야 한다")
+        @Test
+        void valid_number_range() {
+            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 45);
             Lotto lotto = Lotto.from(expectedNumbers);
-        });
-        assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBER_RANGE.getMessage());
+            List<Integer> numbers = lotto.getNumbers();
+            assertEquals(expectedNumbers, numbers);
+        }
+
+        @DisplayName("1~45 사이 숫자가 아닐 경우 예외를 발생시킨다.")
+        @Test
+        void invalid_number_range() {
+            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 46);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                Lotto lotto = Lotto.from(expectedNumbers);
+            });
+            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBER_RANGE.getMessage());
+        }
     }
 
 }

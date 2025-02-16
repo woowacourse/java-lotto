@@ -2,16 +2,16 @@ package domain.dto;
 
 import domain.Ticket;
 
-public class TicketViewDto {
+public class TicketDto {
 
     private final int ticket;
 
-    private TicketViewDto(int ticket) {
+    private TicketDto(int ticket) {
         this.ticket = ticket;
     }
 
-    public static TicketViewDto from(Ticket ticket) {
-        return new TicketViewDto(ticket.getQuantity());
+    public static TicketDto from(Ticket ticket) {
+        return new TicketDto(ticket.getQuantity());
     }
 
     public int getTicket() {
