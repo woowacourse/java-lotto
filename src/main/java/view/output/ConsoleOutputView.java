@@ -21,10 +21,14 @@ public class ConsoleOutputView implements OutputView {
     public void printLottoStatistics(final double revenueRate, final Map<LottoRank, Integer> lottoRanks,
                                      final boolean isDamage) {
         System.out.println("\n당첨 통계\n---------");
+        printLottoRanks(lottoRanks);
+        printLottoRevenue(revenueRate, isDamage);
+    }
+
+    private void printLottoRanks(final Map<LottoRank, Integer> lottoRanks) {
         Arrays.stream(LottoRank.values())
                 .filter(rank -> rank != LottoRank.FAIL)
                 .forEach(rank -> printLottoResult(rank, lottoRanks));
-        printLottoRevenue(revenueRate, isDamage);
     }
 
     private void printLottoResult(final LottoRank rank, final Map<LottoRank, Integer> resultRanks) {
