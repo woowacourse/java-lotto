@@ -26,7 +26,7 @@ class BonusTest {
         Integer expected = 7;
         Bonus bonus = Bonus.of(bonusNumber, lotto);
 
-        assertThat(bonus.getNumber()).isEqualTo(expected);
+        assertThat(bonus.isEqualTo(expected)).isTrue();
     }
 
     @Test
