@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Lotto.validateLottoNumber;
+import static lotto.Lotto.validateNumberRange;
 
 import java.util.List;
 import lotto.view.InputView;
@@ -36,7 +36,7 @@ public class Application {
     }
 
     private static WinningLotto getWinningLotto() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        Lotto winningNumbers = getWinningNumbers();
         try {
             int bonusNumber = getBonusNumber();
             return new WinningLotto(winningNumbers, bonusNumber);
@@ -46,10 +46,10 @@ public class Application {
         }
     }
 
-    private static WinningNumbers getWinningNumbers() {
+    private static Lotto getWinningNumbers() {
         try {
             List<Integer> winningNumbers = InputView.inputWinningNumbers();
-            return new WinningNumbers(winningNumbers);
+            return new Lotto(winningNumbers);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningNumbers();
@@ -59,7 +59,7 @@ public class Application {
     private static int getBonusNumber() {
         try {
             int bonusNumber = InputView.inputBonusNumber();
-            validateLottoNumber(bonusNumber);
+            validateNumberRange(bonusNumber);
             return bonusNumber;
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
