@@ -8,19 +8,30 @@ import model.PurchasedLotto;
 
 public class WinningDiscriminator {
     public static PrizeResult judge(PurchasedLotto purchasedLotto, LottoWinningNumbers lottoWinningNumbers) {
+        EnumMap<Rank, Integer> prizeCounts = countPrizeResults(purchasedLotto, lottoWinningNumbers);
+        return new PrizeResult(prizeCounts, purchasedLotto.size());
+    }
+
+    private static EnumMap<Rank, Integer> countPrizeResults(PurchasedLotto purchasedLotto,
+                                                            LottoWinningNumbers lottoWinningNumbers) {
         EnumMap<Rank, Integer> prizeCounts = new EnumMap<>(Rank.class);
+
         for (int idx = 0; idx < purchasedLotto.size(); idx++) {
-            Set<Integer> lottoNumbers = new HashSet<>(purchasedLotto.findLottoByCreationOrder(idx).getNumbers());
-            Set<Integer> WinningLottoNumbers = new HashSet<>(lottoWinningNumbers.getWinningNumber());
-            lottoNumbers.retainAll(WinningLottoNumbers);
-
-            boolean bonus = purchasedLotto.containByIndex(idx, lottoWinningNumbers.getBonusNumber());
-            int match = lottoNumbers.size();
-
-            Rank result = Rank.judgeRank(match, bonus);
+            Rank result = determineRank(purchasedLotto, lottoWinningNumbers, idx);
             prizeCounts.put(result, prizeCounts.getOrDefault(result, 0) + 1);
         }
 
-        return new PrizeResult(prizeCounts, purchasedLotto.size());
+        return prizeCounts;
+    }
+
+    private static Rank determineRank(PurchasedLotto purchasedLotto, LottoWinningNumbers lottoWinningNumbers, int idx) {
+        Set<Integer> lottoNumbers = new HashSet<>(purchasedLotto.findLottoByCreationOrder(idx).getNumbers());
+        Set<Integer> winningNumbers = new HashSet<>(lottoWinningNumbers.getWinningNumber());
+
+        lottoNumbers.retainAll(winningNumbers);
+        int match = lottoNumbers.size();
+        boolean bonus = purchasedLotto.containByIndex(idx, lottoWinningNumbers.getBonusNumber());
+
+        return Rank.judgeRank(match, bonus);
     }
 }
