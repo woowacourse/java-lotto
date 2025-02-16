@@ -2,11 +2,11 @@ package controller;
 
 import controller.dto.WinningLottoRequest;
 import java.util.List;
-import model.numbers.LottoNumbers;
-import model.rank.LottoRankResult;
 import model.LottoStore;
 import model.PaidAmount;
+import model.numbers.LottoNumbers;
 import model.numbers.WinningLotto;
+import model.rank.LottoRankResult;
 import view.LottoConsoleView;
 
 public class LottoController {

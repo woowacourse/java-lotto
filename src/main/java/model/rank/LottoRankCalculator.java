@@ -5,6 +5,8 @@ import model.numbers.WinningLotto;
 
 public class LottoRankCalculator {
 
+    // TODO: calcualte 에 대한 테스트 추가
+
     public LottoRank calculate(LottoNumbers lottoNumbers, WinningLotto winningLotto) {
         int overlappedCount = winningLotto.countOverlappedNumbers(lottoNumbers.getNumbers());
 
