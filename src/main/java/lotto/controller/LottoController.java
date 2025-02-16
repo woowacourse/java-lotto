@@ -1,4 +1,4 @@
-package lotto;
+package lotto.controller;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -13,13 +13,13 @@ import lotto.utils.Parser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class LottoMachine {
+public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
 
-    public LottoMachine(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoService = lottoService;
