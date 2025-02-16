@@ -22,13 +22,13 @@ public enum Prize {
         this.bonusMatch = bonusMatch;
     }
 
-    public static EnumMap<Prize, Integer> initializeMap() {
-        EnumMap<Prize, Integer> enumMap = new EnumMap<>(Prize.class);
+    public static EnumMap<Prize, Integer> initialize() {
+        EnumMap<Prize, Integer> prizes = new EnumMap<>(Prize.class);
         for (Prize prize : Prize.values()) {
-            enumMap.put(prize, 0);
+            prizes.put(prize, 0);
         }
 
-        return enumMap;
+        return prizes;
     }
 
     public static Prize find(final int matchCount, final boolean bonusMatch) {
@@ -39,7 +39,9 @@ public enum Prize {
                 .orElse(LAST_PLACE);
     }
 
-    public Integer getPrizeMoney() {
-        return prizeMoney;
+    public static int calculateWinningAmount(final EnumMap<Prize, Integer> prizes) {
+        return prizes.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().prizeMoney * entry.getValue())
+                .sum();
     }
 }
