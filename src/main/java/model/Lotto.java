@@ -36,11 +36,16 @@ public class Lotto {
         );
     }
 
+    public static int generateNumber() {
+        Random random = new Random();
+        return random.nextInt(MAX_LOTTO_NUMBER) + 1;
+    }
+
     private List<Integer> generateLotto() {
         List<Integer> numbers = new ArrayList<>();
-        Random random = new Random();
+
         for (int i = 0; i < NUMBER_COUNT; i++) {
-            numbers.add(random.nextInt(MAX_LOTTO_NUMBER) + 1);
+            numbers.add(generateNumber());
         }
 
         return numbers;
