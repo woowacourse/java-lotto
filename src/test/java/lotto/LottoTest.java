@@ -2,7 +2,7 @@ package lotto;
 
 import static lotto.Lotto.MAX_LOTTO_NUMBER;
 import static lotto.Lotto.MIN_LOTTO_NUMBER;
-import static lotto.Lotto.validateNumberRange;
+import static lotto.Lotto.validateLottoNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -26,14 +26,14 @@ class LottoTest {
 
     @DisplayName("번호가 1과 45 사이의 숫자가 아니면 예외를 던진다")
     @Test
-    void 로또는_1과_45_사이의_번호가_아니면_예외를_던진다() {
-        assertThatThrownBy(() -> validateNumberRange(46))
+    void 번호가_1과_45_사이의_번호가_아니면_예외를_던진다() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
     }
 
     @DisplayName("6개의 고유한 번호가 아니라면 예외를 던진다")
-    @MethodSource("returnWrongNumbers")
+    @MethodSource("returnWrongSizeNumbers")
     @ParameterizedTest
     void _6개의_고유한_번호가_아니라면_예외를_던진다(List<Integer> numbers) {
         assertThatThrownBy(() -> new Lotto(numbers))
@@ -41,7 +41,7 @@ class LottoTest {
                 .hasMessage("6개의 고유한 번호를 입력해야 합니다.");
     }
 
-    static Stream<Arguments> returnWrongNumbers() {
+    static Stream<Arguments> returnWrongSizeNumbers() {
         return Stream.of(
                 Arguments.arguments(List.of(1, 2, 3, 4, 5)),
                 Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7)),

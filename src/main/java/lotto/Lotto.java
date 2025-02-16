@@ -17,7 +17,7 @@ public class Lotto {
         this.numbers = getSortedNumbers(numbers);
     }
 
-    public static void validateNumberRange(final int lottoNumber) {
+    public static void validateLottoNumber(final int lottoNumber) {
         if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
                     "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
@@ -44,7 +44,7 @@ public class Lotto {
         }
 
         for (final int winningNumber : winningNumbers) {
-            validateNumberRange(winningNumber);
+            validateLottoNumber(winningNumber);
         }
     }
 }

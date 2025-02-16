@@ -1,6 +1,6 @@
 package lotto;
 
-import static lotto.Lotto.validateNumberRange;
+import static lotto.Lotto.validateLottoNumber;
 
 import java.util.List;
 import lotto.view.InputView;
@@ -59,7 +59,7 @@ public class Application {
     private static int getBonusNumber() {
         try {
             int bonusNumber = InputView.inputBonusNumber();
-            validateNumberRange(bonusNumber);
+            validateLottoNumber(bonusNumber);
             return bonusNumber;
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
