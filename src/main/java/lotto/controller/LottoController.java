@@ -19,10 +19,11 @@ import lotto.view.OutputView;
 public class LottoController {
 
     private final LottoGenerator lottoGenerator;
-    LottoGroup lottoGroup = new LottoGroup();
+    private final LottoGroup lottoGroup;
 
-    public LottoController(LottoGenerator lottoGenerator) {
+    public LottoController(LottoGenerator lottoGenerator, LottoGroup lottoGroup) {
         this.lottoGenerator = lottoGenerator;
+        this.lottoGroup = lottoGroup;
     }
 
     public void run() {
