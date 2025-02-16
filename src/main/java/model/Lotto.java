@@ -1,44 +1,40 @@
 package model;
 
+import dto.LottoDto;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 public class Lotto {
-    private static final int BONUS_REQUIRED_RANK_NUMBER = 5;
+    private static final String LOTTO_FORM_ERROR_MESSAGE = "로또는 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
 
     private final Set<Integer> lotto;
 
-    public Lotto(RandomNumberGenerator randomNumberGenerator) {
-        this.lotto = randomNumberGenerator.generateNumbers();
+    public Lotto(Set<Integer> numbers) {
+        validateLotto(numbers);
+        this.lotto = numbers;
     }
 
-    public Rank getRank(WinningLotto winningLotto) {
-        int duplicateNumber = getDuplicateNumber(winningLotto);
-        if (duplicateNumber == BONUS_REQUIRED_RANK_NUMBER && isBonusMatch(winningLotto.getBonus())) {
-            return Rank.SECOND;
+    public boolean contains(int number) {
+        return lotto.contains(number);
+    }
+
+    public LottoDto toDto() {
+        return new LottoDto(lotto);
+    }
+
+    private void validateLotto(Set<Integer> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException(LOTTO_FORM_ERROR_MESSAGE);
         }
-
-        return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getMatchNumber() == duplicateNumber)
-                .findFirst()
-                .orElse(Rank.FAIL);
+        numbers.forEach(number -> {
+            if (!isValidateNumberRange(number)) {
+                throw new IllegalArgumentException(LOTTO_FORM_ERROR_MESSAGE);
+            }
+        });
     }
 
-    private int getDuplicateNumber(WinningLotto winningLotto) {
-        Set<Integer> union = new HashSet<>();
-        union.addAll(winningLotto.getWinningNumbers());
-        union.addAll(lotto);
-        return 12 - union.size();
-    }
-
-    private boolean isBonusMatch(int bonus) {
-        return lotto.contains(bonus);
-    }
-
-    public Set<Integer> getLotto() {
-        return Collections.unmodifiableSet(lotto);
+    private boolean isValidateNumberRange(int number) {
+        return number >= 1 && number <= 45;
     }
 }
