@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import lotto.LottoNumberGenerator;
 
 public class SystemLottoNumberGenerator implements LottoNumberGenerator {
     @Override

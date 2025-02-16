@@ -1,7 +1,7 @@
 package lotto.mock;
 
 import java.util.List;
-import lotto.LottoNumberGenerator;
+import lotto.domain.LottoNumberGenerator;
 
 public class TestLottoNumberGenerator implements LottoNumberGenerator {
     @Override

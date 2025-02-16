@@ -4,7 +4,8 @@ import static lotto.domain.Lotto.validateLottoNumber;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoManager;
+import lotto.domain.LottoMachine;
+import lotto.domain.SystemLottoNumberGenerator;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
@@ -16,14 +17,15 @@ public class Application {
         OutputView.printLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         WinningStatistics winningStatistics = winningLotto.calculateStatistics(lottos);
-        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
+        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoMachine.LOTTO_UNIT_PRICE);
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
 
     private static List<Lotto> purchaseLottos() {
         try {
+            LottoMachine lottoMachine = new LottoMachine(new SystemLottoNumberGenerator());
             int purchaseAmount = getPurchaseAmount();
-            return LottoManager.purchase(purchaseAmount);
+            return lottoMachine.purchase(purchaseAmount);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return purchaseLottos();
