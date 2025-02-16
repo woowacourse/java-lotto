@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
+import lotto.domain.RandomLottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.WinningResult;
@@ -17,19 +17,19 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoGenerator lottoGenerator;
+    private final RandomLottoGenerator randomLottoGenerator;
 
     public LottoController(final InputView inputView, final OutputView outputView,
-                           final LottoGenerator lottoGenerator) {
+                           final RandomLottoGenerator randomLottoGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoGenerator = lottoGenerator;
+        this.randomLottoGenerator = randomLottoGenerator;
     }
 
     public void run() {
         final LottoPrice lottoPrice = getLottoPrice();
         final int lottoCount = getLottoCount(lottoPrice);
-        final List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
+        final List<Lotto> lottos = randomLottoGenerator.generate(lottoCount);
         printPurchasedLottos(lottos);
         printWinningResult(lottos, lottoPrice);
     }
