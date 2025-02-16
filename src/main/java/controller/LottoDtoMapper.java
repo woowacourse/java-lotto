@@ -21,7 +21,12 @@ public class LottoDtoMapper {
     }
 
     public WinningLotto toWinningLotto(WinningLottoRequest winningLottoRequest) {
-        return new WinningLotto(new LottoNumbers(winningLottoRequest.numbers()),
+        List<LottoNumber> lottoNumbers = winningLottoRequest.numbers()
+                .stream()
+                .map(LottoNumber::new)
+                .toList();
+
+        return new WinningLotto(new LottoNumbers(lottoNumbers),
                 new LottoNumber(winningLottoRequest.bonusNumber()));
     }
 

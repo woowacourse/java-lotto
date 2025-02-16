@@ -3,26 +3,26 @@ package model;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
-import model.numbers.LottoNumberGenerator;
 import model.numbers.LottoNumbers;
+import model.numbers.LottoNumbersGenerator;
 import model.numbers.WinningLotto;
 import model.rank.LottoRank;
 import model.rank.LottoRankCalculator;
 import model.rank.LottoRankResult;
 
 public class LottoStore {
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final LottoNumbersGenerator lottoNumbersGenerator;
     private final LottoRankCalculator lottoRankCalculator;
 
-    public LottoStore(LottoNumberGenerator lottoNumberGenerator, LottoRankCalculator lottoRankCalculator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    public LottoStore(LottoNumbersGenerator lottoNumbersGenerator, LottoRankCalculator lottoRankCalculator) {
+        this.lottoNumbersGenerator = lottoNumbersGenerator;
         this.lottoRankCalculator = lottoRankCalculator;
     }
 
     public List<LottoNumbers> purchase(PaidAmount paidAmount) {
         int purchasedAmount = paidAmount.getUnitCount();
         return IntStream.range(0, purchasedAmount)
-                .mapToObj(count -> new LottoNumbers(lottoNumberGenerator.generate()))
+                .mapToObj(count -> lottoNumbersGenerator.generate())
                 .toList();
     }
 

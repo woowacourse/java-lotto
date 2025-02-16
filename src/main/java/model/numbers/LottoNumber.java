@@ -12,6 +12,10 @@ public class LottoNumber {
         this.number = number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     public boolean isMatched(int comparedNumber) {
         return comparedNumber == number;
     }

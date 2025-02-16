@@ -15,22 +15,9 @@ class WinningLottoTest {
     private static final int UPPER_BOUND = 45;
 
     @Test
-    void 당첨_번호는_범위를_벗어나면_예외를_발생시킨다() {
-        // given
-        List<Integer> invalidNumbers = List.of(0, 1, 2, 3, 4, 5);
-        LottoNumber validBonusNumber = new LottoNumber(UPPER_BOUND - 1);
-
-        // when & then
-        Assertions.assertThatThrownBy(
-                        () -> new WinningLotto(new LottoNumbers(invalidNumbers), validBonusNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(("[ERROR] 번호는 1부터 45 사이여야 합니다."));
-    }
-
-    @Test
     void 당첨_번호와_보너스_번호가_중복되면_예외를_발생시킨다() {
         // given
-        LottoNumbers numbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers numbers = new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6)));
         LottoNumber duplicatedBonusNumber = new LottoNumber(numbers.getNumbers().getFirst());
 
         // when & then
@@ -43,7 +30,7 @@ class WinningLottoTest {
     @Test
     void 당첨번호와_겹치는_숫자의_개수를_센다() {
         // given
-        LottoNumbers lottoNumbers = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers = new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6)));
         WinningLotto winningLotto = new WinningLotto(lottoNumbers, new LottoNumber(UPPER_BOUND));
         List<Integer> comparedNumbers = List.of(1, 2, 3, 4, 5, 7);
 
@@ -58,7 +45,8 @@ class WinningLottoTest {
     void 보너스번호와_겹치는지_확인한다() {
         // given
         LottoNumber bonusNumber = new LottoNumber(UPPER_BOUND);
-        WinningLotto winningLotto = new WinningLotto(new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
+        WinningLotto winningLotto = new WinningLotto(
+                new LottoNumbers(fromIntegerListToLottoNumberList(List.of(1, 2, 3, 4, 5, 6))),
                 bonusNumber);
         List<Integer> comparedNumbers = List.of(1, 2, 3, 4, 5, UPPER_BOUND);
 
@@ -70,4 +58,10 @@ class WinningLottoTest {
     }
 
     // TODO: 유효한 경우에 대한 테스트
+
+    private List<LottoNumber> fromIntegerListToLottoNumberList(List<Integer> numbers) {
+        return numbers.stream()
+                .map(LottoNumber::new)
+                .toList();
+    }
 }
