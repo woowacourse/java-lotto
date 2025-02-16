@@ -1,8 +1,12 @@
 package lotto;
 
-import static lotto.Lotto.validateLottoNumber;
+import static lotto.domain.Lotto.validateLottoNumber;
 
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoManager;
+import lotto.domain.WinningLotto;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

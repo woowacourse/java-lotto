@@ -1,10 +1,12 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.Lotto.MIN_LOTTO_NUMBER;
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
+import static lotto.domain.Lotto.MIN_LOTTO_NUMBER;
+import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoMachineTest {

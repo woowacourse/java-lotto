@@ -1,13 +1,13 @@
 package lotto;
 
-import static lotto.Lotto.MAX_LOTTO_NUMBER;
-import static lotto.Lotto.MIN_LOTTO_NUMBER;
-import static lotto.Lotto.validateLottoNumber;
+import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
+import static lotto.domain.Lotto.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
