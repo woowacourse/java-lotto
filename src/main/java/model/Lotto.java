@@ -1,14 +1,16 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
+    public static final int LOTTO_MIN_NUMBER = 1;
+    public static final int LOTTO_MAX_NUMBER = 45;
+
     private static final int LOTTO_COUNT = 6;
-    private static final int LOTTO_MAX_NUMBER = 45;
 
     private final List<Integer> lottoNumber;
 
@@ -45,27 +47,17 @@ public class Lotto {
     }
 
     private void addSingleRandomNumber(List<Integer> lottoNumber) {
-        Random random = new Random();
-        int randomNumber = random.nextInt(LOTTO_MAX_NUMBER) + 1;
+        RandomGenerator randomGenerator = RandomGenerator.getInstance();
+        int randomNumber = randomGenerator.gerRandomInteger(LOTTO_MAX_NUMBER) + 1;
         if (!lottoNumber.contains(randomNumber)) {
             lottoNumber.add(randomNumber);
         }
     }
 
-    public String printLottoNumber() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        combineLottoNumber(sb);
-        sb.append("]");
-        return sb.toString();
-    }
-
-    private void combineLottoNumber(StringBuilder sb) {
-        for (int i : lottoNumber) {
-            sb.append(i);
-            sb.append(",");
-        }
-        sb.deleteCharAt(sb.length() - 1);
+    public String searchLottoNumber() {
+        return this.lottoNumber.stream()
+                .map(number -> Integer.toString(number))
+                .collect(Collectors.joining(","));
     }
 
     public List<Integer> getLottoNumber() {
