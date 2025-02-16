@@ -1,15 +1,15 @@
 package model;
 
-import generator.RandomNumberGenerator;
+import generator.NumberGenerator;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class LottoMachine {
 
     private static final int START_INDEX = 0;
-    private final RandomNumberGenerator numberGenerator;
+    private final NumberGenerator numberGenerator;
 
-    public LottoMachine(final RandomNumberGenerator numberGenerator) {
+    public LottoMachine(final NumberGenerator numberGenerator) {
         this.numberGenerator = numberGenerator;
     }
 
@@ -20,6 +20,6 @@ public class LottoMachine {
     }
 
     private Lotto generateRandomLotto() {
-        return Lotto.from(numberGenerator.pickNumbersInRange(Lotto.LOTTO_NUMBER_COUNT));
+        return Lotto.from(numberGenerator.generateNumbers(Lotto.LOTTO_NUMBER_COUNT));
     }
 }

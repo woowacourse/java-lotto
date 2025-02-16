@@ -1,7 +1,7 @@
 package controller;
 
 import constants.ErrorType;
-import generator.RandomNumberGenerator;
+import generator.NumberGenerator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -19,10 +19,10 @@ public class LottoController {
     private static final int RETRY_COUNT_MAX = 10;
     private final InputView inputView;
     private final OutputView outputView;
-    private final RandomNumberGenerator numberGenerator;
+    private final NumberGenerator numberGenerator;
 
     public LottoController(final InputView inputView, final OutputView outputView,
-                           final RandomNumberGenerator numberGenerator) {
+                           final NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.numberGenerator = numberGenerator;

@@ -1,6 +1,6 @@
 package factory;
 
-import generator.RandomNumberGenerator;
+import generator.NumberGenerator;
 import generator.RandomUniqueNumberGenerator;
 import model.Lotto;
 import view.input.BasicInputParser;
@@ -24,7 +24,7 @@ public class LottoFactory {
         return new ConsoleOutputView();
     }
 
-    public static RandomNumberGenerator numberGenerator() {
+    public static NumberGenerator numberGenerator() {
         return new RandomUniqueNumberGenerator(Lotto.LOTTO_NUMBER_START_INCLUSIVE, Lotto.LOTTO_NUMBER_END_INCLUSIVE);
     }
 
