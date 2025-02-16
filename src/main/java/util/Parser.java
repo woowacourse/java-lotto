@@ -1,5 +1,6 @@
 package util;
 
+import exception.ExceptionMessage;
 import java.util.List;
 
 public class Parser {
@@ -8,7 +9,7 @@ public class Parser {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수 값을 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.NOT_INTEGER_VALUE);
         }
     }
 
@@ -21,13 +22,13 @@ public class Parser {
                     })
                     .toList();
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수 값을 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.NOT_INTEGER_VALUE);
         }
     }
 
     private static void validateIntegerOverFlow(String value) {
         if (value.length() > 10) {
-            throw new IllegalArgumentException("10자리 이하의 값을 입력해주세요.");
+            throw new IllegalArgumentException(ExceptionMessage.INTEGER_OVERFLOW_VALUE);
         }
     }
 }

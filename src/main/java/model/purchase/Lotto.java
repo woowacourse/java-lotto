@@ -1,5 +1,6 @@
 package model.purchase;
 
+import exception.ExceptionMessage;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -39,19 +40,19 @@ public class Lotto {
 
     private void validateNumberCount(List<Integer> numbers) {
         if (numbers.size() != LottoConstants.NUMBER_COUNT) {
-            throw new IllegalStateException("로또 번호의 개수는 6입니다.");
+            throw new IllegalStateException(ExceptionMessage.OUT_OF_LOTTO_SIZE);
         }
     }
 
     private void validateNumberDuplication(List<Integer> numbers) {
         if (new HashSet<>(numbers).size() != numbers.size()) {
-            throw new IllegalArgumentException("로또 번호는 중복이 허용되지 않습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_LOTTO_NUMBER);
         }
     }
 
     private void validateNumberRange(int number) {
         if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
-            throw new IllegalStateException("로또 번호는 1~45 사이의 정수입니다.");
+            throw new IllegalStateException(ExceptionMessage.OUT_OF_LOTTO_NUMBER_RANGE);
         }
     }
 }

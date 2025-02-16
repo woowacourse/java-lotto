@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class NumberGenerator {
 
+    private static final String CANNOT_GENERATE_NUMBER = "코드 에러 : 중복 없는 값을 생성할 수 없습니다.";
+
     public static List<Integer> pickUniqueNumbersInRange(int min, int max, int count,
                                                          NumberPickStrategy numberPickStrategy) {
         validateUniqueAvailability(min, max, count);
@@ -20,7 +22,7 @@ public class NumberGenerator {
     private static void validateUniqueAvailability(int min, int max, int count) {
         int maxNumberCount = max - min + 1;
         if (maxNumberCount < count) {
-            throw new IllegalStateException("코드 에러 : 중복 없는 값을 생성할 수 없습니다.");
+            throw new IllegalStateException(CANNOT_GENERATE_NUMBER);
         }
     }
 }
