@@ -2,6 +2,8 @@ package controller;
 
 import domain.Lotto;
 import domain.Lottos;
+import domain.NumberGenerator;
+import domain.RandomNumberGenerator;
 import domain.Rank;
 import domain.WinningNumbers;
 import dto.response.LottosResponse;
@@ -33,7 +35,8 @@ public class LottoController {
     }
 
     private Lottos issueLottos(int purchaseAmount) {
-        Lottos lottos = Lottos.issueByMoney(purchaseAmount);
+        NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        Lottos lottos = Lottos.issueByMoney(purchaseAmount, randomNumberGenerator);
 
         int quantity = lottos.getQuantity();
         outputView.printLottoQuantity(quantity);
