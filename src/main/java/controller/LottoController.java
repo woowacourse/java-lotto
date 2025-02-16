@@ -22,13 +22,13 @@ public class LottoController {
     }
 
     public void run() {
-        List<LottoTicket> lottoTickets = createLottoTicket();
+        List<LottoTicket> lottoTickets = purchaseLottoTicket();
         WinningLotto winningLotto = createWinningLotto();
         LottoRankResult lottoRankResult = calculateRank(lottoTickets, winningLotto);
         calculateProfitRate(lottoTickets.size(), lottoRankResult);
     }
 
-    private List<LottoTicket> createLottoTicket() {
+    private List<LottoTicket> purchaseLottoTicket() {
         int purchaseAmount = lottoConsoleView.requestPurchaseAmount();
         List<LottoTicket> lottoTickets = lottoStore.purchase(purchaseAmount);
 
