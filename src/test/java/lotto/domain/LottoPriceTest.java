@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static org.assertj.core.api.Assertions.within;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,5 +39,13 @@ public class LottoPriceTest {
         Assertions.assertThat(lottoPrice.calculateLottoCount()).isEqualTo(5);
     }
 
+    @Test
+    void 입력받은_금액을_구입_금액으로_나눈_실수값을_반환한다() {
+        // Given
+        final LottoPrice lottoPrice = new LottoPrice(14000);
+
+        // When & Then
+        Assertions.assertThat(lottoPrice.divideFrom(5000)).isCloseTo(0.35, within(0.01));
+    }
 }
 
