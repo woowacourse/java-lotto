@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.Map;
 
 public class WinningResult {

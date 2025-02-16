@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import error.ErrorType;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
