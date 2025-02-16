@@ -20,7 +20,9 @@ public class Result {
         for (Entry<WinLottoInfo, Integer> winLottoInfoIntegerEntry : result.entrySet()) {
             WinLottoInfo winLottoInfo = winLottoInfoIntegerEntry.getKey();
             int count = winLottoInfoIntegerEntry.getValue();
-            sum += winLottoInfo.getPrice() * count;
+            int prizePerType = winLottoInfo.getPrice();
+            int totalPrizeForThisType = prizePerType * count;
+            sum += totalPrizeForThisType;
         }
         return sum;
     }
