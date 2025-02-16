@@ -1,6 +1,6 @@
 package dto;
 
-public record TicketAmountResponse(
+public record LottoAmountResponse(
         int amount
 ) {
 }
