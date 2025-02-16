@@ -27,7 +27,7 @@ public class Lottos {
     }
 
     private static void validateQuantity(final int quantity) {
-        if (quantity <= 0 || quantity > MAX_QUANTITY) {
+        if (quantity < MIN_QUANTITY || quantity > MAX_QUANTITY) {
             throw new IllegalArgumentException(ERROR_INVALID_QUANTITY);
         }
     }

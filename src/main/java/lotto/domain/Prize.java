@@ -26,7 +26,7 @@ public enum Prize {
         return Arrays.stream(Prize.values())
                 .filter(p -> p.matchCount == matchCount)
                 .filter(prize -> {
-                    if (matchCount == 5) {
+                    if (matchCount == SECOND_PLACE.matchCount) {
                         return prize.isBonusMatch == isBonusMatch;
                     }
                     return true;

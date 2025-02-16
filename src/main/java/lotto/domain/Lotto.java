@@ -50,10 +50,10 @@ public class Lotto {
     }
 
     public int match(Lotto compared) {
-        Set<Integer> distinctNumbers =new HashSet<>();
+        Set<Integer> distinctNumbers = new HashSet<>();
         distinctNumbers.addAll(compared.numbers);
         distinctNumbers.addAll(numbers);
-        return (12 - distinctNumbers.size());
+        return (COUNT_OF_NUMBERS * 2 - distinctNumbers.size());
     }
 
     @Override
