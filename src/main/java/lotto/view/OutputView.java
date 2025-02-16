@@ -1,6 +1,5 @@
 package lotto.view;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import lotto.domain.LottoAward;
@@ -8,8 +7,11 @@ import lotto.domain.LottoAward;
 public class OutputView {
 
     private static final String LINE = System.lineSeparator();
+    private static final String BLANK = " ";
     private static final String TITLE_WINNING_RESULT = LINE + "당첨 통계" + LINE + "---------";
-    private static final String FORMAT_WINNING_RESULT = "%d개 일치 (%d원)- %d개";
+    private static final String TITLE_MATCHING_COUNT = "%d개 일치";
+    private static final String TITLE_MATCHING_BONUS = ", 보너스 볼 일치";
+    private static final String FORMAT_MATCHING_RESULT = "(%d원)- %d개";
     private static final int TRUNCATE_SCALE = 100;
     private static final int PROFIT_RATE_STANDARD = 1;
 
@@ -19,16 +21,23 @@ public class OutputView {
 
     public void printWinningResult(final Map<LottoAward, Integer> winningResult) {
         System.out.println(TITLE_WINNING_RESULT);
-        Arrays.stream(LottoAward.values())
+        LottoAward.ACTUAL_LOTTO_AWARD.stream()
                 .sorted(Comparator.comparing(LottoAward::getMatchingCount))
-                .filter(lottoAward -> !lottoAward.equals(LottoAward.NONE))
-                .forEach(lottoAward -> System.out.printf(FORMAT_WINNING_RESULT + LINE, lottoAward.getMatchingCount(),
-                        lottoAward.getAmount(), winningResult.get(lottoAward)));
+                .forEach(lottoAward -> System.out.printf(makeLottoAwardMessage(lottoAward),
+                        lottoAward.getMatchingCount(), lottoAward.getAmount(), winningResult.get(lottoAward)));
     }
 
     public void printProfitRate(final double profitRate) {
         final double truncatedProfitRate = Math.floor(profitRate * TRUNCATE_SCALE) / TRUNCATE_SCALE;
         System.out.printf(makeResultMessage(profitRate), truncatedProfitRate);
+    }
+
+    private String makeLottoAwardMessage(final LottoAward lottoAward) {
+        String message = TITLE_MATCHING_COUNT;
+        if (lottoAward.equals(LottoAward.SECOND_RANK)) {
+            message += TITLE_MATCHING_BONUS;
+        }
+        return message + BLANK + FORMAT_MATCHING_RESULT + LINE;
     }
 
     private String makeResultMessage(final double profitRate) {
