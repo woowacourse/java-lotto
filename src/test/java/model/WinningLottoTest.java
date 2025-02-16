@@ -68,4 +68,6 @@ class WinningLottoTest {
         //then
         assertThat(isBonusNumberOverlapped).isTrue();
     }
+
+    // TODO: 유효한 경우에 대한 테스트
 }

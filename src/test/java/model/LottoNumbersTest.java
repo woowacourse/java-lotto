@@ -1,5 +1,6 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -46,5 +47,17 @@ class LottoNumbersTest {
         assertThatThrownBy(() -> new LottoNumbers(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 당첨 번호는 6개여야 합니다.");
+    }
+
+    @Test
+    void 로또_번호의_조건이_알맞은_경우_예외를_던지지_않는다() {
+        // given
+        List<Integer> numbers = IntStream.rangeClosed(LOWER_BOUND, VALID_SIZE_OF_NUMBERS)
+                .boxed()
+                .toList();
+
+        // when * then
+        assertThatCode(() -> new LottoNumbers(numbers))
+                .doesNotThrowAnyException();
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
@@ -31,5 +32,13 @@ class PaidAmountTest {
 
         // then
         assertThat(result).isEqualTo(expectedResult);
+    }
+
+    @Test
+    void 구입_금액이_유효한_경우_예외를_던지지_않는다() {
+        int amount = VALID_UNIT * 10;
+        assertThatCode(
+                () -> new PaidAmount(amount)
+        ).doesNotThrowAnyException();
     }
 }

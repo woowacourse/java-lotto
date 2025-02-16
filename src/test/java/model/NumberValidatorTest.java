@@ -1,5 +1,6 @@
 package model;
 
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import common.NumberValidator;
@@ -29,5 +30,21 @@ class NumberValidatorTest {
         assertThatThrownBy(
                 () -> NumberValidator.validatePositive(inputNumber)
         ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 입력값이_정수라면_예외를_발생시키지_않는다() {
+        String input = "1";
+        assertThatCode(
+                () -> NumberValidator.validateInteger(input)
+        ).doesNotThrowAnyException();
+    }
+
+    @Test
+    void 입력값이_양의_정수라면_예외를_발생시키지_않는다() {
+        int input = 3;
+        assertThatCode(
+                () -> NumberValidator.validatePositive(input)
+        ).doesNotThrowAnyException();
     }
 }
