@@ -43,7 +43,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        return new ArrayList<>(numbers);
     }
 
     private void validateLottoDuplicate() {
