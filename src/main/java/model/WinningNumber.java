@@ -43,6 +43,7 @@ public class WinningNumber {
         }
     }
 
+    //TODO : 하기
 //    private void validateNumberType(Runnable task, String winningNumber) {
 //        try {
 //            task.run();

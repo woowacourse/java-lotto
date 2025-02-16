@@ -18,7 +18,6 @@ public class Parser {
                     .map(string -> Integer.parseInt(string.trim()))
                     .toList();
         } catch (NumberFormatException e) {
-            //TODO : 10자리 초과 입력시 에러메세지 분기처리
             throw new IllegalArgumentException("정수 값을 입력해주세요.");
         }
     }

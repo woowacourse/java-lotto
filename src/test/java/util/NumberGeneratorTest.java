@@ -1,6 +1,7 @@
 package util;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,5 +41,11 @@ public class NumberGeneratorTest {
         assertThat(numbers.get(2)).isEqualTo(3);
     }
 
-
+    @DisplayName("중복 없이 숫자를 뽑는 최대의 경우의 수보다 뽑으려는 숫자의 개수가 많으면 예외가 발생하며 프로그램이 종료된다.")
+    @Test
+    void createListOfImpossibleCount() {
+        assertThatThrownBy(
+                () -> NumberGenerator.pickUniqueNumbersInRange(1, 5, 6, defaultNumberPickStrategy))
+                .isInstanceOf(IllegalStateException.class);
+    }
 }
