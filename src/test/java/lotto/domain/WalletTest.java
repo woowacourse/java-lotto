@@ -12,7 +12,7 @@ class WalletTest {
 
     @DisplayName("구매한 로또 목록이 요구 사항과 동일한 형태로 출력된다.")
     @Test
-    void WalletToStringIsSatisfiedRequest() {
+    void test_WalletToStringForRequest() {
         var size = 5;
 
         Cashier cashier = new Cashier(LOTTO_PRICE * size);
@@ -26,7 +26,7 @@ class WalletTest {
 
     @DisplayName("구매한 로또 전체를 지난주 당첨 로또와 비교한다.")
     @Test
-    void testMatchCountListHasCorrectSize() {
+    void test_MatchCountListHasCorrectSize() {
         var size = 5;
         Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
         Wallet wallet = new Wallet(size);

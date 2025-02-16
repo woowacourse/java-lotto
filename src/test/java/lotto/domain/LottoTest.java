@@ -13,7 +13,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호는 로또가 생성할 때, 정렬된다.")
-    void LottoNumberSortedWhenLottoGenerate() {
+    void test_LottoNumberSorted_WhenLottoGenerate() {
         Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
 
         assertThat(lotto.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]");
@@ -21,7 +21,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호의 갯수가 기준(6)과 다를 경우, 예외를 발생시킨다.")
-    void LottoNumberErrorWhenUncorrectedSize() {
+    void error_WhenLottoNumberUncorrectedSize() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_INCORRECT_LOTTO_SIZE.getMessage());
@@ -29,7 +29,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호의 범위가 기준에서 벗어났을 경우, 예외를 발생시킨다.")
-    void LottoNumberErrorWhenOverRange() {
+    void error_WhenLottoNumberOverRange() {
         var overMAX = LOTTO_MAXIMUM + 1;
         var lessMIN = LOTTO_MINIMUM - 1;
 
@@ -44,7 +44,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또는 당첨 번호를 비교하여 자신의 당첨 개수와 보너스 여부를 반환한다.")
-    void returnCorrectMatchCount() {
+    void test_returnCorrect_MatchCount() {
         var bonus = 6;
         var notBonus = bonus + 1;
         var correctCount = 5;
@@ -60,7 +60,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 보너스 번호는 지정된 로또 범위를 벗어날 경우, 예외를 발생한다.")
-    void LottoBonusErrorWhenOverRange() {
+    void error_WhenLottoBonusOverRange() {
         var bonusOverMAX = LOTTO_MAXIMUM + 1;
         var bonusLessMIN = LOTTO_MINIMUM - 1;
 
@@ -76,7 +76,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
-    void LottoBonusErrorWhenDuplicatedWithLotto() {
+    void error_LottoBonusDuplicatedWithLotto() {
         var duplicatedNumber = 6;
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, duplicatedNumber));
 
@@ -87,7 +87,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
-    void MatchWinningLottoCorrectly() {
+    void test_MatchWinningLotto_Correctly() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         Lotto winningLotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 10));
         Lotto winningLotto2 = new Lotto(List.of(1, 2, 3, 4, 11, 10));

@@ -9,7 +9,7 @@ class ProfitTest {
 
     @Test
     @DisplayName("비즈니스 룰에 따라, 수익 여부를 반환한다.")
-    void testCalculateProfit() {
+    void test_CalculateProfit() {
         Profit profit = new Profit(1.5);
         Profit profit2 = new Profit(0.5);
 
