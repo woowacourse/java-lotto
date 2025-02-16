@@ -40,7 +40,6 @@ class WinningNumbersTest {
             WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers, bonusBall);
 
             // then
-
             assertSoftly(softly -> {
                 softly.assertThat(winningNumbers).extracting("winningNumbers").isEqualTo(lottoNumbers);
                 softly.assertThat(winningNumbers).extracting("bonusBall").isEqualTo(bonusBall);
