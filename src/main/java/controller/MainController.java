@@ -38,7 +38,7 @@ public class MainController {
 
     private DrawResult inputDrawResult() {
         LottoNumbers winningLottoNumbers = InputView.inputWinningLottoNumbers();
-        int bonusNumber = InputView.inputBonusNumber(winningLottoNumbers);
+        int bonusNumber = InputView.inputBonusNumber();
         return new DrawResult(winningLottoNumbers, bonusNumber);
     }
 

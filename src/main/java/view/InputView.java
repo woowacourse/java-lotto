@@ -2,7 +2,6 @@ package view;
 
 import domain.LottoNumbers;
 import java.util.Arrays;
-import java.util.List;
 import util.Console;
 import util.RetryHandler;
 
@@ -49,22 +48,10 @@ public class InputView {
         );
     }
 
-    public static int inputBonusNumber(LottoNumbers winningNumbers) {
+    public static int inputBonusNumber() {
         return (Integer) RetryHandler.retryUntilSuccessWithReturn(() -> {
             System.out.println("보너스 볼을 입력해 주세요.");
-            int bonusNumber = Integer.parseInt(Console.readLine());
-            validateBonusNumber(bonusNumber, winningNumbers.numbers());
-            return bonusNumber;
+            return Integer.parseInt(Console.readLine());
         });
-    }
-
-    private static void validateBonusNumber(Integer bonusNumber, List<Integer> winningNumbers) {
-        validateDuplicateNumber(bonusNumber, winningNumbers);
-    }
-
-    private static void validateDuplicateNumber(Integer bonusNumber, List<Integer> winningNumbers) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("중복된 번호가 존재합니다.");
-        }
     }
 }
