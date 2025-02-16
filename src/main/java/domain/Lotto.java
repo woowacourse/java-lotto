@@ -1,17 +1,14 @@
 package domain;
 
-import static constant.LottoConstants.LOTTO_RANGE_MAX;
-import static constant.LottoConstants.LOTTO_RANGE_MIN;
 import static constant.LottoConstants.LOTTO_SIZE;
 import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
-import static exception.ExceptionMessage.LOTTO_RANGE_ERROR;
 import static exception.ExceptionMessage.LOTTO_SIZE_ERROR;
 
 import exception.LottoException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -39,8 +36,24 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getSortedNumbers() {
-        List<Integer> numbers = this.numbers.stream().map(LottoNumber::getNumber).toList();
-        return numbers;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
+    }
+
+    public List<Integer> getSortedLottoNumbers() {
+        return numbers.stream().map(LottoNumber::getNumber).toList();
     }
 }
