@@ -19,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void validateRange(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 " + MIN_LOTTO_NUMBER + " ~ " + MAX_LOTTO_NUMBER + "만 가능합니다.");
+            throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_NOT_IN_RANGE.getMessage());
         }
     }
 

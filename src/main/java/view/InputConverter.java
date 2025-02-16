@@ -4,6 +4,7 @@ import static domain.Lotto.LOTTO_PRICE;
 import static domain.Lotto.MAX_LOTTO_NUMBER;
 import static domain.Lotto.MIN_LOTTO_NUMBER;
 
+import domain.ErrorCode;
 import domain.Lotto;
 import domain.LottoNumber;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ public class InputConverter {
         Matcher matcher = Pattern.compile(WINNING_NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("당첨 번호 입력 양식이 올바르지 않습니다.");
+            throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_WRONG_SYNTAX.getMessage());
         }
 
         List<LottoNumber> winningLottoNumbers = Arrays.stream(input.split(WINNING_NUMBER_DELIMITER))
@@ -41,7 +42,7 @@ public class InputConverter {
         Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("보너스 번호 입력 양식이 올바르지 않습니다.");
+            throw new IllegalArgumentException(ErrorCode.BONUS_NUMBER_WRONG_SYNTAX.getMessage());
         }
 
         int bonusNumber = Integer.parseInt(input);
@@ -54,7 +55,7 @@ public class InputConverter {
         Matcher matcher = Pattern.compile(NUMBER_REGEX).matcher(input);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("구입 금액 입력 양식이 올바르지 않습니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_WRONG_SYNTAX.getMessage());
         }
 
         int purchaseAmount = Integer.parseInt(input);
@@ -66,26 +67,26 @@ public class InputConverter {
 
     private static void validatePurchaseAmountIsDividedByUnit(int value) {
         if (value % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구입 금액은" + LOTTO_PRICE + "원 단위로 가능합니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_NOT_DIVIDED_BY_UNIT.getMessage());
         }
     }
 
     private static void validatePurchaseAmountRange(int value) {
         if (value < LOTTO_PRICE) {
-            throw new IllegalArgumentException("구입 금액은 " + LOTTO_PRICE + "원 이상부터 가능합니다.");
+            throw new IllegalArgumentException(ErrorCode.PURCHASE_AMOUNT_NOT_IN_RANGE.getMessage());
         }
     }
 
     private static void validateNumberRange(int value) {
         if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 " + MIN_LOTTO_NUMBER + " ~ " + MAX_LOTTO_NUMBER + "만 가능합니다.");
+            throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_NOT_IN_RANGE.getMessage());
         }
     }
 
     private static void validateUniqueNumber(List<LottoNumber> values) {
         values.forEach(value -> {
             if (Collections.frequency(values, value) > 1) {
-                throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
+                throw new IllegalArgumentException(ErrorCode.WINNING_NUMBER_DUPLICATED.getMessage());
             }
         });
     }
