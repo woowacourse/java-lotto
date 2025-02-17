@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.PurchaseAmount;
@@ -18,7 +19,7 @@ public class LottoController {
         List<Lotto> lottos = LottoMachine.issueLottos(purchaseAmount.calculateLottoAmount());
         OutputView.printLottos(lottos);
         WinningNumbers winningNumbers = getWinningNumbers();
-        int bonusNumber = getBonusNumber(winningNumbers);
+        BonusNumber bonusNumber = getBonusNumber(winningNumbers);
         WinningStatistics winningStatistics = LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
         double returnRate = winningStatistics.calculateReturnRate(purchaseAmount.calculateLottoAmount());
         OutputView.printWinningStatistics(winningStatistics, returnRate);
@@ -26,8 +27,8 @@ public class LottoController {
 
     private PurchaseAmount getPurchaseAmount() {
         try {
-            int inputPurchaseAmount = InputView.inputPurchaseAmount();
-            return new PurchaseAmount(inputPurchaseAmount);
+            int purchaseAmount = InputView.inputPurchaseAmount();
+            return new PurchaseAmount(purchaseAmount);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getPurchaseAmount();
@@ -44,12 +45,12 @@ public class LottoController {
         }
     }
 
-    private int getBonusNumber(final WinningNumbers winningNumbers) {
+    private BonusNumber getBonusNumber(final WinningNumbers winningNumbers) {
         try {
             int bonusNumber = InputView.inputBonusNumber();
             validateLottoNumber(bonusNumber);
             winningNumbers.validateBonusNumberDuplicated(bonusNumber);
-            return bonusNumber;
+            return new BonusNumber(bonusNumber);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getBonusNumber(winningNumbers);

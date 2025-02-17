@@ -16,11 +16,11 @@ public class LottoMachine {
     }
 
     public static WinningStatistics calculateStatistics(final List<Lotto> lottos, final WinningNumbers winningNumbers,
-                                                        final int bonusNumber) {
+                                                        final BonusNumber bonusNumber) {
         Map<Rank, Integer> statistics = new EnumMap<>(Rank.class);
         for (final Lotto lotto : lottos) {
             int matchCount = winningNumbers.calculateMatchCount(lotto.getNumbers());
-            boolean hasBonusNumber = lotto.hasNumber(bonusNumber);
+            boolean hasBonusNumber = bonusNumber.isIncludedIn(lotto);
             Rank rank = Rank.getRank(matchCount, hasBonusNumber);
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
