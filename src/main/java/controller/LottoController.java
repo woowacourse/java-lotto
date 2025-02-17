@@ -21,19 +21,28 @@ public class LottoController {
     }
 
     public void run() {
+        try {
+            Money money = generateMoney();
+
+            Lottos lottos = getLottos(money.getBuyableLottoCount());
+            List<OutputLottosDto> outputLottosDtos = lottoService.getOutputLottosDtos(lottos.getLottos());
+            OutputView.printLottos(outputLottosDtos);
+
+            List<Integer> answerNumbers = getAnswerNumbers();
+            int bonusNumber = getBonusNumber();
+            AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
+
+            printPrizeResult(answerLotto, lottos);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printError(exception.getMessage());
+        }
+    }
+
+    private Money generateMoney() {
         Money money = getMoney();
         OutputView.printBuyQuantity(money.getBuyableLottoCount());
         OutputView.printChangeMoney(money.getChange());
-
-        Lottos lottos = getLottos(money.getBuyableLottoCount());
-        List<OutputLottosDto> outputLottosDtos = lottoService.getOutputLottosDtos(lottos.getLottos());
-        OutputView.printLottos(outputLottosDtos);
-
-        List<Integer> answerNumbers = getAnswerNumbers();
-        int bonusNumber = getBonusNumber();
-        AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
-
-        printPrizeResult(answerLotto, lottos);
+        return money;
     }
 
     private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
