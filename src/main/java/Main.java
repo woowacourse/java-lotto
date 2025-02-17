@@ -1,7 +1,7 @@
 import controller.LottoController;
-import service.LottoMachine;
-import service.LottoNumberGenerator;
-import service.LottoWinningChecker;
+import domain.LottoMachine;
+import domain.LottoNumberGenerator;
+import domain.LottoWinningChecker;
 import view.InputHandler;
 import view.OutputHandler;
 

@@ -1,9 +1,4 @@
-package service;
-
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoRule;
-import domain.Lottos;
+package domain;
 
 import java.security.SecureRandom;
 import java.util.stream.Collectors;
@@ -11,6 +6,8 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class LottoNumberGenerator {
+
+    public static final int MIN_REPEAT_COUNT = 1;
 
     private final SecureRandom random;
 
@@ -32,10 +29,8 @@ public class LottoNumberGenerator {
     }
 
     private void validateRepeat(int repeatCount) {
-        int minRepeatCount = 1;
-
-        if (repeatCount < minRepeatCount) {
-            throw new IllegalArgumentException(minRepeatCount + "회 이상 반복해야 합니다.");
+        if (repeatCount < MIN_REPEAT_COUNT) {
+            throw new IllegalArgumentException(MIN_REPEAT_COUNT + "회 이상 반복해야 합니다.");
         }
     }
 

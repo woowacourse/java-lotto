@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LottoNumberTest {
@@ -27,7 +28,9 @@ class LottoNumberTest {
         // given
         // when
         // then
-        assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MIN_LOTTO_NUMBER.getValue() - 1));
-        assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MAX_LOTTO_NUMBER.getValue() + 1));
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MIN_LOTTO_NUMBER.getValue()-1)),
+                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MAX_LOTTO_NUMBER.getValue()+1))
+        );
     }
 }

@@ -1,11 +1,5 @@
-package service;
+package domain;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoRanking;
-import domain.LottoResult;
-import domain.Lottos;
-import domain.WinningNumberWithBonusNumber;
 import fixture.LottoFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

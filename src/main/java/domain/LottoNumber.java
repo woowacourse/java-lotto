@@ -12,9 +12,7 @@ public class LottoNumber {
                             LottoRule.MIN_LOTTO_NUMBER.getValue(),
                             LottoRule.MAX_LOTTO_NUMBER.getValue())
                     .boxed()
-                    .collect(Collectors.toMap(
-                            key -> key,
-                            LottoNumber::new));
+                    .collect(Collectors.toMap(key -> key, LottoNumber::new));
 
     private final int value;
 

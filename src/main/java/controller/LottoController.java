@@ -6,14 +6,14 @@ import domain.LottoResult;
 import domain.Lottos;
 import domain.Money;
 import domain.WinningNumberWithBonusNumber;
-import service.LottoMachine;
-import service.LottoWinningChecker;
+import domain.LottoMachine;
+import domain.LottoWinningChecker;
 import view.InputHandler;
 import view.OutputHandler;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoController {
 
@@ -64,7 +64,7 @@ public class LottoController {
         String winningNumber = inputHandler.readWinningNumber();
 
         return Lotto.from(
-                Arrays.stream(winningNumber.split(","))
+                Stream.of(winningNumber.split(","))
                         .map(String::trim)
                         .map(Integer::parseInt)
                         .map(LottoNumber::from)

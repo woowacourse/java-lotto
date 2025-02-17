@@ -3,7 +3,6 @@ package domain;
 import fixture.LottoFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import service.LottoNumberGenerator;
 
 import java.security.SecureRandom;
 import java.util.List;
