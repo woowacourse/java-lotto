@@ -18,7 +18,7 @@ public class LottoService {
     }
 
     public Money createMoney(String inputMoney) {
-        Validator.inputValidatorIsNull(inputMoney);
+        Validator.validateNotNullOrBlank(inputMoney);
         int moneyValue = InputParser.parseStringToInteger(inputMoney);
         return new Money(moneyValue);
     }
@@ -28,8 +28,8 @@ public class LottoService {
     }
 
     public WinningLotto createWinningLotto(String inputWinningNumbers, String inputBonusNumber) {
-        Validator.inputValidatorIsNull(inputWinningNumbers);
-        Validator.inputValidatorIsNull(inputBonusNumber);
+        Validator.validateNotNullOrBlank(inputWinningNumbers);
+        Validator.validateNotNullOrBlank(inputBonusNumber);
 
         return new WinningLotto(
                 InputParser.parseStringToList(inputWinningNumbers),
