@@ -18,8 +18,9 @@ public class InputController {
     public Money getMoney(int lottoPrice) {
         while (true) {
             try {
-                int moneyAmount = inputView.readMoney();
+                String moneyInput = inputView.read("구입금액을 입력해주세요.");
 
+                int moneyAmount = InputParser.parseToInt(moneyInput);
                 return new Money(moneyAmount, lottoPrice);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
