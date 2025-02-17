@@ -10,7 +10,7 @@ import domain.WinningProfit;
 import domain.WinningResult;
 import java.util.List;
 import java.util.Map;
-import utils.RandomNumbersGenerator;
+import domain.RandomNumbersGenerator;
 import view.InputView;
 import view.OutputView;
 

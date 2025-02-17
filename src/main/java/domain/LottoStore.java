@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import utils.NumbersGenerator;
 
 public class LottoStore {
 

@@ -1,6 +1,4 @@
-package utils;
-
-import domain.Lotto;
+package domain;
 
 import java.util.*;
 
