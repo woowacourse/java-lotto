@@ -6,7 +6,7 @@ import java.util.List;
 import view.util.LottoConstants;
 
 public class UserLotto {
-    private List<Integer> winningNumbers;
+    private final List<Integer> winningNumbers;
 
     public UserLotto(List<Integer> winningNumbers) {
         validateSize(winningNumbers);

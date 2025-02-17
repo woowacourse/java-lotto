@@ -17,8 +17,8 @@ public enum RankType {
 
     private static final String PRINT_FORMAT = "%d개 일치, (%d원)- %d개\n";
     private static final String PRINT_FORMAT_SECOND = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    private int winningCount;
-    private int price;
+    private final int winningCount;
+    private final int price;
 
     public static Map<RankType, Integer> makeMap() {
         Map<RankType, Integer> map = new LinkedHashMap<>();

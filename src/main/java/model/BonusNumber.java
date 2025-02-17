@@ -3,7 +3,7 @@ package model;
 import view.util.LottoConstants;
 
 public class BonusNumber {
-    private int bonusNumber;
+    private final int bonusNumber;
 
     public BonusNumber(int bonusNumber) {
         validateNumberRange(bonusNumber);
