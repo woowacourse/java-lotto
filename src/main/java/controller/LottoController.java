@@ -8,6 +8,7 @@ import domain.Purchase;
 import domain.WinningNumber;
 import domain.WinningResult;
 import domain.WinningStatus;
+import util.NumberGeneratorImpl;
 import view.InputView;
 import view.OutputView;
 
@@ -52,7 +53,8 @@ public class LottoController {
     }
 
     public List<Lotto> issueLotto(int lottoCount) {
-        List<Lotto> lottos = LottoMachine.generate(lottoCount);
+        LottoMachine lottoMachine = new LottoMachine(new NumberGeneratorImpl());
+        List<Lotto> lottos = lottoMachine.issueLotto(lottoCount);
         outputView.printLottos(lottos);
         return lottos;
     }
