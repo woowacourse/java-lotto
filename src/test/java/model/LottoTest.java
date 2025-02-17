@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import view.OutputView;
 
 class LottoTest {
 
@@ -18,13 +19,12 @@ class LottoTest {
         Assertions.assertThat(arrayLottoOneResult).isEqualTo(arrayLottoTwoResult);
     }
 
-
     @Test
     void 로또_출력_확인_테스트() {
         Lotto lotto = new Lotto(Arrays.asList(1, 4, 5, 13, 32, 39));
         String expect = "[1,4,5,13,32,39]";
 
-        String result = lotto.printLottoNumber();
+        String result = OutputView.printLottoNumber(lotto);
 
         Assertions.assertThat(result).isEqualTo(expect);
     }

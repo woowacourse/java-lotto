@@ -1,5 +1,6 @@
 package view;
 
+import model.Lotto;
 import model.LottoResult;
 import model.Lottos;
 
@@ -14,7 +15,25 @@ public class OutputView {
     }
 
     public static void printLottoResults(Lottos lottos) {
-        lottos.printLottoNumbers();
+        for (Lotto lotto : lottos.getLottos()) {
+            System.out.println(printLottoNumber(lotto));
+        }
+    }
+
+    public static String printLottoNumber(Lotto lotto) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        combineLottoNumber(sb, lotto);
+        sb.append("]");
+        return sb.toString();
+    }
+
+    private static void combineLottoNumber(StringBuilder sb, Lotto lotto) {
+        for (int i : lotto.getLottoNumber()) {
+            sb.append(i);
+            sb.append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
     }
 
     public static void inputWinnerNumbers() {

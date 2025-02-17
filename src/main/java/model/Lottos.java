@@ -32,12 +32,6 @@ public class Lottos {
         return this.lottos.size();
     }
 
-    public void printLottoNumbers() {
-        for (Lotto l : this.lottos) {
-            System.out.println(l.printLottoNumber());
-        }
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }

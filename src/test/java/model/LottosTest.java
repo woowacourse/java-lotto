@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Arrays;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import view.OutputView;
 
 class LottosTest {
 
@@ -15,5 +17,4 @@ class LottosTest {
 
         Assertions.assertThat(result).isEqualTo(expectCount);
     }
-
 }
