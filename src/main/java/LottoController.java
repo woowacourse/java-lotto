@@ -1,10 +1,17 @@
+import domain.Lotto;
+import domain.LottoManager;
+import domain.LottoWallet;
+import domain.Money;
+import domain.WinningLotto;
+import domain.WinningResult;
 import java.io.IOException;
-import java.util.List;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
-    private InputView inputView;
-    private OutputView outputView;
-    private LottoManager lottoManager;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoManager lottoManager;
 
     public LottoController(InputView inputView, OutputView outputView, LottoManager lottoManager) {
         this.inputView = inputView;
@@ -17,12 +24,12 @@ public class LottoController {
         final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
         outputView.printLottoCount(purchasableLottoCount);
 
-        List<Lotto> lottos = lottoManager.generateLottos(purchasableLottoCount);
-        outputView.printLottos(lottos);
+        LottoWallet lottoWallet = lottoManager.generateLottos(purchasableLottoCount);
+        outputView.printLottos(lottoWallet);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
+        WinningResult winningResult = winningLotto.calculateWinningResult(lottoWallet);
         outputView.printWinningResult(winningResult);
         outputView.printRevenue(lottoManager.calculateRevenue(winningResult, money));
     }

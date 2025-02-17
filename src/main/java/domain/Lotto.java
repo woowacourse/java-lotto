@@ -1,18 +1,19 @@
+package domain;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private static final Money PRICE = new Money(1000);
 
-    private List<Number> numbers;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
-        numbers = lottoNumbers.stream()
+        this.lottoNumbers = lottoNumbers.stream()
                 .sorted()
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .toList();
     }
 
@@ -24,8 +25,8 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream()
-                .map(Number::getValue)
+        return lottoNumbers.stream()
+                .map(LottoNumber::getValue)
                 .toList();
     }
 

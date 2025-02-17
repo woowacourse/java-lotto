@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +33,6 @@ public enum WinningInfo {
 
     public static List<WinningInfo> getSortedValues() {
         return Arrays.stream(values())
-                .filter(v -> v != WinningInfo.NONE)
                 .sorted(Comparator.comparing(WinningInfo::getPrice))
                 .toList();
     }
