@@ -1,8 +1,9 @@
 package view;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static view.PurchaseView.DIVIDABLE_EXCEPTION;
+import static view.PurchaseView.POSITIVE_NUMBER_EXCEPTION;
 
-import constant.ErrorMessage;
 import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class PurchaseViewTest {
         // when & then
         assertThatThrownBy(() -> purchaseView.readPurchaseAmount())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
+                .hasMessage(POSITIVE_NUMBER_EXCEPTION);
     }
 
     @Test
@@ -35,6 +36,6 @@ class PurchaseViewTest {
         // when & then
         assertThatThrownBy(() -> purchaseView.readPurchaseAmount())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.DIVIDABLE_EXCEPTION);
+                .hasMessage(DIVIDABLE_EXCEPTION);
     }
 }

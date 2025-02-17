@@ -1,6 +1,7 @@
 package model;
 
-import constant.ErrorMessage;
+import static view.ResultView.BONUS_NUMBER_DUPLICATE_EXCEPTION;
+
 import java.util.List;
 
 public class WinLotto {
@@ -15,7 +16,7 @@ public class WinLotto {
 
     private void validateDuplicate(List<Integer> winNumbers, int bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE_EXCEPTION);
+            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_EXCEPTION);
         }
     }
 
