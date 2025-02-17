@@ -2,16 +2,18 @@ package controller;
 
 import java.util.List;
 import model.WinLotto;
-import view.WinLottoView;
+import view.InputView;
 
 public class WinLottoController {
-    private WinLottoView winLottoView = new WinLottoView();
+    private final InputView inputView;
+
+    public WinLottoController(InputView inputView) {
+        this.inputView = inputView;
+    }
 
     public WinLotto winLotto() {
-        winLottoView.printWinNumberGuide();
-        List<Integer> winNumbers = winLottoView.readWinNumbers();
-        winLottoView.printBonusNumberGuide();
-        Integer bonusNumber = winLottoView.readBonusNumber();
+        List<Integer> winNumbers = inputView.readWinNumbers();
+        Integer bonusNumber = inputView.readBonusNumber();
         return new WinLotto(winNumbers, bonusNumber);
     }
 }

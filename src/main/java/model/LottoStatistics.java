@@ -1,35 +1,42 @@
 package model;
 
-import constant.WinLottoInfo;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class LottoStatistics {
-    private final EnumMap<WinLottoInfo, Integer> lottoStatistics = new EnumMap<>(WinLottoInfo.class);
+    private final EnumMap<LottoWinRank, Integer> lottoStatistics = new EnumMap<>(LottoWinRank.class);
 
-    public LottoStatistics(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
-        for (LottoNumbers purchasedLotto : lottoNumbers) {
-            WinLottoInfo winResult = WinLottoInfo.result(purchasedLotto, winLotto);
-            lottoStatistics.put(winResult, lottoStatistics.getOrDefault(winResult, 0) + 1);
+    public LottoStatistics(List<Lotto> purchasedLottos, WinLotto winLotto) {
+        Arrays.stream(LottoWinRank.values()).forEach(lottoWinRank -> lottoStatistics.put(lottoWinRank, 0));
+        for (Lotto purchasedLotto : purchasedLottos) {
+            LottoWinRank winResult = LottoWinRank.calculateLottoWinRank(purchasedLotto, winLotto);
+            lottoStatistics.put(winResult, lottoStatistics.get(winResult) + 1);
         }
+        lottoStatistics.remove(LottoWinRank.NONE);
     }
 
-    private Integer calculateTotalPrize() {
+    public Integer getCount(LottoWinRank lottoWinRank) {
+        return lottoStatistics.get(lottoWinRank);
+    }
+
+    public double totalReturn(Integer purchaseAmount) {
+        return (double) calculateTotalPrize() / purchaseAmount;
+    }
+
+    public Set<Entry<LottoWinRank, Integer>> getStatisticsEntries() {
+        return lottoStatistics.entrySet();
+    }
+
+    private int calculateTotalPrize() {
         int sum = 0;
-        for (Entry<WinLottoInfo, Integer> statisticsEntry : lottoStatistics.entrySet()) {
-            WinLottoInfo winLottoInfo = statisticsEntry.getKey();
+        for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.entrySet()) {
+            LottoWinRank lottoWinRank = statisticsEntry.getKey();
             Integer count = statisticsEntry.getValue();
-            sum += winLottoInfo.getPrice() * count;
+            sum += lottoWinRank.getPrice() * count;
         }
         return sum;
-    }
-
-    public Integer getCount(WinLottoInfo winLottoInfo) {
-        return lottoStatistics.get(winLottoInfo);
-    }
-
-    public Double totalReturn(Integer purchaseAmount) {
-        return (double) calculateTotalPrize() / purchaseAmount;
     }
 }

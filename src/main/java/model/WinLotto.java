@@ -1,36 +1,28 @@
 package model;
 
-import constant.ErrorMessage;
 import java.util.List;
 
 public class WinLotto {
-    private final LottoNumbers lottoNumbers;
-    private final Integer bonusNumber;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
     public WinLotto(List<Integer> winNumbers, Integer bonusNumber) {
         validateDuplicate(winNumbers, bonusNumber);
-        validateBound(bonusNumber);
-        this.lottoNumbers = new LottoNumbers(winNumbers);
-        this.bonusNumber = bonusNumber;
+        this.lotto = new Lotto(winNumbers);
+        this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public Integer countMatchNumber(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.countMatchNumber(lottoNumbers);
+    public Integer countMatchNumber(Lotto lotto) {
+        return this.lotto.countMatchNumber(lotto);
     }
 
-    public Boolean bonusMatch(LottoNumbers lottoNumbers) {
-        return lottoNumbers.bonusMatch(this.bonusNumber);
+    public Boolean bonusMatch(Lotto lotto) {
+        return lotto.bonusMatch(this.bonusNumber);
     }
 
     private void validateDuplicate(List<Integer> winNumbers, Integer bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE_EXCEPTION);
-        }
-    }
-
-    private void validateBound(Integer input) {
-        if (input < LottoNumbers.MINIMUM_LOTTO_NUMBER || input > LottoNumbers.MAXIMUM_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+            throw new IllegalArgumentException("당첨 번호와 중복이 아닌 숫자를 입력해주세요");
         }
     }
 }
