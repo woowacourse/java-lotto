@@ -5,11 +5,17 @@ import static lotto.common.constant.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoTest {
+    private static final Lotto defaultLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+    private static final int defaultBonus = 10;
 
     @Test
     @DisplayName("로또 번호는 로또가 생성할 때, 정렬된다.")
@@ -45,14 +51,13 @@ class LottoTest {
     @Test
     @DisplayName("로또는 당첨 번호를 비교하여 자신의 당첨 개수와 보너스 여부를 반환한다.")
     void test_returnCorrect_MatchCount() {
-        var bonus = 6;
-        var notBonus = bonus + 1;
+        var notBonus = defaultBonus + 1;
         var correctCount = 5;
 
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, bonus));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, defaultBonus));
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, notBonus));
 
-        MatchCount count = lotto.matchCount(winningLotto, bonus);
+        MatchCount count = lotto.matchCount(winningLotto, defaultBonus);
 
         assertThat(count.matchCount()).isEqualTo(correctCount);
         assertThat(count.bonus()).isTrue();
@@ -64,12 +69,10 @@ class LottoTest {
         var bonusOverMAX = LOTTO_MAXIMUM + 1;
         var bonusLessMIN = LOTTO_MINIMUM - 1;
 
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-
-        assertThatThrownBy(() -> lotto.validateBonus(bonusOverMAX))
+        assertThatThrownBy(() -> defaultLotto.validateBonus(bonusOverMAX))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
-        assertThatThrownBy(() -> lotto.validateBonus(bonusLessMIN))
+        assertThatThrownBy(() -> defaultLotto.validateBonus(bonusLessMIN))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
     }
@@ -77,28 +80,27 @@ class LottoTest {
     @Test
     @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
     void error_LottoBonusDuplicatedWithLotto() {
-        var duplicatedNumber = 6;
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, duplicatedNumber));
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, defaultBonus));
 
-        assertThatThrownBy(() -> lotto.validateBonus(duplicatedNumber))
+        assertThatThrownBy(() -> lotto.validateBonus(defaultBonus))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("matchWinningLottoTestParameters")
     @DisplayName("로또 보너스 번호가 로또의 번호와 중복될 경우, 예외를 발생한다.")
-    void test_MatchWinningLotto_Correctly() {
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto winningLotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 10));
-        Lotto winningLotto2 = new Lotto(List.of(1, 2, 3, 4, 11, 10));
-        Lotto winningLotto3 = new Lotto(List.of(1, 2, 3, 12, 11, 10));
+    void test_MatchWinningLotto_Correctly(Lotto winningLotto, int expected) {
+        MatchCount count = defaultLotto.matchCount(winningLotto, defaultBonus);
 
-        MatchCount count1 = lotto.matchCount(winningLotto1, 10);
-        MatchCount count2 = lotto.matchCount(winningLotto2, 10);
-        MatchCount count3 = lotto.matchCount(winningLotto3, 10);
+        assertThat(count.matchCount()).isEqualTo(expected);
+    }
 
-        assertThat(count1.matchCount()).isEqualTo(5);
-        assertThat(count2.matchCount()).isEqualTo(4);
-        assertThat(count3.matchCount()).isEqualTo(3);
+    private static Stream<Arguments> matchWinningLottoTestParameters() {
+        return Stream.of(
+            Arguments.of(new Lotto(List.of(1, 2, 3, 4, 5, 10)), 5),
+            Arguments.of(new Lotto(List.of(1, 2, 3, 4, 11, 10)), 4),
+            Arguments.of(new Lotto(List.of(1, 2, 3, 12, 11, 10)), 3)
+        );
     }
 }

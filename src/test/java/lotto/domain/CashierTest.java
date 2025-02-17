@@ -6,19 +6,23 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class CashierTest {
-    @Test
-    @DisplayName("로또의 기준 가격에 비례하여 로또를 발급한다.")
-    void test_GenerateAmount() {
-        Cashier cashier = new Cashier(LOTTO_PRICE);
-        assertThat(cashier.getNumberOfLotto()).isEqualTo(1);
 
-        Cashier cashier2 = new Cashier(LOTTO_PRICE * 2);
-        assertThat(cashier2.getNumberOfLotto()).isEqualTo(2);
+    @ParameterizedTest
+    @MethodSource("generateAmountTestParameters")
+    @DisplayName("로또의 기준 가격에 비례하여 로또를 발급한다.")
+    void test_GenerateAmount(int price, int expected) {
+        Cashier cashier = new Cashier(price);
+        int numberOfLotto = cashier.getNumberOfLotto();
+        assertThat(numberOfLotto).isEqualTo(expected);
     }
 
     @Test
@@ -49,5 +53,13 @@ class CashierTest {
         Profit profit = cashier.calculateProfit(map);
 
         assertThat(profit.rate()).isEqualTo(1.5);
+    }
+
+    private static Stream<Arguments> generateAmountTestParameters() {
+        return Stream.of(
+            Arguments.of(LOTTO_PRICE, 1),
+            Arguments.of(LOTTO_PRICE * 2, 2),
+            Arguments.of(LOTTO_PRICE * 5, 5)
+        );
     }
 }
