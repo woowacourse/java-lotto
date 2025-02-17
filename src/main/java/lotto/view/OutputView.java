@@ -43,14 +43,30 @@ public class OutputView {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
 
+        StringBuilder output = new StringBuilder();
+
         for (MatchRank rank : values()) {
             if (rank == NO_MATCH) {
                 continue;
             }
-            String output = rank.getMatchData();
-            int count = rankCounts.get(rank);
-            System.out.println(output + count + "개");
+
+            output.append(getSingleRankOutput(rank, rankCounts));
         }
+
+        System.out.println(output);
+    }
+
+    private String getSingleRankOutput(MatchRank rank, Map<MatchRank, Integer> rankCounts) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d개 일치", rank.getNumber()));
+        if (rank == MATCH_BONUS) {
+            sb.append(", 보너스볼 일치");
+        }
+        sb.append(String.format("(%d원)", rank.getMoney()));
+        int count = rankCounts.get(rank);
+        sb.append(String.format(" - %d개\n", count));
+
+        return sb.toString();
     }
 
     private void printProfit(Profit profit) {
