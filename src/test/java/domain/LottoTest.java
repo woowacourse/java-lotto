@@ -50,7 +50,7 @@ public class LottoTest {
 
     @DisplayName("중복되는 숫자를 입력할 경우 예외를 발생시킨다. ")
     @Test
-    void 숫자가_중복되는_경우() {
+    void validate_duplicate_number() {
         List<Integer> expectedNumbers = List.of(1, 1, 2, 3, 4, 5);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             Lotto lotto = Lotto.from(expectedNumbers);

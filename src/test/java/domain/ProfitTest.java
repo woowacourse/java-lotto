@@ -27,23 +27,23 @@ public class ProfitTest {
         @DisplayName("구매 금액이 1000, 1등이 당첨되었을 경우, 2000000.0의 수익률이 결과로 나와야 한다")
         @Test
         void profit_test_1() {
-            assertProfit(1000, Rank.FIRST, 2000000.0);
+            assertValidateProfit(1000, Rank.FIRST, 2000000.0);
         }
 
         @DisplayName("구매 금액이 5000, 5등이 당첨되었을 경우, 1.0의 수익률이 결과로 나와야 한다")
         @Test
         void profit_test_2() {
-            assertProfit(5000, Rank.FIFTH, 1.0);
+            assertValidateProfit(5000, Rank.FIFTH, 1.0);
         }
 
         @DisplayName("구매 금액이 1000, 미당첨일 경우, 수익률은 0.0이어야 한다.")
         @Test
         void profit_test_3() {
-            assertProfit(1000, Rank.NONE, 0.0);
+            assertValidateProfit(1000, Rank.NONE, 0.0);
         }
     }
 
-    private void assertProfit(int purchaseAmount, Rank expectedRank, double expectedProfit) {
+    private void assertValidateProfit(int purchaseAmount, Rank expectedRank, double expectedProfit) {
         calculateResult.put(expectedRank, 1);
         Profit profit = Profit.of(calculateResult, purchaseAmount);
         assertThat(profit.getResult()).isEqualTo(expectedProfit);

@@ -52,7 +52,7 @@ public class LottoResultRepositoryTest {
             assertValidateResult(givenNumbers, Rank.THIRD, 1);
         }
 
-        @DisplayName("숫자 4개가 적줄할 경우, 4등에 당첨되어야 한다")
+        @DisplayName("숫자 4개가 적중할 경우, 4등에 당첨되어야 한다")
         @Test
         void validate_fourth() {
             List<Integer> givenNumbers = List.of(1, 2, 3, 4, 10, 11);

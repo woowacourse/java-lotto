@@ -23,20 +23,20 @@ public class LottoController {
 
     public void start() {
         int purchaseAmount = inputView.purchaseAmountInput();
-        TicketDto ticketDto = ticketProcess(purchaseAmount);
-        LottosDto lottosDto = lottoProcess(ticketDto);
-        WinningNumberDto winningNumberDto = winningNumberProcess();
+        TicketDto ticketDto = purchaseTicketProcess(purchaseAmount);
+        LottosDto lottosDto = purchaseLottoProcess(ticketDto);
+        WinningNumberDto winningNumberDto = compareWinningNumberProcess();
         LottoResultDto lottoResultDto = calculateRankProcess(winningNumberDto, lottosDto);
-        profitProcess(lottoResultDto, purchaseAmount);
+        calculateProfitProcess(lottoResultDto, purchaseAmount);
     }
 
-    private TicketDto ticketProcess(int purchaseAmount) {
+    private TicketDto purchaseTicketProcess(int purchaseAmount) {
         TicketDto ticketDto = lottoService.makeTicket(purchaseAmount);
         outputView.printPurchaseResult(ticketDto);
         return ticketDto;
     }
 
-    private void profitProcess(LottoResultDto lottoResultDto, int purchaseAmount) {
+    private void calculateProfitProcess(LottoResultDto lottoResultDto, int purchaseAmount) {
         double calculateRate = lottoService.calculateProfit(lottoResultDto, purchaseAmount);
         outputView.printProfit(calculateRate);
     }
@@ -49,14 +49,14 @@ public class LottoController {
         return lottoResult;
     }
 
-    private WinningNumberDto winningNumberProcess() {
+    private WinningNumberDto compareWinningNumberProcess() {
         String winningNumbers = inputView.winningNumbersInput();
         LottoDto lottoDto = lottoService.makeLotto(winningNumbers);
         int bonusNumber = inputView.bonusNumberInput();
         return lottoService.makeWinningNumber(lottoDto, bonusNumber);
     }
 
-    private LottosDto lottoProcess(TicketDto ticketDto) {
+    private LottosDto purchaseLottoProcess(TicketDto ticketDto) {
         lottoService.saveLotto(ticketDto);
         LottosDto lottos = lottoService.getLottos();
         outputView.printLottos(lottos);
