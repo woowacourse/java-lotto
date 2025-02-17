@@ -1,11 +1,13 @@
 package controller;
 
 import domain.Buyer;
+import domain.Lotto;
 import domain.LottoFactory;
 import domain.LottoRank;
 import domain.LottoStatistics;
 import domain.Money;
 import domain.WinningLotto;
+import java.util.List;
 import java.util.Map;
 import util.InputParser;
 import util.Validator;
@@ -25,8 +27,9 @@ public class LottoController {
     public void run() {
         Money money = creaeteMoney();
         LottoFactory lottoFactory = new LottoFactory();
-        Buyer buyer = new Buyer(lottoFactory.createLottos(money));
-        outputView.displayLottos(money.calculateTotalLotto(), buyer.createResult());
+        List<Lotto> lottos = lottoFactory.createLottos(money);
+        Buyer buyer = new Buyer(lottos);
+        outputView.displayLottos(money.calculateTotalLotto(), lottos);
 
         WinningLotto winningLotto = createWinningLotto();
         Map<LottoRank, Integer> lottoResult = buyer.countMatchedRanks(winningLotto);

@@ -12,14 +12,6 @@ public class Buyer {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public String createResult() {
-        String result = "";
-        for (Lotto lotto : lottos) {
-            result += lotto.toString() + "\n";
-        }
-        return result;
-    }
-
     public Map<LottoRank, Integer> countMatchedRanks(WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = LottoRank.createLottoRankCounter();
 

@@ -11,6 +11,10 @@ public class Lotto {
         this.numbers = new ArrayList<>(numbers);
     }
 
+    public List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
+
     public LottoRank checkLottoRank(WinningLotto winningLotto) {
         int winningCounter = (int) numbers.stream()
             .filter(winningLotto::containsWinningNumber)
@@ -20,10 +24,5 @@ public class Lotto {
             .anyMatch(winningLotto::isBonusNumber);
 
         return LottoRank.findLottoRank(winningCounter, bonusChecker);
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
     }
 }

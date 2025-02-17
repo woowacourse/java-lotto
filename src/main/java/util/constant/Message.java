@@ -18,6 +18,9 @@ public class Message {
 
     /* output message */
     public static final String TOTAL_LOTTO_FORMAT = "%d개를 구매했습니다.\n";
+    public static final String STATISTICS_MATCH_FORMAT = "%d개 일치";
+    public static final String STATISTICS_BONUS_BALL_FORMAT = ", 보너스 볼 일치";
+    public static final String STATISTICS_PRICE_FORMAT = " (%d원)";
     public static final String STATISTICS_FORMAT = "%s- %d개\n";
     public static final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
     public static final String STATISTICS_START_MESSAGE = "당첨 통계";
