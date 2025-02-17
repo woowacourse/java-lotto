@@ -68,7 +68,7 @@ public class WinningResults {
     public long calculateEarnedMoney() {
         long totalEarnedMoney = 0L;
         for (WinningResult result : this.getResults()) {
-            totalEarnedMoney += result.getWinningAmount() * result.getWinningCount();
+            totalEarnedMoney += result.calculateWinningMoney();
         }
         return totalEarnedMoney;
     }
