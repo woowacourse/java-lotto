@@ -1,8 +1,5 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum WinLottoInfo {
     FIRST(6, 2000000000),
     SECOND(5, 30000000),
@@ -20,20 +17,6 @@ public enum WinLottoInfo {
         this.price = price;
     }
 
-    public static WinLottoInfo result(LottoNumbers purchasedLotto, WinLotto winLotto) {
-        int matchNumberCount = winLotto.countMatchNumber(purchasedLotto);
-        boolean bonusMatch = winLotto.bonusMatch(purchasedLotto);
-        if (matchNumberCount <= 2) {
-            return NONE;
-        }
-        if (matchNumberCount == 5 && !bonusMatch) {
-            return THIRD;
-        }
-        List<WinLottoInfo> filteredWinLottoInfo = Arrays.stream(WinLottoInfo.values())
-                .filter((winLottoInfo) -> winLottoInfo.matchNumberCount == matchNumberCount)
-                .toList();
-        return filteredWinLottoInfo.getFirst();
-    }
 
     public int getMatchNumberCount() {
         return matchNumberCount;
