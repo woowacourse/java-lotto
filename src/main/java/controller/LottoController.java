@@ -8,6 +8,7 @@ import domain.Lottos;
 import domain.Prize;
 import domain.PurchaseAmount;
 import domain.WinningLotto;
+import domain.lottogenerator.RandomLottoGenerator;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +49,7 @@ public class LottoController {
 
     private Lottos createLottos(PurchaseAmount purchaseAmount) {
         Lottos lottos = Lottos.ofSize(
-                purchaseAmount.calculateAvailableQuantity(LOTTO_PRICE)
+                purchaseAmount.calculateAvailableQuantity(LOTTO_PRICE), new RandomLottoGenerator()
         );
         outputView.printPurchasedLottos(lottos);
         return lottos;

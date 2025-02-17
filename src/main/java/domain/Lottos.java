@@ -2,6 +2,7 @@ package domain;
 
 import static domain.properties.LottoProperties.MAX_PURCHASABLE_LOTTOS;
 
+import domain.lottogenerator.LottoGenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,11 +18,11 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public static Lottos ofSize(final int quantity) {
+    public static Lottos ofSize(final int quantity, LottoGenerator lottoGenerator) {
         validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
-            Lotto generatedLotto = Lotto.of(LottoGenerator.generate());
+            Lotto generatedLotto = Lotto.of(lottoGenerator.generate());
             lottos.add(generatedLotto);
         }
         return new Lottos(lottos);
