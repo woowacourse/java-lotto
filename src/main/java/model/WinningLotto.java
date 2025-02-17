@@ -1,5 +1,9 @@
 package model;
 
+import static model.Lotto.LOTTO_SIZE;
+import static model.Lotto.MAXIMUM_LOTTO_NUMBER;
+import static model.Lotto.MINIMUM_LOTTO_NUMBER;
+
 import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +17,7 @@ public class WinningLotto {
     public static final String NUMBER_REGEX = "^[0-9]*[0-9]$";
     public static final String WINNING_NUMBERS_INPUT_ERROR_MESSAGE = "당첨 번호는 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
     public static final String BONUS_INPUT_ERROR_MESSAGE = "보너스볼은 당첨 번호와 중복되지 않는 1 이상 45 이하의 정수여야합니다.\n";
+    public static final int MAXIMUM_UNION_SIZE = 12;
 
     private final List<Integer> winningNumbers = new ArrayList<>();
     private int bonus;
@@ -37,7 +42,7 @@ public class WinningLotto {
     public int getDuplicateNumber(LottoDto lottoDto) {
         Set<Integer> union = new HashSet<>(winningNumbers);
         union.addAll(lottoDto.lotto());
-        return 12 - union.size();
+        return MAXIMUM_UNION_SIZE - union.size();
     }
 
     private void validateBonus(String rawBonus) {
@@ -77,7 +82,7 @@ public class WinningLotto {
 
     private void validateDuplicateWinningNumbers() {
         Set<Integer> set = new HashSet<>(winningNumbers);
-        if (set.size() != 6) {
+        if (set.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(WINNING_NUMBERS_INPUT_ERROR_MESSAGE);
         }
     }
@@ -87,7 +92,7 @@ public class WinningLotto {
     }
 
     private boolean isValidateNumberRange(int number) {
-        return number >= 1 && number <= 45;
+        return number >= MINIMUM_LOTTO_NUMBER && number <= MAXIMUM_LOTTO_NUMBER;
     }
 
 }

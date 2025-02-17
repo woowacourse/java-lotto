@@ -9,9 +9,11 @@ public class UserLotto {
     private final List<Lotto> lottos = new ArrayList<>();
 
     public UserLotto(String rawPurchaseAmount) {
+        LottoMachine lottoMachine = new LottoMachine();
         purchaseNumber = Integer.parseInt(rawPurchaseAmount) / 1000;
         for (int i = 0; i < purchaseNumber; i++) {
-            lottos.add(new Lotto());
+            Lotto lotto = new Lotto(lottoMachine.generateLotto());
+            lottos.add(lotto);
         }
     }
 
