@@ -44,14 +44,14 @@ public enum LottoRank {
         return comparedOverlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT;
     }
 
-    public static LottoRank findByMatchCondition(
+    public static LottoRank findByOverlappedCountAndBonusNumber(
             int overlappedCount,
-            boolean isBonusNUmberOverlapped
+            boolean isBonusNumberOverlapped
     ) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> {
                     if (requiredBonusNumber(overlappedCount)) {
-                        return Objects.equals(rank.isRequiredBonusNumber(), isBonusNUmberOverlapped)
+                        return Objects.equals(rank.isRequiredBonusNumber(), isBonusNumberOverlapped)
                                 && Objects.equals(rank.overlappedCount, overlappedCount);
                     }
                     return Objects.equals(rank.overlappedCount, overlappedCount);

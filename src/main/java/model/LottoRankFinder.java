@@ -16,8 +16,8 @@ public class LottoRankFinder {
         int overlappedCount = winningLotto.countOverlappedNumbers(lottoTicket.getNumbers());
         if (LottoRank.requiredBonusNumber(overlappedCount)) {
             boolean isBonusNumberOverlapped = winningLotto.isOverlappedBonusNumber(lottoTicket.getNumbers());
-            return LottoRank.findByMatchCondition(overlappedCount, isBonusNumberOverlapped);
+            return LottoRank.findByOverlappedCountAndBonusNumber(overlappedCount, isBonusNumberOverlapped);
         }
-        return LottoRank.findByMatchCondition(overlappedCount, false);
+        return LottoRank.findByOverlappedCountAndBonusNumber(overlappedCount, false);
     }
 }
