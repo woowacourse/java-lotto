@@ -72,4 +72,13 @@ public class LottoTest {
 
         Assertions.assertThat(lotto.isSameWith(Arrays.asList(1, 2, 3, 4, 5, 7))).isFalse();
     }
+
+    @DisplayName("로또 번호와 다른 갯수의 숫자가 입력될 경우 False를 반환한다")
+    @Test
+    void shouldReturnFalseWhenCountDifferent() {
+        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+        Assertions.assertThat(lotto.isSameWith(Arrays.asList(1, 2, 3, 4, 5))).isFalse();
+        Assertions.assertThat(lotto.isSameWith(Arrays.asList(1, 2, 3, 4, 5, 6, 7))).isFalse();
+    }
 }
