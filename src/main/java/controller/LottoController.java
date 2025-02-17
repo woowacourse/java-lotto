@@ -1,5 +1,6 @@
 package controller;
 
+import domain.WinningResultEvaluator;
 import java.util.List;
 import domain.BonusNumber;
 import domain.Lotto;
@@ -7,7 +8,6 @@ import domain.LottoMachine;
 import domain.Purchase;
 import domain.WinningNumber;
 import domain.WinningResult;
-import domain.WinningStatus;
 import util.NumberGeneratorImpl;
 import view.InputView;
 import view.OutputView;
@@ -29,7 +29,7 @@ public class LottoController {
         WinningNumber winningNumber = readWinningNumber();
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
-        WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
+        WinningResult winningResult = findWinningResult(issuedLottos, winningNumber, bonusNumber);
         double earningRate = winningResult.calculateEarningRate(purchase);
 
         printResult(winningResult, earningRate);
@@ -81,17 +81,11 @@ public class LottoController {
         }
     }
 
-    public WinningResult checkWinningResult(List<Lotto> issuedLottos,
-                                            WinningNumber winningNumber,
-                                            BonusNumber bonusNumber) {
-        WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : issuedLottos) {
-            int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
-            boolean isMatchedWithBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
-            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, isMatchedWithBonusNumber);
-            winningResult.update(winningStatus);
-        }
-        return winningResult;
+    public WinningResult findWinningResult(List<Lotto> issuedLottos,
+                                           WinningNumber winningNumber,
+                                           BonusNumber bonusNumber) {
+        WinningResultEvaluator winningResultEvaluator = new WinningResultEvaluator(winningNumber, bonusNumber);
+        return winningResultEvaluator.evaluate(issuedLottos);
     }
 
     public void printResult(WinningResult winningResult, double earningRate) {
