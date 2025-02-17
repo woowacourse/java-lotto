@@ -1,11 +1,18 @@
 package controller;
 
-import domain.dto.LottoDto;
-import domain.dto.LottoResultDto;
-import domain.dto.LottosDto;
-import domain.dto.TicketDto;
-import domain.dto.WinningNumberDto;
-import service.LottoService;
+import static domain.LottoRules.WINNING_NUMBERS_REQUIRED;
+
+import creator.LottoCreator;
+import domain.Lotto;
+import domain.Profit;
+import domain.Rank;
+import domain.Ticket;
+import domain.WinningNumber;
+import java.util.List;
+import java.util.Map;
+import repository.LottoRepository;
+import repository.LottoResultRepository;
+import utils.RandomNumber;
 import view.InputView;
 import view.OutputView;
 
@@ -13,52 +20,59 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoService lottoService;
+    private final LottoRepository lottoRepository;
+    private final LottoResultRepository lottoResultRepository;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoRepository lottoRepository,
+        LottoResultRepository lottoResultRepository) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
+        this.lottoRepository = lottoRepository;
+        this.lottoResultRepository = lottoResultRepository;
     }
 
     public void start() {
         int purchaseAmount = inputView.purchaseAmountInput();
-        TicketDto ticketDto = purchaseTicketProcess(purchaseAmount);
-        LottosDto lottosDto = purchaseLottoProcess(ticketDto);
-        WinningNumberDto winningNumberDto = compareWinningNumberProcess();
-        LottoResultDto lottoResultDto = calculateRankProcess(winningNumberDto, lottosDto);
-        calculateProfitProcess(lottoResultDto, purchaseAmount);
+        Ticket ticket = purchaseTicketProcess(purchaseAmount);
+        List<Lotto> lottos = purchaseLottoProcess(ticket);
+        WinningNumber winningNumber = compareWinningNumberProcess();
+        Map<Rank, Integer> calculateResult = calculateRankProcess(winningNumber, lottos);
+        calculateProfitProcess(calculateResult, purchaseAmount);
     }
 
-    private TicketDto purchaseTicketProcess(int purchaseAmount) {
-        TicketDto ticketDto = lottoService.makeTicket(purchaseAmount);
-        outputView.printPurchaseResult(ticketDto);
-        return ticketDto;
+    private Ticket purchaseTicketProcess(int purchaseAmount) {
+        Ticket ticket = LottoCreator.createTicket(purchaseAmount);
+        outputView.printPurchaseResult(ticket);
+        return ticket;
     }
 
-    private void calculateProfitProcess(LottoResultDto lottoResultDto, int purchaseAmount) {
-        double calculateRate = lottoService.calculateProfit(lottoResultDto, purchaseAmount);
-        outputView.printProfit(calculateRate);
+    private void calculateProfitProcess(Map<Rank, Integer> calculateResult, int purchaseAmount) {
+        Profit profit = LottoCreator.createProfit(calculateResult, purchaseAmount);
+        outputView.printProfit(profit.getResult());
     }
 
-    private LottoResultDto calculateRankProcess(
-        WinningNumberDto winningNumber, LottosDto lottos) {
-        lottoService.calculateRank(winningNumber, lottos);
-        LottoResultDto lottoResult = lottoService.getRankResult();
-        outputView.printWinningStatistic(lottoResult);
-        return lottoResult;
+    private Map<Rank, Integer> calculateRankProcess(
+        WinningNumber winningNumber, List<Lotto> lottos) {
+        lottoResultRepository.add(winningNumber, lottos);
+        Map<Rank, Integer> calculateResult = lottoResultRepository.getCalculateResult();
+        outputView.printWinningStatistic(calculateResult);
+        return calculateResult;
     }
 
-    private WinningNumberDto compareWinningNumberProcess() {
+    private WinningNumber compareWinningNumberProcess() {
         String winningNumbers = inputView.winningNumbersInput();
-        LottoDto lottoDto = lottoService.makeLotto(winningNumbers);
+        Lotto lotto = LottoCreator.createLotto(winningNumbers);
         int bonusNumber = inputView.bonusNumberInput();
-        return lottoService.makeWinningNumber(lottoDto, bonusNumber);
+        return LottoCreator.createWinningNumber(lotto, bonusNumber);
     }
 
-    private LottosDto purchaseLottoProcess(TicketDto ticketDto) {
-        lottoService.saveLotto(ticketDto);
-        LottosDto lottos = lottoService.getLottos();
+    private List<Lotto> purchaseLottoProcess(Ticket ticket) {
+        for (int i = 0; i < ticket.getQuantity(); i++) {
+            List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
+            Lotto lotto = Lotto.from(numbers);
+            lottoRepository.addLotto(lotto);
+        }
+        List<Lotto> lottos = lottoRepository.getLottos();
         outputView.printLottos(lottos);
         return lottos;
     }
