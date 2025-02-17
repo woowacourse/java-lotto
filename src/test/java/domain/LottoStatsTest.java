@@ -20,7 +20,7 @@ class LottoStatsTest {
         }
 
         lottoStats.calculateResult(lottos);
-        assertThat(lottoStats.toString()).contains("6개 일치 (2000000000원)- 3개");
+        assertThat(lottoStats.getStatus(Rank.FIRST)).isEqualTo(3);
     }
 
     @DisplayName("기본 테스트 케이스")
@@ -43,12 +43,12 @@ class LottoStatsTest {
                 new Lotto(List.of(3, 8, 27, 30, 35, 44)));
         LottoStats lottoStats = new LottoStats(new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7));
         lottoStats.calculateResult(lottos);
-        assertThat(lottoStats.toString()).contains("3개 일치 (5000원)- 1개");
-        assertThat(lottoStats.toString()).contains("4개 일치 (50000원)- 0개");
-        assertThat(lottoStats.toString()).contains("5개 일치 (1500000원)- 0개");
-        assertThat(lottoStats.toString()).contains("5개 일치, 보너스 볼 일치(30000000원)- 0개");
-        assertThat(lottoStats.toString()).contains("6개 일치 (2000000000원)- 0개");
-        assertThat(lottoStats.getEarningRate(14000)).isEqualTo("0.35");
+        assertThat(lottoStats.getStatus(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoStats.getStatus(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoStats.getEarningRate(14000)).isEqualTo(0.35);
     }
 
     @DisplayName("총 상금 계산 테스트")
