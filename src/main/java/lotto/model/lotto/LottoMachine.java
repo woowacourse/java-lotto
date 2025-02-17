@@ -28,7 +28,8 @@ public class LottoMachine {
 
     public List<Lotto> issueAutomatic(final NumbersGenerator numbersGenerator) {
         List<Lotto> lottoTickets = new ArrayList<>();
-        for (int count = 0; count < buyingAmount.calculateBuyingCount(LOTTO_PRICE); count++) {
+        int buyingLottoCount = buyingAmount.calculateBuyingCount(LOTTO_PRICE);
+        for (int count = 0; count < buyingLottoCount; count++) {
             List<Integer> randomLottoNumbers = numbersGenerator.generate();
             lottoTickets.add(new Lotto(randomLottoNumbers));
         }
