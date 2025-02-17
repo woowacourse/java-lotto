@@ -33,7 +33,7 @@ public class LottoController {
         try {
             LottoStore lottoStore = createLottoStore();
             Money purchaseLottoMoney = inputMoney(lottoStore);
-            Lottos purchasedLottos = purchaseLottos(purchaseLottoMoney);
+            Lottos purchasedLottos = lottoStore.buy(purchaseLottoMoney);
             outputView.printPurchaseLottos(purchasedLottos);
 
             WinningLotto winningLotto = inputWinningLotto();
@@ -51,14 +51,8 @@ public class LottoController {
     }
 
     private LottoStore createLottoStore() {
-        LottoPickStrategy lottoPickStrategy = Number.createLottPickStrategy();
+        LottoPickStrategy lottoPickStrategy = Number.createRandomLottoPickStrategy();
         return new LottoStore(Lotto.createLottoMachine(lottoPickStrategy));
-    }
-
-    private Lottos purchaseLottos(Money purchaseLottoMoney) {
-        LottoPickStrategy lottoPickStrategy = Number.createLottPickStrategy();
-        LottoStore lottoStore = new LottoStore(Lotto.createLottoMachine(lottoPickStrategy));
-        return lottoStore.buy(purchaseLottoMoney);
     }
 
     private WinningLotto inputWinningLotto() {

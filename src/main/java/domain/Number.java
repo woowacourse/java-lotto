@@ -12,7 +12,7 @@ public record Number(int value) {
         validateNumberRange(value);
     }
 
-    public static LottoPickStrategy createLottPickStrategy() {
+    public static LottoPickStrategy createRandomLottoPickStrategy() {
         return new RandomLottoPickStrategy(MAX_NUMBER);
     }
 
