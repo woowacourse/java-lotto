@@ -3,22 +3,22 @@ package lotto.controller;
 import java.util.List;
 import java.util.Optional;
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoMoneyFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
-import lotto.service.LottoMoneyService;
-import lotto.service.LottoService;
-import lotto.service.WinningLottoService;
+import lotto.domain.WinningLottoFactory;
 import lotto.util.ObjectCreator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class GameController {
 
-    private final LottoService lottoService = new LottoService();
-    private final LottoMoneyService lottoMoneyService = new LottoMoneyService();
-    private final WinningLottoService winningLottoService = new WinningLottoService();
+    private final LottoFactory lottoFactory = new LottoFactory();
+    private final LottoMoneyFactory lottoMoneyFactory = new LottoMoneyFactory();
+    private final WinningLottoFactory winningLottoFactory = new WinningLottoFactory();
 
     public void run() {
         LottoMoney lottoMoney = storeLottoMoney();
@@ -41,7 +41,7 @@ public class GameController {
         return ObjectCreator.useInputToCreateObject(() -> {
             String money = InputView.readLottoMoney();
 
-            return lottoMoneyService.createLottoMoney(money);
+            return lottoMoneyFactory.createLottoMoney(money);
         });
     }
 
@@ -67,7 +67,7 @@ public class GameController {
         return ObjectCreator.useInputToCreateObject(() -> {
             String numbers = InputView.readWinningNumbers();
 
-            return lottoService.createLotto(numbers);
+            return lottoFactory.createLotto(numbers);
         });
     }
 
@@ -79,7 +79,7 @@ public class GameController {
         return ObjectCreator.useInputToCreateObject(() -> {
             String bonus = InputView.readBonusBall();
 
-            return winningLottoService.createWinningLotto(winningNumbers, bonus);
+            return winningLottoFactory.createWinningLotto(winningNumbers, bonus);
         });
     }
 
