@@ -11,8 +11,8 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final int ticketAmount) {
-        lottos = generateLottos(ticketAmount);
+    public Lottos(final int amount) {
+        lottos = generateLottos(amount);
     }
 
     public LottosResponse createResponse() {
@@ -27,9 +27,9 @@ public class Lottos {
         return Collections.unmodifiableList(lottos);
     }
 
-    private List<Lotto> generateLottos(final int ticketAmount) {
+    private List<Lotto> generateLottos(final int amount) {
         ArrayList<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < ticketAmount; i++) {
+        for (int i = 0; i < amount; i++) {
             lottos.add(new Lotto());
         }
 
