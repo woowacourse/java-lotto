@@ -18,6 +18,7 @@ public class OutputView {
 
     public static void writeLottoTickets(List<Lotto> lottoTickets) {
         System.out.printf("%d개를 구매했습니다.\n", lottoTickets.size());
+
         for (Lotto lottoTicket : lottoTickets) {
             Collections.sort(lottoTicket.getLotto());
             System.out.println(lottoTicket.getLotto());
@@ -25,9 +26,24 @@ public class OutputView {
     }
 
     public static void writeLottoResult(LottoResult lottoResult) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\n당첨 통계\n");
-        sb.append("---------\n");
+        System.out.println(formatProfitStatusHead());
+
+        System.out.println(formatProfitStatusBody(lottoResult));
+
+        System.out.println(formatProfitStatusTail(lottoResult));
+    }
+
+    private static String formatProfitStatusHead() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("\n당첨 통계\n");
+        builder.append("---------\n");
+
+        return builder.toString();
+    }
+
+    private static String formatProfitStatusBody(LottoResult lottoResult) {
+        StringBuilder builder = new StringBuilder();
 
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.getLottoResult().entrySet()) {
             LottoPrize lottoPrize = entry.getKey();
@@ -35,15 +51,21 @@ public class OutputView {
             if (lottoPrize.equals(LottoPrize.MISS)) {
                 continue;
             }
-            sb.append(String.format("%d개 일치 (%d원) - %d개\n", lottoPrize.getHitNumbers(), lottoPrize.getPrize(),
+            builder.append(String.format("%d개 일치 (%d원) - %d개\n", lottoPrize.getHitNumbers(), lottoPrize.getPrize(),
                     entry.getValue()));
         }
+        return builder.toString();
+    }
 
-        sb.append(String.format("총 수익률은 %.2f입니다.", lottoResult.getLottoProfitRate()));
+    private static String formatProfitStatusTail(LottoResult lottoResult) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(String.format("총 수익률은 %.2f입니다.", lottoResult.getLottoProfitRate()));
+
         String profitStatus = formatProfitStatus(lottoResult.getLottoProfitRate());
-        sb.append(String.format("(기준이 1이기 때문에 결과적으로 %s라는 의미임)", profitStatus));
+        builder.append(String.format("(기준이 1이기 때문에 결과적으로 %s라는 의미임)", profitStatus));
 
-        System.out.println(sb);
+        return builder.toString();
     }
 
     private static String formatProfitStatus(double profitRate) {

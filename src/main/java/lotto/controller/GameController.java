@@ -2,20 +2,27 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoFactory;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
+import lotto.domain.LottoMoneyFactory;
 import lotto.domain.LottoResult;
 import lotto.domain.WinningLotto;
+import lotto.domain.WinningLottoFactory;
 import lotto.util.ObjectCreator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class GameController {
 
-    public void run() {
-        LottoMoney lottoMoney = saveLottoMoney();
-        LottoMachine lottoMachine = buyLottoTickets(lottoMoney);
+    private final LottoFactory lottoFactory = new LottoFactory();
+    private final LottoMoneyFactory lottoMoneyFactory = new LottoMoneyFactory();
+    private final WinningLottoFactory winningLottoFactory = new WinningLottoFactory();
 
+    public void run() {
+        LottoMoney lottoMoney = storeLottoMoney();
+
+        LottoMachine lottoMachine = buyLottoTickets(lottoMoney);
         List<Lotto> lottoTickets = lottoMachine.getLottoTickets();
         OutputView.writeLottoTickets(lottoTickets);
 
@@ -25,27 +32,21 @@ public class GameController {
         OutputView.writeLottoResult(lottoResult);
     }
 
-    private LottoMoney saveLottoMoney() {
-        LottoMoney lottoMoney = null;
-        while (lottoMoney == null) {
-            lottoMoney = createLottoMoney();
-        }
-        return lottoMoney;
+    private LottoMoney storeLottoMoney() {
+        return ObjectCreator.repeatUntilSuccess(this::receiveLottoMoney);
     }
 
-    private LottoMoney createLottoMoney() {
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String money = InputView.readLottoMoney();
-            return new LottoMoney(money);
-        });
+    private LottoMoney receiveLottoMoney() {
+        String money = InputView.readLottoMoney();
+        return lottoMoneyFactory.createLottoMoney(money);
     }
 
     private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
-        LottoMachine lottoMachine = null;
-        while (lottoMachine == null) {
-            lottoMachine = ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
-        }
-        return lottoMachine;
+        return ObjectCreator.repeatUntilSuccess(() -> receiveLottoMachine(lottoMoney));
+    }
+
+    private LottoMachine receiveLottoMachine(LottoMoney lottoMoney) {
+        return new LottoMachine(lottoMoney);
     }
 
     private WinningLotto storeWinningLotto() {
@@ -54,39 +55,29 @@ public class GameController {
     }
 
     private Lotto storeWinningLottoNumbers() {
-        Lotto lotto = null;
-        while (lotto == null) {
-            lotto = createWinningLottoNumbers();
-        }
-        return lotto;
+        return ObjectCreator.repeatUntilSuccess(this::receiveWinningLottoNumbers);
     }
 
-    private Lotto createWinningLottoNumbers() {
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String numbers = InputView.readWinningNumbers();
-            return new Lotto(numbers);
-        });
+    private Lotto receiveWinningLottoNumbers() {
+        String numbers = InputView.readWinningNumbers();
+        return lottoFactory.createLotto(numbers);
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
-        WinningLotto winningLotto = null;
-        while (winningLotto == null) {
-            winningLotto = createWinningLottoWithBonus(winningNumbers);
-        }
-        return winningLotto;
+        return ObjectCreator.repeatUntilSuccess(() -> receiveWinningLottoBonus(winningNumbers));
     }
 
-    private WinningLotto createWinningLottoWithBonus(Lotto winningNumbers){
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String bonus = InputView.readBonusBall();
-            return new WinningLotto(winningNumbers, bonus);
-        });
+    private WinningLotto receiveWinningLottoBonus(Lotto winningNumbers) {
+        String bonus = InputView.readBonusBall();
+        return winningLottoFactory.createWinningLotto(winningNumbers, bonus);
     }
 
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
         LottoResult lottoResult = new LottoResult();
+
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
+
         return lottoResult;
     }
 }
