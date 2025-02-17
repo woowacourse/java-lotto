@@ -1,4 +1,4 @@
-package model;
+package model.common;
 
 public class LottoConstants {
     public static final int MIN_NUMBER = 1;
