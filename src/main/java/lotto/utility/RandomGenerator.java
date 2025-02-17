@@ -1,24 +1,21 @@
 package lotto.utility;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RandomGenerator {
 
-    private void addNumberToList(List<Integer> list, int number) {
-        if (!list.contains(number)) {
-            list.add(number);
-        }
-    }
+    public List<Integer> generateNumbers(int maxNumber, int count) {
+        Set<Integer> randoms = new HashSet<>();
 
-    public List<Integer> generateUniqueRandomNumbers(int maxNumber) {
-        List<Integer> randoms = new ArrayList<>();
-
-        while (randoms.size() < 6) {
+        while (randoms.size() < count) {
             int nextRandomNumber = (int) Math.ceil(Math.random() * maxNumber);
-            addNumberToList(randoms, nextRandomNumber);
+            randoms.add(nextRandomNumber);
         }
 
-        return randoms;
+        return randoms.stream()
+                .sorted()
+                .toList();
     }
 }

@@ -28,15 +28,13 @@ public class Vendor {
     }
 
     public List<Lotto> issueLottos() {
+        final int LOTTO_NUMBERS = 6;
         int lottoCount = this.calculateLottoCount();
         RandomGenerator randomGenerator = new RandomGenerator();
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(MAX_RANDOM_VALUE)
-                    .stream()
-                    .sorted()
-                    .toList();
+            List<Integer> randoms = randomGenerator.generateNumbers(MAX_RANDOM_VALUE, LOTTO_NUMBERS);
             lottos.add(new Lotto(randoms));
         }
 
