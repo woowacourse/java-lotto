@@ -18,6 +18,11 @@ public class InputView {
         return parseWinningNumbers(input());
     }
 
+    public static int inputBonusNumber() {
+        System.out.println("보너스 볼을 입력해 주세요.");
+        return parseInt(input());
+    }
+
     private static List<Integer> parseWinningNumbers(final String input) {
         String[] inputWinningNumbers = input.split(",");
         List<Integer> winningNumbers = new ArrayList<>();
@@ -31,13 +36,8 @@ public class InputView {
         try {
             return Integer.parseInt(input);
         } catch (final NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해 주세요.");
+            throw new IllegalArgumentException("숫자를 입력해 주세요. [입력: %s]".formatted(input));
         }
-    }
-
-    public static int inputBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return parseInt(input());
     }
 
     private static String input() {

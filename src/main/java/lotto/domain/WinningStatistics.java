@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Map;
 
@@ -15,11 +15,10 @@ public class WinningStatistics {
     }
 
     private int calculateTotalWinningAmount() {
-        int total = 0;
-        for (final Rank rank : winningStatistics.keySet()) {
-            total += rank.calculateAllWinningAmount(winningStatistics.get(rank));
-        }
-        return total;
+        return winningStatistics.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().calculateAllWinningAmount(entry.getValue()))
+                .sum();
     }
 
     public int getRankCount(final Rank rank) {

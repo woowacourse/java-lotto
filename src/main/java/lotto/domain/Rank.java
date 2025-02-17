@@ -1,12 +1,14 @@
-package lotto;
+package lotto.domain;
+
+import java.util.Arrays;
 
 public enum Rank {
     NONE(0, 0),
-    FIFTH(5000, 3),
-    FOURTH(50000, 4),
-    THIRD(1500000, 5),
-    SECOND(30000000, 5),
-    FIRST(2000000000, 6);
+    FIFTH(5_000, 3),
+    FOURTH(50_000, 4),
+    THIRD(1_500_000, 5),
+    SECOND(30_000_000, 5),
+    FIRST(2_000_000_000, 6);
 
     private final int winningAmount;
     private final int matchCount;
@@ -25,19 +27,17 @@ public enum Rank {
     }
 
     public static Rank checkRank(final int matchCount, final boolean hasBonusNumber) {
-        for (final Rank rank : Rank.values()) {
-            if (matchCount == SECOND.matchCount) {
-                return checkSecondOrThird(hasBonusNumber);
-            }
-            if (rank.matchCount == matchCount) {
-                return rank;
-            }
+        if (matchCount == SECOND.matchCount) {
+            return checkSecondOrThird(hasBonusNumber);
         }
-        return NONE;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.matchCount == matchCount)
+                .findAny()
+                .orElse(NONE);
     }
 
     public int calculateAllWinningAmount(final int winningCount) {
-        return winningCount * getWinningAmount();
+        return winningCount * winningAmount;
     }
 
     private static Rank checkSecondOrThird(final boolean hasBonusNumber) {
