@@ -11,7 +11,7 @@ public class WinningLotto {
     }
 
     public WinningLotto(final Lotto lotto, final int bonusNumber) {
-        this(lotto, new LottoNumber(bonusNumber));
+        this(lotto, LottoNumber.of(bonusNumber));
     }
 
     private static void validateBonusNumber(final Lotto lotto, final LottoNumber bonusNumber) {

@@ -3,23 +3,33 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import lotto.domain.util.LottoGenerator;
+import java.util.Map;
 import lotto.domain.util.impl.RandomLottoGenerator;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class LottosTest {
-    private final LottoGenerator generator = new TestLottoGenerator();
 
     @Test
     void 당첨_결과를_구한다() {
-        Lottos lottos = new Lottos(generator, 2000);
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1,2,3,4,5,6)), 7);
-        assertThat(lottos.calculateWinnings(winningLotto).get(Rank.FIRST))
-            .isEqualTo(1);
+        Iterator<List<Integer>> numsIterator = getNumsIterator();
+        Lottos lottos = new Lottos(i -> numsIterator.next().stream()
+                .map(LottoNumber::of)
+                .toList(), 6000);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
+        Map<Rank, Long> rankLongMap = lottos.calculateWinnings(winningLotto);
+
+        SoftAssertions.assertSoftly(softly -> {
+            assertThat(rankLongMap.get(Rank.FIFTH)).isEqualTo(1);
+            assertThat(rankLongMap.get(Rank.SECOND)).isEqualTo(1);
+            assertThat(rankLongMap.get(Rank.THIRD)).isEqualTo(1);
+            assertThat(rankLongMap.get(Rank.FOURTH)).isEqualTo(1);
+            assertThat(rankLongMap.get(Rank.FIFTH)).isEqualTo(1);
+        });
     }
 
     @Test
@@ -31,21 +41,18 @@ public class LottosTest {
     @ParameterizedTest
     @ValueSource(ints = {3, 3003})
     void 구입_금액이_1000원으로_나누어떨어지지_않을_경우_예외를_반환한다(int payment) {
-        assertThatThrownBy(() -> new Lottos(generator, payment))
-            .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Lottos(new RandomLottoGenerator(), payment))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    static class TestLottoGenerator implements LottoGenerator {
-        private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
-        private int index = 0;
-
-        @Override
-        public List<LottoNumber> generate(int lottoNumberCount) {
-            List<LottoNumber> lottoNumbers = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
-                lottoNumbers.add(LottoNumber.of(numbers.get(index++)));
-            }
-            return lottoNumbers;
-        }
+    private static Iterator<List<Integer>> getNumsIterator() {
+        return List.of(
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 7),
+                List.of(1, 2, 3, 4, 5, 8),
+                List.of(1, 2, 3, 4, 8, 9),
+                List.of(1, 2, 3, 8, 9, 10),
+                List.of(1, 2, 8, 9, 10, 11)
+        ).iterator();
     }
 }

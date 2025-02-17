@@ -27,15 +27,6 @@ public class LottoTest {
                 .isTrue();
     }
 
-    @Test
-    void 로또_번호의_등수를_판정한다() {
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
-
-        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 6)))).isEqualTo(Rank.FIRST);
-        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 7)))).isEqualTo(Rank.SECOND);
-        assertThat(winningLotto.calculateWinning(new Lotto(List.of(1, 2, 3, 4, 5, 8)))).isEqualTo(Rank.THIRD);
-    }
-
     @ParameterizedTest
     @MethodSource("invalidCountLottoArguments")
     void 로또_번호_개수가_6개가_아닐_경우_예외를_반환한다(List<Integer> numbers) {
@@ -51,8 +42,8 @@ public class LottoTest {
 
     private static Stream<Arguments> invalidCountLottoArguments() {
         return Stream.of(
-                Arguments.arguments(List.of(1,2,3,4,5)),
-                Arguments.arguments(List.of(1,2,3,4,5,6,7))
+                Arguments.arguments(List.of(1, 2, 3, 4, 5)),
+                Arguments.arguments(List.of(1, 2, 3, 4, 5, 6, 7))
         );
     }
 }
