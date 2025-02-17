@@ -20,8 +20,8 @@ public class Money {
     }
 
     public Lottos buyLottos(Generator generator) {
-        LottosFactory lottosFactory = new LottosFactory(generator);
-        return lottosFactory.from(money / LOTTO_PRICE);
+        LottosFactory lottosFactory = new LottosFactory();
+        return lottosFactory.from(money / LOTTO_PRICE, generator);
     }
 
     public double calculateProfit(final EnumMap<Rank, Integer> countRank) {

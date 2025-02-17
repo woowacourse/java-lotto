@@ -6,13 +6,13 @@ import java.util.List;
 
 public class LottosFactory {
 
-    private final Generator generator;
+//    private final Generator generator;
+//
+//    public LottosFactory(final Generator generator) {
+//        this.generator = generator;
+//    }
 
-    public LottosFactory(final Generator generator) {
-        this.generator = generator;
-    }
-
-    public Lottos from(final int count) {
+    public Lottos from(final int count, final Generator generator) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i<count; i++) {
             lottos.add(Lotto.from(generator.generate()));

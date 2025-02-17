@@ -5,8 +5,8 @@ import static domain.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import generator.FakeGenerator;
 import java.util.EnumMap;
+import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -40,19 +40,19 @@ class MoneyTest {
         //given
         Money money = new Money(14000);
         EnumMap<Rank, Integer> rankCount = new EnumMap<>(Rank.class);
-        rankCount.put(Rank.FIFTH,1);
+        rankCount.put(Rank.FIFTH, 1);
 
         //when-then
         assertThat(money.calculateProfit(rankCount)).isEqualTo(0.35);
     }
 
     @Test
-    void 로또를_구매할_수_있다(){
+    void 로또를_구매할_수_있다() {
         //given
         Money money = new Money(14000);
 
         //when-then
-        assertThat(money.buyLottos(new FakeGenerator())
+        assertThat(money.buyLottos(() -> List.of(1, 2, 3, 4, 5, 6))
                 .getLottos()
                 .size()).isEqualTo(14);
     }
