@@ -49,14 +49,18 @@ public enum LottoRank {
             boolean isBonusNumberOverlapped
     ) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> {
-                    if (requiredBonusNumber(overlappedCount)) {
-                        return Objects.equals(rank.isRequiredBonusNumber(), isBonusNumberOverlapped)
-                                && Objects.equals(rank.overlappedCount, overlappedCount);
-                    }
-                    return Objects.equals(rank.overlappedCount, overlappedCount);
-                })
+                .filter(rank -> Objects.equals(rank.overlappedCount, overlappedCount))
+                .filter(rank -> checkBonusNumber(overlappedCount, rank.isRequiredBonusNumber(), isBonusNumberOverlapped))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static boolean checkBonusNumber(
+            int overlappedCount,
+            boolean isRequiredBonusNumber,
+            boolean isBonusNumberOverlapped
+    ) {
+        return !requiredBonusNumber(overlappedCount) ||
+                (requiredBonusNumber(overlappedCount) && isRequiredBonusNumber == isBonusNumberOverlapped);
     }
 }
