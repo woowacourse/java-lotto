@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoValidator {
     public static void validateWinningNumbers(List<Integer> winningNumbers) {
-        if(winningNumbers.size() != 6) {
+        if (winningNumbers.size() != 6) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
         for (int num : winningNumbers) {

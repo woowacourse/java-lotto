@@ -21,8 +21,8 @@ public class LottoStats {
         }
     }
 
-    public Long getTotalPrize() {
-        Long totalPrize = 0L;
+    public long getTotalPrize() {
+        long totalPrize = 0L;
         for (Rank lottoRank : rank.keySet()) {
             totalPrize += lottoRank.getPrize() * rank.get(lottoRank);
         }

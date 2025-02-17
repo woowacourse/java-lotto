@@ -28,7 +28,7 @@ public class OutputView {
     }
 
     private static String printLottoStatsParser(Rank rank, LottoStats lottoStats) {
-        if(rank.isSecond()) {
+        if (rank.isSecond()) {
             return String.format("%d개 일치, 보너스 볼 일치(%d원) - %d개", rank.getCount(), rank.getPrize(), lottoStats.getStatus(rank));
         }
         return String.format("%d개 일치 (%d원) - %d개", rank.getCount(), rank.getPrize(), lottoStats.getStatus(rank));
