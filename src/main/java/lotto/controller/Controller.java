@@ -28,10 +28,10 @@ public class Controller {
         Cashier cashier = requestCashier();
         int numberOfLotto = cashier.getNumberOfLotto();
         Wallet wallet = new Wallet(numberOfLotto);
-        outputView.print(numberOfLotto);
+        outputView.printLottoPurchaseInfo(numberOfLotto);
         outputView.print(wallet.toString());
 
-        Lotto winningLotto = requestwinningLotto();
+        Lotto winningLotto = requestWinningLotto();
 
         int bonus = requestBonus(winningLotto);
 
@@ -79,7 +79,7 @@ public class Controller {
         }
     }
 
-    private Lotto requestwinningLotto() {
+    private Lotto requestWinningLotto() {
         while (true) {
             try {
                 outputView.print(REQUEST_WINNING_LOTTO);

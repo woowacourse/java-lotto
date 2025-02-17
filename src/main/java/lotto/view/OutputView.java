@@ -16,7 +16,7 @@ public class OutputView {
         System.out.println(output);
     }
 
-    public void print(int number) {
+    public void printLottoPurchaseInfo(int number) {
         System.out.println(number + "개를 구매했습니다.\n");
     }
 
