@@ -19,8 +19,6 @@ public class InputView {
             return reader.readLine();
         } catch (IOException e) {
             System.out.println(ERROR_IOException + e.getMessage());
-        } finally {
-            close();
         }
         return null;
     }
