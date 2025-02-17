@@ -1,16 +1,16 @@
 package domain.vo;
 
-public record Number(int value) {
+public record LottoNumber(int value) {
     public static int MIN = 1;
     public static int MAX = 45;
 
-     public Number {
+     public LottoNumber {
         validate(value);
      }
 
-    public static Number from(String rawInput) {
+    public static LottoNumber from(String rawInput) {
         try {
-            return new Number(Integer.parseInt(rawInput));
+            return new LottoNumber(Integer.parseInt(rawInput));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(e);
         }

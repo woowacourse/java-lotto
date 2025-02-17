@@ -1,24 +1,24 @@
 package domain;
 
-import infrastructure.constants.Constants;
-import domain.vo.Number;
+import domain.vo.LottoNumber;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Lotto {
-    private List<Number> numbers;
+    public static final int SIZE = 6;
+    private List<LottoNumber> numbers;
 
     public Lotto(List<Integer> lottoNumbers) {
         validate(lottoNumbers);
         numbers = lottoNumbers.stream()
                 .sorted()
-                .map(Number::new)
+                .map(LottoNumber::new)
                 .toList();
     }
 
-    public boolean isExist(Number number) {
+    public boolean isExist(LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     public List<Integer> getNumbers() {
-        return numbers.stream().map(Number::value).toList();
+        return numbers.stream().map(LottoNumber::value).toList();
     }
 
     private void validate(List<Integer> numbers) {
@@ -38,8 +38,8 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != Constants.LOTTO_SIZE) {
-            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 구성돼야 합니다.", Constants.LOTTO_SIZE));
+        if (numbers.size() != SIZE) {
+            throw new IllegalArgumentException(String.format("로또는 %d개의 숫자로 구성돼야 합니다.", SIZE));
         }
     }
 
