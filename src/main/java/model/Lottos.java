@@ -1,24 +1,21 @@
 package model;
 
+import static constant.LottoConstant.LOTTO_PRICE;
+
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Lottos {
-    private final List<Lotto> lottos;
+public record Lottos(List<Lotto> lottos) {
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-    }
-
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
-    public int computeTicketCount() {
-        return lottos.size();
+    public int computeTicketAmount() {
+        return computeTicketCount() * LOTTO_PRICE;
     }
 
     public Stream<Lotto> stream() {
         return lottos.stream();
+    }
+
+    private int computeTicketCount() {
+        return lottos.size();
     }
 }
