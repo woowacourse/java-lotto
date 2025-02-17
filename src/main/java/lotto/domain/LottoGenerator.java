@@ -12,24 +12,24 @@ import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private static final int START_INDEX = 0;
+    private static final int NUMBER_START_INDEX = 0;
 
     public List<Lotto> generateLotto(final int count) {
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            List<Integer> numbers = makeRandomNumbers();
+            final List<Integer> numbers = makeRandomNumbers(LOTTO_SIZE);
+            Collections.sort(numbers);
             lottos.add(new Lotto(numbers));
         }
         return lottos;
     }
 
-    private List<Integer> makeRandomNumbers() {
-        List<Integer> numberRange = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+    private List<Integer> makeRandomNumbers(final int size) {
+        final List<Integer> numberRange = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberRange);
-        List<Integer> partialNumbers = numberRange.subList(START_INDEX, LOTTO_SIZE);
-        Collections.sort(partialNumbers);
+        final List<Integer> partialNumbers = numberRange.subList(NUMBER_START_INDEX, size);
         return partialNumbers;
     }
 }
