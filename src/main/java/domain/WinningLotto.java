@@ -7,14 +7,22 @@ import java.util.*;
 
 public class WinningLotto {
 
-    private List<Integer> winningNumbers;
-    private int bonusNumber;
+    private final List<Integer> winningNumbers;
+    private final int bonusNumber;
 
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         validateWinningLotto(winningNumbers, bonusNumber);
 
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public boolean containsWinningNumber(int number) {
+        return winningNumbers.contains(number);
+    }
+
+    public boolean isBonusNumber(int number) {
+        return bonusNumber == number;
     }
 
     private void validateWinningLotto(List<Integer> winningNumbers, int bonusNumber) {
@@ -51,13 +59,5 @@ public class WinningLotto {
         if (number < LOTTO_MIN_NUM || number > LOTTO_MAX_NUM) {
             throw new IllegalArgumentException(WINNING_NUMBER_RANGE_ERROR);
         }
-    }
-
-    public boolean containsWinningNumber(int number) {
-        return winningNumbers.contains(number);
-    }
-
-    public boolean isBonusNumber(int number) {
-        return bonusNumber == number;
     }
 }

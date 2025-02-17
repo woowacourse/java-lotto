@@ -17,5 +17,4 @@ public class LottoStatistics {
         }
         return sum;
     }
-
 }
