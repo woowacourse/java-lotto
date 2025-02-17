@@ -26,4 +26,20 @@ class PurchaseAmountTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구매 금액은 1000원 단위어야 합니다.");
     }
+
+    @Test
+    @DisplayName("구매 금액이 0인 경우, 예외를 발생시킨다.")
+    void throwsExceptionWhenAmountIsZero() {
+        assertThatThrownBy(() -> new PurchaseAmount(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 양수여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("구매 금액이 음수인 경우, 예외를 발생시킨다.")
+    void throwsExceptionWhenAmountIsNegative() {
+        assertThatThrownBy(() -> new PurchaseAmount(-1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 양수여야 합니다.");
+    }
 }
