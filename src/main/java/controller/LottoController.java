@@ -25,10 +25,9 @@ public class LottoController {
         outputView.displayLottos(money.calculateTotalLotto(), lottos);
 
         WinningLotto winningLotto = createWinningLotto();
-        Map<LottoRank, Integer> lottoResult = buyer.countMatchedRanks(winningLotto);
-        outputView.displayResult(lottoResult);
+        LottoStatistics lottoStatistics = buyer.countMatchedRanks(winningLotto);
+        outputView.displayResult(lottoStatistics.getLottoCounter());
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottoResult);
         int profit = lottoStatistics.calculateProfit();
         double profitRate = money.calculateProfitRate(profit);
         outputView.displayProfit(profitRate);

@@ -11,6 +11,10 @@ public class LottoStatistics {
         this.lottoCounter = new LinkedHashMap<>(lottoCounter);
     }
 
+    public Map<LottoRank, Integer> getLottoCounter() {
+        return new LinkedHashMap<>(lottoCounter);
+    }
+
     public int calculateProfit() {
         int sum = 0;
         for (LottoRank lottoRank : lottoCounter.keySet()) {

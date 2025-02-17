@@ -12,13 +12,13 @@ public class Buyer {
         this.lottos = new ArrayList<>(lottos);
     }
 
-    public Map<LottoRank, Integer> countMatchedRanks(WinningLotto winningLotto) {
+    public LottoStatistics countMatchedRanks(WinningLotto winningLotto) {
         Map<LottoRank, Integer> result = LottoRank.createLottoRankCounter();
 
         for (Lotto lotto : lottos) {
             LottoRank matchedLotto = lotto.checkLottoRank(winningLotto);
             result.put(matchedLotto, result.get(matchedLotto) + 1);
         }
-        return result;
+        return new LottoStatistics(result);
     }
 }
