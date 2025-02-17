@@ -28,7 +28,7 @@ public class Lotto {
         validateDistinct(numbers);
     }
 
-    private static void validateSize(List<LottoNumber> numbers) {
+    private void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != LottoRule.LOTTO_SELECTION_SIZE.getValue()) {
             throw new IllegalArgumentException(
                     "로또 번호는 " + LottoRule.LOTTO_SELECTION_SIZE.getValue() + "개여야 합니다. "

@@ -15,6 +15,19 @@ class LottoWinningCheckerTest {
 
     private final LottoWinningChecker lottoWinningChecker = new LottoWinningChecker();
 
+    private static Stream<Arguments> lottoDataProvider() {
+        List<Integer> winningNumber = List.of(7, 8, 9, 10, 11, 12);
+        int bonusNumber = 13;
+
+        return Stream.of(
+                Arguments.of(List.of(7, 8, 9, 10, 11, 12), winningNumber, bonusNumber, LottoRanking.FIRST, 1),
+                Arguments.of(List.of(7, 8, 9, 10, 11, 13), winningNumber, bonusNumber, LottoRanking.SECOND, 1),
+                Arguments.of(List.of(7, 8, 9, 10, 11, 45), winningNumber, bonusNumber, LottoRanking.THIRD, 1),
+                Arguments.of(List.of(7, 8, 9, 10, 44, 45), winningNumber, bonusNumber, LottoRanking.FOURTH, 1),
+                Arguments.of(List.of(7, 8, 9, 43, 44, 45), winningNumber, bonusNumber, LottoRanking.FIFTH, 1)
+        );
+    }
+
     @ParameterizedTest
     @DisplayName("로또 결과를 확인할 수 있다")
     @MethodSource("lottoDataProvider")
@@ -38,18 +51,5 @@ class LottoWinningCheckerTest {
         // then
         assertThat(lottoResult.result().get(ranking))
                 .isEqualTo(expectedCount);
-    }
-
-    private static Stream<Arguments> lottoDataProvider() {
-        List<Integer> winningNumber = List.of(7, 8, 9, 10, 11, 12);
-        int bonusNumber = 13;
-
-        return Stream.of(
-                Arguments.of(List.of(7, 8, 9, 10, 11, 12), winningNumber, bonusNumber, LottoRanking.FIRST, 1),
-                Arguments.of(List.of(7, 8, 9, 10, 11, 13), winningNumber, bonusNumber, LottoRanking.SECOND, 1),
-                Arguments.of(List.of(7, 8, 9, 10, 11, 45), winningNumber, bonusNumber, LottoRanking.THIRD, 1),
-                Arguments.of(List.of(7, 8, 9, 10, 44, 45), winningNumber, bonusNumber, LottoRanking.FOURTH, 1),
-                Arguments.of(List.of(7, 8, 9, 43, 44, 45), winningNumber, bonusNumber, LottoRanking.FIFTH, 1)
-        );
     }
 }

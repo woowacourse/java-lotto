@@ -54,19 +54,19 @@ public class InputHandler {
         }
     }
 
-    private static void validateNullAndEmpty(String str) {
+    private void validateNullAndEmpty(String str) {
         if (str == null || str.isBlank()) {
             throw new IllegalArgumentException("입력값이 비어 있을 수 없습니다.");
         }
     }
 
-    private static void validateMinAmount(BigInteger amount) {
+    private void validateMinAmount(BigInteger amount) {
         if (amount.compareTo(BigInteger.ZERO) < 0) {
             throw new IllegalArgumentException("구입 금액은 음수가 될 수 없습니다.");
         }
     }
 
-    private static void validateMaxAmount(BigInteger amount) {
+    private void validateMaxAmount(BigInteger amount) {
         BigInteger maxAllowedMoney = BigInteger.valueOf(Integer.MAX_VALUE);
 
         if (amount.compareTo(maxAllowedMoney) > 0) {

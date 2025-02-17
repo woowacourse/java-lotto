@@ -1,13 +1,13 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoMachine;
 import domain.LottoNumber;
 import domain.LottoResult;
+import domain.LottoWinningChecker;
 import domain.Lottos;
 import domain.Money;
 import domain.WinningNumberWithBonusNumber;
-import domain.LottoMachine;
-import domain.LottoWinningChecker;
 import view.InputHandler;
 import view.OutputHandler;
 

@@ -29,8 +29,8 @@ class LottoNumberTest {
         // when
         // then
         assertAll(
-                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MIN_LOTTO_NUMBER.getValue()-1)),
-                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MAX_LOTTO_NUMBER.getValue()+1))
+                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MIN_LOTTO_NUMBER.getValue() - 1)),
+                () -> assertThrows(IllegalArgumentException.class, () -> LottoNumber.from(LottoRule.MAX_LOTTO_NUMBER.getValue() + 1))
         );
     }
 }

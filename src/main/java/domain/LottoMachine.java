@@ -22,7 +22,7 @@ public class LottoMachine {
         validateMultipleOfLottoPrice(money);
     }
 
-    private static void validateMultipleOfLottoPrice(Money money) {
+    private void validateMultipleOfLottoPrice(Money money) {
         if (money.getAmount() % LOTTO_PRICE == 0) {
             return;
         }

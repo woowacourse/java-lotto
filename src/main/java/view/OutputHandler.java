@@ -84,13 +84,13 @@ public class OutputHandler {
         lottoRankingMessage.append(" ");
     }
 
-    private static void printRateMessage(double rateOfReturn) {
+    private void printRateMessage(double rateOfReturn) {
         String resultType = getResultType(rateOfReturn);
 
         System.out.printf("(기준이 1이기 때문에 결과적으로 %s라는 의미임)%n", resultType);
     }
 
-    private static String getResultType(double rateOfReturn) {
+    private String getResultType(double rateOfReturn) {
         if (rateOfReturn < 1) {
             return "손해";
         }
