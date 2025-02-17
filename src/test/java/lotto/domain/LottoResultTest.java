@@ -29,7 +29,7 @@ public class LottoResultTest {
     @Test
     public void lottoMatch_5Hit_BonusTrue() {
         Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, "41");
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 41);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
@@ -46,7 +46,7 @@ public class LottoResultTest {
     @Test
     public void lottoMatch_5Hit_BonusFalse() {
         Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 11);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
@@ -63,7 +63,7 @@ public class LottoResultTest {
     @Test
     public void lottoMatch_Under3Hit() {
         Lotto winningNumbers = new Lotto(Set.of(5, 7, 29, 6, 3, 4));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 11);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
@@ -80,7 +80,7 @@ public class LottoResultTest {
     @Test
     public void lottoProfitRate() {
         Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, 11);
 
         LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);

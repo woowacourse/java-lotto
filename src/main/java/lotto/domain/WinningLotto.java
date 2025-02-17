@@ -3,7 +3,6 @@ package lotto.domain;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_BONUS_DISTINCT;
-import static lotto.util.ErrorHandler.INVALID_LOTTO_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
 
 import java.util.Set;
@@ -13,19 +12,10 @@ public class WinningLotto {
     private final Lotto winningNumbers;
     private final int bonusBall;
 
-    public WinningLotto(Lotto winningNumbers, String bonusBallInput) {
-        int bonusBallNumber = validateAndParse(bonusBallInput);
-        validateBonusBall(winningNumbers, bonusBallNumber);
+    public WinningLotto(Lotto winningNumbers, int bonusBall) {
+        validateBonusBall(winningNumbers, bonusBall);
         this.winningNumbers = winningNumbers;
-        this.bonusBall = bonusBallNumber;
-    }
-
-    private int validateAndParse(String bonusBallInput) {
-        try {
-            return Integer.parseInt(bonusBallInput);
-        } catch (NumberFormatException e) {
-            throw INVALID_LOTTO_NUMBER.getException();
-        }
+        this.bonusBall = bonusBall;
     }
 
     private void validateBonusBall(Lotto winningNumbers, int bonusBallNumber) {

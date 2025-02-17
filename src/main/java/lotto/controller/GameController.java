@@ -70,8 +70,8 @@ public class GameController {
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
         try {
-            String response = InputView.readBonusBall();
-            return new WinningLotto(winningNumbers, response);
+            int bonusBall = InputView.readBonusBall();
+            return new WinningLotto(winningNumbers, bonusBall);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
             return storeWinningLottoBonus(winningNumbers);

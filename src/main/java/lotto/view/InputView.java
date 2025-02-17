@@ -21,12 +21,14 @@ public class InputView {
 
     public static Set<Integer> readWinningNumbers() {
         String message = "지난 주 당첨 번호를 입력해 주세요.";
-        return parseLottoNumbers(readResponse(message));
+        String response = readResponse(message);
+        return parseLottoNumbers(response);
     }
 
-    public static String readBonusBall() {
+    public static int readBonusBall() {
         String message = "보너스 볼을 입력해 주세요.";
-        return readResponse(message);
+        String response = readResponse(message);
+        return validateAndParseBonusBall(response);
     }
 
     private static String readResponse(String message) {
@@ -52,6 +54,14 @@ public class InputView {
     public static int validateAndParseLottoNumbers(String lottoNumberInput) {
         try {
             return Integer.parseInt(lottoNumberInput);
+        } catch (NumberFormatException e) {
+            throw INVALID_LOTTO_NUMBER.getException();
+        }
+    }
+
+    public static int validateAndParseBonusBall(String bonusBallInput) {
+        try {
+            return Integer.parseInt(bonusBallInput);
         } catch (NumberFormatException e) {
             throw INVALID_LOTTO_NUMBER.getException();
         }
