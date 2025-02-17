@@ -29,23 +29,20 @@ public class LottoController {
         printPrizeResult(answerLotto, lottos);
     }
 
-    private AnswerLotto getAnswerLotto() {
-        List<Integer> answerNumbers = getAnswerNumbers();
-        int bonusNumber = getBonusNumber();
-        return lottoService.getAnswerLotto(answerNumbers, bonusNumber);
-    }
-
-    private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
-        lottoService.calculatePrize(answerLotto, lottos);
-        OutputView.printPrizeResult(lottoService.getPrizeResult());
-
-        double rateOfReturn = lottoService.calculateRateOfReturn();
-        OutputView.printRateOfReturn(rateOfReturn);
+    private Money getMoney() {
+        String money = InputView.inputMoney();
+        return new Money(InputParser.parseInt(money));
     }
 
     private Lottos getLottos(int buyableLottoCount) {
         NumberGenerator numberGenerator = new RandomNumberGenerator();
         return Lottos.of(numberGenerator, buyableLottoCount);
+    }
+
+    private AnswerLotto getAnswerLotto() {
+        List<Integer> answerNumbers = getAnswerNumbers();
+        int bonusNumber = getBonusNumber();
+        return lottoService.getAnswerLotto(answerNumbers, bonusNumber);
     }
 
     private int getBonusNumber() {
@@ -58,8 +55,11 @@ public class LottoController {
         return InputParser.parseNumbers(numbers);
     }
 
-    private Money getMoney() {
-        String money = InputView.inputMoney();
-        return new Money(InputParser.parseInt(money));
+    private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {
+        lottoService.calculatePrize(answerLotto, lottos);
+        OutputView.printPrizeResult(lottoService.getPrizeResult());
+
+        double rateOfReturn = lottoService.calculateRateOfReturn();
+        OutputView.printRateOfReturn(rateOfReturn);
     }
 }
