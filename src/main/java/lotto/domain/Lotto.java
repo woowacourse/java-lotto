@@ -14,13 +14,14 @@ public class Lotto {
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
     private static final int LOTTO_SIZE = 6;
+
     private final List<Integer> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
+        validateNumberRange(lottoNumbers);
+        validateLottoSize(lottoNumbers);
+        validateDuplicateNumber(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
-        validateNumberRange();
-        validateLottoSize();
-        validateDuplicateNumber();
     }
 
     public int checkMatchCount(List<Integer> winningNumbers) {
@@ -37,7 +38,7 @@ public class Lotto {
         return lottoNumbers.contains(bonusNumber);
     }
 
-    private void validateNumberRange() {
+    private void validateNumberRange(List<Integer> lottoNumbers) {
         for (Integer number : lottoNumbers) {
             if (number < MIN_NUMBER || number > MAX_NUMBER) {
                 throw new LottoException(OUT_OF_RANGE);
@@ -45,14 +46,14 @@ public class Lotto {
         }
     }
 
-    private void validateDuplicateNumber() {
+    private void validateDuplicateNumber(List<Integer> lottoNumbers) {
         Set<Integer> set = new HashSet<>(lottoNumbers);
         if (set.size() != LOTTO_SIZE) {
             throw new LottoException(MUST_NOT_BE_DUPLICATED_LOTTO_NUMBER);
         }
     }
 
-    private void validateLottoSize() {
+    private void validateLottoSize(List<Integer> lottoNumbers) {
         if (lottoNumbers.size() != LOTTO_SIZE) {
             throw new LottoException(INVALID_LOTTO_SIZE);
         }

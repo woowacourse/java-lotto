@@ -38,11 +38,6 @@ public class LottoManager {
         return new WinningNumbers(parsedWinningNumbers, parsedBonusNumber);
     }
 
-    private Lotto makeLotto() {
-        List<Integer> lottoNumbers = numberGeneratorWithUniqueValues(MAKE_QUANTITY, MIN_VALUE, MAX_VALUE);
-        return new Lotto(lottoNumbers);
-    }
-
     public EnumMap<Rank, Integer> makeStatistics(LottoBundle lottoBundle, WinningNumbers winningNumbers) {
         EnumMap<Rank, Integer> rankIntegerEnumMap = makeDefaultMap();
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
@@ -57,5 +52,10 @@ public class LottoManager {
     public String calculateTotalResult(EnumMap<Rank, Integer> lottoResult, AmountPaid amountPaid) {
         int totalPrize = calculateTotalPrize(lottoResult);
         return amountPaid.calculateProfitRate(totalPrize);
+    }
+
+    private Lotto makeLotto() {
+        List<Integer> lottoNumbers = numberGeneratorWithUniqueValues(MAKE_QUANTITY, MIN_VALUE, MAX_VALUE);
+        return new Lotto(lottoNumbers);
     }
 }
