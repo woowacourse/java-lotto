@@ -5,7 +5,6 @@ import domain.Money;
 import domain.WinningLotto;
 import domain.WinningResult;
 import java.io.IOException;
-import java.util.List;
 import view.InputView;
 import view.OutputView;
 

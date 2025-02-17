@@ -13,13 +13,13 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getMatchedCount(Lotto lotto) {
+    public int countMatchedNumber(Lotto lotto) {
         List<Integer> lottoNumbers = new ArrayList<>(lotto.getNumbers());
         lottoNumbers.retainAll(winningNumbers.getNumbers());
         return lottoNumbers.size();
     }
 
-    public boolean isMatchBonus(Lotto lotto) {
+    public boolean isBonusNumberMatched(Lotto lotto) {
         return lotto.getNumbers()
                 .stream()
                 .anyMatch(number -> number == bonusNumber.getValue());

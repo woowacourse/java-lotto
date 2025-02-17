@@ -43,7 +43,7 @@ class WinningLottoTest {
     @MethodSource("correctMatchedCountArguments")
     void should_return_correct_matched_count(WinningLotto winningLotto, Lotto lotto, int expected) {
         // when
-        final int matchedCount = winningLotto.getMatchedCount(lotto);
+        final int matchedCount = winningLotto.countMatchedNumber(lotto);
 
         // then
         assertThat(matchedCount).isEqualTo(expected);
@@ -60,7 +60,7 @@ class WinningLottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         // when
-        final boolean isBonusMatched = winningLotto.isMatchBonus(lotto);
+        final boolean isBonusMatched = winningLotto.isBonusNumberMatched(lotto);
 
         // then
         assertThat(isBonusMatched).isEqualTo(expected);
