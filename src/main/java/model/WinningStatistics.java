@@ -3,6 +3,7 @@ package model;
 
 import static model.RankType.NONE;
 
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,11 +20,12 @@ public class WinningStatistics {
     }
 
     private Map<RankType, Integer> initStatistics() {
-        Map<RankType, Integer> map = new LinkedHashMap<>();
-        for (RankType rankType : RankType.values()) {
-            map.putIfAbsent(rankType, 0);
+        Map<RankType, Integer> winningStatistics = new EnumMap<>(RankType.class);
+
+        for(RankType rankType : RankType.values()){
+            winningStatistics.put(rankType, 0);
         }
-        return map;
+        return winningStatistics;
     }
 
     private int calculateTotalPrize() {
