@@ -1,13 +1,13 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lotto.controller.generator.LottoNumbersGenerator;
 import lotto.model.Money;
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoMachine;
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.Lottos;
-import lotto.model.lotto.generator.LottoNumbersGenerator;
 import lotto.model.winning.WinningLotto;
 import lotto.model.winning.WinningResultResponses;
 import lotto.view.InputView;
@@ -26,14 +26,12 @@ public class LottoController {
     public void run() {
         try {
             Money buyingAmount = new Money(inputView.readBuyingAmount());
-            Lottos lottoTickets = issueRandomLottoTickets(buyingAmount);
+            List<Lotto> lottoTickets = issueRandomLottoTickets(buyingAmount);
             printIssuedLottoTickets(lottoTickets);
 
             WinningLotto winningLotto = createWinningLotto();
             WinningResultResponses winningResultResponses = winningLotto.calculateWinning(lottoTickets);
-            outputView.printWinningResult(winningResultResponses);
-            outputView.printWinningRatio(
-                    buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
+            printWinningResult(winningResultResponses, buyingAmount);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
         }
@@ -41,21 +39,45 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         List<Integer> winningLottoNumbers = inputView.readWinningLotto();
-        int bonusNumber = inputView.readBonusNumber();
-        return new WinningLotto(new Lotto(winningLottoNumbers), LottoNumber.draw(bonusNumber));
+        int bonusNumberInput = inputView.readBonusNumber();
+        validateDuplication(winningLottoNumbers, bonusNumberInput);
+        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        LottoNumber bonusNumber = LottoNumber.draw(bonusNumberInput);
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 
-    private Lottos issueRandomLottoTickets(final Money buyingAmount) {
-        LottoMachine lottoMachine = new LottoMachine();
-        return lottoMachine.issueAutomatic(buyingAmount, new LottoNumbersGenerator());
+    private void validateDuplication(final List<Integer> numbers, final int number) {
+        if (numbers.contains(number)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
     }
 
-    private void printIssuedLottoTickets(final Lottos lottoTickets) {
-        List<List<Integer>> issuedLottoNumbers = lottoTickets.getLottos()
-                .stream()
+    private List<Lotto> issueRandomLottoTickets(final Money buyingAmount) {
+        LottoMachine lottoMachine = new LottoMachine(buyingAmount);
+        LottoNumbersGenerator numbersGenerator = new LottoNumbersGenerator(
+                LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER, Lotto.LOTTO_SIZE
+        );
+        outputView.printChangeAmount(lottoMachine.calculateChange());
+        return lottoMachine.issueAutomatic(numbersGenerator);
+    }
+
+    private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {
+        outputView.printIssuedLottos(lottoTickets.stream()
                 .map(Lotto::getNumbers)
-                .toList();
-        outputView.printIssuedLottos(issuedLottoNumbers);
+                .toList());
+    }
+
+    private void addSortedLottoNumbers(final Lotto lottoTicket, final List<List<Integer>> issuedLottoNumbers) {
+        issuedLottoNumbers.add(new ArrayList<>(lottoTicket.getNumbers())
+                .stream()
+                .sorted()
+                .toList());
+    }
+
+    private void printWinningResult(final WinningResultResponses winningResultResponses, final Money buyingAmount) {
+        outputView.printWinningResult(winningResultResponses);
+        outputView.printWinningRatio(
+                buyingAmount.calculateReturnRatio(winningResultResponses.calculateTotalReturn()));
     }
 
 }

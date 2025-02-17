@@ -20,7 +20,7 @@ public class WinningResultResponses {
             }
             resultResponses.add(
                     new WinningResultResponse(
-                            rank.getMatchingCount(), rank.getWinningAmount(), rank.hasBonus(), ranks.get(rank)
+                            rank.getMatchingCount(), rank.getWinningAmount(), rank.isBonusRequired(), ranks.get(rank)
                     ));
         }
         return resultResponses;

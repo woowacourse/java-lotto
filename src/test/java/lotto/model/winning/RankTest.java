@@ -34,7 +34,7 @@ class RankTest {
     })
     @ParameterizedTest
     void isNeedBonusNumber(Rank rank, boolean expected) {
-        assertThat(rank.hasBonus()).isEqualTo(expected);
+        assertThat(rank.isBonusRequired()).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideRankCategory() {
