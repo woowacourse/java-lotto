@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.EnumMap;
-import lotto.Rank;
 
 public class DashBoard {
 
@@ -15,14 +14,14 @@ public class DashBoard {
     }
 
     private EnumMap<Rank, Integer> initializeRanks() {
-        EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
+        final EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             ranks.put(rank, INITIAL_RANK_COUNT);
         }
         return ranks;
     }
 
-    public void recordResult(Lotto lotto, Lotto winningLotto, int bonusNumber) {
+    public void recordResult(final Lotto lotto, final Lotto winningLotto, final LottoNumber bonusNumber) {
         Rank rank = RankDeterminer.determine(lotto, winningLotto, bonusNumber);
         increaseRankCount(rank);
     }
@@ -31,7 +30,7 @@ public class DashBoard {
      * rank 키가 존재하지 않으면 RANK_COUNT_INCREMENT로 초기화하고,
      * 존재하면 기존 값에 RANK_COUNT_INCREMENT를 더하여 업데이트한다.
      */
-    private void increaseRankCount(Rank rank) {
+    private void increaseRankCount(final Rank rank) {
         ranks.merge(rank, RANK_COUNT_INCREMENT, Integer::sum);
     }
 
