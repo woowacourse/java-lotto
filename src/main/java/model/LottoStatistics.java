@@ -22,7 +22,7 @@ public class LottoStatistics {
         return lottoStatistics.get(lottoWinRank);
     }
 
-    public Double totalReturn(Integer purchaseAmount) {
+    public double totalReturn(Integer purchaseAmount) {
         return (double) calculateTotalPrize() / purchaseAmount;
     }
 
@@ -30,7 +30,7 @@ public class LottoStatistics {
         return lottoStatistics.entrySet();
     }
 
-    private Integer calculateTotalPrize() {
+    private int calculateTotalPrize() {
         int sum = 0;
         for (Entry<LottoWinRank, Integer> statisticsEntry : lottoStatistics.entrySet()) {
             LottoWinRank lottoWinRank = statisticsEntry.getKey();
