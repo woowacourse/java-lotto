@@ -75,7 +75,7 @@ class LottoStatisticsTest {
         assertThat(statistics.getRankCounts()).isEqualTo(testData.expectedRankCounts);
     }
 
-    @DisplayName("통 당첨 금액을 검증한다.")
+    @DisplayName("총 당첨 금액을 검증한다.")
     @ParameterizedTest
     @MethodSource("provideTestData")
     void testTotalPrize(LottoStatisticsTestData testData) {

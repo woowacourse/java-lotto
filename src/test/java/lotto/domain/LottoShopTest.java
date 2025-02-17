@@ -14,7 +14,7 @@ class LottoShopTest {
 
     @DisplayName("돈에 맞춰 로또 개수를 구매하는지 확인")
     @Test
-    void test_byLottos() {
+    void test_buyLottos() {
         // given
         Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
 
@@ -26,6 +26,18 @@ class LottoShopTest {
 
         // then
         assertThat(lottos.size()).isEqualTo(5);
+    }
+
+    @DisplayName("돈으로 구매할 수 있는 로또 개수를 계산한다.")
+    @Test
+    void test_calculateLottoCount() {
+        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+
+        LottoShop lottoShop = new LottoShop(
+                new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
+
+        int lottoCount = lottoShop.calculateLottoCount(money);
+        assertThat(lottoCount).isEqualTo(5);
     }
 
 }
