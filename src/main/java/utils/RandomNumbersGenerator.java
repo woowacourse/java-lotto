@@ -1,22 +1,20 @@
 package utils;
 
 import domain.Lotto;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+import java.util.*;
 
 public class RandomNumbersGenerator implements NumbersGenerator {
 
     @Override
     public List<Integer> generate() {
-        final List<Integer> numbers = new ArrayList<>();
+        final Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < Lotto.SIZE) {
             final int number = (int) (Math.random() * (Lotto.MAX_NUMBER - 1)) + Lotto.MIN_NUMBER;
-            if (!numbers.contains(number)) {
-                numbers.add(number);
-            }
+            numbers.add(number);
         }
-        Collections.sort(numbers);
-        return numbers;
+        return numbers.stream()
+                .sorted()
+                .toList();
     }
 }
