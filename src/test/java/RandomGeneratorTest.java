@@ -41,10 +41,17 @@ class RandomGeneratorTest {
         // given
         Random random1 = new Random(1);
         Random random2 = new Random(1);
+
+        Random random3 = new Random(10);
+        Random random4 = new Random(10);
         // when
         int firstValue1 = random1.nextInt();
         int firstValue2 = random2.nextInt();
+
+        int firstValue3 = random3.nextInt();
+        int firstValue4 = random4.nextInt();
         //then
         assertEquals(firstValue1, firstValue2, "시드 값이 같으면 동일한 랜덤 값을 생성해야 합니다.");
+        assertEquals(firstValue3, firstValue4, "시드 값이 같으면 동일한 랜덤 값을 생성해야 합니다.");
     }
 }
