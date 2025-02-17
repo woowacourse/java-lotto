@@ -5,6 +5,8 @@ import domain.Lottos;
 import java.util.List;
 import java.util.Random;
 import util.RandomNumberPicker;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
 
@@ -17,15 +19,15 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseMoney = inputPurchaseMoney();
+        final int purchaseMoney = inputPurchaseMoney();
 
-        LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, new RandomNumberPicker(new Random()));
-        Lottos lottos = lottoMachine.issueLottos();
+        final LottoMachine lottoMachine = LottoMachine.of(purchaseMoney, new RandomNumberPicker(new Random()));
+        final Lottos lottos = lottoMachine.issueLottos();
 
         outputView.printLottos(lottos.getLottos());
 
-        List<Integer> matchNumbers = inputMatchLottoNumbers();
-        int bonusNumber = inputBonusNumber();
+        final List<Integer> matchNumbers = inputMatchLottoNumbers();
+        final int bonusNumber = inputBonusNumber();
 
         outputView.printStaticsLotto(lottos.getStatistics(matchNumbers, bonusNumber));
         outputView.printIncomeRate(lottos.getIncomeRate(matchNumbers, bonusNumber, purchaseMoney));

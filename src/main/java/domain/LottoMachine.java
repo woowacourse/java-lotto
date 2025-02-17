@@ -14,23 +14,23 @@ public class LottoMachine {
     private final int purchaseMoney;
     private final NumberPicker numberPicker;
 
-    private LottoMachine(int purchaseMoney, NumberPicker numberPicker) {
+    private LottoMachine(final int purchaseMoney, final NumberPicker numberPicker) {
         validateMinPrice(purchaseMoney);
         this.purchaseMoney = purchaseMoney;
         this.numberPicker = numberPicker;
     }
 
-    public static LottoMachine of(int purchaseMoney, NumberPicker numberPicker) {
+    public static LottoMachine of(final int purchaseMoney, final NumberPicker numberPicker) {
         return new LottoMachine(purchaseMoney, numberPicker);
     }
 
     public Lottos issueLottos() {
-        int lottoCount = calculateTicketCount();
-        List<Lotto> lottos = isssueLottoBy(lottoCount);
+        final int lottoCount = calculateTicketCount();
+        List<Lotto> lottos = issueLottoBy(lottoCount);
         return new Lottos(lottos);
     }
 
-    private List<Lotto> isssueLottoBy(int lottoCount) {
+    private List<Lotto> issueLottoBy(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             insertLottoTo(lottos);
@@ -38,8 +38,8 @@ public class LottoMachine {
         return lottos;
     }
 
-    private void insertLottoTo(List<Lotto> lottos) {
-        Numbers numbers = numberPicker.pickUnique(START_NUMBER, END_NUMBER, NUMBER_COUNT);
+    private void insertLottoTo(final List<Lotto> lottos) {
+        final Numbers numbers = numberPicker.pickUnique(START_NUMBER, END_NUMBER, NUMBER_COUNT);
         Lotto lotto = new Lotto(numbers);
         lottos.add(lotto);
     }
@@ -48,7 +48,7 @@ public class LottoMachine {
         return purchaseMoney / PRICE;
     }
 
-    private void validateMinPrice(int purchaseMoney) {
+    private void validateMinPrice(final int purchaseMoney) {
         if (purchaseMoney < PRICE) {
             throw new IllegalStateException("금액은 1000원 이상이여아 합니다.");
         }

@@ -1,6 +1,5 @@
 package domain;
 
-import dto.LottoMatchResult;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.EnumMap;
@@ -27,16 +26,16 @@ public enum LottoPrize {
     private final boolean isBonusMatch;
     private final long prizeMoney;
 
-    LottoPrize(int minMatchCount, boolean isBonusMatch, long prizeMoney) {
+    LottoPrize(final int minMatchCount, final boolean isBonusMatch, final long prizeMoney) {
         this.minMatchCount = minMatchCount;
         this.isBonusMatch = isBonusMatch;
         this.prizeMoney = prizeMoney;
     }
 
-    public static LottoPrize match(LottoMatchResult matchResult) {
+    public static LottoPrize match(final int matchCount, final boolean isBonusMatch) {
         return Arrays.stream(LottoPrize.values())
-            .filter(prize -> prize.minMatchCount == matchResult.matchCount())
-            .filter(prize -> isSecondPrize(matchResult, prize))
+            .filter(prize -> prize.minMatchCount == matchCount)
+            .filter(prize -> isSecondPrize(isBonusMatch, prize))
             .sorted(Comparator.comparingLong(LottoPrize::getPrizeMoney).reversed())
             .findFirst()
             .orElse(LottoPrize.NONE);
@@ -62,9 +61,9 @@ public enum LottoPrize {
         return prizeMoney;
     }
 
-    private static boolean isSecondPrize(LottoMatchResult matchResult, LottoPrize prize) {
+    private static boolean isSecondPrize(final boolean isBonusMatch, final LottoPrize prize) {
         if (prize == LottoPrize.SECOND) {
-            return matchResult.isBonusMatch();
+            return isBonusMatch;
         }
         return true;
     }

@@ -3,7 +3,6 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import dto.LottoMatchResult;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -18,11 +17,11 @@ class LottoTest {
     void 당첨된_로또번호_개수를_계산한다(List<Integer> matchNumbers, int bonusNumber, int expectedMatchCount,
                            boolean expectedBonusMatch) {
         //given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Lotto sut = new Lotto(numbers);
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto sut = new Lotto(numbers);
 
         //when
-        LottoMatchResult result = sut.getMatchResult(matchNumbers, bonusNumber);
+        final LottoMatchResult result = sut.getMatchResult(matchNumbers, bonusNumber);
 
         //than
         assertThat(result.matchCount()).isEqualTo(expectedMatchCount);
@@ -32,10 +31,10 @@ class LottoTest {
     @Test
     void 로또_당첨_번호에_중복이_있으면_예외를_발생한다() {
         // given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Lotto sut = new Lotto(numbers);
-        List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 5);
-        int bonusNumber = 6;
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto sut = new Lotto(numbers);
+        final List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 5);
+        final int bonusNumber = 6;
 
         // expected
         assertThatThrownBy(() -> sut.getMatchResult(duplicatedMatchNumbers, bonusNumber))
@@ -46,10 +45,10 @@ class LottoTest {
     @Test
     void 로또_당첨_번호가_6개가_아니면_예외를_발생한다() {
         // given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Lotto sut = new Lotto(numbers);
-        List<Integer> illegalCountMatchNumber = List.of(1, 2, 3, 4, 5);
-        int bonusNumber = 6;
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto sut = new Lotto(numbers);
+        final List<Integer> illegalCountMatchNumber = List.of(1, 2, 3, 4, 5);
+        final int bonusNumber = 6;
 
         // expected
         assertThatThrownBy(() -> sut.getMatchResult(illegalCountMatchNumber, bonusNumber))
@@ -60,10 +59,10 @@ class LottoTest {
     @Test
     void 보너스_번호에_중복이_있으면_예외를_발생한다() {
         // given
-        Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
-        Lotto sut = new Lotto(numbers);
-        List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 6);
-        int bonusNumber = 6;
+        final Numbers numbers = Numbers.from(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto sut = new Lotto(numbers);
+        final List<Integer> duplicatedMatchNumbers = List.of(1, 2, 3, 4, 5, 6);
+        final int bonusNumber = 6;
 
         // expected
         assertThatThrownBy(() -> sut.getMatchResult(duplicatedMatchNumbers, bonusNumber))

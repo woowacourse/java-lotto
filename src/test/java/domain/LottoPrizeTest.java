@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import dto.LottoMatchResult;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -14,7 +13,7 @@ class LottoPrizeTest {
     @MethodSource("provideMatchNumbers")
     void 로또_당첨_등수를_확인한다(int matchCount, boolean isBonusMatch, LottoPrize result) {
         // expected
-        assertThat(LottoPrize.match(new LottoMatchResult(matchCount, isBonusMatch))).isEqualTo(result);
+        assertThat(LottoPrize.match(matchCount, isBonusMatch)).isEqualTo(result);
     }
 
     public static Stream<Arguments> provideMatchNumbers() {

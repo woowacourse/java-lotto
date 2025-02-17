@@ -1,4 +1,4 @@
-package controller;
+package view;
 
 import domain.Lotto;
 import domain.LottoPrize;
@@ -18,7 +18,7 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printLottos(List<Lotto> lottos) {
+    public void printLottos(final List<Lotto> lottos) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : lottos) {
             sb.append(lotto.getNumbers().toString()).append("\n");
@@ -35,7 +35,7 @@ public class OutputView {
         System.out.println("보너스 볼을 입력해 주세요.");
     }
 
-    public void printStaticsLotto(Map<LottoPrize, Integer> staticsLottos) {
+    public void printStaticsLotto(final Map<LottoPrize, Integer> staticsLottos) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n").append("당첨 통계").append("\n");
         sb.append("---------").append("\n");
@@ -43,7 +43,7 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    private String formatStaticsLottos(Map<LottoPrize, Integer> staticsLottos) {
+    private String formatStaticsLottos(final Map<LottoPrize, Integer> staticsLottos) {
         StringJoiner sj = new StringJoiner("\n");
         for (Map.Entry<LottoPrize, Integer> lottoPrize : staticsLottos.entrySet()) {
             LottoPrize prizeKey = lottoPrize.getKey();
@@ -56,11 +56,11 @@ public class OutputView {
         return sj.toString();
     }
 
-    private boolean isNotNonePrize(LottoPrize prizeKey) {
+    private boolean isNotNonePrize(final LottoPrize prizeKey) {
         return !prizeKey.equals(LottoPrize.NONE);
     }
 
-    private String formatResult(Entry<LottoPrize, Integer> lottoPrize, LottoPrize prizeKey) {
+    private String formatResult(final Entry<LottoPrize, Integer> lottoPrize, final LottoPrize prizeKey) {
         String format = getLottoPrizeFormat(prizeKey);
         return String.format(format,
             prizeKey.getMinMatchCount(),
@@ -68,7 +68,7 @@ public class OutputView {
             lottoPrize.getValue());
     }
 
-    private String getLottoPrizeFormat(LottoPrize lottoPrize) {
+    private String getLottoPrizeFormat(final LottoPrize lottoPrize) {
         StringBuilder prizeFormat = new StringBuilder();
         prizeFormat.append("%d개 일치");
 
@@ -80,7 +80,7 @@ public class OutputView {
         return prizeFormat.toString();
     }
 
-    public void printIncomeRate(double incomeRate) {
+    public void printIncomeRate(final double incomeRate) {
         StringBuilder sb = new StringBuilder();
 
         sb.append("총 수익률은 %s입니다.");
@@ -91,7 +91,7 @@ public class OutputView {
         System.out.printf(sb + "\n", getFormattedIncomeRate(incomeRate));
     }
 
-    private String getFormattedIncomeRate(double incomeRate) {
+    private String getFormattedIncomeRate(final double incomeRate) {
         DecimalFormat decimalFormat = new DecimalFormat(INCOME_RATE_FORMAT);
         decimalFormat.setRoundingMode(RoundingMode.DOWN);
         return decimalFormat.format(incomeRate);

@@ -12,10 +12,10 @@ class RandomNumberPickerTest {
     @Test
     void 중복_없는_번호를_생성한다() {
         // given
-        RandomNumberPicker sut = new RandomNumberPicker(new Random());
+        final RandomNumberPicker sut = new RandomNumberPicker(new Random());
 
         // when
-        Numbers result = sut.pickUnique(1, 10, 6);
+        final Numbers result = sut.pickUnique(1, 10, 6);
 
         // then
         assertThat(result.getNumbers()).hasSize(6);

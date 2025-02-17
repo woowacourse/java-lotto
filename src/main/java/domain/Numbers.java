@@ -33,7 +33,6 @@ public class Numbers {
         }
     }
 
-
     private void validateNumberNotDuplicated(List<Integer> numbers) {
         HashSet<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
         if (numbers.size() != nonDuplicateNumbers.size()) {
