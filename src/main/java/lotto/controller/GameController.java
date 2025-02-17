@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import java.util.Optional;
 import lotto.domain.Lotto;
 import lotto.domain.LottoFactory;
 import lotto.domain.LottoMachine;
@@ -37,25 +36,21 @@ public class GameController {
         return ObjectCreator.repeatUntilSuccess(this::receiveLottoMoney);
     }
 
-    private Optional<LottoMoney> receiveLottoMoney() {
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String money = InputView.readLottoMoney();
-
-            return lottoMoneyFactory.createLottoMoney(money);
-        });
+    private LottoMoney receiveLottoMoney() {
+        String money = InputView.readLottoMoney();
+        return lottoMoneyFactory.createLottoMoney(money);
     }
 
     private LottoMachine buyLottoTickets(LottoMoney lottoMoney) {
         return ObjectCreator.repeatUntilSuccess(() -> receiveLottoMachine(lottoMoney));
     }
 
-    private Optional<LottoMachine> receiveLottoMachine(LottoMoney lottoMoney) {
-        return ObjectCreator.useInputToCreateObject(() -> new LottoMachine(lottoMoney));
+    private LottoMachine receiveLottoMachine(LottoMoney lottoMoney) {
+        return new LottoMachine(lottoMoney);
     }
 
     private WinningLotto storeWinningLotto() {
         Lotto winningNumbers = storeWinningLottoNumbers();
-
         return storeWinningLottoBonus(winningNumbers);
     }
 
@@ -63,24 +58,18 @@ public class GameController {
         return ObjectCreator.repeatUntilSuccess(this::receiveWinningLottoNumbers);
     }
 
-    private Optional<Lotto> receiveWinningLottoNumbers() {
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String numbers = InputView.readWinningNumbers();
-
-            return lottoFactory.createLotto(numbers);
-        });
+    private Lotto receiveWinningLottoNumbers() {
+        String numbers = InputView.readWinningNumbers();
+        return lottoFactory.createLotto(numbers);
     }
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
         return ObjectCreator.repeatUntilSuccess(() -> receiveWinningLottoBonus(winningNumbers));
     }
 
-    private Optional<WinningLotto> receiveWinningLottoBonus(Lotto winningNumbers) {
-        return ObjectCreator.useInputToCreateObject(() -> {
-            String bonus = InputView.readBonusBall();
-
-            return winningLottoFactory.createWinningLotto(winningNumbers, bonus);
-        });
+    private WinningLotto receiveWinningLottoBonus(Lotto winningNumbers) {
+        String bonus = InputView.readBonusBall();
+        return winningLottoFactory.createWinningLotto(winningNumbers, bonus);
     }
 
     private LottoResult checkLottoResult(WinningLotto winningLotto, List<Lotto> lottoTickets, LottoMoney lottoMoney) {
