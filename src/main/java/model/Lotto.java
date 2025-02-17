@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final String NUMBER_COUNT_EXCEPTION = "6개의 숫자를 입력해주세요.";
-    private static final String NUMBER_DUPLICATE_EXCEPTION = "중복이 아닌 숫자를 입력해주세요";
 
     private final List<LottoNumber> numbers;
 
@@ -46,14 +44,14 @@ public class Lotto {
 
     private void validateNumberCount(List<Integer> winNumbers) {
         if (winNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException(NUMBER_COUNT_EXCEPTION);
+            throw new IllegalArgumentException("6개의 숫자를 입력해주세요.");
         }
     }
 
     private void validateDuplicate(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>(numbers);
         if (numbers.size() != numberSet.size()) {
-            throw new IllegalArgumentException(NUMBER_DUPLICATE_EXCEPTION);
+            throw new IllegalArgumentException("중복이 아닌 숫자를 입력해주세요");
         }
     }
 }

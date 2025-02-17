@@ -3,8 +3,6 @@ package model;
 import java.util.List;
 
 public class WinLotto {
-    private static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
-
     private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
@@ -24,7 +22,7 @@ public class WinLotto {
 
     private void validateDuplicate(List<Integer> winNumbers, Integer bonusNumber) {
         if (winNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException(BONUS_NUMBER_DUPLICATE_EXCEPTION);
+            throw new IllegalArgumentException("당첨 번호와 중복이 아닌 숫자를 입력해주세요");
         }
     }
 }

@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class InputView {
     private static final String DELIMITER = ",";
-    public static final String POSITIVE_NUMBER_EXCEPTION = "양의 정수를 입력해주세요.";
 
     public Integer readPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -35,7 +34,7 @@ public class InputView {
     private Integer validatePositiveNumber(String input) {
         String POSITIVE_INTEGER_REGEX = "[1-9]\\d*";
         if (!input.matches(POSITIVE_INTEGER_REGEX)) {
-            throw new IllegalArgumentException(POSITIVE_NUMBER_EXCEPTION);
+            throw new IllegalArgumentException("양의 정수를 입력해주세요.");
         }
         return Integer.parseInt(input);
     }
