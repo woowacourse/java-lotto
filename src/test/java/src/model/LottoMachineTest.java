@@ -1,5 +1,6 @@
 package src.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -72,11 +73,9 @@ class LottoMachineTest {
         LottoMachine lottoMachine = new LottoMachine(new MockedNumberGenerator());
         List<LottoPrize> results = lottoMachine.getLottoResults(lottos, winningLotto);
 
-        assertNotNull(results);
-        assertEquals(3, results.size());
-
-        assertEquals(LottoPrize.SIX, results.get(0));
-        assertEquals(LottoPrize.FIVE_WITH_BONUS, results.get(1));
-        assertEquals(LottoPrize.ZERO, results.get(2));
+        assertThat(results)
+                .isNotNull()
+                .hasSize(3)
+                .containsExactly(LottoPrize.SIX, LottoPrize.FIVE_WITH_BONUS, LottoPrize.ZERO);
     }
 }
