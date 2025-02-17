@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,10 @@ class WinningLottoTest {
     @Test
     void winningLottoCreation() {
 
-        final Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList());
         final int bonusNumber = 7;
 
-        assertThatCode(() -> WinningLotto.of(lotto, bonusNumber))
+        assertThatCode(() -> WinningLotto.of(lotto, LottoNumber.of(bonusNumber)))
                 .doesNotThrowAnyException();
     }
 
@@ -25,10 +26,10 @@ class WinningLottoTest {
     @Test
     void duplicateBonusNumberCreationThrowException() {
 
-        final Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        final Lotto lotto = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList());
         final int bonusNumber = 4;
 
-        assertThatThrownBy(() -> WinningLotto.of(lotto, bonusNumber))
+        assertThatThrownBy(() -> WinningLotto.of(lotto, LottoNumber.of(bonusNumber)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
@@ -36,16 +37,16 @@ class WinningLottoTest {
     @DisplayName("")
     @Test
     void calculatePrizesTest() {
-        Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningNumbers = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList());
         int bonusNumber = 7;
-        WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = WinningLotto.of(winningNumbers, LottoNumber.of(bonusNumber));
 
-        Lotto lotto1 = Lotto.of(List.of(1, 2, 3, 4, 5, 6)); // 1등
-        Lotto lotto2 = Lotto.of(List.of(1, 2, 3, 4, 5, 7)); // 2둥
-        Lotto lotto3 = Lotto.of(List.of(1, 2, 3, 4, 5, 8)); // 3둥
-        Lotto lotto4 = Lotto.of(List.of(1, 2, 3, 4, 9, 10)); // 4둥
-        Lotto lotto5 = Lotto.of(List.of(11, 12, 13, 4, 5, 6)); // 5둥
-        Lotto lotto6 = Lotto.of(List.of(11, 12, 13, 14, 5, 6)); // 6둥
+        Lotto lotto1 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList()); // 1등
+        Lotto lotto2 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 7).map(LottoNumber::of).toList()); // 2둥
+        Lotto lotto3 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 8).map(LottoNumber::of).toList()); // 3둥
+        Lotto lotto4 = Lotto.of(Stream.of(1, 2, 3, 4, 9, 10).map(LottoNumber::of).toList()); // 4둥
+        Lotto lotto5 = Lotto.of(Stream.of(11, 12, 13, 4, 5, 6).map(LottoNumber::of).toList()); // 5둥
+        Lotto lotto6 = Lotto.of(Stream.of(11, 12, 13, 14, 5, 6).map(LottoNumber::of).toList()); // 6둥
 
         List<Lotto> myLotto = List.of(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
         Lottos lottos = Lottos.of(myLotto);

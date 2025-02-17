@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Prize;
 import domain.WinningLotto;
@@ -25,10 +26,10 @@ public class LottoController {
         final int purchaseAmount = readPurchaseAmount();
         Lottos lottos = createLottos(purchaseAmount);
 
-        final List<Integer> winningNumbers = readWinningNumbers();
-        final int bonusNumber = readBonusNumber();
+        List<LottoNumber> winningLottoNumbers = readWinningNumbers();
+        LottoNumber bonusLottoNumber = readBonusNumber();
 
-        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningLottoNumbers), bonusLottoNumber);
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         outputView.printLottoResult(prizes,
@@ -49,18 +50,21 @@ public class LottoController {
         return lottos;
     }
 
-    private List<Integer> readWinningNumbers() throws IOException {
+    private List<LottoNumber> readWinningNumbers() throws IOException {
         String rawWinningNumber = inputView.readWinningNumber();
         final List<String> rawWinningNumbers = Arrays.stream(rawWinningNumber.split(",")).map(String::trim).toList();
         InputValidator.validateElements(rawWinningNumbers);
         final List<Integer> winningNumbers = rawWinningNumbers.stream().map(Integer::parseInt).toList();
-        return winningNumbers;
+
+        return winningNumbers.stream()
+                .map(LottoNumber::of)
+                .toList();
     }
 
-    private int readBonusNumber() throws IOException {
+    private LottoNumber readBonusNumber() throws IOException {
         final String rawBonusNumber = inputView.readBonusNumber();
         InputValidator.validateInteger(rawBonusNumber);
         final int bonusNumber = Integer.parseInt(rawBonusNumber);
-        return bonusNumber;
+        return LottoNumber.of(bonusNumber);
     }
 }
