@@ -18,7 +18,7 @@ public class OutputView {
         Arrays.stream(LottoAward.values())
                 .sorted(Comparator.comparing(LottoAward::getMatchingCount))
                 .filter(lottoAward -> !lottoAward.equals(LottoAward.NONE))
-                .forEach(lottoAward -> System.out.printf("%d개 일치 (%d원)- %d개" + LINE, lottoAward.getMatchingCount(),
+                .forEach(lottoAward -> System.out.printf(makeMatchingCountResult(lottoAward) + " (%d원)- %d개" + LINE, lottoAward.getMatchingCount(),
                         lottoAward.getAmount(), winningResult.get(lottoAward)));
     }
 
@@ -27,6 +27,14 @@ public class OutputView {
         String message = "총 수익률은 %.2f입니다.";
         message += makeResultMessage(profitRate);
         System.out.printf(message, flooredProfitRage);
+    }
+
+    private String makeMatchingCountResult(LottoAward lottoAward) {
+        String result = "%d개 일치";
+        if (lottoAward == LottoAward.SECOND_RANK) {
+            result += ", 보너스 볼 일치";
+        }
+        return result;
     }
 
     private String makeResultMessage(final double profitRate) {
