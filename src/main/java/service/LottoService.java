@@ -1,9 +1,12 @@
 package service;
 
+import constants.LottoConstants;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
 import domain.enums.Prize;
+import dto.OutputLottosDto;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,6 +19,15 @@ public class LottoService {
         for (Prize prize : Prize.values()) {
             prizeResult.put(prize, 0);
         }
+    }
+
+    public List<OutputLottosDto> getLottosDtos(List<Lotto> lottos) {
+        List<OutputLottosDto> outputLottosDtos = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            outputLottosDtos.add(new OutputLottosDto(lotto.getNumbers()));
+        }
+
+        return outputLottosDtos;
     }
 
     public AnswerLotto getAnswerLotto(List<Integer> selectedNumbers, int bonus) {
@@ -47,10 +59,11 @@ public class LottoService {
             totalEarnedMoney += prize.getPrizeMoney() * prizeCount;
         }
 
-        int usedMoney = totalPrizeCount * 1000;
+        int usedMoney = totalPrizeCount * LottoConstants.LOTTO_PRICE;
         double rateOfReturn = (double) totalEarnedMoney / usedMoney;
         return Math.floor(rateOfReturn * 100) / 100.0;
     }
+
 
     private void updatePrizeResult(Prize foundPrize) {
         Integer prizeCount = prizeResult.getOrDefault(foundPrize, 0);
