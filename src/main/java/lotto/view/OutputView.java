@@ -1,13 +1,16 @@
 package lotto.view;
 
-import static lotto.common.Constants.ENTER;
+import static lotto.common.Constants.LINE_SEPARATOR;
 
-import lotto.domain.Lotto;
-import lotto.domain.Rank;
-import lotto.dto.LottoGroupDto;
-import lotto.dto.ProfitDto;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OutputView {
+
+    private static final String DELIMITER = ", ";
+    private static final List<String> CORRECT_MESSAGE = List.of("", "3개 일치 (5000원)- ", "4개 일치 (50000원)- ",
+            "5개 일치 (1500000원)- ", "5개 일치, 보너스 볼 일치(30000000원)- ", "6개 일치 (2000000000원)- ");
 
     private OutputView() {
     }
@@ -16,20 +19,28 @@ public class OutputView {
         System.out.println("[ERROR] " + e.getMessage());
     }
 
-    public static void printLottoGroup(LottoGroupDto lottoGroupDto) {
-        System.out.printf("%d개를 구매했습니다." + ENTER, lottoGroupDto.lottoGroup().size());
+    public static void printLottoGroup(int getTicketCount, List<List<Integer>> lottoList) {
+        System.out.println(getTicketCount + "개를 구매했습니다.");
 
-        for (Lotto lotto : lottoGroupDto.lottoGroup()) {
-            System.out.println(lotto.toString());
-        }
+        lottoList.stream()
+                .map(OutputView::formatLotto)
+                .forEach(System.out::println);
 
         System.out.println();
     }
 
-    public static void printResult(ProfitDto profitDto, String profitRate) {
+    public static void printStatics(List<Integer> correctCountValues, String profitRate) {
         printNoticeResultMessage();
-        printMatchCounts(profitDto);
+        IntStream.range(1, CORRECT_MESSAGE.size())
+                .forEach(index -> System.out.println(CORRECT_MESSAGE.get(index) + correctCountValues.get(index) + "개"));
+
         printProfitRate(profitRate);
+    }
+
+    private static String formatLotto(List<Integer> lotto) {
+        return lotto.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER, "[", "]"));
     }
 
     private static void printNoticeResultMessage() {
@@ -37,18 +48,8 @@ public class OutputView {
         System.out.println("---------");
     }
 
-    private static void printMatchCounts(ProfitDto profitDto) {
-        profitDto.rankCounts()
-                .forEach((rank, matchCount) -> {
-                    if (rank.equals(Rank.NO_REWARD)) {
-                        return;
-                    }
-                    System.out.printf("%s%s개" + ENTER, rank.getMessage(), matchCount);
-                });
-    }
-
     private static void printProfitRate(String profitRate) {
-        System.out.printf(ENTER + "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profitRate);
+        System.out.printf(LINE_SEPARATOR + "총 수익률은 %s입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)", profitRate);
     }
 }
 

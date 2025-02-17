@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.common.Constants.MAX_LOTTO_NUMBER;
 import static lotto.common.Constants.MIN_LOTTO_NUMBER;
+import static lotto.common.ErrorMessage.ONLY_LOTTO_NUMBER;
 
 import java.util.Objects;
 
@@ -19,8 +20,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validateNumber(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("1~45사이의 숫자만 입력하세요.");
+            throw new IllegalArgumentException(ONLY_LOTTO_NUMBER.getMessage());
         }
+    }
+
+    public int toInteger() {
+        return number;
     }
 
     @Override

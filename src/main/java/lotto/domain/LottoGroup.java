@@ -1,44 +1,35 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-import static lotto.common.Constants.MAX_LOTTO_NUMBER;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
-import lotto.utils.RandomNumberUtils;
 
 public class LottoGroup {
-    private final List<Lotto> item = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public static LottoGroup create() {
-        return new LottoGroup();
+    public LottoGroup(List<Lotto> item) {
+        this.lottos = item;
     }
 
-    public void generate(Money money) {
-        IntStream.range(0, money.getLottoTicketCount())
-                .mapToObj(index -> createLotto())
-                .forEach(item::add);
+    public static LottoGroup from(List<Lotto> lottoList) {
+        return new LottoGroup(lottoList);
     }
 
-    public List<Lotto> getItem() {
-        return item;
+    public void calculateProfit(Profit profit, WinnerLotto winnerLotto) {
+        for (Lotto lotto : lottos) {
+            long matchCount = winnerLotto.getMatchCount(lotto);
+            boolean hasBonus = winnerLotto.hasBonusNumber(lotto);
+            Rank rank = Rank.find((int) matchCount, hasBonus);
+            profit.incrementCount(rank);
+        }
     }
 
-    private Lotto createLotto() {
-        List<Integer> randomNumbers = generateRandomNumbers();
-        List<LottoNumber> lottoNumbers = convertToLottoNumbers(randomNumbers);
-
-        return Lotto.from(lottoNumbers);
+    public List<List<Integer>> toIntegerLottosList() {
+        return lottos.stream().map(Lotto::toIntegerList).toList();
     }
 
-    private List<Integer> generateRandomNumbers() {
-        return RandomNumberUtils.generateRandomNumbers(LOTTO_NUM_SIZE, MAX_LOTTO_NUMBER);
-    }
-
-    private List<LottoNumber> convertToLottoNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .map(LottoNumber::new)
-                .toList();
+    @Override
+    public String toString() {
+        return "LottoGroup{" +
+                "lottos=" + lottos +
+                '}';
     }
 }
