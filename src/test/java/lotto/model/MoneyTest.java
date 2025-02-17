@@ -25,5 +25,4 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("천원 단위로 입력해주세요.");
     }
-
 }
