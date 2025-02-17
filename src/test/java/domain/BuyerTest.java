@@ -12,7 +12,6 @@ public class BuyerTest {
     @DisplayName("로또 당첨 개수 세기 테스트")
     void success_1() {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-
         // 로또 6개 생성
         Buyer buyer = new Buyer(
             List.of(

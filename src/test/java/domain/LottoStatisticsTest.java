@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class LottoStatisticsTest {
     @Test
     @DisplayName("수익률 계산 테스트")
-    public void success_4() {
+    public void success_1() {
         int input = 10000;
         Money money = new Money(input);
         Map<LottoRank, Integer> result = Map.of(

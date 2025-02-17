@@ -26,5 +26,4 @@ public class LottoTest {
         LottoRank rank = lotto.checkLottoRank(winningLotto);
         Assertions.assertThat(rank).isEqualTo(LottoRank.BOOM);
     }
-
 }
