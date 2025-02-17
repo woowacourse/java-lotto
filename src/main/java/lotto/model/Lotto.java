@@ -9,24 +9,24 @@ public class Lotto {
 
     private final Set<LottoNumber> numbers;
 
-    public Lotto(Set<LottoNumber> numbers) {
+    public Lotto(final Set<LottoNumber> numbers) {
         validateNumbersCount(numbers);
         this.numbers = numbers;
     }
 
-    private void validateNumbersCount(Set<LottoNumber> numbers) {
+    private void validateNumbersCount(final Set<LottoNumber> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT.value()) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", LOTTO_NUMBER_COUNT.value()));
         }
     }
 
-    public int getMatchCount(Lotto lotto) {
-        Set<LottoNumber> me = new HashSet<>(Set.copyOf(this.numbers));
+    public int getMatchCount(final Lotto lotto) {
+        final Set<LottoNumber> me = new HashSet<>(Set.copyOf(this.numbers));
         me.retainAll(lotto.getLottoNumbers());
         return me.size();
     }
 
-    public boolean contains(LottoNumber number) {
+    public boolean contains(final LottoNumber number) {
         return numbers.contains(number);
     }
 

@@ -16,7 +16,7 @@ public final class Cashier {
     }
 
     private static List<Lotto> issueLottoByCount(int count) {
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(LottoMachine.issue());
         }
@@ -25,8 +25,7 @@ public final class Cashier {
 
     private static int calculateLottoCount(int amount) {
         if (amount % LOTTO_PURCHASE_AMOUNT_UNIT != 0) {
-            String message = String.format("로또는 %,d원 단위로 구매할 수 있습니다.", LOTTO_PURCHASE_AMOUNT_UNIT);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(String.format("로또는 %,d원 단위로 구매할 수 있습니다.", LOTTO_PURCHASE_AMOUNT_UNIT));
         }
         return amount / LOTTO_PURCHASE_AMOUNT_UNIT;
     }

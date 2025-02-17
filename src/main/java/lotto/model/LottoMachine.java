@@ -26,7 +26,7 @@ public final class LottoMachine {
     }
 
     private static LottoNumber getRandomLottoNumberInRange(int start, int end) {
-        Random random = new Random();
+        final Random random = new Random();
         return new LottoNumber(random.nextInt(end - start) + start);
     }
 }

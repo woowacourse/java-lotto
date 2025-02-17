@@ -6,11 +6,11 @@ import lotto.model.LottoNumber;
 
 public record LottoDto(List<Integer> numbers) {
 
-    public static LottoDto from(Lotto lotto) {
+    public static LottoDto from(final Lotto lotto) {
         return new LottoDto(sortAsc(lotto));
     }
 
-    private static List<Integer> sortAsc(Lotto lotto) {
+    private static List<Integer> sortAsc(final Lotto lotto) {
         return lotto.getLottoNumbers()
                 .stream()
                 .map(LottoNumber::getNumber)
