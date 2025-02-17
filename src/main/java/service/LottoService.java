@@ -3,6 +3,7 @@ package service;
 import domain.AnswerLotto;
 import domain.Lotto;
 import domain.Lottos;
+import domain.enums.LottoMoney;
 import domain.enums.Prize;
 import dto.OutputLottosDto;
 import java.util.LinkedHashMap;
@@ -48,7 +49,7 @@ public class LottoService {
             totalEarnedMoney += prize.getPrizeMoney() * prizeCount;
         }
 
-        int usedMoney = totalPrizeCount * 1000;
+        int usedMoney = totalPrizeCount * LottoMoney.PRICE.getValue();
         double rateOfReturn = (double) totalEarnedMoney / usedMoney;
         return Math.floor(rateOfReturn * 100) / 100.0;
     }
