@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,8 @@ public class LottoMachineTest {
         LottoMoney lottoMoney = new LottoMoney("10000");
         LottoTickets lottoTickets = new LottoTickets();
 
-        LottoMachine lottoMachine = new LottoMachine();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
         for (Lotto lottoTicket : lottoMachine.generateLottoTickets(lottoMoney)) {
             lottoTickets.addLottoTicket(lottoTicket);
         }

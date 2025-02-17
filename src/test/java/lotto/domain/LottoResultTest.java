@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
+import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,8 @@ public class LottoResultTest {
     @BeforeAll
     static void setUp() {
         lottoMoney = new LottoMoney("1000");
-        LottoMachine lottoMachine = new LottoMachine(12345L);
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(12345L);
+        LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
         lottoTickets = new LottoTickets();
         for (Lotto lottoTicket : lottoMachine.generateLottoTickets(lottoMoney)) {
             lottoTickets.addLottoTicket(lottoTicket);
