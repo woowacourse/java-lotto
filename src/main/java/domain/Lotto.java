@@ -1,7 +1,7 @@
 package domain;
 
-import error.AppException;
-import error.ErrorMessage;
+import exception.AppException;
+
 import java.util.List;
 
 public class Lotto {
@@ -9,6 +9,10 @@ public class Lotto {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
     public static final int SIZE = 6;
+
+    public static final String INVALID_LOTTO_NUMBER_RANGE = "숫자는 1부터 45 사이여야 합니다.";
+    public static final String INVALID_LOTTO_NUMBER_SIZE = "당첨번호는 6개여야 합니다.";
+    public static final String INVALID_LOTTO_NUMBER_DUPLICATE = "중복된 숫자가 없어야 합니다.";
 
     private final List<Integer> numbers;
 
@@ -25,7 +29,7 @@ public class Lotto {
 
     private void validateDuplicate(final List<Integer> numbers) {
         if (!isDistinctNumber(numbers)) {
-            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_DUPLICATE);
+            throw new AppException(INVALID_LOTTO_NUMBER_DUPLICATE);
         }
     }
 
@@ -35,7 +39,7 @@ public class Lotto {
 
     private void validateRange(List<Integer> numbers) {
         if (isOutOfRange(numbers)) {
-            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_RANGE);
+            throw new AppException(INVALID_LOTTO_NUMBER_RANGE);
         }
     }
 
@@ -47,7 +51,7 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if(numbers.size() != SIZE) {
-            throw new AppException(ErrorMessage.INVALID_LOTTO_NUMBER_SIZE);
+            throw new AppException(INVALID_LOTTO_NUMBER_SIZE);
         }
     }
 

@@ -1,9 +1,12 @@
 package domain;
 
-import error.AppException;
-import error.ErrorMessage;
+import exception.AppException;
 
 public class Money {
+
+    public static final String INVALID_MONEY_UNIT = "구입 금액은 1000 단위 숫자로 입력해야 합니다.";
+    public static final String INVALID_MONEY_RANGE = "구입 금액은 1000원 이상이어야 합니다.";
+    public static final String INVALID_MONEY_FORMAT = "구입 금액은 숫자여야 합니다.";
 
     private static final int UNIT = 1_000;
 
@@ -21,13 +24,13 @@ public class Money {
 
     private void validateAmount(final int amount) {
         if (amount % UNIT != 0) {
-            throw new AppException(ErrorMessage.INVALID_MONEY_UNIT);
+            throw new AppException(INVALID_MONEY_UNIT);
         }
     }
 
     private void validateRange(final int amount) {
         if (amount < UNIT) {
-            throw new AppException(ErrorMessage.INVALID_MONEY_RANGE);
+            throw new AppException(INVALID_MONEY_RANGE);
         }
     }
 

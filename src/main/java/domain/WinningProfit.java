@@ -1,7 +1,6 @@
 package domain;
 
-import error.AppException;
-import error.ErrorMessage;
+import exception.AppException;
 
 import java.util.Map;
 
@@ -15,7 +14,7 @@ public class WinningProfit {
 
     public double calculateProfitRate(final int amount) {
         if(amount == 0){
-            throw new AppException(ErrorMessage.INVALID_MONEY_RANGE);
+            throw new AppException(Money.INVALID_MONEY_RANGE);
         }
         return calculateTotalPrice() / (double) amount;
     }

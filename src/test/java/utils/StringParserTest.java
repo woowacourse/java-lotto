@@ -1,6 +1,7 @@
 package utils;
 
-import error.ErrorMessage;
+import domain.BonusNumber;
+import domain.WinningNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ class StringParserTest {
         //given
         final String input = "123";
         //when
-        int result = StringParser.parseToNumber(input, ErrorMessage.INVALID_BONUS_NUMBER_FORMAT);
+        int result = StringParser.parseToNumber(input, BonusNumber.INVALID_BONUS_NUMBER_FORMAT);
         //then
         assertEquals(123, result);
     }
@@ -29,7 +30,7 @@ class StringParserTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class,
-                () -> StringParser.parseToNumber(input, ErrorMessage.INVALID_BONUS_NUMBER_FORMAT));
+                () -> StringParser.parseToNumber(input, BonusNumber.INVALID_BONUS_NUMBER_FORMAT));
     }
 
     @DisplayName("문자열을 구분자 기준으로 분리하는데 성공한다")
@@ -39,7 +40,7 @@ class StringParserTest {
         final String input = "1,2,3,4,5,6";
         final String delimiter = ",";
         //when
-        List<Integer> result = StringParser.parseToNumbers(input, delimiter, ErrorMessage.INVALID_WINNING_NUMBERS_FORMAT);
+        List<Integer> result = StringParser.parseToNumbers(input, delimiter, WinningNumber.INVALID_WINNING_NUMBERS_FORMAT);
         //then
         assertThat(result).containsOnly(1, 2, 3, 4, 5, 6);
     }
@@ -53,6 +54,6 @@ class StringParserTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class,
-                () -> StringParser.parseToNumbers(input, delimiter, ErrorMessage.INVALID_BONUS_NUMBER_FORMAT));
+                () -> StringParser.parseToNumbers(input, delimiter, BonusNumber.INVALID_BONUS_NUMBER_FORMAT));
     }
 }
