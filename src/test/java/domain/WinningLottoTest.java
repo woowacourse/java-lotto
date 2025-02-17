@@ -4,11 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class WinningLottoTest {
     @DisplayName("당첨 로또 생성 성공")
@@ -34,25 +35,31 @@ class WinningLottoTest {
                 .hasMessage("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
 
-    @DisplayName("")
-    @Test
-    void calculatePrizesTest() {
+    @DisplayName("로또 등수 계산하기 테스트")
+    @ParameterizedTest
+    @CsvSource({
+            "1,2,3,4,5,6, FIRST_PLACE",
+            "1,2,3,4,5,7, SECOND_PLACE",
+            "1,2,3,4,5,8, THIRD_PLACE",
+            "1,2,3,4,9,10, FOURTH_PLACE",
+            "11,12,13,4,5,6, FIFTH_PLACE",
+            "11,12,13,14,5,6, SIXTH_PLACE"
+    })
+    void calculatePrizesTest(String num1, String num2, String num3, String num4, String num5, String num6,
+                             Prize expectedPrize) {
         Lotto winningNumbers = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList());
         int bonusNumber = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, LottoNumber.of(bonusNumber));
 
-        Lotto lotto1 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList()); // 1등
-        Lotto lotto2 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 7).map(LottoNumber::of).toList()); // 2둥
-        Lotto lotto3 = Lotto.of(Stream.of(1, 2, 3, 4, 5, 8).map(LottoNumber::of).toList()); // 3둥
-        Lotto lotto4 = Lotto.of(Stream.of(1, 2, 3, 4, 9, 10).map(LottoNumber::of).toList()); // 4둥
-        Lotto lotto5 = Lotto.of(Stream.of(11, 12, 13, 4, 5, 6).map(LottoNumber::of).toList()); // 5둥
-        Lotto lotto6 = Lotto.of(Stream.of(11, 12, 13, 14, 5, 6).map(LottoNumber::of).toList()); // 6둥
+        Lotto lotto = Lotto.of(Stream.of(num1, num2, num3, num4, num5, num6)
+                .map(Integer::parseInt)
+                .map(LottoNumber::of)
+                .toList());
 
-        List<Lotto> myLotto = List.of(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
-        Lottos lottos = Lottos.of(myLotto);
+        Lottos lottos = Lottos.of(List.of(lotto));
 
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
-        assertThat(prizes).isEqualTo(Arrays.stream(Prize.values()).toList());
+        assertThat(prizes).containsExactly(expectedPrize);
     }
 }
