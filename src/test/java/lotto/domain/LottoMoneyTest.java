@@ -10,7 +10,7 @@ public class LottoMoneyTest {
 
     @DisplayName("로또 구입 금액이 숫자가 아닌 예외")
     @Test
-    public void lottoMoneyNumber() {
+    public void lottoMoneyDigit() {
         String input = "money";
         assertThatThrownBy(() -> InputView.validateAndParseLottoMoney(input))
                 .isInstanceOf(IllegalArgumentException.class);
