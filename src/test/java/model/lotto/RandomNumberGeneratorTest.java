@@ -1,9 +1,8 @@
-package model;
+package model.lotto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import model.lotto.RandomNumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
