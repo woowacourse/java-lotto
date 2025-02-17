@@ -19,7 +19,7 @@ public class Wallet {
         }
     }
 
-    public int getPurchasableQuantity(){
+    public int getPurchasableQuantity() {
         return money / LOTTO_PRICE_PER_ONE;
     }
 }

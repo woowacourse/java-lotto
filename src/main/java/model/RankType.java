@@ -24,17 +24,21 @@ public enum RankType {
         return price;
     }
 
-    private static RankType checkSecondAndThird(boolean bonusBall){
-        if(bonusBall) return SECOND;
+    private static RankType checkSecondAndThird(boolean bonusBall) {
+        if (bonusBall) {
+            return SECOND;
+        }
         return THIRD;
     }
 
-    public static RankType calculateRankType(boolean isBonusMatch, int matchCount){
-        if(matchCount == SECOND.matchCount){
+    public static RankType calculateRankType(boolean isBonusMatch, int matchCount) {
+        if (matchCount == SECOND.matchCount) {
             return checkSecondAndThird(isBonusMatch);
         }
-        for(RankType rankType : values()){
-            if(rankType.matchCount == matchCount) return rankType;
+        for (RankType rankType : values()) {
+            if (rankType.matchCount == matchCount) {
+                return rankType;
+            }
         }
         return NONE;
     }

@@ -62,7 +62,8 @@ public class OutputView {
         return stringBuilder.toString();
     }
 
-    private static void appendLottoResult(final Map<RankType, Integer> map, final StringBuilder stringBuilder, final RankType rankType) {
+    private static void appendLottoResult(final Map<RankType, Integer> map, final StringBuilder stringBuilder,
+                                          final RankType rankType) {
         if (rankType == RankType.SECOND) {
             stringBuilder.append(
                     String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(),
@@ -70,7 +71,8 @@ public class OutputView {
             return;
         }
         stringBuilder.append(
-                String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(), map.get(rankType)));
+                String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(),
+                        map.get(rankType)));
     }
 
 }

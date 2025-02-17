@@ -56,7 +56,7 @@ public class Lotto {
     }
 
     private void validateDuplicate(List<Integer> winningNumbers) {
-        if(isDuplicatedNumbers(winningNumbers)){
+        if (isDuplicatedNumbers(winningNumbers)) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }
