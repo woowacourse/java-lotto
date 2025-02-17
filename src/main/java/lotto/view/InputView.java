@@ -1,4 +1,4 @@
-package view;
+package lotto.view;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,18 +9,8 @@ public class InputView {
 
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public String readPurchaseAmount() {
-        System.out.println("구입금액을 입력해 주세요.");
-        return readLine();
-    }
-
-    public String readWinningNumber() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        return readLine();
-    }
-
-    public String readBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
+    public String read(String prompt) {
+        System.out.println(prompt);
         return readLine();
     }
 
@@ -29,8 +19,6 @@ public class InputView {
             return reader.readLine();
         } catch (IOException e) {
             System.out.println(ERROR_IOException + e.getMessage());
-        } finally {
-            close();
         }
         return null;
     }

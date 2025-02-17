@@ -1,6 +1,4 @@
-package domain;
-
-import java.util.List;
+package lotto.domain;
 
 public class WinningLotto {
     private static final String ERROR_DUPLICATE_BONUS_NUMBER = "보너스 번호는 당첨 번호와 중복될 수 없습니다.";
@@ -24,18 +22,11 @@ public class WinningLotto {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    public List<Prize> calculatePrizes(Lottos lottos) {
-        List<Lotto> purchasedLottos = lottos.getLottos();
-        return purchasedLottos.stream()
-                .map(lotto -> Prize.getPrizePlace(countMatchedNumbers(lotto), isBounusMatched(lotto)))
-                .toList();
-    }
-
-    private int countMatchedNumbers(Lotto lotto) {
+    public int matchWinningNumbers(Lotto lotto) {
         return winningLotto.match(lotto);
     }
 
-    private boolean isBounusMatched(Lotto lotto) {
+    public boolean isBonusMatched(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }

@@ -1,4 +1,4 @@
-package domain;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -70,6 +70,6 @@ class LottoTest {
 
         List<Integer> orderedNumbers = unorderedNumbers.stream().sorted().toList();
         Lotto orderedLotto = Lotto.of(orderedNumbers);
-        assertThat(lotto.toString()).isEqualTo(orderedLotto.toString());
+        assertThat(lotto.getNumbers()).isEqualTo(orderedLotto.getNumbers());
     }
 }

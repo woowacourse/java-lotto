@@ -1,12 +1,12 @@
-package domain;
+package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
     private static final int MIN_QUANTITY = 1;
     private static final int MAX_QUANTITY = 100;
+    private static final int LOTTO_PRICE = 1000;
     private static final String ERROR_INVALID_QUANTITY =
             "로또는 " + MIN_QUANTITY + "장부터 최대 " + MAX_QUANTITY + "장까지 구매 가능합니다.";
 
@@ -16,7 +16,8 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos ofSize(final int quantity) {
+    public static Lottos ofAmount(final int amount) {
+        int quantity = amount / LOTTO_PRICE;
         validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
@@ -27,7 +28,7 @@ public class Lottos {
     }
 
     private static void validateQuantity(final int quantity) {
-        if (quantity <= 0 || quantity > MAX_QUANTITY) {
+        if (quantity < MIN_QUANTITY || quantity > MAX_QUANTITY) {
             throw new IllegalArgumentException(ERROR_INVALID_QUANTITY);
         }
     }
@@ -36,15 +37,23 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public List<String> getPurchasedLottos() {
-        return lottos.stream().map(Lotto::toString).toList();
+    public List<Rank> calculateRanks(WinningLotto winningLotto) {
+        return lottos.stream()
+                .map(lotto -> Rank.getPlace(
+                        winningLotto.matchWinningNumbers(lotto), winningLotto.isBonusMatched(lotto)))
+                .toList();
     }
 
-    public List<Lotto> getLottos() {
-        return Collections.unmodifiableList(lottos);
+    public double calculateEarningRate(List<Rank> ranks) {
+        long prizeTotal = Rank.calculateTotalPrize(ranks);
+        return (double) prizeTotal / (getQuantity() * LOTTO_PRICE);
     }
 
     public int getQuantity() {
         return lottos.size();
+    }
+
+    public List<List<Integer>> getPurchasedLottos() {
+        return lottos.stream().map(Lotto::getNumbers).toList();
     }
 }
