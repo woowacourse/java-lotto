@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public enum Prize {
     _1ST(1, 6, false, 2_000_000_000),
@@ -9,13 +8,14 @@ public enum Prize {
     _3RD(3, 5, false, 1_500_000),
     _4TH(4, 4, false, 50_000),
     _5TH(5, 3, false, 5_000),
+    LAST(0, 0, false, 0)
     ;
 
-    final int rank;
-    final int price;
-    final int count;
-    final boolean bonus;
-    static final int FIVE_MATCH = 5;
+    private final int rank;
+    private final int price;
+    private final int count;
+    private final boolean bonus;
+    private static final int FIVE_MATCH = 5;
 
     Prize(int rank, int count, boolean bonus, int price) {
         this.rank = rank;
@@ -24,13 +24,14 @@ public enum Prize {
         this.count = count;
     }
 
-    public static Optional<Prize> findPrize(int count, boolean bonus) {
+    public static Prize findPrize(int count, boolean bonus) {
         if (bonus && count == FIVE_MATCH) {
-            return Optional.of(_2ND);
+            return _2ND;
         }
         return Arrays.stream(Prize.values())
                 .filter(prize -> prize.count == count)
-                .findFirst();
+                .findFirst()
+                .orElse(LAST);
     }
 
     public int getPrice() {

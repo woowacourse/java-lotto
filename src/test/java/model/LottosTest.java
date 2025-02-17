@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static util.LottoUtil.generateTestLotto;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,13 +18,13 @@ class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos(Arrays.asList(
-                generateTestLotto(1, 2, 3, 6, 7, 8),
-                generateTestLotto(10, 11, 12, 4, 5, 6),
-                generateTestLotto(1, 2, 3, 4, 10, 11),
-                generateTestLotto(1, 2, 3, 4, 5, 10)
+                generateTestLotto(List.of(1, 2, 3, 6, 7, 8)),
+                generateTestLotto(List.of(10, 11, 12, 4, 5, 6)),
+                generateTestLotto(List.of(1, 2, 3, 4, 10, 11)),
+                generateTestLotto(List.of(1, 2, 3, 4, 5, 10))
         ));
         winningLotto = new WinningLotto(
-                generateTestLotto(1, 2, 3, 4, 5, 6),
+                generateTestLotto(List.of(1, 2, 3, 4, 5, 6)),
                 new LottoNumber(10)
         );
     }
@@ -40,7 +41,7 @@ class LottosTest {
     }
 
     @Test
-    void 수익률을_계산한다() {
+    void 내가_구매한_로또의_수익률을_계산한다() {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(winningLotto);
         assertThat(lottoEvaluator.computeProfit(lottos)).isEqualTo(7526.25);
     }

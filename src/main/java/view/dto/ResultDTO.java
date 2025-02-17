@@ -33,6 +33,7 @@ public record ResultDTO(
     public static ResultDTO from(Map<Prize, Integer> result, double profit) {
         return new ResultDTO(result.entrySet()
                 .stream()
+                .filter(entry -> entry.getKey() != Prize.LAST)
                 .map(entry -> InnerResultDetail.from(entry.getKey(), entry.getValue()))
                 .toList(), profit);
     }

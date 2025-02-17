@@ -2,7 +2,6 @@ package model;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -19,8 +18,12 @@ public class LottoEvaluator {
         Map<Prize, Integer> result = new TreeMap<>();
         Arrays.stream(Prize.values()).forEach(prize -> result.put(prize, DEFAULT_COUNT));
         lottos.stream()
-                .forEach(lotto -> calculatePrize(lotto)
-                        .ifPresent(prize -> result.merge(prize, COUNTER_STEP, Integer::sum)));
+                .forEach(lotto -> {
+                    Prize prize = calculatePrize(lotto);
+                    if (prize != Prize.LAST) {
+                        result.merge(prize, COUNTER_STEP, Integer::sum);
+                    }
+                });
         return result;
     }
 
@@ -28,12 +31,12 @@ public class LottoEvaluator {
         Map<Prize, Integer> result = getResult(lottos);
         int sum = result.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().price * entry.getValue())
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
         return sum / (double) lottos.computeTicketAmount();
     }
 
-    public Optional<Prize> calculatePrize(Lotto userLotto) {
+    public Prize calculatePrize(Lotto userLotto) {
         boolean hasBonusNumber = containsBonusNumber(userLotto);
         return Prize.findPrize(countMatchingNumbers(userLotto), hasBonusNumber);
     }
