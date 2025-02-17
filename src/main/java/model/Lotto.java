@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class Lotto {
@@ -9,8 +10,8 @@ public class Lotto {
 
     private final List<LottoNumber> numbers;
 
-    public Lotto() {
-        this.numbers = generateLottoNumbers();
+    public Lotto(NumberGenerator numberGenerator) {
+        this.numbers = generateLotto(numberGenerator);
     }
 
     public Lotto(List<Integer> numbers) {
@@ -34,10 +35,10 @@ public class Lotto {
         return numbers;
     }
 
-    private List<LottoNumber> generateLottoNumbers() {
+    private List<LottoNumber> generateLotto(NumberGenerator numberGenerator) {
         Set<LottoNumber> lottoNumbers = new HashSet<>();
         while (lottoNumbers.size() < LOTTO_NUMBER_COUNT) {
-            lottoNumbers.add(new LottoNumber());
+            lottoNumbers.add(new LottoNumber(numberGenerator.generate()));
         }
         return lottoNumbers.stream().sorted().toList();
     }
@@ -53,5 +54,23 @@ public class Lotto {
         if (numbers.size() != numberSet.size()) {
             throw new IllegalArgumentException("중복이 아닌 숫자를 입력해주세요");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 }

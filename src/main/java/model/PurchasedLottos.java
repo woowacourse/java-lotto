@@ -1,5 +1,6 @@
 package model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +10,11 @@ public class PurchasedLottos {
     private final List<Lotto> lottos = new ArrayList<>();
     private final Integer purchaseAmount;
 
-    public PurchasedLottos(Integer purchaseAmount) {
+    public PurchasedLottos(Integer purchaseAmount, NumberGenerator numberGenerator) {
         validateDividable(purchaseAmount);
         int purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
-            lottos.add(new Lotto());
+            lottos.add(new Lotto(numberGenerator));
         }
         this.purchaseAmount = purchaseAmount;
     }

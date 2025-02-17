@@ -19,6 +19,6 @@ public class InputViewTest {
         // when & then
         assertThatThrownBy(inputView::readPurchaseAmount)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(InputView.POSITIVE_NUMBER_EXCEPTION);
+                .hasMessage("양의 정수를 입력해주세요.");
     }
 }

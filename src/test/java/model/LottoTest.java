@@ -4,15 +4,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
+import java.util.Random;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
+    static class TestNumberGenerator implements NumberGenerator {
+        private final List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        int index = 0;
+
+        @Override
+        public int generate() {
+            return numbers.get(index++);
+        }
+    }
+
+    @Test
+    @DisplayName("로또 생성 테스트")
+    public void generateLottoTest() {
+        // given & when
+        Lotto lotto = new Lotto(new TestNumberGenerator());
+        Lotto lottoActual = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        // then
+        assertThat(lotto).isEqualTo(lottoActual);
+    }
+
     @Test
     @DisplayName("로또 번호 개수 테스트")
     public void lottoNumbersCountTest() {
         // given & when
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(
+                () -> {
+                    Random random = new Random();
+                    return random.nextInt(45) + 1;
+                }
+        );
         List<LottoNumber> numbers = lotto.getNumbers();
         // then
         assertThat(numbers.size()).isEqualTo(6);
@@ -22,7 +48,12 @@ class LottoTest {
     @DisplayName("로또 번호 범위 테스트")
     public void lottoNumberBoundTest() {
         // given & when
-        Lotto lotto = new Lotto();
+        Lotto lotto = new Lotto(
+                () -> {
+                    Random random = new Random();
+                    return random.nextInt(45) + 1;
+                }
+        );
         List<LottoNumber> numbers = lotto.getNumbers();
         // then
         for (LottoNumber number : numbers) {

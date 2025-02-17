@@ -1,5 +1,6 @@
 package controller;
 
+import model.LottoNumberGenerator;
 import model.PurchasedLottos;
 import view.InputView;
 import view.OutputView;
@@ -15,7 +16,7 @@ public class PurchaseController {
 
     public PurchasedLottos purchase() {
         Integer purchaseAmount = inputView.readPurchaseAmount();
-        PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount);
+        PurchasedLottos purchasedLottos = new PurchasedLottos(purchaseAmount, new LottoNumberGenerator());
         outputView.printPurchaseResult(purchasedLottos.size());
         outputView.printPurchasedLottos(purchasedLottos);
         return purchasedLottos;

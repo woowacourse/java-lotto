@@ -15,7 +15,7 @@ public class InputView {
     }
 
     public List<Integer> readWinNumbers() {
-        System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.");
+        System.out.printf("%n지난 주 당첨 번호를 입력해 주세요.%n");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<String> splitInput = Arrays.stream(input.split(DELIMITER))

@@ -1,10 +1,8 @@
 package model;
 
-import java.util.Random;
-
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int MINIMUM_LOTTO_NUMBER = 1;
-    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    static final int MAXIMUM_LOTTO_NUMBER = 45;
 
     private final int number;
 
@@ -13,9 +11,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public LottoNumber() {
-        Random random = new Random();
-        this.number = random.nextInt(MAXIMUM_LOTTO_NUMBER) + 1;
+    public LottoNumber(NumberGenerator numberGenerator) {
+        this.number = numberGenerator.generate();
     }
 
     public int getNumber() {
