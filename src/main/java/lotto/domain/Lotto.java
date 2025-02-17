@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.*;
 import static lotto.common.exception.ErrorMessage.*;
 
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
 
@@ -33,7 +33,7 @@ public class Lotto {
     }
 
     private static void validateSize(List<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException(ERROR_LOTTO_SIZE);
         }
     }

@@ -4,7 +4,6 @@ import java.util.List;
 import lotto.common.utill.InputParser;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.Money;
 import lotto.domain.WinningInform;
 import lotto.view.InputView;
 
@@ -15,12 +14,10 @@ public class InputController {
         this.inputView = inputView;
     }
 
-    public Money getMoney() {
+    public int getMoney() {
         while (true) {
             try {
-                int number = getInt("구입금액을 입력해 주세요.");
-
-                return new Money(number);
+                return inputView.readMoney();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

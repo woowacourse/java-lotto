@@ -1,10 +1,12 @@
 package lotto.controller;
 
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.*;
+
 import java.util.List;
 
-import lotto.domain.LottoNumberGenerator;
+import lotto.domain.RandomNumbersGenerator;
 import lotto.domain.LottoStatistics;
-import lotto.domain.Money;
 import lotto.domain.LottoShop;
 import lotto.domain.WinningInform;
 import lotto.domain.Lotto;
@@ -23,10 +25,12 @@ public class Controller {
     }
 
     public void run() {
-        Money money = inputController.getMoney();
-        outputView.print(money.getAmount() + "개를 구매했습니다.\n");
+        int money = inputController.getMoney();
+        LottoShop lottoShop = new LottoShop(
+                new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
+        int purchasedLottoCount = lottoShop.calculateLottoCount(money);
+        outputView.printLottoCount(purchasedLottoCount);
 
-        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
         List<Lotto> lottos = lottoShop.buyLottos(money);
         Wallet wallet = new Wallet(lottos);
         outputView.printWallet(WalletDto.from(wallet));
@@ -34,7 +38,7 @@ public class Controller {
         WinningInform winningInform = inputController.getWinningInform();
 
         LottoStatistics lottoStatistics = LottoStatistics.from(wallet, winningInform);
-        Profit profit = Profit.from(lottoStatistics.getTotalPrize(), money.money());
+        Profit profit = Profit.from(lottoStatistics.getTotalPrize(), money);
         outputView.printResult(lottoStatistics, profit);
     }
 

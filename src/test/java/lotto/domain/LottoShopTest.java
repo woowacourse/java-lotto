@@ -1,8 +1,10 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.LOTTO_PRIZE;
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MAXIMUM;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MINIMUM;
+import static lotto.domain.LottoShop.LOTTO_PRIZE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -15,14 +17,15 @@ class LottoShopTest {
     @Test
     void test_byLottos() {
         // given
-        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
-        Money money = new Money(LOTTO_PRIZE * 5);
+        LottoShop lottoShop = new LottoShop(
+                new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
+        int money = LOTTO_PRIZE * 5;
 
         // when
         List<Lotto> lottos = lottoShop.buyLottos(money);
 
         // then
-        assertThat(lottos.size()).isEqualTo(money.getAmount());
+        assertThat(lottos.size()).isEqualTo(5);
     }
 
 }
