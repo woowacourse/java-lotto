@@ -24,7 +24,7 @@ public class WinningResults {
         return ranks;
     }
 
-    private static void initRanks(final Map<Rank, Integer> ranks) {
+    private void initRanks(final Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
@@ -58,8 +58,8 @@ public class WinningResults {
         saveResults(rank, false, ranks, results);
     }
 
-    private static void saveResults(final Rank rank, final boolean hasBonus, final Map<Rank, Integer> ranks,
-                                    final List<WinningResult> results) {
+    private void saveResults(final Rank rank, final boolean hasBonus, final Map<Rank, Integer> ranks,
+                             final List<WinningResult> results) {
         WinningResult winningResult = new WinningResult(rank.getMatchingCount(),
                 rank.getWinningAmount(), hasBonus, ranks.get(rank));
         results.add(winningResult);
