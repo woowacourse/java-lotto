@@ -3,7 +3,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import domain.Lotto;
-import domain.Number;
+import domain.LottoNumber;
 import domain.WinningLotto;
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,18 +21,18 @@ class WinningLottoTest {
     void should_throw_exception_when_bonus_number_is_in_winning_numbers() {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        domain.Number bonusNumber = new Number(1);
+        LottoNumber bonusLottoNumber = new LottoNumber(1);
 
         // when & then
         assertThatThrownBy(() -> {
-            new WinningLotto(winningNumbers, bonusNumber);
+            new WinningLotto(winningNumbers, bonusLottoNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     static Stream<Arguments> correctMatchedCountArguments() {
-        return Stream.of(arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new domain.Number(7)),
+        return Stream.of(arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7)),
                         new Lotto(List.of(1, 2, 3, 43, 44, 45)), 3),
-                arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new domain.Number(7)),
+                arguments(new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7)),
                         new Lotto(List.of(1, 2, 3, 7, 44, 45)), 3)
 
         );
@@ -55,7 +55,7 @@ class WinningLottoTest {
     void should_return_correct_bonus_match(int bonusNumber, boolean expected) {
         // given
         Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 45));
-        domain.Number bonus = new domain.Number(bonusNumber);
+        LottoNumber bonus = new LottoNumber(bonusNumber);
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonus);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 

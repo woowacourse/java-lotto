@@ -5,9 +5,9 @@ import java.util.List;
 
 public class WinningLotto {
     private final Lotto winningNumbers;
-    private final Number bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto winningNumbers, Number bonusNumber) {
+    public WinningLotto(Lotto winningNumbers, LottoNumber bonusNumber) {
         validate(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
@@ -25,7 +25,7 @@ public class WinningLotto {
                 .anyMatch(number -> number == bonusNumber.getValue());
     }
 
-    private void validate(Lotto winningNumbers, Number bonusNumber) {
+    private void validate(Lotto winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.getNumbers()
                 .stream()
                 .anyMatch(number -> number == bonusNumber.getValue())) {

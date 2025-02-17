@@ -3,7 +3,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.Lotto;
 import domain.LottoManager;
 import domain.Money;
-import domain.Number;
+import domain.LottoNumber;
 import domain.WinningInfo;
 import domain.WinningLotto;
 import domain.WinningResult;
@@ -23,7 +23,7 @@ class LottoManagerTest {
             new Lotto(List.of(1, 2, 3, 4, 10, 11)),
             new Lotto(List.of(1, 2, 3, 10, 11, 12)),
             new Lotto(List.of(10, 11, 12, 13, 14, 15)));
-    WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new Number(7));
+    WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
     @BeforeEach
     void setup() {

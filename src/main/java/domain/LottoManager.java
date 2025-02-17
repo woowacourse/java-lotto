@@ -8,7 +8,7 @@ public class LottoManager {
     public List<Lotto> generateLottos(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
-            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(Number.MIN, Number.MAX, 6)));
+            lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(LottoNumber.MIN, LottoNumber.MAX, 6)));
         }
         return lottos;
     }

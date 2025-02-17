@@ -2,7 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.Money;
-import domain.Number;
+import domain.LottoNumber;
 import domain.WinningLotto;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,8 +24,8 @@ public class InputView {
 
     public WinningLotto inputWinningLotto() throws IOException {
         Lotto winningNumbers = inputWinningNumbers();
-        domain.Number bonusNumber = inputBonusNumber();
-        return new WinningLotto(winningNumbers, bonusNumber);
+        LottoNumber bonusLottoNumber = inputBonusNumber();
+        return new WinningLotto(winningNumbers, bonusLottoNumber);
     }
 
     private Lotto inputWinningNumbers() throws IOException {
@@ -39,10 +39,10 @@ public class InputView {
         return new Lotto(winningNumbers);
     }
 
-    private domain.Number inputBonusNumber() throws IOException {
+    private LottoNumber inputBonusNumber() throws IOException {
         System.out.println("보너스 볼을 입력해 주세요.");
         String bonusRawInput = bufferedReader.readLine();
-        return Number.from(bonusRawInput);
+        return LottoNumber.from(bonusRawInput);
     }
 
 }
