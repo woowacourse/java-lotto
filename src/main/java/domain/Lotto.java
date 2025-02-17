@@ -27,12 +27,8 @@ public class Lotto {
     }
 
     private boolean containsDuplicate(List<LottoNumber> lottoNumbers) {
-        return lottoNumbers.stream()
-                .anyMatch(
-                        num1 -> lottoNumbers.stream()
-                                .filter(num2 -> num1 != num2)
-                                .anyMatch(num2 -> num1.isSameValue(num2))
-                );
+        List<LottoNumber> distinct = lottoNumbers.stream().distinct().toList();
+        return lottoNumbers.size() != distinct.size();
     }
 
     public int match(Lotto compared) {

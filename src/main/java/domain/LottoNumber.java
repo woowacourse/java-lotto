@@ -1,6 +1,7 @@
 package domain;
 
 import domain.properties.LottoProperties;
+import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private final int lottoNumber;
@@ -33,5 +34,18 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.lottoNumber, other.lottoNumber);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof LottoNumber that)) {
+            return false;
+        }
+        return lottoNumber == that.lottoNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(lottoNumber);
     }
 }
