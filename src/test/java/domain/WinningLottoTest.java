@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.lottogenerator.LottoGenerator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -47,17 +48,30 @@ class WinningLottoTest {
     })
     void calculatePrizesTest(String num1, String num2, String num3, String num4, String num5, String num6,
                              Prize expectedPrize) {
+        // 원하는 로또 생성을 위한 익명 클래스 생성
+        LottoGenerator fixedLottoGenerator = new LottoGenerator() {
+            private final List<Integer> numbers
+                    = Stream.of(num1, num2, num3, num4, num5, num6)
+                    .map(Integer::parseInt)
+                    .toList();
+
+            @Override
+            public List<LottoNumber> generate() {
+                return numbers.stream()
+                        .map(LottoNumber::of)
+                        .toList();
+            }
+        };
+
+        // 우승 로또 준비
         Lotto winningNumbers = Lotto.of(Stream.of(1, 2, 3, 4, 5, 6).map(LottoNumber::of).toList());
         int bonusNumber = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, LottoNumber.of(bonusNumber));
 
-        Lotto lotto = Lotto.of(Stream.of(num1, num2, num3, num4, num5, num6)
-                .map(Integer::parseInt)
-                .map(LottoNumber::of)
-                .toList());
+        // 발급 받은 로또
+        Lottos lottos = Lottos.ofSize(1, fixedLottoGenerator);
 
-        Lottos lottos = Lottos.of(List.of(lotto));
-
+        // 당첨 결과 계산
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         assertThat(prizes).containsExactly(expectedPrize);
