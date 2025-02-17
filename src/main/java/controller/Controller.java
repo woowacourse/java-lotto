@@ -11,7 +11,7 @@ import model.LottoNumberPicker;
 import model.Lottos;
 import model.Money;
 import model.WinningLotto;
-import util.LottoParser;
+import util.InputConverter;
 import view.InputView;
 import view.OutputView;
 import view.dto.LottosDTO;
@@ -34,7 +34,7 @@ public class Controller {
     }
 
     private Lottos buyLottos() {
-        Integer inputMoney = LottoParser.parseInt(inputView.inputMoney());
+        Integer inputMoney = InputConverter.parseInt(inputView.inputMoney());
         Money money = new Money(inputMoney);
         Lottos lottos = generateLottos(money);
         outputView.printLottos(LottosDTO.from(lottos));
@@ -53,11 +53,14 @@ public class Controller {
 
     private WinningLotto inputWinningLotto() {
         String rawWinningLotto = inputView.inputWinningLotto();
-        List<String> splittedWinningLotto = LottoParser.splitByDelimiter(rawWinningLotto);
+        List<String> splittedWinningLotto = InputConverter.splitByDelimiter(rawWinningLotto);
         Lotto lotto = new Lotto(
-                splittedWinningLotto.stream().map(LottoParser::parseNumber).collect(Collectors.toSet()));
+                splittedWinningLotto.stream()
+                        .map(singleNumber -> new LottoNumber(InputConverter.parseInt(singleNumber)))
+                        .collect(Collectors.toSet()));
+
         String rawBonusNumber = inputView.inputBonus();
-        LottoNumber bonusLottoNumber = LottoParser.parseNumber(rawBonusNumber);
+        LottoNumber bonusLottoNumber = new LottoNumber(InputConverter.parseInt(rawBonusNumber));
         return new WinningLotto(lotto, bonusLottoNumber);
     }
 }
