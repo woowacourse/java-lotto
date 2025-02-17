@@ -1,12 +1,11 @@
 package lotto.model;
 
 import static lotto.constant.LottoNumberConstants.*;
-import static lotto.model.LottoNumberFixture.generateLottoNumbersInRange;
+import static lotto.model.fixture.LottoNumberFixture.generateLottoNumbersInRange;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;

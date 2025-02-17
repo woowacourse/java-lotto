@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static lotto.model.LottoNumberFixture.*;
+import static lotto.model.fixture.LottoNumberFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;

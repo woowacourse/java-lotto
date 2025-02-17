@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static lotto.model.LottoNumberFixture.*;
+import static lotto.model.fixture.LottoNumberFixture.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import lotto.Rank;

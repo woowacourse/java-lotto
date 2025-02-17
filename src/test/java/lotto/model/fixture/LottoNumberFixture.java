@@ -1,7 +1,8 @@
-package lotto.model;
+package lotto.model.fixture;
 
 import java.util.HashSet;
 import java.util.Set;
+import lotto.model.LottoNumber;
 
 public class LottoNumberFixture {
      public static Set<LottoNumber> generateLottoNumbersInRange(int start, int end) {
