@@ -24,7 +24,7 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public void run() {
+    public void playLotto() {
         final Money money = requestMoney();
 
         final LottoStore lottoStore = new LottoStore(new RandomNumbersGenerator(), money);
