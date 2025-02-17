@@ -12,7 +12,7 @@ public class LottoShop {
         this.randomNumbersGenerator = randomNumbersGenerator;
     }
 
-    public List<Lotto> buyLottos(int money) {
+    public List<Lotto> buyLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
 
         int lottoCount = calculateLottoCount(money);
@@ -24,7 +24,7 @@ public class LottoShop {
         return lottos;
     }
 
-    public int calculateLottoCount(int money) {
-        return money / LOTTO_PRIZE;
+    public int calculateLottoCount(Money money) {
+        return money.amount() / LOTTO_PRIZE;
     }
 }

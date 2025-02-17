@@ -2,9 +2,11 @@ package lotto.controller;
 
 import static lotto.domain.Lotto.LOTTO_SIZE;
 import static lotto.domain.LottoNumber.*;
+import static lotto.domain.LottoShop.LOTTO_PRIZE;
 
 import java.util.List;
 
+import lotto.domain.Money;
 import lotto.domain.RandomNumbersGenerator;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoShop;
@@ -25,7 +27,7 @@ public class Controller {
     }
 
     public void run() {
-        int money = inputController.getMoney();
+        Money money = inputController.getMoney(LOTTO_PRIZE);
         LottoShop lottoShop = new LottoShop(
                 new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
         int purchasedLottoCount = lottoShop.calculateLottoCount(money);

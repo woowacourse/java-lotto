@@ -10,16 +10,16 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 class LottoShopTest {
 
-    @DisplayName("돈에 맞게 로또가 구매되는지 확인")
+    @DisplayName("돈에 맞춰 로또 개수를 구매하는지 확인")
     @Test
     void test_byLottos() {
         // given
+        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+
         LottoShop lottoShop = new LottoShop(
                 new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
-        int money = LOTTO_PRIZE * 5;
 
         // when
         List<Lotto> lottos = lottoShop.buyLottos(money);
