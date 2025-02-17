@@ -24,7 +24,7 @@ public class WinningLotto {
     }
 
     private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
-        if (lotto.hasBonus(bonusNumber)) {
+        if (lotto.hasNumber(bonusNumber)) {
             throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
         }
     }
@@ -45,7 +45,7 @@ public class WinningLotto {
     private void saveMatchingRanks(final List<Lotto> lottos, final Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
-            Rank findRank = Rank.findBy(matchingCount, lotto.hasBonus(bonusNumber));
+            Rank findRank = Rank.findBy(matchingCount, lotto.hasNumber(bonusNumber));
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
     }

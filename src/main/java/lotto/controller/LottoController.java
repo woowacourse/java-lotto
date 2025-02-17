@@ -38,9 +38,18 @@ public class LottoController {
     }
 
     private WinningLotto createWinningLotto() {
-        Lotto winningLotto = new Lotto(inputView.readWinningLotto());
-        LottoNumber bonusNumber = LottoNumber.draw(inputView.readBonusNumber());
+        List<Integer> winningLottoNumbers = inputView.readWinningLotto();
+        int bonusNumberInput = inputView.readBonusNumber();
+        validateDuplication(winningLottoNumbers, bonusNumberInput);
+        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        LottoNumber bonusNumber = LottoNumber.draw(bonusNumberInput);
         return new WinningLotto(winningLotto, bonusNumber);
+    }
+
+    private void validateDuplication(final List<Integer> numbers, final int number) {
+        if (numbers.contains(number)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
     }
 
     private List<Lotto> issueRandomLottoTickets(final Money buyingAmount) {
