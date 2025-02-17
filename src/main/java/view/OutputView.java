@@ -18,13 +18,13 @@ public class OutputView {
     private static final String WINNING_PROFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
     public void printAskInputMoney() {
-        printlnMessage(ASK_INPUT_MONEY);
     }
 
     public void printUserLottos(final List<Lotto> lottos) {
         final String message = lottos.stream()
                 .map(lotto -> lotto.getNumbers().toString())
                 .collect(Collectors.joining(LINE_SEPARATOR));
+
         printlnMessage(String.format(USER_LOTTOS_HEADER, lottos.size()) + LINE_SEPARATOR + message);
     }
 
@@ -43,7 +43,6 @@ public class OutputView {
                 .collect(Collectors.joining(LINE_SEPARATOR));
         printlnMessage(message);
     }
-
 
     public void printWinningProfit(double profitRate) {
         String message = String.format(WINNING_PROFIT, profitRate, "이득");
@@ -70,4 +69,3 @@ public class OutputView {
         System.out.println(message);
     }
 
-}

@@ -24,7 +24,6 @@ public enum LottoRank {
         this.isBonus = isBonus;
     }
 
-
     public static LottoRank findByMatchedCountAndIsBonus(final int matchedCount, final boolean isBonus) {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> rank.matchedCount == matchedCount)

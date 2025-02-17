@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StringParser {
-
     private static final String SPACE = " ";
 
     private StringParser() {
