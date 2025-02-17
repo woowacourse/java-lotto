@@ -17,7 +17,7 @@ public class OutputView {
     private static final String WINNING_RESULT_HEADER = "당첨 통계" + LINE_SEPARATOR + "---------";
     private static final String WINNING_PROFIT = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)";
 
-    public void printAskInputMoney() {
+    public void printAskInputPurchaseAmount() {
         System.out.println(ASK_INPUT_MONEY);
     }
 
