@@ -1,17 +1,13 @@
 package lotto.domain;
 
-import static lotto.util.Constant.LOTTO_NUMBER_DELIMITER;
 import static lotto.util.Constant.LOTTO_NUMBER_MAX_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_MIN_RANGE;
 import static lotto.util.Constant.LOTTO_NUMBER_SIZE;
-import static lotto.util.ErrorHandler.INVALID_LOTTO_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_RANGE;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_SIZE;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -20,21 +16,6 @@ public class Lotto {
     public Lotto(Set<Integer> numbers) {
         validate(numbers);
         this.lotto = numbers;
-    }
-
-    private Set<Integer> parse(String input) {
-        Set<String> result = Arrays.stream(input.split(LOTTO_NUMBER_DELIMITER)).collect(Collectors.toSet());
-        return result.stream()
-                .map(s -> validateAndParse(s.strip()))
-                .collect(Collectors.toSet());
-    }
-
-    private int validateAndParse(String lottoNumberInput) {
-        try {
-            return Integer.parseInt(lottoNumberInput);
-        } catch (NumberFormatException e) {
-            throw INVALID_LOTTO_NUMBER.getException();
-        }
     }
 
     private void validate(Set<Integer> numbers) {
