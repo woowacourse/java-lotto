@@ -18,12 +18,6 @@ public class WinningResultCalculator {
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
-        }
-    }
-
     public WinningResult countLottoPrizes(final List<Lotto> lottos) {
         Map<LottoAward, Integer> winningResult = initializeWinningResult();
         for (Lotto lotto : lottos) {
@@ -33,6 +27,12 @@ public class WinningResultCalculator {
             winningResult.merge(lottoAward, MATCH_COUNT_INCREMENT, Integer::sum);
         }
         return new WinningResult(winningResult);
+    }
+
+    private void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
+        }
     }
 
     private Map<LottoAward, Integer> initializeWinningResult() {

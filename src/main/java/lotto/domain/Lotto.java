@@ -28,18 +28,18 @@ public class Lotto {
         validateSize(values);
     }
 
-    private void validateSize(final List<Integer> values) {
-        if (values.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
-        }
-    }
-
     private void validateDuplicated(final List<Integer> values) {
         boolean isDuplicated = values.stream()
                 .distinct()
                 .count() != values.size();
         if (isDuplicated) {
             throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
+        }
+    }
+
+    private void validateSize(final List<Integer> values) {
+        if (values.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
         }
     }
 
