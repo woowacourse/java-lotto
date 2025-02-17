@@ -1,7 +1,8 @@
 package domain;
 
-import static domain.LottoInformation.*;
 import java.util.List;
+
+import static domain.LottoInformation.LOTTO_COUNT;
 
 public class Lotto {
 
@@ -25,7 +26,7 @@ public class Lotto {
         if (numbers.stream().distinct().count() == LOTTO_COUNT) {
             return;
         }
-        throw new IllegalArgumentException("6자리로 입력해주세요");
+        throw new IllegalArgumentException(String.format("로또 번호는 %d자리여야 합니다.", LOTTO_COUNT));
     }
 
     private static void validateSize(List<Integer> numbers) {
