@@ -14,7 +14,8 @@ class RandomGeneratorTest {
     void 입력한_최대_범위까지의_난수_리스트를_생성한다() {
         RandomGenerator randomGenerator = new RandomGenerator();
         final int MAX_NUMBER = 45;
-        List<Integer> randomNumbers = randomGenerator.generateUniqueRandomNumbers(MAX_NUMBER);
+        final int NUMBER_COUNT = 6;
+        List<Integer> randomNumbers = randomGenerator.generateNumbers(MAX_NUMBER, NUMBER_COUNT);
 
         assertThat(randomNumbers).allSatisfy(number -> assertThat(number).isStrictlyBetween(0, 46));
     }
