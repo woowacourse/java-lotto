@@ -1,21 +1,26 @@
 package domain;
 
-import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
-import static global.exception.ExceptionMessage.INVALID_FORMAT;
-import static global.exception.ExceptionMessage.INVALID_RANGE;
+import static domain.exception.ExceptionMessage.DUPLICATED_NUMBER;
+import static domain.exception.ExceptionMessage.INVALID_FORMAT;
+import static domain.exception.ExceptionMessage.INVALID_RANGE;
 
 import java.util.List;
 
 public class WinningLotto{
-    private static final int LOTTO_MIN = 1;
-    private static final int LOTTO_MAX = 45;
+    private final Lotto lotto;
+    private final LottoNumber bonusNumber;
 
-    private Lotto lotto;
-    private int bonusNumber;
+    public static WinningLotto of(final List<Integer> numbers, final int bonusNumber){
+        Lotto lotto = Lotto.from(numbers);
+        LottoNumber bonus =  LottoNumber.from(bonusNumber);
+        validateBonusDuplicate(lotto, bonus);
 
-    public WinningLotto(final List<Integer> numbers, final String bonusNumber) {
-        this.lotto = Lotto.from(numbers);
-        this.bonusNumber = validateBonus(bonusNumber);
+        return new WinningLotto(Lotto.from(numbers),bonus);
+    }
+
+    private WinningLotto(final Lotto lotto, final LottoNumber bonusNumber) {
+        this.lotto = lotto;
+        this.bonusNumber = bonusNumber;
     }
 
     public Rank countMatchNumbers(final Lotto lotto) {
@@ -23,34 +28,14 @@ public class WinningLotto{
         return Rank.matchRank(count, lotto.contains(bonusNumber));
     }
 
-    public boolean contains(final int number) {
+    public boolean contains(final LottoNumber number) {
         return lotto.contains(number);
     }
 
-    private int validateBonus(final String bonusNumber) {
-        int bonus = validateIsInteger(bonusNumber);
-        validateRange(bonus);
-        validateBonusDuplicate(bonus);
-        return bonus;
-    }
-
-    private void validateBonusDuplicate(final int bonusNumber) {
+    private static void validateBonusDuplicate(final Lotto lotto, final LottoNumber bonusNumber) {
         if(lotto.contains(bonusNumber)){
             throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
         }
     }
 
-    private void validateRange(final int number) {
-        if (number < LOTTO_MIN || number > LOTTO_MAX) {
-            throw new IllegalArgumentException(INVALID_RANGE.getMessage());
-        }
-    }
-
-    private int validateIsInteger(final String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_FORMAT.getMessage());
-        }
-    }
 }

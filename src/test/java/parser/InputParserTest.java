@@ -1,8 +1,6 @@
 package parser;
 
-import static global.exception.ExceptionMessage.INVALID_FORMAT;
-import static global.exception.ExceptionMessage.INVALID_POSITIVE;
-import static org.junit.jupiter.api.Assertions.*;
+import static domain.exception.ExceptionMessage.INVALID_FORMAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

@@ -1,5 +1,6 @@
 package controller;
 
+import domain.LottoNumber;
 import domain.Money;
 import domain.Lottos;
 import domain.Rank;
@@ -7,7 +8,7 @@ import domain.dto.AmountDto;
 import domain.dto.LottosDto;
 import domain.WinningLotto;
 import domain.dto.ResultDto;
-import global.generator.RandomGenerator;
+import domain.generator.RandomGenerator;
 import parser.InputParser;
 import java.util.EnumMap;
 import view.InputView;
@@ -46,9 +47,9 @@ public class LottoController {
 
     private WinningLotto inputWinningLotto() {
         String winningNumber = inputView.inputWinningLotto();
-        String bonusNumber = inputView.inputBonusLotto();
+        int bonusNumber = inputView.inputBonusLotto();
 
-        return new WinningLotto(InputParser.lottoParser(winningNumber), bonusNumber);
+        return WinningLotto.of(InputParser.lottoParser(winningNumber), bonusNumber);
     }
 
     private void calculateResult(final Lottos lottos, final WinningLotto winningLotto, final Money money) {

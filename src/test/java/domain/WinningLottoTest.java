@@ -1,7 +1,7 @@
 package domain;
 
-import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
-import static global.exception.ExceptionMessage.INVALID_RANGE;
+import static domain.exception.ExceptionMessage.DUPLICATED_NUMBER;
+import static domain.exception.ExceptionMessage.INVALID_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -18,7 +18,7 @@ public class WinningLottoTest {
     @MethodSource("testMatchRank")
     void 로또_결과에_따른_랭크를_반환한다(List<Integer> numbers, Rank rank) {
         //given
-        WinningLotto winningLotto = new WinningLotto(List.of(1,2,3,4,5,6), "7");
+        WinningLotto winningLotto = WinningLotto.of(List.of(1,2,3,4,5,6), 7);
         Lotto lotto = Lotto.from(numbers);
 
         //when-then
@@ -42,7 +42,7 @@ public class WinningLottoTest {
         @Test
         void 보너스_번호의_범위가_다르면_예외가_발생한다() {
             assertThatThrownBy(() -> {
-                new WinningLotto(List.of(1,2,3,4,5,6), "46");
+                WinningLotto.of(List.of(1,2,3,4,5,6), 46);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(INVALID_RANGE.getMessage());
         }
@@ -50,7 +50,7 @@ public class WinningLottoTest {
         @Test
         void 보너스_번호가_중복되면_예외가_발생한다() {
             assertThatThrownBy(() -> {
-                new WinningLotto(List.of(1,2,3,4,5,6), "6");
+                WinningLotto.of(List.of(1,2,3,4,5,6), 6);
             }).isInstanceOf(IllegalArgumentException.class)
                     .hasMessage(DUPLICATED_NUMBER.getMessage());
         }

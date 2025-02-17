@@ -1,24 +1,18 @@
 package domain;
 
-import global.generator.Generator;
+import domain.generator.Generator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottosFactory {
 
-    private final Generator generator;
-
-    public LottosFactory(final Generator generator) {
-        this.generator = generator;
-    }
-
-    public Lottos from(final int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i<count; i++) {
-            lottos.add(Lotto.from(generator.generate()));
-        }
+    public Lottos from(final int count, final Generator generator) {
+        List<Lotto> lottos = Stream.generate(generator::generate)
+                .limit(count)
+                .map(Lotto::from)
+                .toList();
 
         return new Lottos(lottos);
     }
-
 }
