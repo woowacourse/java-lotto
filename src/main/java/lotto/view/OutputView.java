@@ -27,12 +27,12 @@ public class OutputView {
     }
 
     private void printPrizeResult(final Prize prize, final int count) {
-        if (prize.isBonusMatch) {
+        if (prize.isBonusMatch()) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator(),
-                    prize.matchCount, prize.prizeAmount, count);
+                    prize.getMatchCount(), prize.getPrizeAmount(), count);
             return;
         }
         System.out.printf("%d개 일치 (%d원)- %d개" + System.lineSeparator(),
-                prize.matchCount, prize.prizeAmount, count);
+                prize.getMatchCount(), prize.getPrizeAmount(), count);
     }
 }

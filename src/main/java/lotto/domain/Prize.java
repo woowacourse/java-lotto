@@ -18,9 +18,9 @@ public enum Prize {
     public static final List<Prize> winningPlaces =
             List.of(FIFTH_PLACE, FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE);
 
-    public final int matchCount;
-    public final boolean isBonusMatch;
-    public final int prizeAmount;
+    private final int matchCount;
+    private final boolean isBonusMatch;
+    private final int prizeAmount;
 
     Prize(final int matchCount, final boolean isBonusMatch, final int prizeAmount) {
         this.matchCount = matchCount;
@@ -49,5 +49,17 @@ public enum Prize {
         Map<Prize, Integer> prizeCount = new HashMap<>();
         Arrays.stream(Prize.values()).forEach(prize -> prizeCount.put(prize, Collections.frequency(prizes, prize)));
         return prizeCount;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusMatch() {
+        return isBonusMatch;
+    }
+
+    public int getPrizeAmount() {
+        return prizeAmount;
     }
 }
