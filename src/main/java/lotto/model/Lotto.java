@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_COUNT;
+import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_COUNT;
 
 import java.util.HashSet;
 import java.util.Set;

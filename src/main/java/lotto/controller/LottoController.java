@@ -1,8 +1,5 @@
 package lotto.controller;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;

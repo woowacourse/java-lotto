@@ -1,6 +1,6 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.*;
+import static lotto.constant.LottoNumberConstants.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;

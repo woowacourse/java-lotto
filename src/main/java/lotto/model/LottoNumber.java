@@ -1,7 +1,7 @@
 package lotto.model;
 
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.LottoNumberConstants.LOTTO_NUMBER_MIN;
+import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_MAX;
+import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_MIN;
 
 import java.util.Objects;
 
