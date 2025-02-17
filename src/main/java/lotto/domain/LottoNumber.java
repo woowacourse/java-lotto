@@ -1,27 +1,42 @@
 package lotto.domain;
 
-import static lotto.constant.ErrorMessage.OUT_OF_RANGE_LOTTO_NUMBER;
-
-import lotto.util.NumberGenerator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public record LottoNumber(
-    int number
+        int number
 ) implements Comparable<LottoNumber> {
-    public static final int MINIMUM = 1;
-    public static final int MAXIMUM = 45;
+    private static final int MINIMUM = 1;
+    private static final int MAXIMUM = 45;
+    private static final List<LottoNumber> CACHE = new ArrayList<>();
+
+    static {
+        for (int i = MINIMUM; i <= MAXIMUM; i++) {
+            CACHE.add(new LottoNumber(i));
+        }
+    }
 
     public LottoNumber {
         validate(number);
     }
 
-    private void validate(int number) {
-        if (number < MINIMUM || number > MAXIMUM) {
-            throw new IllegalArgumentException(OUT_OF_RANGE_LOTTO_NUMBER.getMessage());
+    public static LottoNumber of(final int number) {
+        LottoNumber lottoNumber = CACHE.get(number - 1);
+        if (Objects.isNull(lottoNumber)) {
+            lottoNumber = new LottoNumber(number);
         }
+        return lottoNumber;
     }
 
-    public static LottoNumber random(NumberGenerator generator) {
-        return new LottoNumber(generator.generate(MINIMUM, MAXIMUM));
+    public static List<LottoNumber> values() {
+        return CACHE;
+    }
+
+    private void validate(final int number) {
+        if (number < MINIMUM || number > MAXIMUM) {
+            throw new IllegalArgumentException(String.format("[ERROR] 로또 번호는 %d ~ %d 값을 입력해야 합니다.", MAXIMUM, MINIMUM));
+        }
     }
 
     @Override

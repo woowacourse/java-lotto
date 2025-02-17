@@ -1,4 +1,4 @@
-package lotto.dto;
+package lotto.dto.util;
 
 import static lotto.constant.ErrorMessage.NOT_NUMBER;
 
