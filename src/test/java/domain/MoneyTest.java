@@ -4,11 +4,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class MoneyTest {
+
+    private final LottoStore lottoStore;
+
+    public MoneyTest() {
+        LottoPickStrategy strategy = (int size) -> List.of(1, 2, 3, 4, 5, 6);
+        this.lottoStore = new LottoStore(strategy);
+    }
 
     @Test
     void amount가_음수인_경우_예외를_반환한다() {
@@ -88,14 +97,14 @@ class MoneyTest {
 
     @Test
     void 구매금액이_로또가격보다_적을_경우_예외를_발생시킨다() {
-        assertThatThrownBy(() -> new Money("999"))
+        assertThatThrownBy(() -> Money.forPurchaseAmount(999, lottoStore))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("구매 금액은 로또 가격보다 적을 수 없습니다.");
     }
 
     @Test
     void 구매금액이_로또가격보다_많거나_같은_경우_예외를_발생시키지_않는다() {
-        assertThatCode(() -> new Money("1000"))
+        assertThatCode(() -> Money.forPurchaseAmount(1000, lottoStore))
                 .doesNotThrowAnyException();
     }
 }

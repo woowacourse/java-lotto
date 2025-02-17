@@ -1,11 +1,13 @@
 import controller.LottoController;
-import view.InputValidator;
+import converter.InputConverter;
 import view.InputView;
 import view.OutputView;
 
 public class LottoRunner {
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController(new InputView(), new InputValidator(), new OutputView());
+        LottoController lottoController = new LottoController(
+                new InputView(), new OutputView(), new InputConverter()
+        );
         lottoController.start();
     }
 }

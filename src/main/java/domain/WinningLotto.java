@@ -17,11 +17,13 @@ public class WinningLotto {
         }
     }
 
-    public int calculateMatchCount(Lotto lotto) {
-        return this.lotto.calculateMatchCount(lotto);
+    public Rank calculateRank(Lotto purchasedlotto) {
+        int matchCount = lotto.calculateMatchCount(purchasedlotto);
+        boolean isMatchBonusNumber = containsBonusNumber(purchasedlotto);
+        return Rank.findRank(matchCount, isMatchBonusNumber);
     }
 
-    public boolean containsBonusNumber(Lotto lotto) {
+    private boolean containsBonusNumber(Lotto lotto) {
         return lotto.contains(bonusNumber);
     }
 }

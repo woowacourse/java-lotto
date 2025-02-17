@@ -1,12 +1,19 @@
 package domain;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
+import domain.lottogeneratestrategy.RandomLottoPickStrategy;
+
 public record Number(int value) {
 
     private static final int MIN_NUMBER = 1;
-    public static final int MAX_NUMBER = 45;
+    private static final int MAX_NUMBER = 45;
 
     public Number {
         validateNumberRange(value);
+    }
+
+    public static LottoPickStrategy createRandomLottoPickStrategy() {
+        return new RandomLottoPickStrategy(MAX_NUMBER);
     }
 
     private void validateNumberRange(int value) {
