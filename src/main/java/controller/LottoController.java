@@ -36,7 +36,7 @@ public class LottoController {
         int purchaseAmount = convertToInteger(viewFacade.getPurchaseInput());
         Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
             () -> RandomGenerator.generateNumbers(1, 45, 6));
-        viewFacade.printLottos(lottos.toDto());
+        viewFacade.printLottos(lottos);
         return new PurchaseHistory(lottos, purchaseAmount);
     }
 
@@ -54,7 +54,7 @@ public class LottoController {
             purchaseHistory.lottos,
             purchaseHistory.purchaseAmount
         );
-        viewFacade.printStatistics(statistics.toDto());
+        viewFacade.printStatistics(statistics);
     }
 
     private record PurchaseHistory(Lottos lottos, int purchaseAmount) {

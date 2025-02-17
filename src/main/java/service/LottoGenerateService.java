@@ -14,16 +14,10 @@ public class LottoGenerateService {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
-        Lottos lottos = new Lottos();
-        IntStream.range(0, count)
-            .forEach(repeat -> insertNewLottoTo(lottos, strategy));
-        return lottos;
-    }
-
-    private void insertNewLottoTo(Lottos lottos, NumbersStrategy strategy) {
-        List<Integer> numbers = strategy.get();
-        Lotto lotto = new Lotto(numbers);
-        lottos.addLotto(lotto);
+        List<Lotto> lottos = IntStream.range(0, count)
+            .mapToObj(repeat -> new Lotto(strategy.get()))
+            .toList();
+        return new Lottos(lottos);
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {

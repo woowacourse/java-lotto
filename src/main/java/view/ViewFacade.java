@@ -1,7 +1,7 @@
 package view;
 
-import dto.LottosDto;
-import dto.StatisticsDto;
+import domain.Lottos;
+import domain.Statistics;
 
 public class ViewFacade {
 
@@ -25,11 +25,11 @@ public class ViewFacade {
         return inputView.getBonusNumber();
     }
 
-    public void printLottos(LottosDto lottosDto) {
-        outputView.printLottos(lottosDto);
+    public void printLottos(Lottos lottos) {
+        outputView.printLottos(lottos);
     }
 
-    public void printStatistics(StatisticsDto statisticsDto) {
-        outputView.printStatistics(statisticsDto);
+    public void printStatistics(Statistics statistics) {
+        outputView.printStatistics(statistics);
     }
 }

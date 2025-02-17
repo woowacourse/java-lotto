@@ -1,20 +1,23 @@
 package domain;
 
-import dto.StatisticsDto;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 public class Statistics {
 
-    private Map<PrizeTier, Integer> prizeCounts;
-    private double profitRate;
+    private final Map<PrizeTier, Integer> prizeCounts;
+    private final double profitRate;
 
     public Statistics(Map<PrizeTier, Integer> prizeCounts, double profitRate) {
         this.prizeCounts = prizeCounts;
         this.profitRate = profitRate;
     }
 
-    public StatisticsDto toDto() {
-        return new StatisticsDto(new HashMap<>(prizeCounts), profitRate);
+    public Map<PrizeTier, Integer> getPrizeCounts() {
+        return Collections.unmodifiableMap(prizeCounts);
+    }
+
+    public double getProfitRate() {
+        return profitRate;
     }
 }

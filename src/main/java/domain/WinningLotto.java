@@ -7,8 +7,8 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private Lotto basicLotto;
-    private int bonusNumber;
+    private final Lotto basicLotto;
+    private final int bonusNumber;
 
     public WinningLotto(Lotto basicLotto, int bonusNumber) {
         validateBonusNumber(basicLotto, bonusNumber);

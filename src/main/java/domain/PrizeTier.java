@@ -10,9 +10,9 @@ public enum PrizeTier {
     FIFTH(3, false, 5_000),
     NONE(0, false, 0);
 
-    private int matchedCount;
-    private boolean isBonusMatched;
-    private int prize;
+    private final int matchedCount;
+    private final boolean isBonusMatched;
+    private final int prize;
 
     PrizeTier(int matchedCount, boolean isBonusMatched, int prize) {
         this.matchedCount = matchedCount;

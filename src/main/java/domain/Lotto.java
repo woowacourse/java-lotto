@@ -4,7 +4,6 @@ import static error.ErrorMessage.DUPLICATE_NUMBERS_FOUND;
 import static error.ErrorMessage.INVALID_LOTTO_COUNT;
 import static error.ErrorMessage.NUMBER_OUT_OF_RANGE;
 
-import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Set;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
     private PrizeTier prizeTier = null;
 
     public Lotto(List<Integer> numbers) {
@@ -45,8 +44,8 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
-    public LottoDto toDto() {
-        return new LottoDto(new ArrayList<>(numbers));
+    public List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
     private void validateNumbers(List<Integer> numbers) {
