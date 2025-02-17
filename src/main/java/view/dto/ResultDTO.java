@@ -5,15 +5,16 @@ import java.util.Map;
 import model.Prize;
 
 public record ResultDTO(
-        List<InnerResultDetail> prizeDTOs, double profit
+        List<WinningStatDTO> prizeDTOs, double profit
 ) {
-    public record InnerResultDetail(int count, int price, int match, boolean isBonus) implements Comparable<InnerResultDetail>{
-        public static InnerResultDetail from(Prize prize, int count){
-            return new InnerResultDetail(prize.getCount(), prize.getPrice(), count, prize.isBonus());
+    public record WinningStatDTO(int count, int price, int match, boolean isBonus) implements
+            Comparable<WinningStatDTO> {
+        public static WinningStatDTO from(Prize prize, int count) {
+            return new WinningStatDTO(prize.getCount(), prize.getPrice(), count, prize.isBonus());
         }
 
         @Override
-        public int compareTo(InnerResultDetail o) {
+        public int compareTo(WinningStatDTO o) {
             int comp = count - o.count;
             if (comp == 0) {
                 if (isBonus) {
@@ -24,10 +25,11 @@ public record ResultDTO(
             return comp;
         }
     }
-    public static ResultDTO from(Map<Prize, Integer> result, double profit){
+
+    public static ResultDTO from(Map<Prize, Integer> result, double profit) {
         return new ResultDTO(result.entrySet()
                 .stream()
-                .map((entry) -> InnerResultDetail.from(entry.getKey(), entry.getValue()))
+                .map((entry) -> WinningStatDTO.from(entry.getKey(), entry.getValue()))
                 .toList(), profit);
     }
 

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import model.LottoNumber;
 
-public class Parser {
+public class LottoParser {
 
     private static final String DELIMITER_COMMA = ", ";
 
