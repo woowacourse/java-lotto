@@ -3,11 +3,15 @@ import controller.PurchaseController;
 import controller.WinLottoController;
 import model.PurchasedLottos;
 import model.WinLotto;
+import view.InputView;
+import view.OutputView;
 
 public class LottoApplication {
-    private final PurchaseController purchaseController = new PurchaseController();
-    private final WinLottoController winLottoController = new WinLottoController();
-    private final LottoStatisticsController lottoStatisticsController = new LottoStatisticsController();
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final PurchaseController purchaseController = new PurchaseController(inputView, outputView);
+    private final WinLottoController winLottoController = new WinLottoController(inputView);
+    private final LottoStatisticsController lottoStatisticsController = new LottoStatisticsController(outputView);
 
     public static void main(String[] args) {
         new LottoApplication().run();

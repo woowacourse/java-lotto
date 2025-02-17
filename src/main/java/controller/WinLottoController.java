@@ -5,7 +5,11 @@ import model.WinLotto;
 import view.InputView;
 
 public class WinLottoController {
-    private final InputView inputView = new InputView();
+    private final InputView inputView;
+
+    public WinLottoController(InputView inputView) {
+        this.inputView = inputView;
+    }
 
     public WinLotto winLotto() {
         List<Integer> winNumbers = inputView.readWinNumbers();

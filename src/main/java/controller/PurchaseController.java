@@ -5,8 +5,13 @@ import view.InputView;
 import view.OutputView;
 
 public class PurchaseController {
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public PurchaseController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
 
     public PurchasedLottos purchase() {
         Integer purchaseAmount = inputView.readPurchaseAmount();
