@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;

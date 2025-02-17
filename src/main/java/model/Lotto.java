@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,7 +17,6 @@ public class Lotto {
         sb.append("[");
         combineLottoNumber(sb);
         sb.append("]");
-
         return sb.toString();
     }
 

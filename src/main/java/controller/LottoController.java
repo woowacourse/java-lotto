@@ -1,11 +1,11 @@
-package Controller;
+package controller;
 
-import Model.Lotto;
-import Model.LottoResult;
-import Model.Lottos;
-import Model.WinnerNumber;
-import View.InputView;
-import View.OutputView;
+import model.Lotto;
+import model.LottoResult;
+import model.Lottos;
+import model.WinnerNumber;
+import view.InputView;
+import view.OutputView;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,7 +39,6 @@ public class LottoController {
     }
 
     private List<Integer> readWinnerNumbers() {
-
         OutputView.inputWinnerNumbers();
         String inputWinnerNumbers = SCANNER.nextLine();
         return InputView.inputWinnerNumbers(inputWinnerNumbers);

@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-import Constant.Constants;
+import constant.LottoConfig;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +13,6 @@ public class LottoCreator {
 
     public static List<Integer> createLotto() {
         Set<Integer> nonDuplicateLottoNumbers = new HashSet<>();
-
         while (nonDuplicateLottoNumbers.size() < LOTTO_COUNT) {
             nonDuplicateLottoNumbers.add(createRandomNumber());
         }
@@ -22,7 +21,7 @@ public class LottoCreator {
 
     private static int createRandomNumber() {
         Random random = new Random();
-        return random.nextInt(Constants.LOTTO_MAX_NUMBER) + 1;
+        return random.nextInt(LottoConfig.LOTTO_MAX_NUMBER) + 1;
     }
 
 }

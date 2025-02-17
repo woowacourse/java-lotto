@@ -1,7 +1,7 @@
-package View;
+package view;
 
-import Model.LottoResult;
-import Model.Lottos;
+import model.LottoResult;
+import model.Lottos;
 
 public class OutputView {
 

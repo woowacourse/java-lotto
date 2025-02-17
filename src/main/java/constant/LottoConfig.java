@@ -1,4 +1,4 @@
-package Constant;
+package constant;
 
 public final class LottoConfig {
     public static final int LOTTO_MIN_NUMBER = 1;
