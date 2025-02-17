@@ -1,10 +1,9 @@
 package model;
 
-import dto.ROIResultResponse;
+import dto.LottoResultResponse;
 import dto.TicketAmountResponse;
 
-import static global.utils.Validator.validateDivisibility;
-import static global.utils.Validator.validateRange;
+import static global.utils.Validator.validateNumberRange;
 
 public class Ticket {
 
@@ -25,17 +24,23 @@ public class Ticket {
         return new TicketAmountResponse(getTicketAmount());
     }
 
-    public ROIResultResponse createROIResponse(final int totalPrice) {
+    public LottoResultResponse createROIResponse(final int totalPrice) {
         double ROI = calculateROI(totalPrice);
-        return new ROIResultResponse(ROI, Heuristic.determine(ROI));
+        return new LottoResultResponse(ROI, Heuristic.determine(ROI));
     }
 
-    private static void validatePurchaseMoney(final int purchaseMoney) {
-        validateRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
-        validateDivisibility(purchaseMoney, TICKET_PRICE);
+    private void validatePurchaseMoney(final int purchaseMoney) {
+        validateNumberRange(purchaseMoney, TICKET_PRICE, Integer.MAX_VALUE);
+        validateDivisibility(purchaseMoney);
     }
 
     private double calculateROI(final int totalPrice) {
         return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
+    }
+
+    private void validateDivisibility(final int number) {
+        if (number % TICKET_PRICE != 0) {
+            throw new IllegalArgumentException("금액은 " + TICKET_PRICE + "원 단위로 나누어 떨어져야 합니다.");
+        }
     }
 }

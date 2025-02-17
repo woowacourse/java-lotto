@@ -7,7 +7,7 @@ public enum Heuristic {
 
     private final String benefitType;
 
-    Heuristic(String benefitType) {
+    Heuristic(final String benefitType) {
         this.benefitType = benefitType;
     }
 

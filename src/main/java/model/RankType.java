@@ -31,7 +31,7 @@ public enum RankType {
                 .findFirst()
                 .orElse(NONE);
     }
-    
+
     public LottoRankDetailResponse createResponse() {
         return new LottoRankDetailResponse(
                 matchNumber,

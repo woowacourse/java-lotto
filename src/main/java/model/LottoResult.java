@@ -2,6 +2,7 @@ package model;
 
 import dto.LottoResultDetailResponse;
 import dto.LottoResultsResponse;
+import model.lotto.WinningLotto;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ public class LottoResult {
 
     private Map<RankType, Integer> results;
 
-    public LottoResult(Lottos lottos, WinningLotto winningLotto) {
+    public LottoResult(final Lottos lottos, final WinningLotto winningLotto) {
         results = winningLotto.evaluateRank(lottos.getLottos());
         sort();
     }

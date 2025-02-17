@@ -5,7 +5,7 @@ import global.utils.Validator;
 import model.LottoResult;
 import model.Lottos;
 import model.Ticket;
-import model.WinningLotto;
+import model.lotto.WinningLotto;
 import view.InputView;
 import view.OutputView;
 

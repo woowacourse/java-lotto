@@ -1,17 +1,18 @@
 package model;
 
 import dto.LottosResponse;
+import model.lotto.Lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(final int ticketAmount) {
-        lottos = new ArrayList<>();
-        addLottos(ticketAmount);
+    public Lottos(final int amount) {
+        lottos = generateLottos(amount);
     }
 
     public LottosResponse createResponse() {
@@ -23,12 +24,15 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
-    private void addLottos(final int ticketAmount) {
-        for (int i = 0; i < ticketAmount; i++) {
+    private List<Lotto> generateLottos(final int amount) {
+        ArrayList<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < amount; i++) {
             lottos.add(new Lotto());
         }
+
+        return lottos;
     }
 }

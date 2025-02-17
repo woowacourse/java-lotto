@@ -1,13 +1,14 @@
-package model;
-
-import static global.constant.LottoConstant.MAX_LOTTO_NUMBER;
-import static global.constant.LottoConstant.MIN_LOTTO_NUMBER;
+package model.lotto;
 
 import global.utils.Validator;
+import model.RankType;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
+import static model.lotto.LottoConstant.MAX_LOTTO_NUMBER;
+import static model.lotto.LottoConstant.MIN_LOTTO_NUMBER;
 
 public class WinningLotto {
 
@@ -38,7 +39,7 @@ public class WinningLotto {
     }
 
     private void validateBonusNumber(final int bonusNumber) {
-        Validator.validateRange(bonusNumber, MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER);
+        Validator.validateNumberRange(bonusNumber, MIN_LOTTO_NUMBER.getValue(), MAX_LOTTO_NUMBER.getValue());
         validateLottoNumberDuplicate(bonusNumber);
     }
 
