@@ -1,13 +1,15 @@
 package view;
 
-import enums.LottoRanking;
 import domain.Lotto;
 import domain.Lottos;
+import enums.LottoRanking;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private OutputView() {
+    }
 
     public static void printTicketsContMessage(int ticket) {
         System.out.println(ticket + "개를 구매했습니다.");
