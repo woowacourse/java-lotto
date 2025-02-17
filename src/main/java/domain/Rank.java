@@ -25,11 +25,11 @@ public enum Rank {
 
     private static class Prize {
         private static final long NONE = 0L;
-        private static final long FIFTH = 5000L;
-        private static final long FOURTH = 50000L;
-        private static final long THIRD = 1500000L;
-        private static final long SECOND = 30000000L;
-        private static final long FIRST = 2000000000L;
+        private static final long FIFTH = 5_000L;
+        private static final long FOURTH = 50_000L;
+        private static final long THIRD = 1_500_000L;
+        private static final long SECOND = 30_000_000L;
+        private static final long FIRST = 2_000_000_000L;
     }
 
     private static class MatchCount {
