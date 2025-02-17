@@ -7,8 +7,9 @@ public enum WinningCount {
     FIVE(5, 1500000),
     FIVE_BONUS(5, 30000000),
     SIX(6, 2000000000);
-    private int amount;
-    private int matchedCount;
+
+    private final int amount;
+    private final int matchedCount;
 
     WinningCount(int matchedCount, int amount) {
         this.matchedCount = matchedCount;
