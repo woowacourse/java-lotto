@@ -1,17 +1,21 @@
 package domain;
 
-import static global.exception.ExceptionMessage.INVALID_INTEGER;
-import static global.exception.ExceptionMessage.INVALID_POSITIVE;
-import static global.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.excepetion.AmountExceptionMessage;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class AmountTest {
+
+    @Test
+    void 금액_생성_성공_테스트() {
+        assertThatCode(() -> new Amount("14000")).doesNotThrowAnyException();
+    }
 
     @Nested
     class 금액_검증_테스트 {
@@ -20,7 +24,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount("우택호");
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_INTEGER);
+                    .hasMessage(AmountExceptionMessage.INVALID_INTEGER);
         }
 
         @ParameterizedTest
@@ -29,7 +33,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount(input);
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_POSITIVE);
+                    .hasMessage(AmountExceptionMessage.INVALID_POSITIVE);
         }
 
         @ParameterizedTest
@@ -38,7 +42,7 @@ class AmountTest {
             assertThatThrownBy(() -> {
                 new Amount(input);
             }).isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(INVALID_UNIT_PRICE);
+                    .hasMessage(AmountExceptionMessage.INVALID_UNIT_PRICE);
         }
     }
 
