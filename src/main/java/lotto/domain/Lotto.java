@@ -9,7 +9,6 @@ import lotto.util.Parser;
 
 public class Lotto {
 
-    private static final String DELIMITER = ",";
     private static final String LOTTO_NUMBER_RANGE_ERROR = "1과 45 사이의 수를 입력하셔야 합니다.";
     private static final String LOTTO_NUMBER_FORMAT_ERROR = "당첨 번호는 숫자를 입력하셔야 합니다.";
     private static final String LOTTO_NUMBER_DUPLICATED_ERROR = "로또 숫자는 중복될 수 없습니다.";
@@ -22,7 +21,9 @@ public class Lotto {
     }
 
     public Lotto(String winningLottoInput) {
-        validate(winningLottoInput);
+        List<Integer> parsedLotto = parseLotto(winningLottoInput);
+        validateLotto(parsedLotto);
+        this.lottoNumber = parsedLotto;
     }
 
     public int getMatchCount(Lotto winningLottoNumber) {
@@ -35,30 +36,26 @@ public class Lotto {
         return lottoNumber.contains(bonusNumber);
     }
 
-    private void validate(String winningLottoInput) {
-        List<String> splittedLotto = validateLength(winningLottoInput);
-        List<Integer> parsedLotto = validateIsNumber(splittedLotto);
-        validateRange(parsedLotto);
-        validateDuplicate(parsedLotto);
-        this.lottoNumber = parsedLotto;
-    }
+    private List<Integer> parseLotto(String winningLottoInput) {
+        List<String> splittedLotto = Parser.splitByComma(winningLottoInput);
 
-    private List<String> validateLength(String winningLottoInput) {
-        List<String> winningNumbers = List.of(winningLottoInput
-                .replaceAll(" ", "")
-                .split(DELIMITER));
-        if (winningNumbers.size() != LottoConstants.LENGTH.getNumber()) {
-            throw new IllegalArgumentException(LOTTO_NUMBER_LENGTH_ERROR);
-        }
-        return winningNumbers;
-    }
-
-    private List<Integer> validateIsNumber(List<String> splitedLotto) {
         List<Integer> parsedLotto = new ArrayList<>();
-        for (String lottoNumber : splitedLotto) {
-            parsedLotto.add(Parser.validateNumber(lottoNumber, LOTTO_NUMBER_FORMAT_ERROR));
+        for (String lottoNumber : splittedLotto) {
+            parsedLotto.add(Parser.parseToNumber(lottoNumber, LOTTO_NUMBER_FORMAT_ERROR));
         }
         return parsedLotto;
+    }
+
+    private void validateLotto(List<Integer> parsedLotto) {
+        validateLength(parsedLotto);
+        validateRange(parsedLotto);
+        validateDuplicate(parsedLotto);
+    }
+
+    private void validateLength(List<Integer> parsedLotto) {
+        if (parsedLotto.size() != LottoConstants.LENGTH.getNumber()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_LENGTH_ERROR);
+        }
     }
 
     private void validateRange(List<Integer> parsedLotto) {

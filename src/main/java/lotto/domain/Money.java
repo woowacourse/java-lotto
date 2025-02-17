@@ -27,7 +27,7 @@ public class Money {
     }
 
     private void validate(String money) {
-        int validatedMoney = Parser.validateNumber(money, PURCHASE_FORMAT_ERROR);
+        int validatedMoney = Parser.parseToNumber(money, PURCHASE_FORMAT_ERROR);
         validateUnit(validatedMoney);
         validateNegative(validatedMoney);
         validateLimit(validatedMoney);

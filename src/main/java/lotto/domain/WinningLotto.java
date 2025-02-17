@@ -26,7 +26,7 @@ public class WinningLotto {
     }
 
     private int validate(String bonusNumber) {
-        int parsedBonusNumber = Parser.validateNumber(bonusNumber, BONUS_NUMBER_FORMAT_ERROR);
+        int parsedBonusNumber = Parser.parseToNumber(bonusNumber, BONUS_NUMBER_FORMAT_ERROR);
         checkRange(parsedBonusNumber);
         validateBonusNumber(lotto, parsedBonusNumber);
         return parsedBonusNumber;
