@@ -1,5 +1,6 @@
 package view;
 
+import domain.Lotto;
 import domain.LottoFactory;
 
 import java.util.Arrays;
@@ -60,7 +61,7 @@ public class InputView {
     }
 
     private static void validateWinningNumbers(List<Integer> winningNumbers) {
-        if(winningNumbers.size() != 6) {
+        if(winningNumbers.size() != LottoFactory.LOTTO_COUNT) {
             throw new IllegalArgumentException("당첨 번호는 6개여야 합니다.");
         }
         for (int num : winningNumbers) {
@@ -69,8 +70,8 @@ public class InputView {
     }
 
     private static void validateNumber(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("번호는 1 ~ 45만 입력 가능합니다.");
+        if (number < Lotto.LOTTO_NUMBER_MIN || number > Lotto.LOTTO_NUMBER_MAX) {
+            throw new IllegalArgumentException("번호는 " + Lotto.LOTTO_NUMBER_MIN + " ~ " + Lotto.LOTTO_NUMBER_MAX + " 만 입력 가능합니다.");
         }
     }
 

@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Rank {
-    NONE("", 0L, 0, false),
-    FIFTH("3개 일치 (5000원)- ", 5000L, 3, false),
-    FOURTH("4개 일치 (50000원)- ", 50000L, 4, false),
-    THIRD("5개 일치 (1500000원)- ", 1500000L, 5, false),
-    SECOND("5개 일치, 보너스 볼 일치(30000000원)- ", 30000000L, 5, true),
-    FIRST("6개 일치 (2000000000원)- ", 2000000000L, 6, false);
+    NONE("", Prize.NONE, MatchCount.NONE, false),
+    FIFTH("3개 일치 (5,000원)- ", Prize.FIFTH, MatchCount.THREE, false),
+    FOURTH("4개 일치 (50,000원)- ", Prize.FOURTH, MatchCount.FOUR, false),
+    THIRD("5개 일치 (1,500,000원)- ", Prize.THIRD, MatchCount.FIVE, false),
+    SECOND("5개 일치, 보너스 볼 일치 (30,000,000원)- ", Prize.SECOND, MatchCount.FIVE, true),
+    FIRST("6개 일치 (2,000,000,000원)- ", Prize.FIRST, MatchCount.SIX, false);
 
     private final String message;
     private final long prize;
@@ -21,6 +21,23 @@ public enum Rank {
         this.prize = prize;
         this.count = count;
         this.bonusMatch = bonusMatch;
+    }
+
+    private static class Prize {
+        private static final long NONE = 0L;
+        private static final long FIFTH = 5000L;
+        private static final long FOURTH = 50000L;
+        private static final long THIRD = 1500000L;
+        private static final long SECOND = 30000000L;
+        private static final long FIRST = 2000000000L;
+    }
+
+    private static class MatchCount {
+        private static final int NONE = 0;
+        private static final int THREE = 3;
+        private static final int FOUR = 4;
+        private static final int FIVE = 5;
+        private static final int SIX = 6;
     }
 
     public static Rank fromResult(int matchCount, boolean contains) {

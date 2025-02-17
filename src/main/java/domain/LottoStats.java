@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class LottoStats {
+    private final int DEFAULT_COUNT = 0;
+
     private final Map<Rank, Integer> rank;
     private final List<Integer> winningNumbers;
     private final int bonusBall;
@@ -18,7 +20,7 @@ public class LottoStats {
     public void calculateResult(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
             Rank lottoRank = lotto.getRank(winningNumbers, bonusBall);
-            rank.put(lottoRank, rank.getOrDefault(lottoRank, 0) + 1);
+            rank.put(lottoRank, rank.getOrDefault(lottoRank, DEFAULT_COUNT) + 1);
         }
     }
 
@@ -45,7 +47,7 @@ public class LottoStats {
     }
 
     public Integer getRankCount(Rank lottoRank) {
-        return rank.getOrDefault(lottoRank, 0);
+        return rank.getOrDefault(lottoRank, DEFAULT_COUNT);
     }
 
     public String getEarningRate(int purchaseAmount) {
