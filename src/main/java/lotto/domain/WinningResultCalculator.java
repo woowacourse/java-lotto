@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.constant.ErrorMessage;
-
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ public class WinningResultCalculator {
 
     private void validate(final Lotto winningLotto, final LottoNumber bonusNumber) {
         if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_BONUS_NUMBER);
+            throw new IllegalArgumentException("로또 번호와 중복되지 않는 보너스 번호를 입력해 주세요.");
         }
     }
 
