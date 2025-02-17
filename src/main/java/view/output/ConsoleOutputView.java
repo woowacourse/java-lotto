@@ -42,11 +42,11 @@ public class ConsoleOutputView implements OutputView {
         System.out.printf("총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n", revenueRate, revenueDescription);
     }
 
-    private String selectByFlag(final boolean selectLeft, final String left, final String right) {
-        if (selectLeft) {
-            return left;
+    private String selectByFlag(final boolean selectionFlag, final String trueValue, final String falseValue) {
+        if (selectionFlag) {
+            return trueValue;
         }
-        return right;
+        return falseValue;
     }
 
     @Override
