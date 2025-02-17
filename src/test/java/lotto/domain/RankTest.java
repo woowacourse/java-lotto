@@ -16,7 +16,7 @@ class RankTest {
         assertThat(Rank.find(5, false)).isEqualTo(Rank.THIRD);
     }
 
-    @DisplayName("5개_맞고_보너스_넘버가_없다면_THIRD_반환한다")
+    @DisplayName("5개_맞고_보너스_넘버가_있다면_SECOND_반환한다")
     @Test
     void returnSecond() {
         assertThat(Rank.find(5, true)).isEqualTo(Rank.SECOND);
@@ -31,6 +31,12 @@ class RankTest {
         for (Boolean hasBonusNumber : booleans) {
             assertThat(Rank.find(correctCount, hasBonusNumber)).isEqualTo(Rank.NO_REWARD);
         }
+    }
+
+    @DisplayName("4개 맞고 보너스 넘버가 맞아도 FOURTH 반환한다.")
+    @Test
+    void returnFourth(){
+        assertThat(Rank.find(4, true)).isEqualTo(Rank.FOURTH);
     }
 
 }

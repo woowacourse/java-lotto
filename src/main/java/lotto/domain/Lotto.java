@@ -13,7 +13,7 @@ public class Lotto {
 
     public Lotto(List<LottoNumber> lottoNumbers) {
         validLottoNumbers(lottoNumbers);
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = List.copyOf(lottoNumbers);
     }
 
     public long getMatchCount(Lotto winnerNumbers) {

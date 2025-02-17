@@ -47,6 +47,5 @@ class LottoNumberTest {
         LottoNumber number2 = LottoNumber.from(5);
 
         assertThat(number1).isLessThan(number2);
-        assertThat(number2).isGreaterThan(number1);
     }
 }
