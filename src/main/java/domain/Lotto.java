@@ -23,7 +23,7 @@ public class Lotto {
         boolean bonusChecker = false;
 
         for (int number : numbers) {
-            winningCounter += checkWinningCounter(winningNumbers, number);
+            winningCounter += addWinningCounter(winningNumbers, number);
         }
         if (numbers.contains(bonusNumber)) {
             bonusChecker = true;
@@ -31,7 +31,7 @@ public class Lotto {
         return LottoMatch.calculateLotto(winningCounter, bonusChecker);
     }
 
-    private int checkWinningCounter(List<Integer> winningNumbers, int number) {
+    private int addWinningCounter(List<Integer> winningNumbers, int number) {
         if (winningNumbers.contains(number)) {
             return 1;
         }
