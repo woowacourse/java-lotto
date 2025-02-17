@@ -21,7 +21,7 @@ public class OutputView {
     public void displayLottos(int totalLotto, List<Lotto> lottos) {
         System.out.printf(TOTAL_LOTTO_FORMAT, totalLotto);
 
-        for(Lotto lotto : lottos) {
+        for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
     }

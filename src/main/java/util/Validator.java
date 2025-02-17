@@ -1,6 +1,5 @@
 package util;
 
-
 import static util.constant.Message.INPUT_NON_NUMERIC_ERROR;
 import static util.constant.Message.INPUT_NULL_ERROR;
 
