@@ -11,9 +11,11 @@ public enum ErrorMessage {
         LottoNumber.MINIMUM, LottoNumber.MAXIMUM)),
     WINNING_NUMBERS_CONTAIN_BONUS_NUMBER("당첨 번호와 보너스 번호는 중복될 수 없습니다."),
     DUPLICATE_LOTTO_NUMBER("로또 번호는 중복될 수 없습니다."),
+    USED_MONEY_MUST_NOT_ZERO("구입 금액은 0원일 수 없습니다."),
     ;
 
     private static final String PREFIX = "[ERROR] ";
+
     private final String message;
 
     ErrorMessage(String message) {
@@ -23,5 +25,4 @@ public enum ErrorMessage {
     public String getMessage() {
         return PREFIX + message;
     }
-
 }

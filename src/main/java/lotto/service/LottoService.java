@@ -1,12 +1,16 @@
 package lotto.service;
 
-import lotto.domain.*;
-import lotto.dto.response.LottosResponse;
-import lotto.dto.request.PaymentRequest;
-import lotto.dto.response.ResultResponse;
-import lotto.dto.request.WinningBallsRequest;
-
 import java.util.Map;
+
+import lotto.domain.Bank;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.WinningNumbers;
+import lotto.dto.request.PaymentRequest;
+import lotto.dto.request.WinningBallsRequest;
+import lotto.dto.response.LottosResponse;
+import lotto.dto.response.ResultResponse;
 
 public class LottoService {
     private final Bank bank;
@@ -14,12 +18,12 @@ public class LottoService {
     private WinningNumbers winningNumbers;
 
     public LottoService() {
-        this.bank = new Bank();
+        bank = new Bank();
     }
 
     public LottosResponse buyLottos(PaymentRequest request) {
         bank.use(request.payment());
-        this.lottos = new Lottos(request.payment());
+        lottos = new Lottos(request.payment());
         return LottosResponse.from(lottos);
     }
 

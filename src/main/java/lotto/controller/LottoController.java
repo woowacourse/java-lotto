@@ -16,20 +16,8 @@ public class LottoController {
     }
 
     public void run() {
-        buyLottoTicket();
-        setWinningBalls();
-        getResult();
-    }
-
-    private void buyLottoTicket() {
         outputView.printTicket(lottoService.buyLottos(inputView.readPayment()));
-    }
-
-    private void setWinningBalls() {
         lottoService.setWinningBalls(inputView.readWinningBalls());
-    }
-
-    private void getResult() {
         outputView.printResult(lottoService.getResult());
     }
 }
