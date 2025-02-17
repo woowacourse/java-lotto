@@ -1,9 +1,5 @@
 package view;
 
-import static view.util.LottoConstants.COMMA_REGEX;
-import static view.util.LottoConstants.DELIMITER_VALIDATE_REGEX;
-import static view.util.LottoConstants.NUMERIC_VALIDATE_REGEX;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +9,10 @@ public class InputView {
     private static final String INPUT_MONEY_PROMPT = "구입금액을 입력해 주세요.";
     private static final String INPUT_WINNING_NUMBER_PROMPT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String INPUT_BONUS_NUMBER_PROMPT = "보너스 번호를 입력해 주세요.";
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final String NUMERIC_VALIDATE_REGEX = "[+-]?\\d*(\\.\\d+)?";
+    private static final String DELIMITER_VALIDATE_REGEX = "([0-9]+)(, [0-9]+)+";
+    private static final String COMMA_REGEX = ", ";
 
     private static void isDivideByThousand(int inputMoney) {
         if (inputMoney % LottoConstants.LOTTO_PRICE_PER_ONE != 0) {

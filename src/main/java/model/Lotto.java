@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private List<Integer> randomNumbers;
+    private final List<Integer> randomNumbers;
 
     public List<Integer> getRandomNumbers() {
         return randomNumbers;
@@ -25,11 +25,7 @@ public class Lotto {
         return (new HashSet<>(randomNumbers).size() != randomNumbers.size());
     }
 
-    public String makeResultToStringForPrint() {
-        return "[" + String.join(", ",
-                randomNumbers.stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        ) + "]";
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return randomNumbers.contains(bonusNumber);
     }
 }
