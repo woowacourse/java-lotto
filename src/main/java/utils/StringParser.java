@@ -18,9 +18,10 @@ public class StringParser {
         }
     }
 
+    //공백 제거 추가
     public static List<Integer> parseToNumbers(String input, String delimiter, ErrorMessage errorMessage) {
         return Arrays.stream(input.split(delimiter))
-                .map(token -> parseToNumber(token, errorMessage))
+                .map(token -> parseToNumber(token.trim(), errorMessage))
                 .toList();
     }
 }
