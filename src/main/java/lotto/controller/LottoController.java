@@ -30,7 +30,7 @@ public class LottoController {
         List<Prize> prizes = lottos.calculatePrizes(winningLotto);
         double earningRate = lottos.calculateEarningRate(prizes);
 
-        outputView.printLottoResult(prizes, earningRate);
+        outputView.printLottoResult(Prize.count(prizes), earningRate);
         inputView.close();
     }
 

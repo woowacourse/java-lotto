@@ -1,7 +1,10 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public enum Prize {
     FIRST_PLACE(6, false, 2000000000),
@@ -11,6 +14,9 @@ public enum Prize {
     FIFTH_PLACE(3, false, 5000),
     SIXTH_PLACE(0, false, 0),
     ;
+
+    public static final List<Prize> winningPlaces =
+            List.of(FIFTH_PLACE, FOURTH_PLACE, THIRD_PLACE, SECOND_PLACE, FIRST_PLACE);
 
     public final int matchCount;
     public final boolean isBonusMatch;
@@ -37,5 +43,11 @@ public enum Prize {
         return prizes.stream()
                 .mapToLong(prize -> prize.prizeAmount)
                 .sum();
+    }
+
+    public static Map<Prize, Integer> count(List<Prize> prizes) {
+        Map<Prize, Integer> prizeCount = new HashMap<>();
+        Arrays.stream(Prize.values()).forEach(prize -> prizeCount.put(prize, Collections.frequency(prizes, prize)));
+        return prizeCount;
     }
 }
