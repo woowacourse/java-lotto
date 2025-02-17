@@ -7,9 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 import model.LottoNumbers;
 import model.WinLotto;
+import model.WinLottoInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import service.WinLottoInfoMapper;
 
 class WinLottoInfoTest {
     List<LottoNumbers> lottoNumbersList = new ArrayList<>();
@@ -26,7 +28,7 @@ class WinLottoInfoTest {
         lottoNumbersList.add(new LottoNumbers(List.of(1, 2, 3, 10, 8, 9))); // FIFTH
         lottoNumbersList.add(new LottoNumbers(List.of(14, 15, 10, 11, 12, 13))); // NONE
         resultList = lottoNumbersList.stream()
-                .map((purchasedLotto) -> WinLottoInfo.result(purchasedLotto, winLotto))
+                .map((purchasedLotto) -> WinLottoInfoMapper.result(purchasedLotto, winLotto))
                 .toList();
     }
 

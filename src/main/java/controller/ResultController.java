@@ -1,12 +1,12 @@
 package controller;
 
-import constant.WinLottoInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Purchase;
 import model.Result;
 import model.WinLotto;
-import service.WinLottoService;
+import model.WinLottoInfo;
+import service.WinLottoInfoMapper;
 import view.ResultView;
 
 public class ResultController {
@@ -14,7 +14,7 @@ public class ResultController {
 
     public void lottoResult(Purchase purchase, WinLotto winLotto) {
         List<WinLottoInfo> winResults = purchase.getLottos().stream()
-                .map(lotto -> WinLottoService.result(lotto, winLotto))
+                .map(lotto -> WinLottoInfoMapper.result(lotto, winLotto))
                 .collect(Collectors.toList());
         Result result = new Result(winResults);
 

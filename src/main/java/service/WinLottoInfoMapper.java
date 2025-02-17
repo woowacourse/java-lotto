@@ -1,26 +1,15 @@
-package constant;
+package service;
+
+import static model.WinLottoInfo.NONE;
+import static model.WinLottoInfo.THIRD;
 
 import java.util.Arrays;
 import java.util.List;
 import model.LottoNumbers;
 import model.WinLotto;
+import model.WinLottoInfo;
 
-public enum WinLottoInfo {
-    FIRST(6,  2000000000),
-    SECOND(5,  30000000),
-    THIRD(5,  1500000),
-    FOURTH(4,  50000),
-    FIFTH(3,  5000),
-    NONE(2,  0);
-
-    private final int matchNumberCount;
-    private final int price;
-
-    WinLottoInfo(int matchNumberCount,  int price) {
-        this.matchNumberCount = matchNumberCount;
-
-        this.price = price;
-    }
+public class WinLottoInfoMapper {
 
     public static WinLottoInfo result(LottoNumbers purchasedLotto, WinLotto winLotto) {
         int matchNumberCount = winLotto.countMatchNumber(purchasedLotto);
@@ -32,16 +21,10 @@ public enum WinLottoInfo {
             return THIRD;
         }
         List<WinLottoInfo> filteredWinLottoInfo = Arrays.stream(WinLottoInfo.values())
-                .filter((winLottoInfo) -> winLottoInfo.matchNumberCount == matchNumberCount)
+                .filter((winLottoInfo) -> winLottoInfo.getMatchNumberCount() == matchNumberCount)
                 .toList();
         return filteredWinLottoInfo.getFirst();
     }
 
-    public int getMatchNumberCount() {
-        return matchNumberCount;
-    }
 
-    public int getPrice() {
-        return price;
-    }
 }

@@ -1,10 +1,8 @@
 package model;
 
-import constant.WinLottoInfo;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map.Entry;
-import service.WinLottoService;
 
 public class Result {
     private final EnumMap<WinLottoInfo, Integer> result = new EnumMap<>(WinLottoInfo.class);
@@ -28,7 +26,7 @@ public class Result {
     }
 
     public int getCount(WinLottoInfo winLottoInfo) {
-        return result.getOrDefault(winLottoInfo,0);
+        return result.getOrDefault(winLottoInfo, 0);
     }
 
     public double totalReturn(int purchaseAmount) {

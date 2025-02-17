@@ -2,15 +2,14 @@ package service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import constant.WinLottoInfo;
+import java.util.List;
 import model.LottoNumbers;
 import model.WinLotto;
+import model.WinLottoInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-class WinLottoServiceTest {
+class WinLottoInfoMapperTest {
 
     @Test
     @DisplayName("1등 당첨 테스트")
@@ -19,7 +18,7 @@ class WinLottoServiceTest {
         LottoNumbers purchasedLotto = new LottoNumbers(List.of(1, 2, 3, 4, 5, 6));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // when
-        WinLottoInfo result = WinLottoService.result(purchasedLotto, winLotto);
+        WinLottoInfo result = WinLottoInfoMapper.result(purchasedLotto, winLotto);
         // then
         assertThat(result).isEqualTo(WinLottoInfo.FIRST);
     }
@@ -31,7 +30,7 @@ class WinLottoServiceTest {
         LottoNumbers purchasedLotto = new LottoNumbers(List.of(1, 2, 3, 4, 5, 10));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // when
-        WinLottoInfo result = WinLottoService.result(purchasedLotto, winLotto);
+        WinLottoInfo result = WinLottoInfoMapper.result(purchasedLotto, winLotto);
         // then
         assertThat(result).isEqualTo(WinLottoInfo.THIRD);
     }
@@ -43,7 +42,7 @@ class WinLottoServiceTest {
         LottoNumbers purchasedLotto = new LottoNumbers(List.of(10, 20, 30, 40, 41, 42));
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // when
-        WinLottoInfo result = WinLottoService.result(purchasedLotto, winLotto);
+        WinLottoInfo result = WinLottoInfoMapper.result(purchasedLotto, winLotto);
         // then
         assertThat(result).isEqualTo(WinLottoInfo.NONE);
     }
@@ -55,7 +54,7 @@ class WinLottoServiceTest {
         LottoNumbers purchasedLotto = new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)); // 5개 + 보너스 번호(7)
         WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // when
-        WinLottoInfo result = WinLottoService.result(purchasedLotto, winLotto);
+        WinLottoInfo result = WinLottoInfoMapper.result(purchasedLotto, winLotto);
         // then
         assertThat(result).isEqualTo(WinLottoInfo.SECOND);
     }

@@ -1,8 +1,8 @@
 package model;
 
+import static model.LottoNumbers.LOTTO_NUMBER_COUNT;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import constant.Constants;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ class LottoConstantsTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<Integer> numbers = lottoNumbers.getNumbers();
         // then
-        assertThat(numbers.size()).isEqualTo(Constants.LOTTO_NUMBER_COUNT);
+        assertThat(numbers.size()).isEqualTo(LOTTO_NUMBER_COUNT);
     }
 
     @Test
