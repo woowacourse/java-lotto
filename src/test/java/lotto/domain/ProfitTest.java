@@ -1,9 +1,9 @@
-package lotto.dto;
+package lotto.domain;
 
+import static lotto.domain.LottoShop.LOTTO_PRIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.domain.Profit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,10 +16,10 @@ class ProfitTest {
     void profitRate_half() {
         // given
         long winningPrize = 5000L;
-        long spentMoney = 10000L;
+        int spentMoney = 10000;
 
         // when
-        Profit profit = Profit.from(winningPrize, spentMoney);
+        Profit profit = Profit.from(winningPrize, new Money(spentMoney, LOTTO_PRIZE));
 
         // then
         assertThat(profit.rate()).isEqualTo(0.5);
@@ -35,9 +35,10 @@ class ProfitTest {
             "990, 1000, 0.99, false",
             "1010, 1000, 1.01, true"
     })
-    void testProfitCalculation(long winningPrize, long spentMoney, double expectedRate, boolean expectedIsProfit) {
+    void testProfitCalculation(long winningPrize, int spentMoney, double expectedRate, boolean expectedIsProfit) {
         // when
-        Profit profit = Profit.from(winningPrize, spentMoney);
+        Profit profit = Profit.from(winningPrize, new Money(spentMoney, LOTTO_PRIZE));
+
 
         // then
         assertThat(profit.rate()).isEqualTo(expectedRate);
@@ -52,11 +53,10 @@ class ProfitTest {
             "0, 0",
             "0, -1000"
     })
-    void testInvalidSpentMoneyThrowsException(long winningPrize, long spentMoney) {
+    void testInvalidSpentMoneyThrowsException(long winningPrize, int spentMoney) {
         // then
-        assertThatThrownBy(() -> Profit.from(winningPrize, spentMoney))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("구입 금액이 0 이하일 수 없습니다.");
+        assertThatThrownBy(() -> Profit.from(winningPrize, new Money(spentMoney, LOTTO_PRIZE)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
 }

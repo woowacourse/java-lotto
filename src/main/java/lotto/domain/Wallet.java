@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Wallet {
     private final List<Lotto> lottos;
@@ -10,26 +12,21 @@ public class Wallet {
         this.lottos = lottos;
     }
 
-    public List<MatchResult> getMatchResults(Lotto matchLotto, int bonus) {
-        List<MatchResult> matchResults = new ArrayList<>();
-
-        for (Lotto lotto : lottos) {
-            MatchResult dto = lotto.countMatchingNumbers(matchLotto, bonus);
-            matchResults.add(dto);
+    public Map<MatchRank, Integer> getRankCounts(WinningInform winningInform) {
+        Map<MatchRank, Integer> matchRankResult = new EnumMap<>(MatchRank.class);
+        for (MatchRank rank : MatchRank.values()) {
+            matchRankResult.put(rank, 0);
         }
 
-        return matchResults;
+        for (Lotto lotto : lottos) {
+            MatchRank rank = winningInform.match(lotto);
+            matchRankResult.put(rank, matchRankResult.getOrDefault(rank, 0) + 1);
+        }
+
+        return matchRankResult;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        for (Lotto lotto : lottos) {
-            sb.append(lotto.toString());
-            sb.append("\n");
-        }
-
-        return sb.toString();
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

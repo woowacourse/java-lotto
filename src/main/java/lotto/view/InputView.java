@@ -1,6 +1,7 @@
 package lotto.view;
 
 import java.util.Scanner;
+import lotto.common.utill.InputParser;
 
 public class InputView implements AutoCloseable {
     private Scanner scanner;

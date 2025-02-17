@@ -2,7 +2,6 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -13,40 +12,42 @@ class LottoTest {
     @Test
     @DisplayName("로또 생성 검증")
     void testLotto() {
-        assertThat(new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)))).isNotNull();
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
+        assertThat(new Lotto(LottoNumber.from(list))).isNotNull();
 
     }
 
     @Test
     @DisplayName("로또 번호가 6개가 아니라면 예외를 발생시킨다.")
     void testLottoNumber_sizeException() {
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5))))
+        List<Integer> list = List.of(1, 2, 3, 4, 5);
+        assertThatThrownBy(() -> new Lotto(LottoNumber.from(list)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    @DisplayName("로또 번호 가 1에서 45 사이가 아니라면 예외를 발생시킨다.")
-    void testLottoNumber_rangeException() {
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 100))))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    @DisplayName("MatchCount()에서 로또 당첨 개수와 보너스 여부를 반환한다.")
+    @DisplayName("MatchCount()에서 로또 당첨 개수와 보너스 여부를 통해 MatchRank를 반환한다.")
     void test_MatchCount() {
-        Lotto lotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)));
-        Lotto matchLotto = new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 8)));
+        //given
+        List<Integer> matchList = List.of(1, 2, 3, 4, 5, 7);
+        Lotto matchLotto = new Lotto(LottoNumber.from(matchList));
         int bonus = 6;
-        MatchResult dto = lotto.countMatchingNumbers(matchLotto, bonus);
 
-        assertThat(dto.matchCount()).isEqualTo(5);
-        assertThat(dto.isBonusMatched()).isTrue();
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6); //5개 일치 + 보너스번호 이치
+        Lotto lotto = new Lotto(LottoNumber.from(list));
+
+        //when
+        MatchRank rank = lotto.countMatchingNumbers(matchLotto, new LottoNumber(bonus));
+
+        //then
+        assertThat(rank).isEqualTo(MatchRank.MATCH_BONUS);
     }
 
     @Test
     @DisplayName("로또에 중복된 번호가 있으면 예외가 발생한다.")
     void test_validateDuplicate() {
-        assertThatThrownBy(() -> new Lotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 5))))
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 5);
+        assertThatThrownBy(() -> new Lotto(LottoNumber.from(list)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

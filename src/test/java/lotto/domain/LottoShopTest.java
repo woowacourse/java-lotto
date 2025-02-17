@@ -1,28 +1,43 @@
 package lotto.domain;
 
-import static lotto.common.constant.Constant.LOTTO_PRIZE;
+import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MAXIMUM;
+import static lotto.domain.LottoNumber.LOTTO_RANGE_MINIMUM;
+import static lotto.domain.LottoShop.LOTTO_PRIZE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-
 class LottoShopTest {
 
-    @DisplayName("돈에 맞게 로또가 구매되는지 확인")
+    @DisplayName("돈에 맞춰 로또 개수를 구매하는지 확인")
     @Test
-    void test_byLottos() {
+    void test_buyLottos() {
         // given
-        LottoShop lottoShop = new LottoShop(new LottoNumberGenerator());
-        Money money = new Money(LOTTO_PRIZE * 5);
+        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+
+        LottoShop lottoShop = new LottoShop(
+                new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
 
         // when
         List<Lotto> lottos = lottoShop.buyLottos(money);
 
         // then
-        assertThat(lottos.size()).isEqualTo(money.getAmount());
+        assertThat(lottos.size()).isEqualTo(5);
+    }
+
+    @DisplayName("돈으로 구매할 수 있는 로또 개수를 계산한다.")
+    @Test
+    void test_calculateLottoCount() {
+        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+
+        LottoShop lottoShop = new LottoShop(
+                new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
+
+        int lottoCount = lottoShop.calculateLottoCount(money);
+        assertThat(lottoCount).isEqualTo(5);
     }
 
 }
