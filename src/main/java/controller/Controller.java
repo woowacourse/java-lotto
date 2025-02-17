@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Lotto;
 import model.LottoEvaluator;
@@ -32,7 +34,8 @@ public class Controller {
     }
 
     private Lottos buyLottos() {
-        Money money = Parser.parseMoney(inputView.inputMoney());
+        Integer inputMoney = Parser.parseInt(inputView.inputMoney());
+        Money money = new Money(inputMoney);
         Lottos lottos = generateLottos(money);
         outputView.printLottos(LottosDTO.from(lottos));
         return lottos;
@@ -50,7 +53,8 @@ public class Controller {
 
     private WinningLotto inputWinningLotto() {
         String rawWinningLotto = inputView.inputWinningLotto();
-        Lotto lotto = Parser.parseLotto(rawWinningLotto);
+        List<String> splittedWinningLotto = Parser.splitByDelimiter(rawWinningLotto);
+        Lotto lotto = new Lotto(splittedWinningLotto.stream().map(Parser::parseNumber).collect(Collectors.toSet()));
         String rawBonusNumber = inputView.inputBonus();
         LottoNumber bonusLottoNumber = Parser.parseNumber(rawBonusNumber);
         return new WinningLotto(lotto, bonusLottoNumber);

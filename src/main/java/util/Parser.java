@@ -1,24 +1,16 @@
 package util;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import model.Lotto;
+import java.util.List;
 import model.LottoNumber;
-import model.Money;
 
 public class Parser {
 
     private static final String DELIMITER_COMMA = ", ";
 
-    public static Money parseMoney(String rawMoney) {
-        return new Money(parseInt(rawMoney));
-    }
-
-    public static Lotto parseLotto(String rawInputLotto) {
-        String[] splittedInput = rawInputLotto.split(DELIMITER_COMMA);
-        return new Lotto(Arrays.stream(splittedInput)
-                .map(Parser::parseNumber)
-                .collect(Collectors.toSet()));
+    public static List<String> splitByDelimiter(String rawInput) {
+        String[] splittedInput = rawInput.split(DELIMITER_COMMA);
+        return Arrays.stream(splittedInput).toList();
     }
 
     public static LottoNumber parseNumber(String rawNumber) {
