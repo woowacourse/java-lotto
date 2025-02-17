@@ -4,7 +4,6 @@ import static exception.ErrorMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
 import static exception.ErrorMessage.LOTTO_RANGE_ERROR;
 
 import constant.WinningCount;
-import dto.WinningLottoDto;
 import exception.LottoException;
 import java.util.List;
 
@@ -35,9 +34,7 @@ public class WinningLotto {
         }
     }
 
-    public WinningLottoDto getWinningLottoDto() {
-        return new WinningLottoDto(lotto.getNumbers(), bonusNumber);
-    }
+
 
     public WinningCount getLottoResult(List<Integer> issuedLotto) {
         int matchedCount = (int) issuedLotto.stream().filter(lotto.getNumbers()::contains).count();
