@@ -20,8 +20,7 @@ public enum ExceptionMessage {
 
     private final String errorMessage;
 
-    @Override
-    public String toString() {
+    public String getMessage() {
         return PREFIX + errorMessage;
     }
 }
