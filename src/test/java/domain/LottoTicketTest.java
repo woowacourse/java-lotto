@@ -50,7 +50,7 @@ class LottoTicketTest {
     void 로또_번호의_개수가_6개가_아닌_경우_테스트(List<Integer> numbers) {
         // when & then
         Assertions.assertThatThrownBy(() -> {
-                    new LottoTicket(numbers);
+                    LottoTicket.createLottoTicket(numbers);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개여야 합니다.");
     }
@@ -61,9 +61,9 @@ class LottoTicketTest {
     void 로또_번호가_1_이상_45_이하가_아닌_경우_예외_발생(List<Integer> numbers) {
         // when & then
         Assertions.assertThatThrownBy(() -> {
-                    new LottoTicket(numbers);
+                    LottoTicket.createLottoTicket(numbers);
                 }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1 이상 45 이하이다.");
+                .hasMessage("로또 번호는 1 이상 45 이하여야 합니다.");
     }
 
     @DisplayName("로또 번호가 1 이상 45 이하인 경우 정상적으로 로또가 발행된다.")
@@ -72,7 +72,7 @@ class LottoTicketTest {
     void 로또_번호가_1_이상_45_이하인_경우(List<Integer> numbers) {
         // when & then
         Assertions.assertThatCode(() -> {
-            new LottoTicket(numbers);
+            LottoTicket.createLottoTicket(numbers);
         }).doesNotThrowAnyException();
     }
 
@@ -84,7 +84,7 @@ class LottoTicketTest {
 
         // when & then
         Assertions.assertThatThrownBy(() -> {
-                    new LottoTicket(numbers);
+                    LottoTicket.createLottoTicket(numbers);
                 }).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("중복된 번호가 존재합니다.");
     }
