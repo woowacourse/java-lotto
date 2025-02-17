@@ -27,16 +27,10 @@ public enum Rank {
     }
 
     public static Rank matchRank(int matchCounts, boolean matchBonus) {
-        Map<Integer, Rank> rankMap = new HashMap<>();
-        rankMap.put(6, FIRST);
-        rankMap.put(4, FOURTH);
-        rankMap.put(3, FIFTH);
-
         if (matchCounts == 5) {
             return checkEqualFive(matchBonus);
         }
-
-        return rankMap.getOrDefault(matchCounts, Rank.NONE);
+        return Arrays.stream(Rank.values()).filter(rank -> rank.matchCounts == matchCounts).findFirst().orElse(NONE);
     }
 
     private static Rank checkEqualFive(boolean matchBonus) {

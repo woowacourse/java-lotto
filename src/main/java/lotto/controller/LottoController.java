@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
@@ -31,7 +32,7 @@ public class LottoController {
 
     private WinningLotto operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
-        String bonusNumber = inputView.inputBonusNumber();
+        LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
         return new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
@@ -46,7 +47,7 @@ public class LottoController {
     private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        return new Lottos(lottoCounts, new RandomNumber());
+        return new Lottos(lottoCounts);
     }
 
 }

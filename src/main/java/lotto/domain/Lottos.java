@@ -6,13 +6,13 @@ import java.util.List;
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int lottoCounts, RandomNumber randomNumber) {
-        generateLottos(lottoCounts, randomNumber);
+    public Lottos(int lottoCounts) {
+        generateLottos(lottoCounts);
     }
 
-    private void generateLottos(int lottoCounts, RandomNumber randomNumber) {
+    private void generateLottos(int lottoCounts) {
         for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto(new LottoNumbers(randomNumber)));
+            lottos.add(new Lotto(new RandomNumber()));
         }
     }
 

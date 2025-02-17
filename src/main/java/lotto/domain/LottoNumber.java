@@ -21,9 +21,9 @@ public class LottoNumber {
         return number;
     }
 
-    private int validateNumber(String money) {
+    private int validateNumber(String number) {
         try {
-            return Integer.parseInt(money);
+            return Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.NUMBER_FORMAT_ERROR.getMessage());
         }

@@ -1,10 +1,10 @@
 package lotto.view;
 
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoNumbers;
 import lotto.domain.Lottos;
 import lotto.domain.Prizes;
 import lotto.domain.Rank;
@@ -24,7 +24,7 @@ public class OutputView {
     public void printLottos(Lottos lottos) {
         StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos.getLottos()) {
-            LottoNumbers lottoNumbers = lotto.getLottoNumbers();
+            List<LottoNumber> lottoNumbers = lotto.getLottoNumbers();
             StringJoiner joiner = new StringJoiner(", ");
             buildEachLotto(joiner, lottoNumbers);
             stringBuilder.append("[")
@@ -35,8 +35,8 @@ public class OutputView {
         System.out.println(stringBuilder);
     }
 
-    private void buildEachLotto(StringJoiner joiner, LottoNumbers lottoNumbers) {
-        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumbers()) {
+    private void buildEachLotto(StringJoiner joiner, List<LottoNumber> lottoNumbers) {
+        for (LottoNumber lottoNumber : lottoNumbers) {
             joiner.add(String.valueOf(lottoNumber.getNumber()));
         }
     }

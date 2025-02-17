@@ -6,18 +6,16 @@ import java.util.Map;
 
 public class Prizes {
 
-    private final List<Rank> prizes;
     private final Map<Rank, Integer> results = new LinkedHashMap<>();
 
     public Prizes(List<Rank> prizes) {
-        this.prizes = prizes;
         for (Rank rank : Rank.values()) {
             results.put(rank,0);
         }
-        matchRanks();
+        matchRanks(prizes);
     }
 
-    private void matchRanks() {
+    private void matchRanks(List<Rank> prizes) {
         for (Rank rank : prizes) {
             results.put(rank, results.get(rank) +1);
         }
