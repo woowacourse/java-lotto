@@ -2,17 +2,19 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.util.NumberGenerator;
+import lotto.util.RandomNumber;
 
 public class Lottos {
     private List<Lotto> lottos = new ArrayList<>();
 
-    public Lottos(int lottoCounts) {
-        generateLottos(lottoCounts);
+    public Lottos(int lottoCounts, NumberGenerator numberGenerator) {
+        generateLottos(lottoCounts, numberGenerator);
     }
 
-    private void generateLottos(int lottoCounts) {
+    private void generateLottos(int lottoCounts, NumberGenerator numberGenerator) {
         for (int i = 0; i < lottoCounts; i ++) {
-            lottos.add(new Lotto(new RandomNumber()));
+            lottos.add(new Lotto(numberGenerator));
         }
     }
 
@@ -20,7 +22,7 @@ public class Lottos {
         List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchCount = lotto.match(winningLotto);
-            ranks.add(Rank.matchRank(matchCount, lotto.checkBonusNumberMatch(bonusNumber)));
+            ranks.add(Rank.matchRank(matchCount, lotto.isMatchExist(bonusNumber)));
         }
         return new Prizes(ranks);
     }

@@ -5,18 +5,20 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
-import lotto.domain.RandomNumber;
 import lotto.domain.WinningLotto;
+import lotto.util.NumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final NumberGenerator numberGenerator;
 
-    public LottoController(final InputView inputView, final OutputView outputView) {
+    public LottoController(final InputView inputView, final OutputView outputView, final NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.numberGenerator = numberGenerator;
     }
 
     public void run() {
@@ -47,7 +49,7 @@ public class LottoController {
     private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        return new Lottos(lottoCounts);
+        return new Lottos(lottoCounts, numberGenerator);
     }
 
 }

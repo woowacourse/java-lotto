@@ -7,23 +7,26 @@ import java.util.List;
 import java.util.Set;
 import lotto.constant.ErrorMessage;
 import lotto.constant.LottoConstants;
+import lotto.util.NumberGenerator;
 
 public class Lotto {
     private static final int INCREASE = 1;
     private static final int MAINTENANCE = 0;
     private static final String DELIMITER = ",";
     private final List<LottoNumber> lottoNumbers;
-    private RandomNumber randomNumber;
 
-    public Lotto(RandomNumber randomNumber) {
+    public Lotto(NumberGenerator numberGenerator) {
         this.lottoNumbers = new ArrayList<>();
-        this.randomNumber = randomNumber;
-        generateLottoNumbers();
+        generateLottoNumbers(numberGenerator);
     }
 
-    private void generateLottoNumbers() {
+    public Lotto(String winningLottoInput) {
+        this.lottoNumbers = validate(winningLottoInput);
+    }
+
+    private void generateLottoNumbers(NumberGenerator numberGenerator) {
         while (lottoNumbers.size() < LottoConstants.LENGTH.getNumber()) {
-            LottoNumber lottoNumber = new LottoNumber(randomNumber.generateRandomNumber(
+            LottoNumber lottoNumber = new LottoNumber(numberGenerator.generate(
                     LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber(),
                     LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()));
             judgeAddLotto(lottoNumber);
@@ -41,15 +44,29 @@ public class Lotto {
         return lottoNumbers.stream().noneMatch(number -> number.getNumber() == lottoNumber.getNumber());
     }
 
-    public Lotto(String winningLottoInput) {
-        this.lottoNumbers = validate(winningLottoInput);
-    }
-
     private List<LottoNumber> validate(String winningLottoInput) {
         List<String> splittedLotto = validateLength(winningLottoInput);
         List<LottoNumber> winningLotto = validateIsNumber(splittedLotto);
         findDuplicateWinningNumber(winningLotto);
         return winningLotto;
+    }
+
+    private List<String> validateLength(String winningLottoInput) {
+        List<String> winningNumbers = List.of(winningLottoInput
+                .replaceAll(" ", "")
+                .split(DELIMITER));
+        if (winningNumbers.size() != LottoConstants.LENGTH.getNumber()) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
+        }
+        return winningNumbers;
+    }
+
+    private List<LottoNumber> validateIsNumber(List<String> splittedLotto) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String lottoNumber : splittedLotto) {
+            lottoNumbers.add(new LottoNumber(lottoNumber));
+        }
+        return lottoNumbers;
     }
 
     private void findDuplicateWinningNumber(List<LottoNumber> winningLotto) {
@@ -68,12 +85,12 @@ public class Lotto {
         }
     }
 
-    private List<LottoNumber> validateIsNumber(List<String> splittedLotto) {
-        List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String lottoNumber : splittedLotto) {
-            lottoNumbers.add(new LottoNumber(lottoNumber));
+    public int match(Lotto winningLottoNumber) {
+        int count = 0;
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            count += winningLottoNumber.increaseIfMatch(lottoNumber);
         }
-        return lottoNumbers;
+        return count;
     }
 
     private int increaseIfMatch(LottoNumber number) {
@@ -83,38 +100,12 @@ public class Lotto {
         return MAINTENANCE;
     }
 
-    private boolean isMatchExist(LottoNumber number) {
+    public boolean isMatchExist(LottoNumber number) {
         return lottoNumbers.stream().anyMatch(lotto -> isMatch(lotto, number));
-    }
-
-    private List<String> validateLength(String winningLottoInput) {
-        List<String> winningNumbers = List.of(winningLottoInput
-                .replaceAll(" ", "")
-                .split(DELIMITER));
-        if (winningNumbers.size() != LottoConstants.LENGTH.getNumber()) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
-        }
-        return winningNumbers;
-    }
-
-    public List<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
-    }
-
-    public boolean checkBonusNumberMatch(LottoNumber bonusNumber) {
-        return lottoNumbers.stream().anyMatch(lotto -> isMatch(lotto, bonusNumber));
     }
 
     private boolean isMatch(LottoNumber lottoNumber, LottoNumber target) {
         return lottoNumber.getNumber() == target.getNumber();
-    }
-
-    public int match(Lotto winningLottoNumber) {
-        int count = 0;
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            count += winningLottoNumber.increaseIfMatch(lottoNumber);
-        }
-        return count;
     }
 
     public void checkBonusDuplicate(LottoNumber bonusNumber) {
@@ -125,6 +116,10 @@ public class Lotto {
 
     private boolean checkBonusContain(LottoNumber lottoNumber) {
         return lottoNumbers.stream().noneMatch(number -> number.getNumber() == lottoNumber.getNumber());
+    }
+
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
     }
 
 }

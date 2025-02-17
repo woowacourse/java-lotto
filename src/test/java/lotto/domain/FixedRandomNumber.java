@@ -2,13 +2,20 @@ package lotto.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.util.NumberGenerator;
+import lotto.util.RandomNumber;
 
-public class FixedRandomNumber extends RandomNumber {
-    private final List<Integer> fixedNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+public class FixedRandomNumber implements NumberGenerator {
+    private final List<Integer> numbers;
     private int index = 0;
 
+    public FixedRandomNumber(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     @Override
-    public int generateRandomNumber(int start, int end) {
-        return fixedNumbers.get(index++ % fixedNumbers.size());
+    public int generate(int start, int end) {
+        return numbers.get(index++ % numbers.size());
     }
 }
+
