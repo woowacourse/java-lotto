@@ -18,7 +18,7 @@ public class LottoController {
         this.lottoStore = lottoStore;
     }
 
-    public void run() {
+    public void handleLottoApplication() {
         List<LottoTicketResponse> lottoTicketResponses = purchaseLottoTicket();
         WinningLottoRequest winningLottoRequest = createWinningLotto();
         LottoRankResultsResponse lottoRankResultsResponse = countAllLottoRanks(lottoTicketResponses, winningLottoRequest);
