@@ -18,7 +18,7 @@ public class PurchaseAmount {
         this.amount = amount;
     }
 
-    public int getMatchCount() {
+    public int getAvailableLottoCount() {
         return amount / UNIT;
     }
 

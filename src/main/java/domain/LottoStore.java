@@ -14,7 +14,7 @@ public class LottoStore {
     }
 
     public List<Lotto> issueLottos() {
-        final int count = purchaseAmount.getMatchCount();
+        final int count = purchaseAmount.getAvailableLottoCount();
         final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(numbersGenerator.generate()));
