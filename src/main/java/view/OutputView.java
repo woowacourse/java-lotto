@@ -21,6 +21,7 @@ public class OutputView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
+    // TODO : 인자값 검토
     public void printLottos(List<Lotto> lottos) {
         for(Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers().stream().sorted().toList());
@@ -36,6 +37,7 @@ public class OutputView {
         }
     }
 
+    // TODO : 인자값 검토
     public void printEarningRate(double earningRate) {
         String instruction = "";
         if (earningRate > 1) {

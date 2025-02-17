@@ -37,16 +37,9 @@ public class WinningNumber {
     private void validateNumber(String winningNumber) {
         try {
             int number = Integer.parseInt(winningNumber);
-            validateRange(number);
+            Lotto.validateRange(number);
             validateDuplication(number);
         } catch (NumberFormatException e) {
-            validateDigit(winningNumber);
-            throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
-        }
-    }
-
-    private void validateRange(int number) {
-        if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
@@ -54,12 +47,6 @@ public class WinningNumber {
     private void validateDuplication(int number) {
         if (numbers.contains(number)) {
             throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
-        }
-    }
-
-    private void validateDigit(String winningNumber) {
-        if (winningNumber.length() > 10) {
-            throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");
         }
     }
 }

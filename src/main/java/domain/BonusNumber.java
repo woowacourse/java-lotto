@@ -21,15 +21,9 @@ public class BonusNumber {
     private void validate(String bonusNumberInput, WinningNumber winningNumber) {
         try {
             int bonusNumber = Integer.parseInt(bonusNumberInput);
-            validateRange(bonusNumber);
+            Lotto.validateRange(bonusNumber);
             validateDuplication(bonusNumber, winningNumber);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 볼은 정수로 입력해주세요.");
-        }
-    }
-
-    private void validateRange(int bonusNumber) {
-        if (bonusNumber < LottoConstants.MIN_NUMBER || bonusNumber > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("보너스 볼은 1~45 사이의 정수로 입력해주세요.");
         }
     }
