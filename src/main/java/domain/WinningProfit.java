@@ -12,11 +12,11 @@ public class WinningProfit {
         this.winningResult = winningResult;
     }
 
-    public double calculateProfitRate(final int amount) {
-        if(amount == 0){
+    public double calculateProfitRate(final int purchaseAmount) {
+        if(purchaseAmount == 0){
             throw new AppException(PurchaseAmount.INVALID_PURCHASEAMOUNT_RANGE);
         }
-        return calculateTotalPrice() / (double) amount;
+        return calculateTotalPrice() / (double) purchaseAmount;
     }
 
     private int calculateTotalPrice() {
