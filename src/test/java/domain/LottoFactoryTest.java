@@ -11,7 +11,6 @@ public class LottoFactoryTest {
     public void success_1() {
         int input = 14000;
         Money money = new Money(input);
-        LottoFactory lottoFactory = new LottoFactory();
-        Assertions.assertThat(lottoFactory.createLottos(money).size()).isEqualTo(14);
+        Assertions.assertThat(LottoFactory.createLottos(money).size()).isEqualTo(14);
     }
 }
