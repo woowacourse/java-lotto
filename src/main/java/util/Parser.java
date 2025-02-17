@@ -8,14 +8,14 @@ import model.Money;
 
 public class Parser {
 
-    private static final String DELIMITER = ", ";
+    private static final String DELIMITER_COMMA = ", ";
 
     public static Money parseMoney(String rawMoney) {
         return new Money(parseInt(rawMoney));
     }
 
     public static Lotto parseLotto(String rawInputLotto) {
-        String[] splittedInput = rawInputLotto.split(DELIMITER);
+        String[] splittedInput = rawInputLotto.split(DELIMITER_COMMA);
         return new Lotto(Arrays.stream(splittedInput)
                 .map(Parser::parseNumber)
                 .collect(Collectors.toSet()));
