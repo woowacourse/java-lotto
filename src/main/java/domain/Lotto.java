@@ -74,18 +74,11 @@ public class Lotto {
         }
     }
 
-    private List<Integer> getSorted() {
-        return numbers.stream()
-                .sorted()
-                .toList();
-    }
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
     @Override
     public String toString() {
-        return getSorted().toString();
+        return numbers.stream()
+                .sorted()
+                .toList()
+                .toString();
     }
 }

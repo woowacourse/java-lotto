@@ -1,11 +1,10 @@
 package view;
 
-import domain.Lotto;
 import domain.LottoPrize;
+import domain.Lottos;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -18,12 +17,10 @@ public class OutputView {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    public void printLottos(List<Lotto> lottos) {
+    public void printLottos(Lottos lottos) {
         StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto).append("\n");
-        }
-        sb.append(String.format("%d개를 구매했습니다.", lottos.size())).append("\n");
+        sb.append(lottos).append("\n");
+        sb.append(String.format("%d개를 구매했습니다.", lottos.getLottoCount())).append("\n");
         System.out.println(sb);
     }
 

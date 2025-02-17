@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.StringJoiner;
 import util.NumberPicker;
 
 public class Lottos {
@@ -55,5 +56,18 @@ public class Lottos {
             Optional<LottoPrize> matchPrize = LottoPrize.match(matchResult);
             matchPrize.ifPresent(lottoPrize -> enumMap.put(lottoPrize, enumMap.get(lottoPrize) + 1));
         }
+    }
+
+    public int getLottoCount() {
+        return lottos.size();
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner("\n");
+        for (Lotto lotto : lottos) {
+            sj.add(lotto.toString());
+        }
+        return sj.toString();
     }
 }
