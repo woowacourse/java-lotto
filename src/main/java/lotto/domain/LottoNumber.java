@@ -51,4 +51,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Integer.hashCode(number);
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
 }
