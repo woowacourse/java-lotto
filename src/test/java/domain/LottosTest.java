@@ -18,7 +18,7 @@ class LottosTest {
     void 로또_결과를_계산할_수_있다() {
         //given
         Lottos lottos = lottosFactory.from(1, () -> List.of(1, 2, 3, 4, 5, 6));
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), "7");
+        WinningLotto winningLotto = WinningLotto.of(List.of(1, 2, 3, 4, 5, 6), 7);
 
         //when-then
         assertThat(lottos.calculateWinningResult(winningLotto).get(Rank.FIRST)).isEqualTo(1);

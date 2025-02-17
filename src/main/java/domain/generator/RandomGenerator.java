@@ -1,8 +1,8 @@
 package domain.generator;
 
 import static domain.Lotto.LOTTO_LENGTH;
-import static domain.Lotto.LOTTO_MAX;
-import static domain.Lotto.LOTTO_MIN;
+import static domain.LottoNumber.LOTTO_MAX;
+import static domain.LottoNumber.LOTTO_MIN;
 
 import java.util.List;
 import java.util.Random;

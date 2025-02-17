@@ -13,8 +13,7 @@ public class Lottos {
     }
 
     public EnumMap<Rank, Integer> calculateWinningResult(final WinningLotto winningLotto) {
-        EnumMap<Rank, Integer> countRank = countMatchNumbers(winningLotto);
-        return countRank;
+        return countMatchNumbers(winningLotto);
     }
 
     public List<Lotto> getLottos() {

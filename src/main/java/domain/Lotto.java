@@ -2,31 +2,29 @@ package domain;
 
 import static domain.exception.ExceptionMessage.DUPLICATED_NUMBER;
 import static domain.exception.ExceptionMessage.INVALID_FORMAT;
-import static domain.exception.ExceptionMessage.INVALID_RANGE;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
-    public static final int LOTTO_MIN = 1;
-    public static final int LOTTO_MAX = 45;
     public static final int LOTTO_LENGTH = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public static Lotto from(final List<Integer> numbers){
+    public static Lotto from(final List<Integer> numbers) {
         validateLength(numbers);
-        validateRange(numbers);
         validateLottoDuplicate(numbers);
 
         return new Lotto(numbers);
     }
 
     private Lotto(final List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = numbers.stream()
+                .map(LottoNumber::from)
+                .toList();
     }
 
-    public boolean contains(final int number) {
+    public boolean contains(final LottoNumber number) {
         return numbers.contains(number);
     }
 
@@ -36,7 +34,7 @@ public class Lotto {
                 .count();
     }
 
-    public List<Integer> getNumbers() {
+    public ArrayList<LottoNumber> getNumbers() {
         return new ArrayList<>(numbers);
     }
 
@@ -56,10 +54,4 @@ public class Lotto {
         }
     }
 
-    private static void validateRange(final List<Integer> numbers) {
-        if(numbers.stream()
-                .anyMatch(number -> number < LOTTO_MIN || number > LOTTO_MAX)){
-            throw new IllegalArgumentException(INVALID_RANGE.getMessage());
-        }
-    }
 }

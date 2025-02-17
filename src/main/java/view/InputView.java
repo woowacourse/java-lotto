@@ -29,8 +29,14 @@ public class InputView {
         return sc.nextLine();
     }
 
-    public String inputBonusLotto() {
+    public int inputBonusLotto() {
         System.out.println(InputMessage.BONUS.getMessage());
-        return sc.nextLine();
+        try {
+            int bonusNumber = sc.nextInt();
+            sc.nextLine();
+            return bonusNumber;
+        }catch (InputMismatchException e){
+            throw new IllegalArgumentException(INVALID_INTEGER.getMessage());
+        }
     }
 }
