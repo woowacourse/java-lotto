@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PurchasedLottos {
     private static final int LOTTO_PRICE = 1000;
-    public static final String DIVIDABLE_EXCEPTION = "1000의 배수를 입력해주세요.";
+    private static final String DIVIDABLE_EXCEPTION = "1000의 배수를 입력해주세요.";
 
     private final List<LottoNumbers> lottos = new ArrayList<>();
     private final Integer purchaseAmount;

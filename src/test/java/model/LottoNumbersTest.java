@@ -15,7 +15,7 @@ class LottoNumbersTest {
         LottoNumbers lottoNumbers = new LottoNumbers();
         List<LottoNumber> numbers = lottoNumbers.getNumbers();
         // then
-        assertThat(numbers.size()).isEqualTo(LottoNumbers.LOTTO_NUMBER_COUNT);
+        assertThat(numbers.size()).isEqualTo(6);
     }
 
     @Test
@@ -62,7 +62,7 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumbers.NUMBER_COUNT_EXCEPTION);
+                .hasMessage("6개의 숫자를 입력해주세요.");
     }
 
     @Test
@@ -74,6 +74,6 @@ class LottoNumbersTest {
         // when & then
         assertThatThrownBy(() -> new LottoNumbers(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumbers.NUMBER_DUPLICATE_EXCEPTION);
+                .hasMessage("중복이 아닌 숫자를 입력해주세요");
     }
 }

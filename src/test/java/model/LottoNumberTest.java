@@ -16,9 +16,9 @@ class LottoNumberTest {
         // 예외 범위
         assertThatThrownBy(() -> new LottoNumber(0))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumber.NUMBER_BOUND_EXCEPTION);
+                .hasMessage("1~45 사이의 숫자를 입력해주세요.");
         assertThatThrownBy(() -> new LottoNumber(46))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumber.NUMBER_BOUND_EXCEPTION);
+                .hasMessage("1~45 사이의 숫자를 입력해주세요.");
     }
 }

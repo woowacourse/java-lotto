@@ -42,7 +42,7 @@ class WinLottoTest {
         // when & then
         assertThatThrownBy(() -> new WinLotto(lottoNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LottoNumber.NUMBER_BOUND_EXCEPTION);
+                .hasMessage("1~45 사이의 숫자를 입력해주세요.");
     }
 
     @Test
@@ -55,6 +55,6 @@ class WinLottoTest {
         // when & then
         assertThatThrownBy(() -> new WinLotto(lottoNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(WinLotto.BONUS_NUMBER_DUPLICATE_EXCEPTION);
+                .hasMessage("당첨 번호와 중복이 아닌 숫자를 입력해주세요");
     }
 }

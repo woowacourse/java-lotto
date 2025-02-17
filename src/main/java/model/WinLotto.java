@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class WinLotto {
-    public static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
+    private static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
 
     private final LottoNumbers lottoNumbers;
     private final LottoNumber bonusNumber;

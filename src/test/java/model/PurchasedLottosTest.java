@@ -27,6 +27,6 @@ class PurchasedLottosTest {
         // when & then
         assertThatThrownBy(() -> new PurchasedLottos(purchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(PurchasedLottos.DIVIDABLE_EXCEPTION);
+                .hasMessage("1000의 배수를 입력해주세요.");
     }
 }
