@@ -1,7 +1,7 @@
 package view;
 
 import domain.Lottos;
-import domain.Statistics;
+import dto.Statistics;
 
 public class ViewFacade {
 

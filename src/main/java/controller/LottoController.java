@@ -6,7 +6,7 @@ import static util.InputConverter.convertToList;
 import config.Container;
 import domain.Lotto;
 import domain.Lottos;
-import domain.Statistics;
+import dto.Statistics;
 import domain.WinningLotto;
 import java.util.List;
 import service.LottoGenerateService;

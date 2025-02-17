@@ -2,12 +2,12 @@ package service;
 
 import static java.util.stream.Collectors.toMap;
 
+import domain.Lottos;
+import domain.PrizeTier;
+import dto.Statistics;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
-import domain.Lottos;
-import domain.PrizeTier;
-import domain.Statistics;
 
 public class StatisticsService {
 

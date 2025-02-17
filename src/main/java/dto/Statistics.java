@@ -1,6 +1,6 @@
-package domain;
+package dto;
 
-import java.util.Collections;
+import domain.PrizeTier;
 import java.util.Map;
 
 public class Statistics {
@@ -14,7 +14,7 @@ public class Statistics {
     }
 
     public Map<PrizeTier, Integer> getPrizeCounts() {
-        return Collections.unmodifiableMap(prizeCounts);
+        return prizeCounts;
     }
 
     public double getProfitRate() {

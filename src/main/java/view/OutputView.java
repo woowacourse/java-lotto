@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.Lottos;
 import domain.PrizeTier;
-import domain.Statistics;
+import dto.Statistics;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
