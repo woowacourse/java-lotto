@@ -1,6 +1,5 @@
 package lotto.model;
 
-import static lotto.constant.LottoNumberConstants.*;
 import static lotto.model.fixture.LottoNumberFixture.generateLottoNumbersInRange;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,7 +32,7 @@ class LottoTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new Lotto(lottoNumbers),
-                String.format("로또 번호는 %d개여야 합니다.", LOTTO_NUMBER_COUNT.value())
+                String.format("로또 번호는 %d개여야 합니다.", Lotto.NUMBER_COUNT)
         );
     }
 

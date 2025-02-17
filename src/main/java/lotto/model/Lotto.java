@@ -1,11 +1,11 @@
 package lotto.model;
 
-import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_COUNT;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
+
+    public static final int NUMBER_COUNT = 6;
 
     private final Set<LottoNumber> numbers;
 
@@ -15,8 +15,8 @@ public class Lotto {
     }
 
     private void validateNumbersCount(final Set<LottoNumber> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT.value()) {
-            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", LOTTO_NUMBER_COUNT.value()));
+        if (numbers.size() != NUMBER_COUNT) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", NUMBER_COUNT));
         }
     }
 

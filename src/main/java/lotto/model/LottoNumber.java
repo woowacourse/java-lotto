@@ -1,11 +1,11 @@
 package lotto.model;
 
-import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_MAX;
-import static lotto.constant.LottoNumberConstants.LOTTO_NUMBER_MIN;
-
 import java.util.Objects;
 
 public class LottoNumber {
+
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 45;
 
     private final int number;
 
@@ -15,10 +15,10 @@ public class LottoNumber {
     }
 
     private void validateNumberInRange(int number) {
-        if (number < LOTTO_NUMBER_MIN.value() || number > LOTTO_NUMBER_MAX.value()) {
+        if (number < MIN_VALUE || number > MAX_VALUE) {
             throw new IllegalArgumentException(
                     String.format("로또 번호는 %d부터 %d 사이의 수여야 합니다.",
-                            LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
+                            MIN_VALUE, MAX_VALUE));
         }
     }
 
