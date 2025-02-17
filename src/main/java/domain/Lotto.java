@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     public boolean isSameWith(List<Integer> targetNumbers) {
-        if(targetNumbers.size() != NUMBER_COUNT) {
+        if (targetNumbers.size() != NUMBER_COUNT) {
             return false;
         }
         return new HashSet<>(numbers).containsAll(targetNumbers);

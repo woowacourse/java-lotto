@@ -17,7 +17,7 @@ public enum WinningStatus {
     private final boolean matchesBonusNumber;
     private final String expression;
 
-    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber, String expression){
+    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber, String expression) {
         this.price = price;
         this.matchingCount = matchingCount;
         this.matchesBonusNumber = matchesBonusNumber;
