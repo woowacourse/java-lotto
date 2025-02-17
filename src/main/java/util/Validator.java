@@ -1,8 +1,8 @@
-package view;
+package util;
 
-public class InputValidator {
+public class Validator {
     public static void validateBlank(String value) {
-        if (value.isBlank() || value == null) {
+        if (value.isBlank()) {
             throw new IllegalArgumentException("빈 값이 아닌 값을 입력해주세요.");
         }
     }

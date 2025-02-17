@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ class WinningNumberTest {
     @Test
     void parseWinningNumberInput() {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
-        for(int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 6; i++) {
             assertThat(winningNumber.contains(i)).isTrue();
         }
     }
@@ -44,7 +44,8 @@ class WinningNumberTest {
 
     @DisplayName("당첨 번호가 정수가 아닌 경우 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(strings = {"a, 1, 2, 3, 4, 5", "@, 1, 2, 3, 4, 5", "6.0, 1, 2, 3, 4, 5", " , 1, 2, 3, 4, 5", ", 1, 2, 3, 4, 5"})
+    @ValueSource(strings = {"a, 1, 2, 3, 4, 5", "@, 1, 2, 3, 4, 5", "6.0, 1, 2, 3, 4, 5", " , 1, 2, 3, 4, 5",
+            ", 1, 2, 3, 4, 5"})
     void notIntegerLottoNumber(String winningNumberInput) {
         assertThatThrownBy(() -> new WinningNumber(winningNumberInput))
                 .isInstanceOf(IllegalArgumentException.class);
@@ -56,8 +57,8 @@ class WinningNumberTest {
     void findMatchingCountWithLottoNumber(String lottoNumberInput, int expectedCount) {
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6");
         int matchingCount = winningNumber.findMatchingCountWith(
-                                    Arrays.stream(lottoNumberInput.split(", "))
-                                    .map(Integer::parseInt).toList());
+                Arrays.stream(lottoNumberInput.split(", "))
+                        .map(Integer::parseInt).toList());
 
         assertThat(matchingCount).isEqualTo(expectedCount);
     }

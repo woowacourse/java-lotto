@@ -1,13 +1,14 @@
 package controller;
 
+import domain.WinningResultEvaluator;
 import java.util.List;
-import model.BonusNumber;
-import model.Lotto;
-import util.LottoGenerator;
-import model.Purchase;
-import model.WinningNumber;
-import model.WinningResult;
-import model.WinningStatus;
+import domain.BonusNumber;
+import domain.Lotto;
+import domain.LottoMachine;
+import domain.Purchase;
+import domain.WinningNumber;
+import domain.WinningResult;
+import util.NumberGeneratorImpl;
 import view.InputView;
 import view.OutputView;
 
@@ -20,7 +21,7 @@ public class LottoController {
         this.outputView = outputView;
     }
 
-    public void startGame() {
+    public void execute() {
         Purchase purchase = readPurchaseAmount();
         int lottoCount = findLottoCount(purchase);
         List<Lotto> issuedLottos = issueLotto(lottoCount);
@@ -28,7 +29,7 @@ public class LottoController {
         WinningNumber winningNumber = readWinningNumber();
         BonusNumber bonusNumber = readBonusNumber(winningNumber);
 
-        WinningResult winningResult = checkWinningResult(issuedLottos, winningNumber, bonusNumber);
+        WinningResult winningResult = findWinningResult(issuedLottos, winningNumber, bonusNumber);
         double earningRate = winningResult.calculateEarningRate(purchase);
 
         printResult(winningResult, earningRate);
@@ -36,14 +37,12 @@ public class LottoController {
 
     public Purchase readPurchaseAmount() {
         outputView.printPurchaseAmountInstruction();
-        while (true) {
-            try {
-                String purchaseAmountInput = inputView.readPurchaseAmount();
-                return new Purchase(purchaseAmountInput);
-            }
-            catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String purchaseAmountInput = inputView.readPurchaseAmount();
+            return new Purchase(purchaseAmountInput);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readPurchaseAmount();
         }
     }
 
@@ -54,46 +53,39 @@ public class LottoController {
     }
 
     public List<Lotto> issueLotto(int lottoCount) {
-        List<Lotto> lottos = LottoGenerator.generate(lottoCount);
+        LottoMachine lottoMachine = new LottoMachine(new NumberGeneratorImpl());
+        List<Lotto> lottos = lottoMachine.issueLotto(lottoCount);
         outputView.printLottos(lottos);
         return lottos;
     }
 
     public WinningNumber readWinningNumber() {
         outputView.printWinningNumbersInstruction();
-        while (true) {
-            try {
-                String winningNumbersInput = inputView.readWinningNumbers();
-                return new WinningNumber(winningNumbersInput);
-            }
-            catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String winningNumbersInput = inputView.readWinningNumbers();
+            return new WinningNumber(winningNumbersInput);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readWinningNumber();
         }
     }
 
     public BonusNumber readBonusNumber(WinningNumber winningNumber) {
         outputView.printBonusNumbersInstruction();
-        while (true) {
-            try {
-                String bonusNumberInput = inputView.readBonusNumbers();
-                return new BonusNumber(bonusNumberInput, winningNumber);
-            }
-            catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e.getMessage());
-            }
+        try {
+            String bonusNumberInput = inputView.readBonusNumbers();
+            return new BonusNumber(bonusNumberInput, winningNumber);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readBonusNumber(winningNumber);
         }
     }
 
-    public WinningResult checkWinningResult(List<Lotto> issuedLottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
-        WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : issuedLottos) {
-            int matchingCount = winningNumber.findMatchingCountWith(lotto.getNumbers());
-            boolean matchesBonusNumber = bonusNumber.matchesWith(lotto.getNumbers());
-            WinningStatus winningStatus = WinningStatus.findBy(matchingCount, matchesBonusNumber);
-            winningResult.update(winningStatus);
-        }
-        return winningResult;
+    public WinningResult findWinningResult(List<Lotto> issuedLottos,
+                                           WinningNumber winningNumber,
+                                           BonusNumber bonusNumber) {
+        WinningResultEvaluator winningResultEvaluator = new WinningResultEvaluator(winningNumber, bonusNumber);
+        return winningResultEvaluator.evaluate(issuedLottos);
     }
 
     public void printResult(WinningResult winningResult, double earningRate) {
