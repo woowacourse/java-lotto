@@ -22,6 +22,10 @@ public class AmountPaid {
         return String.format("%.2f", Math.floor(profitRate * 100) * 0.01);
     }
 
+    public int getLottoQuantity() {
+        return amount / LOTTO_PRICE;
+    }
+
     private void validatePositiveValue(int amount) {
         if (amount <= 0) {
             throw new LottoException(NOT_ALLOW_NEGATIVE);
@@ -32,9 +36,5 @@ public class AmountPaid {
         if (amount % LOTTO_PRICE != 0) {
             throw new LottoException(MUST_BE_DIVIDE_BY_THOUSAND);
         }
-    }
-
-    public int getLottoQuantity() {
-        return amount / LOTTO_PRICE;
     }
 }
