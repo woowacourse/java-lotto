@@ -35,6 +35,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.matchRank(matchCounts,matchBonus)).isEqualTo(Rank.FIRST);
     }
+
     @Test
     void 네번째_등수_확인() {
         //given
@@ -44,6 +45,7 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.matchRank(matchCounts,matchBonus)).isEqualTo(Rank.FOURTH);
     }
+
     @Test
     void 미당첨_등수_확인() {
         //given
@@ -53,12 +55,14 @@ class RankTest {
         //when & then
         Assertions.assertThat(Rank.matchRank(matchCounts,matchBonus)).isEqualTo(Rank.NONE);
     }
+
     @Test
     void 유효한_등수만_확인() {
         //given
-        List<Rank> ranks = Rank.validRank();
+        List<Rank> ranks = Rank.getValidRank();
 
         //when & then
         Assertions.assertThat(ranks.contains(Rank.NONE)).isFalse();
     }
+
 }
