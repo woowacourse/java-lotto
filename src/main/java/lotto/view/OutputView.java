@@ -17,8 +17,9 @@ public class OutputView {
 
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
             List<Integer> lottoNumber = lotto.getLottoNumbers();
+            String lottoStatus = lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", "));
             System.out.print("[");
-            System.out.print(lottoNumber.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            System.out.print(lottoStatus);
             System.out.print("]");
             System.out.println();
         }

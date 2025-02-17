@@ -17,7 +17,8 @@ public class AmountPaid {
     }
 
     public String calculateProfitRate(int totalPrize) {
-        return String.format("%.2f", Math.floor(((double) totalPrize / (double) amount) * 100) * 0.01);
+        double profitRate = (double) totalPrize / amount;
+        return String.format("%.2f", Math.floor(profitRate * 100) * 0.01);
     }
 
     private void validateDivideByLottoPrice() {
