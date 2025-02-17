@@ -39,9 +39,9 @@ public enum MatchRank {
             return MATCH_BONUS;
         }
 
-        for (MatchRank statistics : values()) {
-            if (statistics.number == matchCount) {
-                return statistics;
+        for (MatchRank rank : values()) {
+            if (rank.number == matchCount) {
+                return rank;
             }
         }
 
