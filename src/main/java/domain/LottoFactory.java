@@ -12,7 +12,10 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    public List<Lotto> createLottos(Money money) {
+    private LottoFactory() {
+    }
+
+    public static List<Lotto> createLottos(Money money) {
         List<Lotto> lottos = new ArrayList<>();
 
         int totalLotto = money.calculateTotalLotto();
@@ -22,7 +25,7 @@ public class LottoFactory {
         return lottos;
     }
 
-    private List<Integer> createNumbers() {
+    private static List<Integer> createNumbers() {
         List<Integer> numbers = IntStream.rangeClosed(LOTTO_MIN_NUM, LOTTO_MAX_NUM)
             .boxed()
             .collect(Collectors.toList());

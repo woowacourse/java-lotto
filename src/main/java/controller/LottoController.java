@@ -1,12 +1,6 @@
 package controller;
 
-import domain.Buyer;
-import domain.Lotto;
-import domain.LottoFactory;
-import domain.LottoRank;
-import domain.LottoStatistics;
-import domain.Money;
-import domain.WinningLotto;
+import domain.*;
 import java.util.List;
 import java.util.Map;
 import util.InputParser;
@@ -26,8 +20,7 @@ public class LottoController {
 
     public void run() {
         Money money = creaeteMoney();
-        LottoFactory lottoFactory = new LottoFactory();
-        List<Lotto> lottos = lottoFactory.createLottos(money);
+        List<Lotto> lottos = LottoFactory.createLottos(money);
         Buyer buyer = new Buyer(lottos);
         outputView.displayLottos(money.calculateTotalLotto(), lottos);
 
