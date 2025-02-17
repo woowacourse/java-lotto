@@ -36,4 +36,12 @@ public class Price {
     public int getValue() {
         return value;
     }
+
+    public int divide(int lottoPrice) {
+        return value / lottoPrice;
+    }
+
+    public int getTicketCount() {
+        return divide(LOTTO_PRICE);
+    }
 }
