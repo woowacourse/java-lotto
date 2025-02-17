@@ -11,14 +11,44 @@ import java.util.List;
 
 public class LottoController {
     public static void run() {
-        int purchaseAmount = InputView.inputPurchaseAmount();
+        int purchaseAmount = getPurchaseAmount();
         List<Lotto> lottos = LottoFactory.makeLotto(purchaseAmount);
         OutputView.printLottos(lottos);
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        WinningLotto winnigLotto = new WinningLotto(winningNumbers, InputView.inputBonusBall(winningNumbers));
-        LottoStats lottoStats = new LottoStats(winnigLotto);
+        List<Integer> winningNumbers = getWinningNumbers();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, getBonusBall(winningNumbers));
+        LottoStats lottoStats = new LottoStats(winningLotto);
         lottoStats.calculateResult(lottos);
         OutputView.printLottoStats(lottoStats);
         OutputView.printEarningRate(lottoStats, purchaseAmount);
+    }
+
+    public static int getPurchaseAmount() {
+        while (true) {
+            try {
+                return InputView.inputPurchaseAmount();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static List<Integer> getWinningNumbers() {
+        while (true) {
+            try {
+                return InputView.inputWinningNumbers();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static int getBonusBall(List<Integer> winningNumbers) {
+        while (true) {
+            try {
+                return InputView.inputBonusBall(winningNumbers);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
