@@ -10,16 +10,14 @@ import model.Purchase;
 import model.Result;
 
 public class ResultView {
-    public static final String POSITIVE_NUMBER_EXCEPTION = "양의 정수를 입력해주세요.";
-    public static final String DIVIDABLE_EXCEPTION = "1000의 배수를 입력해주세요.";
+
     public static final String NUMBER_COUNT_EXCEPTION = "6개의 숫자를 입력해주세요.";
     public static final String NUMBER_BOUND_EXCEPTION = "1~45 사이의 숫자를 입력해주세요.";
     public static final String NUMBER_DUPLICATE_EXCEPTION = "중복이 아닌 숫자를 입력해주세요";
     public static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
-    public static final String PURCHASE_GUIDE = "구입금액을 입력해 주세요.";
+
     public static final String PURCHASE_RESULT = "%d개를 구매했습니다.%n";
-    public static final String WIN_NUMBERS = "지난 주 당첨 번호를 입력해 주세요.";
-    public static final String BONUS_NUMBER = "보너스 볼을 입력해 주세요.";
+
     public static final String FIRST_RESULT = "%d개 일치 (%d원)- %d개%n";
     public static final String SECOND_RESULT = "%d개 일치, 보너스 볼 일치(%d원) - %d개%n";
     public static final String THIRD_RESULT = "%d개 일치 (%d원)- %d개%n";
