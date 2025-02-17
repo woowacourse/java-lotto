@@ -7,16 +7,16 @@ import java.util.Map;
 
 public class LottoStats {
     private final Map<Rank, Integer> rank;
-    private final WinningLotto winnigLotto;
+    private final WinningLotto winningLotto;
 
     public LottoStats(WinningLotto winnigLotto) {
         rank = new HashMap<>();
-        this.winnigLotto = winnigLotto;
+        this.winningLotto = winnigLotto;
     }
 
     public void calculateResult(List<Lotto> lottos) {
         for (Lotto lotto : lottos) {
-            Rank lottoRank = lotto.getRank(winnigLotto);
+            Rank lottoRank = lotto.getRank(winningLotto);
             rank.put(lottoRank, rank.getOrDefault(lottoRank, 0) + 1);
         }
     }
