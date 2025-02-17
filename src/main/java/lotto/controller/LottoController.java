@@ -5,6 +5,7 @@ import lotto.domain.Lotto;
 import lotto.domain.Scoreboard;
 import lotto.domain.Vendor;
 import lotto.domain.WinningLotto;
+import lotto.utility.RandomGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,7 +23,7 @@ public class LottoController {
 
     public void run() {
         int purchaseAmount = inputView.readPurchaseAmount();
-        Vendor vendor = new Vendor(purchaseAmount);
+        Vendor vendor = new Vendor(new RandomGenerator(), purchaseAmount);
         List<Lotto> lottos = vendor.issueLottos();
         outputView.printLottos(lottos);
 
