@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-
 import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.Lottos;
@@ -27,11 +26,12 @@ public class LottoController {
 
     public void run() {
         try {
-            Money money = new Money(Integer.parseInt(inputView.readPurchaseMoney()));
+            Money money = new Money(parseInt(inputView.readPurchaseMoney()));
             issueLottoTickets(money);
             printIssuedLottoTickets();
             WinningLotto winningLotto = createWinningLotto();
-            WinningResults winningResults = winningLotto.calculateWinning(lottos);
+            WinningResults winningResults = new WinningResults(winningLotto, lottos);
+            winningResults.calculateWinningResults();
             outputView.printWinningResult(winningResults);
             double returnRatio = money.calculateReturnRatio(winningResults.calculateEarnedMoney());
             outputView.printWinningRatio(returnRatio);

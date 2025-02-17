@@ -14,6 +14,10 @@ public class WinningResult {
         this.winningCount = winningCount;
     }
 
+    public long calculateWinningMoney() {
+        return winningAmount * winningCount;
+    }
+
     public int getMatchingCount() {
         return matchingCount;
     }
