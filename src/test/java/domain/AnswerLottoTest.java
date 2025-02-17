@@ -2,6 +2,7 @@ package domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import domain.enums.LottoNumber;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,7 @@ class AnswerLottoTest {
 
         // when & then
         Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new AnswerLotto(lotto, 6));
-        Assertions.assertThatIllegalArgumentException().isThrownBy(() -> new AnswerLotto(lotto, 46));
+        Assertions.assertThatIllegalArgumentException()
+                .isThrownBy(() -> new AnswerLotto(lotto, LottoNumber.MAX_RANGE.getNumber() + 1));
     }
 }

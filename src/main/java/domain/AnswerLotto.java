@@ -1,5 +1,7 @@
 package domain;
 
+import domain.enums.LottoNumber;
+
 public class AnswerLotto {
     private final Lotto lotto;
     private final int bonusNumber;
@@ -28,6 +30,6 @@ public class AnswerLotto {
     }
 
     private boolean isValidNumber(int number) {
-        return number > 0 && number <= 45;
+        return number >= LottoNumber.MIN_RANGE.getNumber() && number <= LottoNumber.MAX_RANGE.getNumber();
     }
 }
