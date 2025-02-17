@@ -15,17 +15,6 @@ public class Profit {
         }
     }
 
-    public void incrementCount(Rank key) {
-        rankCounts.merge(key, 1, Integer::sum);
-    }
-
-    private long calculateTotalProfit() {
-
-        return rankCounts.entrySet().stream()
-                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
-                .sum();
-    }
-
     public String calculateAverageProfitRate(Money money) {
         final int amount = money.getAmount();
         long totalProfit = calculateTotalProfit();
@@ -33,7 +22,29 @@ public class Profit {
                 .divide(new BigDecimal(amount), 2, RoundingMode.HALF_UP).toString();
     }
 
+    private long calculateTotalProfit() {
+        return rankCounts.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrize() * entry.getValue())
+                .sum();
+    }
+
     public Map<Rank, Integer> getRankCounts() {
         return rankCounts;
+    }
+
+    public static Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
+        Profit profit = new Profit();
+
+        for (Lotto lotto : lottoGroup.getLottoGroup()) {
+            long matchCount = winnerLotto.getMatchCount(lotto);
+            boolean hasBonus = winnerLotto.hasBonus(lotto);
+            Rank rank = Rank.find((int) matchCount, hasBonus);
+            profit.incrementCount(rank);
+        }
+        return profit;
+    }
+
+    private void incrementCount(Rank key) {
+        rankCounts.merge(key, 1, Integer::sum);
     }
 }

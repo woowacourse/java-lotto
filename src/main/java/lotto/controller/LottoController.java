@@ -2,12 +2,11 @@ package lotto.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import lotto.domain.Lotto;
+import lotto.domain.LottoGeneratorStrategy;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.Profit;
-import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 import lotto.dto.LottoGroupDto;
 import lotto.dto.ProfitDto;
@@ -17,14 +16,20 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    LottoGroup lottoGroup = new LottoGroup();
+    private final LottoGeneratorStrategy lottoGenerator;
+    private final LottoGroup lottoGroup;
+
+    public LottoController(LottoGeneratorStrategy lottoGenerator, LottoGroup lottoGroup) {
+        this.lottoGenerator = lottoGenerator;
+        this.lottoGroup = lottoGroup;
+    }
 
     public void run() {
         Money money = getMoney();
         processLottoGeneration(money);
         WinnerLotto winnerLotto = getWinnerLotto();
 
-        Profit profit = calculateProfit(winnerLotto);
+        Profit profit = getProfit(winnerLotto);
         String profitRate = profit.calculateAverageProfitRate(money);
 
         OutputView.printResult(ProfitDto.from(profit), profitRate);
@@ -35,21 +40,8 @@ public class LottoController {
     }
 
     private void processLottoGeneration(Money money) {
-        lottoGroup.processLottoTicketGeneration(money);
+        lottoGroup.processLottoTicketGeneration(money, lottoGenerator);
         OutputView.printLottoGroup(LottoGroupDto.from(lottoGroup));
-    }
-
-    private Profit calculateProfit(WinnerLotto winnerLotto) {
-        Profit profit = new Profit();
-
-        for (Lotto lotto : lottoGroup.getLottoGroup()) {
-            long matchCount = winnerLotto.getMatchCount(lotto);
-            boolean hasBonus = winnerLotto.hasBonus(lotto);
-            Rank rank = Rank.find((int) matchCount, hasBonus);
-            profit.incrementCount(rank);
-        }
-
-        return profit;
     }
 
     private WinnerLotto getWinnerLotto() {
@@ -64,8 +56,7 @@ public class LottoController {
         return readBonusNumber(winnerNumbers);
     }
 
-
-    public List<LottoNumber> parseLottoNumbers(String input) {
+    private List<LottoNumber> parseLottoNumbers(String input) {
         return Arrays.stream(input.split(", "))
                 .map(LottoNumber::new)
                 .toList();
@@ -82,4 +73,9 @@ public class LottoController {
             return readBonusNumber(winnerNumbers);
         }
     }
+
+    private Profit getProfit(WinnerLotto winnerLotto) {
+        return Profit.calculateProfit(winnerLotto, lottoGroup);
+    }
+
 }
