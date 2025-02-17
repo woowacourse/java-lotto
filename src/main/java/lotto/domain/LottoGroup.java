@@ -13,8 +13,13 @@ public class LottoGroup {
         return new LottoGroup(lottoList);
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
+    public void calculateProfit(Profit profit, WinnerLotto winnerLotto) {
+        for (Lotto lotto : lottos) {
+            long matchCount = winnerLotto.getMatchCount(lotto);
+            boolean hasBonus = winnerLotto.hasBonusNumber(lotto);
+            Rank rank = Rank.find((int) matchCount, hasBonus);
+            profit.incrementCount(rank);
+        }
     }
 
     public List<List<Integer>> toIntegerLottosList() {

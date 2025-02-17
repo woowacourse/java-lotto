@@ -9,7 +9,6 @@ import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.Profit;
-import lotto.domain.Rank;
 import lotto.domain.WinnerLotto;
 
 public class LottoService {
@@ -57,12 +56,7 @@ public class LottoService {
     public Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
         Profit profit = new Profit();
 
-        for (Lotto lotto : lottoGroup.getLottos()) {
-            long matchCount = winnerLotto.getMatchCount(lotto);
-            boolean hasBonus = winnerLotto.hasBonusNumber(lotto);
-            Rank rank = Rank.find((int) matchCount, hasBonus);
-            profit.incrementCount(rank);
-        }
+        lottoGroup.calculateProfit(profit, winnerLotto);
 
         return profit;
     }
