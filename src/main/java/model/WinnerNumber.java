@@ -25,6 +25,14 @@ public class WinnerNumber {
         LottoResult.addCount(lottoNumbers.size(), bonusBall);
     }
 
+    public List<Integer> getWinnerNumbers() {
+        return winnerNumbers;
+    }
+
+    public int getBonusBall() {
+        return bonusBall;
+    }
+
     private void validateDuplicateValue(List<Integer> winnerNumbers) {
         Set<Integer> duplicateCheck = new HashSet<>(winnerNumbers);
         if (duplicateCheck.size() != winnerNumbers.size()) {
