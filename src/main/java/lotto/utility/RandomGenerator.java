@@ -15,7 +15,6 @@ public class RandomGenerator {
         }
 
         return randoms.stream()
-                .sorted()
                 .toList();
     }
 }
