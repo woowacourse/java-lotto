@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -23,28 +22,28 @@ public class LottoResult {
         }
     }
 
-    public void matchLottoTicketsResult(WinningLotto winningLotto, List<Set<Integer>> lottoTickets) {
-        for (Set<Integer> lottoTicket : lottoTickets) {
+    public void matchLottoTicketsResult(WinningLotto winningLotto, LottoTickets lottoTickets) {
+        for (Lotto lottoTicket : lottoTickets.getLottoTickets()) {
             matchLottoTicketResult(winningLotto, lottoTicket);
         }
     }
 
-    private void matchLottoTicketResult(WinningLotto winningLotto, Set<Integer> lottoTicket) {
+    private void matchLottoTicketResult(WinningLotto winningLotto, Lotto lottoTicket) {
         int bonusBall = winningLotto.getBonusBall();
-        boolean isBonusHit = lottoTicket.contains(bonusBall);
+        boolean isBonusHit = lottoTicket.getLottoNumbers().contains(bonusBall);
 
-        Set<Integer> winningLottoSet = new HashSet<>(winningLotto.getWinningNumbers());
-        Set<Integer> lottoTicketSet = new HashSet<>(lottoTicket);
+        Set<Integer> winningLottoNumbers = new HashSet<>(winningLotto.getWinningNumbers());
+        Set<Integer> lottoTicketNumbers = new HashSet<>(lottoTicket.getLottoNumbers());
 
-        lottoTicketSet.retainAll(winningLottoSet);
-        int winningNumbersHit = lottoTicketSet.size();
+        lottoTicketNumbers.retainAll(winningLottoNumbers);
+        int winningNumbersHit = lottoTicketNumbers.size();
 
         LottoPrize lottoPrize = LottoPrize.findLottoPrize(winningNumbersHit, isBonusHit);
         lottoResult.put(lottoPrize, lottoResult.getOrDefault(lottoPrize, 0) + 1);
     }
 
     public Double calculateLottoProfitRate(LottoMoney lottoMoney) {
-        int money = lottoMoney.getLottoMoney();
+        int money = lottoMoney.amount();
         int totalProfit = 0;
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.entrySet()) {
             LottoPrize lottoPrize = entry.getKey();

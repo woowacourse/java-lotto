@@ -2,11 +2,18 @@ package lotto.util;
 
 import java.util.Random;
 
-public class LottoNumberGenerator implements RandomNumberGenerator {
+public class LottoNumberGenerator {
 
-    private static final Random random = new Random();
+    private final Random random;
 
-    @Override
+    public LottoNumberGenerator() {
+        this.random = new Random();
+    }
+
+    public LottoNumberGenerator(long seed) {
+        this.random = new Random(seed);
+    }
+
     public int generate(int min, int max) {
         return random.nextInt(max - min + 1) + min;
     }

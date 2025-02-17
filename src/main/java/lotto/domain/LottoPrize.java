@@ -25,6 +25,10 @@ public enum LottoPrize {
         return prize;
     }
 
+    public int getHitNumbers() {
+        return hitNumbers;
+    }
+
     public static LottoPrize findLottoPrize(int winningNumbersHit, boolean isBonusHit) {
         return Arrays.stream(values())
                 .filter(rank -> rank.hitNumbers == winningNumbersHit)
@@ -36,9 +40,5 @@ public enum LottoPrize {
                 })
                 .findFirst()
                 .orElse(MISS);
-    }
-
-    public int getHitNumbers() {
-        return hitNumbers;
     }
 }

@@ -1,11 +1,11 @@
 package lotto.controller;
 
-import java.util.List;
 import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
 import lotto.domain.WinningLotto;
 import lotto.util.LottoNumberGenerator;
 import lotto.view.InputView;
@@ -14,14 +14,27 @@ import lotto.view.OutputView;
 public class GameController {
 
     private LottoMoney lottoMoney;
+    private LottoTickets lottoTickets;
 
     public void run() {
-        LottoMachine lottoMachine = buyLottoTickets();
-        List<Set<Integer>> lottoTickets = lottoMachine.getLottoTickets();
+        buyLottoTickets();
+        findLottoTicketsResult();
+    }
+
+    private void buyLottoTickets() {
+        lottoMoney = storeLottoMoney();
+        lottoTickets = new LottoTickets();
+        LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
+        LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
+        for (Lotto lottoTicket : lottoMachine.generateLottoTickets(lottoMoney)) {
+            lottoTickets.addLottoTicket(lottoTicket);
+        };
+
         OutputView.writeLottoTickets(lottoTickets);
+    }
 
+    private void findLottoTicketsResult() {
         WinningLotto winningLotto = storeWinningLotto();
-
         LottoResult lottoResult = new LottoResult();
         lottoResult.matchLottoTicketsResult(winningLotto, lottoTickets);
         lottoResult.calculateLottoProfitRate(lottoMoney);
@@ -30,15 +43,13 @@ public class GameController {
         OutputView.writeLottoResultProfitRate(lottoResult.calculateLottoProfitRate(lottoMoney));
     }
 
-    private LottoMachine buyLottoTickets() {
+    private LottoMoney storeLottoMoney() {
         try {
-            String response = InputView.readLottoMoney();
-            lottoMoney = new LottoMoney(response);
-            LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();
-            return new LottoMachine(lottoNumberGenerator, lottoMoney);
+            int lottoMoneyAmount = InputView.readLottoMoney();
+            return new LottoMoney(lottoMoneyAmount);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
-            return buyLottoTickets();
+            return storeLottoMoney();
         }
     }
 
@@ -49,8 +60,8 @@ public class GameController {
 
     private Lotto storeWinningLottoNumbers() {
         try {
-            String response = InputView.readWinningNumbers();
-            return new Lotto(response);
+            Set<Integer> lottoNumbers = InputView.readWinningNumbers();
+            return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
             return storeWinningLottoNumbers();
@@ -59,8 +70,8 @@ public class GameController {
 
     private WinningLotto storeWinningLottoBonus(Lotto winningNumbers) {
         try {
-            String response = InputView.readBonusBall();
-            return new WinningLotto(winningNumbers, response);
+            int bonusBall = InputView.readBonusBall();
+            return new WinningLotto(winningNumbers, bonusBall);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
             return storeWinningLottoBonus(winningNumbers);

@@ -1,10 +1,10 @@
 package lotto.view;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import lotto.domain.Lotto;
 import lotto.domain.LottoPrize;
 import lotto.domain.LottoResult;
+import lotto.domain.LottoTickets;
 
 public class OutputView {
 
@@ -12,11 +12,11 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public static void writeLottoTickets(List<Set<Integer>> lottoTickets) {
+    public static void writeLottoTickets(LottoTickets lottoTickets) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%d개를 구매했습니다.\n", lottoTickets.size()));
-        for (Set<Integer> lottoTicket : lottoTickets) {
-            sb.append(lottoTicket).append('\n');
+        sb.append(String.format("%d개를 구매했습니다.\n", lottoTickets.getLottoTicketsCount()));
+        for (Lotto lottoTicket : lottoTickets.getLottoTickets()) {
+            sb.append(lottoTicket.getLottoNumbers()).append('\n');
         }
         System.out.println(sb);
     }
@@ -27,7 +27,7 @@ public class OutputView {
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.getLottoResult().entrySet()) {
             writeLottoResultHit(sb, entry);
         }
-        System.out.println(sb);
+        System.out.print(sb);
     }
 
     public static void writeLottoResultProfitRate(double profitRate) {
