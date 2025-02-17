@@ -19,17 +19,16 @@ public class Lotto {
     public LottoMatch compareLotto(WinningLotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getWinningNumbers();
         int bonusNumber = winningLotto.getBonusNumber();
-        int winningCounter = 0;
-        boolean bonusChecker = false;
 
-        for (int number : numbers) {
-            winningCounter += addWinningCounter(winningNumbers, number);
-        }
-        if (numbers.contains(bonusNumber)) {
-            bonusChecker = true;
-        }
+        int winningCounter = numbers.stream()
+                .mapToInt(number -> addWinningCounter(winningNumbers, number))
+                .sum();
+
+        boolean bonusChecker = numbers.contains(bonusNumber);
+
         return LottoMatch.calculateLotto(winningCounter, bonusChecker);
     }
+
 
     private int addWinningCounter(List<Integer> winningNumbers, int number) {
         if (winningNumbers.contains(number)) {
