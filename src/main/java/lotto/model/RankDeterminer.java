@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.Rank;
-
 public final class RankDeterminer {
 
     private RankDeterminer() {

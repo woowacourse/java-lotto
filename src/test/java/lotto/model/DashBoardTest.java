@@ -3,7 +3,6 @@ package lotto.model;
 import static lotto.model.fixture.LottoNumberFixture.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import lotto.Rank;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

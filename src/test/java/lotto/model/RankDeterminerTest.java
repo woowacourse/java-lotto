@@ -4,7 +4,6 @@ import static lotto.model.fixture.LottoNumberFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.stream.Stream;
-import lotto.Rank;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.params.ParameterizedTest;

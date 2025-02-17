@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import lotto.Rank;
+import lotto.model.Rank;
 import lotto.model.Cashier;
 import lotto.model.DashBoard;
 import lotto.model.Lotto;

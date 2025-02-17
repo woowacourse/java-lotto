@@ -1,7 +1,6 @@
 package lotto.model;
 
 import java.util.EnumMap;
-import lotto.Rank;
 
 public class DashBoard {
 
