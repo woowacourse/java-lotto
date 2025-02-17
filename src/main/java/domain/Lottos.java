@@ -20,12 +20,7 @@ public class Lottos {
         validateQuantity(quantity);
         List<Lotto> lottos = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
-            Lotto generatedLotto = Lotto.of(
-                    LottoGenerator.generate()
-                            .stream()
-                            .map(LottoNumber::of)
-                            .toList()
-            );
+            Lotto generatedLotto = Lotto.of(LottoGenerator.generate());
             lottos.add(generatedLotto);
         }
         return new Lottos(lottos);

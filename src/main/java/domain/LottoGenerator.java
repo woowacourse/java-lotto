@@ -13,11 +13,11 @@ import java.util.Set;
 public class LottoGenerator {
     private static final Random random = new Random();
 
-    public static List<Integer> generate() {
-        Set<Integer> numbers = new HashSet<>();
+    public static List<LottoNumber> generate() {
+        Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() < COUNT_OF_NUMBERS) {
-            int i = random.nextInt(MAX_NUMBER) + MIN_NUMBER;
-            numbers.add(i);
+            int randomNumber = random.nextInt(MAX_NUMBER) + MIN_NUMBER;
+            numbers.add(LottoNumber.of(randomNumber));
         }
         return new ArrayList<>(numbers);
     }
