@@ -39,11 +39,13 @@ public class Money {
             throw new IllegalArgumentException(PURCHASE_UNIT_ERROR);
         }
     }
+
     private void validateNegative(int validatedMoney) {
         if (validatedMoney <= ZERO) {
             throw new IllegalArgumentException(PURCHASE_MINIMUM_ERROR);
         }
     }
+
     private void validateLimit(int validatedMoney) {
         if (validatedMoney > MAXIMUM) {
             throw new IllegalArgumentException(PURCHASE_MAXIMUM_ERROR);
