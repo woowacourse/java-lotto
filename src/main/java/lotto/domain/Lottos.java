@@ -12,26 +12,14 @@ public class Lottos {
     }
 
     public Prizes calculatePrize(WinningLotto winningLotto) {
-        Lotto winningLottoNumber = winningLotto.getLotto();
-        int bonusNumber = winningLotto.getBonusNumber();
-        return matchNumber(winningLottoNumber, bonusNumber);
-    }
-
-    private Prizes matchNumber(Lotto winningLottoNumber, int bonusNumber) {
         List<Prize> result = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            int matchCount = lotto.match(winningLottoNumber);
-            result.add(new Prize(matchCount, lotto.checkBonusNumberMatch(bonusNumber)));
+            result.add(new Prize(winningLotto.matchCount(lotto), winningLotto.matchBonusNumber(lotto)));
         }
         return new Prizes(result);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.toString());
-        }
-        return stringBuilder.toString();
+    public List<Lotto> getLottos() {
+        return new ArrayList<>(lottos);
     }
 }

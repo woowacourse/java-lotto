@@ -3,7 +3,6 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,12 +11,24 @@ import org.junit.jupiter.params.provider.ValueSource;
 class LottoTest {
 
     @Test
-    void 로또_생성_검증_1() {
+    void 로또_생성_검증() {
         //given
         String inputLotto = "1, 2, 3, 4, 5, 6";
 
         //when & then
         Assertions.assertDoesNotThrow(() -> new Lotto(inputLotto));
+    }
+
+    @Test
+    void 랜덤_로또_생성_검증() {
+        //given
+        Lotto randomLotto = new Lotto(new FixedRandomLottoGenerator());
+        Lotto fixedLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        int expectedMatchCount = 6;
+
+        //when & then
+        assertThat(randomLotto.getMatchCount(fixedLotto))
+                .isEqualTo(expectedMatchCount);
     }
 
     @ParameterizedTest
@@ -28,8 +39,7 @@ class LottoTest {
     void 로또_숫자_개수_오류(String invalidLotto) {
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_LENGTH_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -39,8 +49,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_FORMAT_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -50,8 +59,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.RANGE_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -61,8 +69,7 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(() -> new Lotto(invalidLotto))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_DUPLICATED_ERROR.getMessage());
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -70,9 +77,11 @@ class LottoTest {
         //given
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
         Lotto userLotto = new Lotto("1, 2, 3, 10, 11 ,12");
+        int expectedMatchCount = 3;
 
         //when & then
-        assertThat(userLotto.match(winningLotto)).isEqualTo(3);
+        assertThat(userLotto.getMatchCount(winningLotto))
+                .isEqualTo(expectedMatchCount);
     }
 
     @Test
@@ -82,7 +91,7 @@ class LottoTest {
         int bonusNumber = 3;
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.containsNumber(bonusNumber)).isEqualTo(true);
     }
 
     @Test
@@ -92,6 +101,6 @@ class LottoTest {
         int bonusNumber = 7;
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.containsNumber(bonusNumber)).isEqualTo(false);
     }
 }

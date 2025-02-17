@@ -12,16 +12,9 @@ public class Prizes {
     public Prizes(List<Prize> prizes) {
         this.prizes = prizes;
         for (Rank rank : Rank.values()) {
-            results.put(rank,0);
+            results.put(rank, 0);
         }
         matchRanks();
-    }
-
-    public void matchRanks() {
-        for (Prize prize : prizes) {
-            Rank rank = prize.matchRank();
-            results.put(rank, results.get(rank) +1);
-        }
     }
 
     public double calculateProfit(Money money) {
@@ -32,14 +25,14 @@ public class Prizes {
         return money.calculateProfit(sum);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Rank rank : Rank.validRank()) {
-            sb.append(rank.getMessage())
-                    .append(results.get(rank))
-                    .append(System.lineSeparator());
+    private void matchRanks() {
+        for (Prize prize : prizes) {
+            Rank rank = prize.getMatchRank();
+            results.put(rank, results.get(rank) + 1);
         }
-        return sb.toString();
+    }
+
+    public Map<Rank, Integer> getResults() {
+        return new LinkedHashMap<>(results);
     }
 }
