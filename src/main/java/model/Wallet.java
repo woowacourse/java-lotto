@@ -1,11 +1,10 @@
 package model;
 
-
 public class Wallet {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
-    private int money;
+    private final int money;
 
-    public Wallet(int money) {
+    public Wallet(final int money) {
         validateDivideByThousand(money);
         this.money = money;
     }
@@ -20,7 +19,7 @@ public class Wallet {
         }
     }
 
-    public int getPurchasableQuantity(){
+    public int getPurchasableQuantity() {
         return money / LOTTO_PRICE_PER_ONE;
     }
 }
