@@ -1,5 +1,6 @@
 package lotto.model;
 
+import static lotto.LottoNumberConstants.*;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
@@ -19,6 +20,8 @@ class LottoNumberTest {
     void shouldThrowException_WhenNumberNotInRange() {
         assertThatThrownBy(() -> new LottoNumber(80))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 1부터 45 사이의 수여야 합니다.");
+                .hasMessage(String.format("로또 번호는 %d부터 %d 사이의 수여야 합니다.",
+                        LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value())
+                );
     }
 }

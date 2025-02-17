@@ -16,7 +16,9 @@ public class LottoNumber {
 
     private void validateNumberInRange(int number) {
         if (number < LOTTO_NUMBER_MIN.value() || number > LOTTO_NUMBER_MAX.value()) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 수여야 합니다.");
+            throw new IllegalArgumentException(
+                    String.format("로또 번호는 %d부터 %d 사이의 수여야 합니다.",
+                            LOTTO_NUMBER_MIN.value(), LOTTO_NUMBER_MAX.value()));
         }
     }
 
