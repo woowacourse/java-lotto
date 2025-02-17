@@ -2,6 +2,7 @@ package controller;
 
 import domain.LottoMachine;
 import domain.LottoTicket;
+import domain.Money;
 import domain.Profit;
 import domain.RandomIntegerGenerator;
 import domain.StatisticsService;
@@ -19,9 +20,11 @@ public class MainController {
 
     public void run() {
         int purchaseAmount = InputView.inputPurchaseAmount();
+        Money money = new Money(purchaseAmount);
+
         LottoMachine lottoMachine = new LottoMachine();
         List<LottoTicket> lottoTickets =
-                lottoMachine.generateLottoTickets(purchaseAmount, new RandomIntegerGenerator());
+                lottoMachine.generateLottoTickets(money.getMoney(), new RandomIntegerGenerator());
         OutputView.printLottoTickets(lottoTickets);
 
         List<Integer> winningNumbers = InputView.inputWinningLottoTicket();
@@ -30,7 +33,8 @@ public class MainController {
         WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottoTickets, winningNumbers,
                 bonusNumber);
         OutputView.printWinningStatistics(winningStatistics);
-        Profit profit = statisticsService.calculateProfit(winningStatistics, purchaseAmount);
+
+        Profit profit = statisticsService.calculateProfit(winningStatistics, money.getMoney());
         OutputView.printProfit(profit);
     }
 }
