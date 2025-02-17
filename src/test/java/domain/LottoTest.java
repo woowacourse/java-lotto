@@ -21,21 +21,15 @@ public class LottoTest {
         @DisplayName("숫자가_6개를_초과한_경우_예외가_발생해야_한다")
         @Test
         void over_6_length() {
-            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                Lotto lotto = Lotto.from(expectedNumbers);
-            });
-            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
+            assertThrowValidateNumber(List.of(1, 2, 3, 4, 5, 6, 7),
+                INVALID_NUMBERS_SIZE.getMessage());
         }
 
         @DisplayName("숫자가_6개_미만인_경우_예외가_발생해야_한다")
         @Test
         void less_6_length() {
-            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5);
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                Lotto lotto = Lotto.from(expectedNumbers);
-            });
-            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBERS_SIZE.getMessage());
+            assertThrowValidateNumber(List.of(1, 2, 3, 4, 5),
+                INVALID_NUMBERS_SIZE.getMessage());
         }
 
         @DisplayName("숫자가_6개인_경우_로또객체가_성공적으로_생성되어야_한다")
@@ -51,11 +45,8 @@ public class LottoTest {
     @DisplayName("중복되는 숫자를 입력할 경우 예외를 발생시킨다. ")
     @Test
     void validate_duplicate_number() {
-        List<Integer> expectedNumbers = List.of(1, 1, 2, 3, 4, 5);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Lotto lotto = Lotto.from(expectedNumbers);
-        });
-        assertThat(exception.getMessage()).isEqualTo(INVALID_DUPLICATE_NUMBER.getMessage());
+        assertThrowValidateNumber(List.of(1, 1, 2, 3, 4, 5),
+            INVALID_DUPLICATE_NUMBER.getMessage());
     }
 
     @Nested
@@ -71,15 +62,33 @@ public class LottoTest {
             assertEquals(expectedNumbers, numbers);
         }
 
-        @DisplayName("1~45 사이 숫자가 아닐 경우 예외를 발생시킨다.")
+        @DisplayName("숫자가 45보다 크다면, 예외를 발생시켜야 한다")
         @Test
-        void invalid_number_range() {
-            List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 46);
-            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-                Lotto lotto = Lotto.from(expectedNumbers);
-            });
-            assertThat(exception.getMessage()).isEqualTo(INVALID_NUMBER_RANGE.getMessage());
+        void number_over_45() {
+            assertThrowValidateNumber(List.of(1, 2, 3, 4, 5, 46),
+                INVALID_NUMBER_RANGE.getMessage());
         }
+
+        @DisplayName("숫자가 1보다 작다면, 예외를 발생시켜야 한다")
+        @Test
+        void number_under_1() {
+            assertThrowValidateNumber(List.of(0, 2, 3, 4, 5, 45),
+                INVALID_NUMBER_RANGE.getMessage());
+        }
+
+        @DisplayName("숫자가 음수라면, 예외를 발생시켜야 한다.")
+        @Test
+        void validate_negative_number() {
+            assertThrowValidateNumber(List.of(-1, 2, 3, 4, 5, 45),
+                INVALID_NUMBER_RANGE.getMessage());
+        }
+    }
+
+    private void assertThrowValidateNumber(List<Integer> expectedNumbers, String expectedMessage) {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            Lotto.from(expectedNumbers);
+        });
+        assertThat(exception.getMessage()).isEqualTo(expectedMessage);
     }
 
 }
