@@ -20,7 +20,7 @@ class LottoStatsTest {
         }
 
         lottoStats.calculateResult(lottos);
-        assertThat(lottoStats.toString()).contains("6개 일치 (2000000000원)- 3개");
+        assertThat(lottoStats.getStatus(Rank.FIRST)).isEqualTo(3);
     }
 
     @DisplayName("기본 테스트 케이스")
@@ -43,30 +43,25 @@ class LottoStatsTest {
                 new Lotto(List.of(3, 8, 27, 30, 35, 44)));
         LottoStats lottoStats = new LottoStats(new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7));
         lottoStats.calculateResult(lottos);
-        assertThat(lottoStats.toString()).contains("3개 일치 (5000원)- 1개");
-        assertThat(lottoStats.toString()).contains("4개 일치 (50000원)- 0개");
-        assertThat(lottoStats.toString()).contains("5개 일치 (1500000원)- 0개");
-        assertThat(lottoStats.toString()).contains("5개 일치, 보너스 볼 일치(30000000원)- 0개");
-        assertThat(lottoStats.toString()).contains("6개 일치 (2000000000원)- 0개");
-        assertThat(lottoStats.getEarningRate(14000)).isEqualTo("0.35");
+        assertThat(lottoStats.getStatus(Rank.FIFTH)).isEqualTo(1);
+        assertThat(lottoStats.getStatus(Rank.FOURTH)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.THIRD)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.SECOND)).isEqualTo(0);
+        assertThat(lottoStats.getStatus(Rank.FIRST)).isEqualTo(0);
+        assertThat(lottoStats.getEarningRate(14000)).isEqualTo(0.35);
     }
 
     @DisplayName("총 상금 계산 테스트")
     @Test
     void 총_상금_계산_테스트() {
-        List<Lotto> lottos = new ArrayList<>();
         LottoStats lottoStats = new LottoStats(new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7));
 
         Lotto firstRank = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        lottos.add(firstRank);
         Lotto secondRank = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        lottos.add(secondRank);
         Lotto thirdRank = new Lotto(List.of(1, 2, 3, 4, 5, 8));
-        lottos.add(thirdRank);
         Lotto fourthRank = new Lotto(List.of(1, 2, 3, 4, 7, 8));
-        lottos.add(fourthRank);
         Lotto fifthRank = new Lotto(List.of(1, 2, 3, 7, 8, 9));
-        lottos.add(fifthRank);
+        List<Lotto> lottos = List.of(firstRank, secondRank, thirdRank, fourthRank, fifthRank);
 
         lottoStats.calculateResult(lottos);
 

@@ -6,10 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import static validation.LottoValidator.*;
+
 public class InputView {
-    static Scanner sc = new Scanner(System.in);
 
     public static int inputPurchaseAmount() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("구입금액을 입력해 주세요.");
         int purchaseAmount = validatePurchaseAmount(sc.nextLine());
         System.out.println(purchaseAmount / LottoFactory.LOTTO_PRICE + "개를 구매했습니다.");
@@ -17,6 +19,7 @@ public class InputView {
     }
 
     public static List<Integer> inputWinningNumbers() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         try {
             List<Integer> winningNumbers = Arrays.stream(sc.nextLine()
@@ -24,8 +27,7 @@ public class InputView {
                     .map(String::trim)
                     .map(Integer::parseInt)
                     .toList();
-            Validator.validateWinningNumbers(winningNumbers);
-            Validator.validateWinningNumbersUnique(winningNumbers);
+            validateWinningNumbers(winningNumbers);
             return winningNumbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("당첨 번호는 숫자만 가능합니다.");
@@ -33,11 +35,12 @@ public class InputView {
     }
 
     public static int inputBonusBall(List<Integer> winningNumbers) {
+        Scanner sc = new Scanner(System.in);
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             int bonusBall = Integer.parseInt(sc.nextLine());
-            Validator.validateNumber(bonusBall);
-            Validator.validateBonusBallUnique(winningNumbers, bonusBall);
+            validateNumber(bonusBall);
+            validateBonusBallUnique(winningNumbers, bonusBall);
             return bonusBall;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("보너스 볼을 형식에 맞게 입력해주세요.");
@@ -45,6 +48,7 @@ public class InputView {
     }
 
     private static int validatePurchaseAmount(String purchaseAmount) {
+        Scanner sc = new Scanner(System.in);
         try {
             int amount = Integer.parseInt(purchaseAmount);
             if (amount < LottoFactory.LOTTO_PRICE) {
