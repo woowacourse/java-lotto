@@ -18,7 +18,7 @@ public class Lotto {
 
     private void validate(final List<LottoNumber> numbers) {
         validateSize(numbers);
-        validateDuplication(numbers);
+        validateDuplicationWithAnotherLotto(numbers);
     }
 
     private void validateSize(final List<LottoNumber> numbers) {
@@ -27,13 +27,17 @@ public class Lotto {
         }
     }
 
-    private void validateDuplication(final List<LottoNumber> numbers) {
+    private void validateDuplicationWithAnotherLotto(final List<LottoNumber> numbers) {
         ArrayList<LottoNumber> lottoNumbers = new ArrayList<>();
         for (LottoNumber number : numbers) {
-            if (lottoNumbers.contains(number)) {
-                throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
-            }
+            validateDuplication(number, lottoNumbers);
             lottoNumbers.add(number);
+        }
+    }
+
+    private static void validateDuplication(LottoNumber number, ArrayList<LottoNumber> lottoNumbers) {
+        if (lottoNumbers.contains(number)) {
+            throw new IllegalArgumentException("중복된 숫자가 존재합니다.");
         }
     }
 
