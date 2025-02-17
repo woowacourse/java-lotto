@@ -1,4 +1,4 @@
-package global.generator;
+package domain.generator;
 
 import java.util.List;
 import java.util.Random;

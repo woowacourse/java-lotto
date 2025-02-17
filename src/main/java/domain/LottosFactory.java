@@ -1,6 +1,6 @@
 package domain;
 
-import global.generator.Generator;
+import domain.generator.Generator;
 import java.util.ArrayList;
 import java.util.List;
 

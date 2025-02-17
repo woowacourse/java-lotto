@@ -1,7 +1,7 @@
 package domain;
 
-import static global.exception.ExceptionMessage.DUPLICATED_NUMBER;
-import static global.exception.ExceptionMessage.INVALID_RANGE;
+import static domain.exception.ExceptionMessage.DUPLICATED_NUMBER;
+import static domain.exception.ExceptionMessage.INVALID_RANGE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

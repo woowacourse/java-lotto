@@ -7,7 +7,7 @@ import domain.dto.AmountDto;
 import domain.dto.LottosDto;
 import domain.WinningLotto;
 import domain.dto.ResultDto;
-import global.generator.RandomGenerator;
+import domain.generator.RandomGenerator;
 import parser.InputParser;
 import java.util.EnumMap;
 import view.InputView;

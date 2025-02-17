@@ -1,6 +1,6 @@
 package view;
 
-import static global.exception.ExceptionMessage.INVALID_INTEGER;
+import static domain.exception.ExceptionMessage.INVALID_INTEGER;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

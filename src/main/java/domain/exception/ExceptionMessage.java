@@ -1,4 +1,4 @@
-package global.exception;
+package domain.exception;
 
 public enum ExceptionMessage {
     INVALID_POSITIVE("양수로 입력해 주세요."),

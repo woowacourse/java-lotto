@@ -1,7 +1,7 @@
 package domain;
 
-import static global.exception.ExceptionMessage.INVALID_POSITIVE;
-import static global.exception.ExceptionMessage.INVALID_UNIT_PRICE;
+import static domain.exception.ExceptionMessage.INVALID_POSITIVE;
+import static domain.exception.ExceptionMessage.INVALID_UNIT_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

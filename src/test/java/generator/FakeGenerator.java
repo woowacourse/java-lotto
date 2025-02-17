@@ -1,6 +1,6 @@
 package generator;
 
-import global.generator.Generator;
+import domain.generator.Generator;
 import java.util.List;
 
 public class FakeGenerator implements Generator {
