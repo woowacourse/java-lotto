@@ -5,8 +5,8 @@ import lotto.util.Parser;
 public class Money {
 
     private static final int ZERO = 0;
-    private static final int THOUSAND = 1000;
-    private static final int MAXIMUM = 100000;
+    private static final int THOUSAND = 1_000;
+    private static final int MAXIMUM = 100_000;
     private static final String PURCHASE_FORMAT_ERROR = "구입금액은 숫자여야 합니다.";
     private static final String PURCHASE_UNIT_ERROR = "구입금액은 천원 단위여야 합니다.";
     private static final String PURCHASE_MINIMUM_ERROR = "구입금액은 천원부터 입니다.";
