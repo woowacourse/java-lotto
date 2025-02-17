@@ -4,6 +4,7 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Prize;
+import domain.PurchaseAmount;
 import domain.WinningLotto;
 import domain.properties.LottoProperties;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class LottoController {
     }
 
     public void run() throws IOException {
-        final int purchaseAmount = readPurchaseAmount();
+        PurchaseAmount purchaseAmount = readPurchaseAmount();
         Lottos lottos = createLottos(purchaseAmount);
 
         List<LottoNumber> winningLottoNumbers = readWinningNumbers();
@@ -37,15 +38,17 @@ public class LottoController {
         );
     }
 
-    private int readPurchaseAmount() throws IOException {
+    private PurchaseAmount readPurchaseAmount() throws IOException {
         String rawPurchaseAmount = inputView.readPurchaseAmount();
         InputValidator.validateInteger(rawPurchaseAmount);
         final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
-        return purchaseAmount;
+        return PurchaseAmount.of(purchaseAmount);
     }
 
-    private Lottos createLottos(final int purchaseAmount) {
-        Lottos lottos = Lottos.ofSize(purchaseAmount / LottoProperties.PRICE);
+    private Lottos createLottos(PurchaseAmount purchaseAmount) {
+        Lottos lottos = Lottos.ofSize(
+                purchaseAmount.calculateAvailableQuantity(LottoProperties.PRICE)
+        );
         outputView.printPurchasedLottos(lottos);
         return lottos;
     }
