@@ -2,6 +2,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.LottoManager;
+import domain.LottoWallet;
 import domain.Money;
 import domain.LottoNumber;
 import domain.WinningInfo;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 class LottoManagerTest {
     private LottoManager lottoManager;
-
     List<Lotto> lottos = List.of(
             new Lotto(List.of(1, 2, 3, 4, 5, 6)),
             new Lotto(List.of(1, 2, 3, 4, 5, 7)),
@@ -23,6 +23,7 @@ class LottoManagerTest {
             new Lotto(List.of(1, 2, 3, 4, 10, 11)),
             new Lotto(List.of(1, 2, 3, 10, 11, 12)),
             new Lotto(List.of(10, 11, 12, 13, 14, 15)));
+    LottoWallet lottoWallet = new LottoWallet(lottos);
     WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
     @BeforeEach
@@ -37,10 +38,10 @@ class LottoManagerTest {
         int lottoCount = 2;
 
         // when
-        List<Lotto> lottos = lottoManager.generateLottos(lottoCount);
+        LottoWallet lottos = lottoManager.generateLottos(lottoCount);
 
         // then
-        assertThat(lottos).hasSize(lottoCount);
+        assertThat(lottos.getLottoWallet()).hasSize(lottoCount);
     }
 
     @Test
@@ -50,7 +51,7 @@ class LottoManagerTest {
         LottoManager lottoManager = new LottoManager();
 
         // when
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.calculateWinningResult(lottoWallet, winningLotto);
 
         // then
         for (WinningInfo value : WinningInfo.values()) {
@@ -63,7 +64,7 @@ class LottoManagerTest {
     void check_calculate_revenue_correctly() {
         // given
         LottoManager lottoManager = new LottoManager();
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.calculateWinningResult(lottoWallet, winningLotto);
 
         Money money = new Money(6000);
         long totalPrices = Arrays.stream(WinningInfo.values())

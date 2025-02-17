@@ -5,17 +5,17 @@ import java.util.List;
 import util.RandomNumbersGenerator;
 
 public class LottoManager {
-    public List<Lotto> generateLottos(final int lottoCount) {
+    public LottoWallet generateLottos(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {
             lottos.add(new Lotto(RandomNumbersGenerator.generateUniqueNumbers(LottoNumber.MIN, LottoNumber.MAX, 6)));
         }
-        return lottos;
+        return new LottoWallet(lottos);
     }
 
-    public WinningResult calculateWinningResult(List<Lotto> lottos, WinningLotto winningLotto) {
+    public WinningResult calculateWinningResult(LottoWallet lottoWallet, WinningLotto winningLotto) {
         WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : lottos) {
+        for (Lotto lotto : lottoWallet.getLottoWallet()) {
             final int matchedCount = winningLotto.getMatchedCount(lotto);
             final boolean isBonusMatched = winningLotto.isMatchBonus(lotto);
             WinningInfo winningInfo = WinningInfo.of(matchedCount, isBonusMatched);

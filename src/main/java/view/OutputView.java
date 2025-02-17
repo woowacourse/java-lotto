@@ -1,6 +1,7 @@
 package view;
 
 import domain.Lotto;
+import domain.LottoWallet;
 import domain.WinningInfo;
 import domain.WinningResult;
 import java.util.List;
@@ -12,8 +13,8 @@ public class OutputView {
         System.out.printf("%d개를 구매했습니다.\n", count);
     }
 
-    public void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public void printLottos(LottoWallet lottoWallet) {
+        for (Lotto lotto : lottoWallet.getLottoWallet()) {
             System.out.println(formatLottoMessage(lotto));
         }
     }

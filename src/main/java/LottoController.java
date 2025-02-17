@@ -1,5 +1,6 @@
 import domain.Lotto;
 import domain.LottoManager;
+import domain.LottoWallet;
 import domain.Money;
 import domain.WinningLotto;
 import domain.WinningResult;
@@ -24,12 +25,12 @@ public class LottoController {
         final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
         outputView.printLottoCount(purchasableLottoCount);
 
-        List<Lotto> lottos = lottoManager.generateLottos(purchasableLottoCount);
-        outputView.printLottos(lottos);
+        LottoWallet lottoWallet = lottoManager.generateLottos(purchasableLottoCount);
+        outputView.printLottos(lottoWallet);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
+        WinningResult winningResult = lottoManager.calculateWinningResult(lottoWallet, winningLotto);
         outputView.printWinningResult(winningResult);
         outputView.printRevenue(lottoManager.calculateRevenue(winningResult, money));
     }
