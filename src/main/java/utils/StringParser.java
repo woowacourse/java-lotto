@@ -1,5 +1,7 @@
 package utils;
 
+import exception.AppException;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class StringParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new AppException(errorMessage);
         }
     }
 
