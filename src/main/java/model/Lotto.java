@@ -25,14 +25,6 @@ public class Lotto {
         return (new HashSet<>(randomNumbers).size() != randomNumbers.size());
     }
 
-    public String makeResultToStringForPrint() {
-        return "[" + String.join(", ",
-                randomNumbers.stream()
-                        .map(String::valueOf)
-                        .collect(Collectors.toList())
-        ) + "]";
-    }
-
     public boolean isContainBonusNumber(int bonusNumber) {
         return randomNumbers.contains(bonusNumber);
     }
