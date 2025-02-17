@@ -30,7 +30,7 @@ public class WinningLotto {
 
     private void validateBonusBall(Lotto winningNumbers, int bonusBallNumber) {
         validateRange(bonusBallNumber);
-        validateDistinct(winningNumbers, bonusBallNumber);
+        validateDuplicate(winningNumbers, bonusBallNumber);
     }
 
     private void validateRange(int bonusBallNumber) {
@@ -39,7 +39,7 @@ public class WinningLotto {
         }
     }
 
-    private void validateDistinct(Lotto winningNumbers, int bonusBallNumber) {
+    private void validateDuplicate(Lotto winningNumbers, int bonusBallNumber) {
         Set<Integer> winningLottoNumbers = winningNumbers.getLottoNumbers();
         if (winningLottoNumbers.contains(bonusBallNumber)) {
             throw INVALID_LOTTO_BONUS_DISTINCT.getException();
