@@ -2,8 +2,11 @@ package lotto.view;
 
 import static lotto.domain.MatchInfo.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 
@@ -41,5 +44,12 @@ public class OutputView {
         }
 
         System.out.println(print);
+    }
+
+    public void printLottoList(List<Lotto> lottoList) {
+        String output = lottoList.stream()
+            .map(Lotto::toString)
+            .collect(Collectors.joining("\n"));
+        print(output);
     }
 }

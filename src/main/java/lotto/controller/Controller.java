@@ -29,7 +29,8 @@ public class Controller {
         int numberOfLotto = cashier.getNumberOfLotto();
         Wallet wallet = new Wallet(numberOfLotto);
         outputView.printLottoPurchaseInfo(numberOfLotto);
-        outputView.print(wallet.toString());
+
+        outputView.printLottoList(wallet.getLottoList());
 
         Lotto winningLotto = requestWinningLotto();
 

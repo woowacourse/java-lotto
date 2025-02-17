@@ -1,8 +1,8 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Wallet {
@@ -20,10 +20,7 @@ public class Wallet {
             .toList();
     }
 
-    @Override
-    public String toString() {
-        return lottoList.stream()
-            .map(Lotto::toString)
-            .collect(Collectors.joining("\n"));
+    public List<Lotto> getLottoList() {
+        return Collections.unmodifiableList(lottoList);
     }
 }
