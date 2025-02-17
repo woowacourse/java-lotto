@@ -43,7 +43,7 @@ public class LottoResult {
     }
 
     public Double calculateLottoProfitRate(LottoMoney lottoMoney) {
-        int money = lottoMoney.getLottoMoney();
+        int money = lottoMoney.amount();
         int totalProfit = 0;
         for (Map.Entry<LottoPrize, Integer> entry : lottoResult.entrySet()) {
             LottoPrize lottoPrize = entry.getKey();

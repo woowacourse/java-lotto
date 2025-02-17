@@ -21,7 +21,7 @@ public class LottoMachine {
 
     public List<Lotto> generateLottoTickets(LottoMoney lottoMoney) {
         List<Lotto> tickets = new ArrayList<>();
-        int ticketNumber = lottoMoney.getLottoMoney() / LOTTO_MONEY_UNIT;
+        int ticketNumber = lottoMoney.amount() / LOTTO_MONEY_UNIT;
         for (int i = 0; i < ticketNumber; i++) {
             Lotto ticket = generateLottoTicket();
             tickets.add(ticket);

@@ -4,13 +4,10 @@ import static lotto.util.Constant.LOTTO_MONEY_UNIT;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_AMOUNT;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_UNIT;
 
-public class LottoMoney {
+public record LottoMoney(int amount) {
 
-    private final int lottoMoney;
-
-    public LottoMoney(int lottoMoney) {
-        validate(lottoMoney);
-        this.lottoMoney = lottoMoney;
+    public LottoMoney {
+        validate(amount);
     }
 
     private void validate(int amount) {
@@ -28,9 +25,5 @@ public class LottoMoney {
         if (amount % LOTTO_MONEY_UNIT != 0) {
             throw INVALID_LOTTO_MONEY_UNIT.getException();
         }
-    }
-
-    public int getLottoMoney() {
-        return lottoMoney;
     }
 }
