@@ -53,11 +53,9 @@ public class LottoController {
     }
 
     private void printIssuedLottoTickets(final List<Lotto> lottoTickets) {
-        List<List<Integer>> issuedLottoNumbers = new ArrayList<>();
-        for (Lotto lottoTicket : lottoTickets) {
-            addSortedLottoNumbers(lottoTicket, issuedLottoNumbers);
-        }
-        outputView.printIssuedLottos(issuedLottoNumbers);
+        outputView.printIssuedLottos(lottoTickets.stream()
+                .map(Lotto::getNumbers)
+                .toList());
     }
 
     private void addSortedLottoNumbers(final Lotto lottoTicket, final List<List<Integer>> issuedLottoNumbers) {

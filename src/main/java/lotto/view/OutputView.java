@@ -1,5 +1,6 @@
 package lotto.view;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,10 +17,17 @@ public class OutputView {
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
         for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
-            System.out.println(issuedLottoNumber.stream()
+            List<Integer> sortedLottoNumber = sortAscendingLottoNumber(issuedLottoNumber);
+            System.out.println(sortedLottoNumber.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", ", "[", "]")));
         }
+    }
+
+    private List<Integer> sortAscendingLottoNumber(final List<Integer> issuedLottoNumber) {
+        return new ArrayList<>(issuedLottoNumber).stream()
+                .sorted()
+                .toList();
     }
 
     public void printWinningResult(final WinningResultResponses responses) {
