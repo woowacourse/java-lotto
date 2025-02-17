@@ -12,12 +12,12 @@ public enum Rank {
     FIRST(6, false, 2_000_000_000L);
 
     private final int matchingCount;
-    private final boolean hasBonus;
+    private final boolean bonusRequired;
     private final long winningAmount;
 
-    Rank(final int matchingCount, final boolean hasBonus, final long winningAmount) {
+    Rank(final int matchingCount, final boolean bonusRequired, final long winningAmount) {
         this.matchingCount = matchingCount;
-        this.hasBonus = hasBonus;
+        this.bonusRequired = bonusRequired;
         this.winningAmount = winningAmount;
     }
 
@@ -26,7 +26,7 @@ public enum Rank {
                 .filter(rank -> rank.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(NONE);
-        if (findRank.equals(THIRD) && SECOND.hasBonus == hasBonusNumber) {
+        if (findRank.equals(THIRD) && SECOND.bonusRequired == hasBonusNumber) {
             return SECOND;
         }
         return findRank;
@@ -44,7 +44,7 @@ public enum Rank {
         return this.equals(NONE);
     }
 
-    public boolean hasBonus() {
-        return this.hasBonus;
+    public boolean isBonusRequired() {
+        return this.bonusRequired;
     }
 }
