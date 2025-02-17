@@ -7,7 +7,7 @@ public class UserLotto {
     private final Lotto winningNumbers;
     private final BonusNumber bonusNumber;
 
-    public UserLotto(List<Integer> userInputNumbers, BonusNumber bonusNumber) {
+    public UserLotto(final List<Integer> userInputNumbers, final BonusNumber bonusNumber) {
         this.winningNumbers = new Lotto(userInputNumbers);
         validateDuplicateBonusNumber(bonusNumber.getBonusNumber());
         this.bonusNumber = bonusNumber;

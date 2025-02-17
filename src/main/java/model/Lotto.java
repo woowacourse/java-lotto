@@ -13,7 +13,7 @@ public class Lotto {
     private static final int BALL_NUMBER_OF_ONE_LOTTO = 6;
     private final List<Integer> randomNumbers;
 
-    public Lotto(List<Integer> winningNumbers) {
+    public Lotto(final List<Integer> winningNumbers) {
         validateSize(winningNumbers);
         validateDuplicate(winningNumbers);
 
@@ -49,13 +49,13 @@ public class Lotto {
         return randomNumbers;
     }
 
-    private void validateSize(final List<Integer> winningNumbers) {
+    private void validateSize(List<Integer> winningNumbers) {
         if (winningNumbers.size() != BALL_NUMBER_OF_ONE_LOTTO) {
             throw new IllegalArgumentException("번호는 6개의 숫자여야 합니다.");
         }
     }
 
-    private void validateDuplicate(final List<Integer> winningNumbers) {
+    private void validateDuplicate(List<Integer> winningNumbers) {
         if(isDuplicatedNumbers(winningNumbers)){
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
@@ -66,7 +66,7 @@ public class Lotto {
     }
 
 
-    private void validateNumberRange(final Set<Integer> winningNumbers) {
+    private void validateNumberRange(Set<Integer> winningNumbers) {
         for (Integer winningNumber : winningNumbers) {
             if (winningNumber < START_NUMBER_OF_LOTTO_RANGE || winningNumber > END_NUMBER_OF_LOTTO_RANGE) {
                 throw new IllegalArgumentException("숫자는 1~45 사이여야 합니다.");
