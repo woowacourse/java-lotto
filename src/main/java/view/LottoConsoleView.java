@@ -1,29 +1,24 @@
 package view;
 
-import common.NumberValidator;
 import controller.dto.LottoRankResponse;
 import controller.dto.LottoTicketResponse;
-import controller.dto.WinningLottoRequest;
 import java.util.List;
 
 public class LottoConsoleView {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final InputParser inputParser;
+    private final LottoParser lottoParser;
 
-    public LottoConsoleView(InputView inputView, OutputView outputView, InputParser inputParser) {
+    public LottoConsoleView(InputView inputView, OutputView outputView, LottoParser lottoParser) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.inputParser = inputParser;
+        this.lottoParser = lottoParser;
     }
 
     public int requestPurchaseAmount() {
         String rawPurchaseAmount = inputView.inputPurchaseAmount();
-        NumberValidator.validateInteger(rawPurchaseAmount);
-        int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
-        NumberValidator.validatePositive(purchaseAmount);
-        return purchaseAmount;
+        return lottoParser.parsePurchaseAmount(rawPurchaseAmount);
     }
 
     public void printPurchaseCount(int purchaseCount) {
@@ -34,14 +29,14 @@ public class LottoConsoleView {
         outputView.printPurchasedLottos(lottoTicketResponses);
     }
 
-    public WinningLottoRequest requestWinningLotto() {
+    public List<Integer> requestWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
-        List<Integer> parsedWinningNumbers = inputParser.parseWinningNumbers(rawWinningNumbers);
+        return lottoParser.parseWinningNumbers(rawWinningNumbers);
+    }
 
+    public int requestBonusNumber() {
         String rawBonusNumber = inputView.inputBonusNumber();
-        int parsedBonusNumber = inputParser.parseBonusNumber(rawBonusNumber);
-
-        return new WinningLottoRequest(parsedWinningNumbers, parsedBonusNumber);
+        return lottoParser.parseBonusNumber(rawBonusNumber);
     }
 
     public void printLottoRankResults(List<LottoRankResponse> lottoRankResponses) {

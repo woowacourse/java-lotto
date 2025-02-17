@@ -1,47 +1,83 @@
 package model;
 
+import common.NumbersGenerator;
+import controller.dto.LottoDtoMapper;
+import controller.dto.LottoRankResponse;
+import controller.dto.LottoRankResultsResponse;
+import controller.dto.LottoTicketResponse;
+import controller.dto.WinningLottoRequest;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class LottoStore {
 
     private static final int LOTTO_PRICE = 1_000;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
-    private final LottoRankCalculator lottoRankCalculator;
+    private final NumbersGenerator numbersGenerator;
+    private final LottoRankFinder lottoRankFinder;
+    private final LottoRankCounter lottoRankCounter;
+    private final LottoDtoMapper lottoDtoMapper;
 
-    public LottoStore(LottoNumberGenerator lottoNumberGenerator, LottoRankCalculator lottoRankCalculator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
-        this.lottoRankCalculator = lottoRankCalculator;
+    public LottoStore(
+            NumbersGenerator numbersGenerator,
+            LottoRankFinder lottoRankFinder,
+            LottoRankCounter lottoRankCounter,
+            LottoDtoMapper lottoDtoMapper
+    ) {
+        this.numbersGenerator = numbersGenerator;
+        this.lottoRankFinder = lottoRankFinder;
+        this.lottoRankCounter = lottoRankCounter;
+        this.lottoDtoMapper = lottoDtoMapper;
     }
 
-    public List<LottoTicket> purchase(final int purchaseAmount) {
+    public int calculatePurchaseCount(int purchaseAmount) {
         validateAmountUnit(purchaseAmount);
-        int purchaseCount = purchaseAmount / LOTTO_PRICE;
-        return IntStream.range(0, purchaseCount).mapToObj(count -> new LottoTicket(lottoNumberGenerator.generate()))
+        return purchaseAmount / LOTTO_PRICE;
+    }
+
+    public int calculatePurchaseAmount(int lottoTicketCount) {
+        return lottoTicketCount * LOTTO_PRICE;
+    }
+
+    public List<LottoTicketResponse> createLottoTickets(int purchaseCount) {
+        return IntStream.range(0, purchaseCount)
+                .mapToObj(count -> new LottoTicket(numbersGenerator.generate()))
+                .map(lottoDtoMapper::toLottoTicketResponse)
                 .toList();
     }
 
-    public LottoRankResult calculateRankMatchCount(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        List<LottoRank> lottoRanks = calculateRank(lottoTickets, winningLotto);
-        LottoRankResult lottoRankResult = new LottoRankResult();
-        for (LottoRank lottoRank : lottoRanks) {
-            lottoRankResult.updateRankCount(lottoRank);
-        }
-        return lottoRankResult;
+    public LottoRankResultsResponse countAllLottoRanks(
+            List<LottoTicketResponse> lottoTicketResponses,
+            WinningLottoRequest winningLottoRequest
+    ) {
+        List<LottoTicket> lottoTickets = lottoDtoMapper.toLottoTickets(lottoTicketResponses);
+        WinningLotto winningLotto = lottoDtoMapper.toWinningLotto(winningLottoRequest);
+
+        List<LottoRank> lottoRanks = lottoRankFinder.findAll(lottoTickets, winningLotto);
+        Map<LottoRank, Integer> lottoRankCountResult = lottoRankCounter.countLottoRanks(lottoRanks);
+        LottoRankResult lottoRankResult = new LottoRankResult(lottoRankCountResult);
+
+        return lottoDtoMapper.toLottoRankResultResponse(lottoRankResult);
     }
 
-    public double calculateProfitRate(int lottoTicketCount, LottoRankResult lottoRankResult) {
-        int purchasedAmount = lottoTicketCount * LOTTO_PRICE;
+    public List<LottoRankResponse> getLottoRankResults(LottoRankResultsResponse lottoRankResultsResponse) {
+        return new ArrayList<>(lottoRankResultsResponse.getKeys().stream()
+                .map(rank -> {
+                    int rankMatchCount = lottoRankResultsResponse.getValue(rank);
+                    return LottoRankResponse.of(rank, rankMatchCount);
+                })
+                .toList());
+    }
+
+    public double calculateProfitRate(int purchasedAmount, LottoRankResultsResponse lottoRankResultsResponse) {
+        LottoRankResult lottoRankResult = lottoDtoMapper.toLottoRankResult(lottoRankResultsResponse);
+
         int profit = lottoRankResult.getKeys().stream()
-                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank)).sum();
+                .mapToInt(rank -> rank.getWinningAmount() * lottoRankResult.getValue(rank))
+                .sum();
         return (double) profit / purchasedAmount;
-    }
-
-    private List<LottoRank> calculateRank(List<LottoTicket> lottoTickets, WinningLotto winningLotto) {
-        return lottoTickets.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
-                .filter(Objects::nonNull).toList();
     }
 
     private void validateAmountUnit(int purchaseAmount) {

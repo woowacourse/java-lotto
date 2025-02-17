@@ -2,56 +2,74 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.within;
 
+import controller.dto.LottoDtoMapper;
+import controller.dto.LottoRankResultsResponse;
+import controller.dto.LottoTicketResponse;
+import controller.dto.WinningLottoRequest;
+import java.util.HashMap;
 import java.util.List;
-import model.LottoNumberGenerator;
+import java.util.Map;
 import model.LottoRank;
-import model.LottoRankCalculator;
-import model.LottoRankResult;
+import model.LottoRankCounter;
+import model.LottoRankFinder;
 import model.LottoStore;
-import model.LottoTicket;
-import model.WinningLotto;
 import org.junit.jupiter.api.Test;
 
 class LottoStoreTest {
 
-    private LottoStore lottoStore = new LottoStore(new LottoNumberGenerator(), new LottoRankCalculator());
+    private LottoStore lottoStore = new LottoStore(
+            () -> List.of(1, 2, 3, 4, 5, 6),
+            new LottoRankFinder(),
+            new LottoRankCounter(),
+            new LottoDtoMapper());
 
     @Test
     void 구입_금액이_1000원_단위가_아나라면_예외를_발생시킨다() {
-        int purchasePrice = 1001;
+        int purchaseAmount = 1001;
         assertThatThrownBy(
-                () -> lottoStore.purchase(purchasePrice)
+                () -> lottoStore.calculatePurchaseCount(purchaseAmount)
         ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 구입_금액에_해당하는_개수만큼_로또_티켓이_생성된다() {
-        int purchasePrice = 14000;
-        assertThat(lottoStore.purchase(purchasePrice).size()).isEqualTo(14);
+    void 구입_금액에_따라_구매될_로또_개수를_반환한다() {
+        int purchaseAmount = 14000;
+
+        int purchaseCount = lottoStore.calculatePurchaseCount(purchaseAmount);
+        assertThat(purchaseCount).isEqualTo(14);
+    }
+
+    @Test
+    void 구입_개수만큼_로또_티켓이_생성된다() {
+        int purchaseCount = 14;
+        assertThat(lottoStore.createLottoTickets(purchaseCount).size()).isEqualTo(14);
+        assertThat(lottoStore.createLottoTickets(purchaseCount).getFirst().numbers()).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void 당첨결과_개수를_센다() {
         // given
-        List<LottoTicket> lottoTickets = List.of(new LottoTicket(List.of(1, 2, 3, 4, 5, 6)));
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 7), 6);
+        List<LottoTicketResponse> lottoTickets = List.of(new LottoTicketResponse(List.of(1, 2, 3, 4, 5, 6)));
+        WinningLottoRequest winningLotto = new WinningLottoRequest(List.of(1, 2, 3, 4, 5, 7), 6);
 
         // when
-        LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoTickets, winningLotto);
+        LottoRankResultsResponse lottoRankResultsResponse = lottoStore.countAllLottoRanks(lottoTickets, winningLotto);
 
         // then
-        assertThat(lottoRankResult.getValue(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(lottoRankResultsResponse.getValue(LottoRank.SECOND)).isEqualTo(1);
     }
 
     @Test
     void 수익률을_계산한다() {
         // given
-        int ticketCount = 14;
-        LottoRankResult lottoRankResult = new LottoRankResult();
-        lottoRankResult.updateRankCount(LottoRank.FIFTH);
+        int purchaseAmount = 14000;
+
+        Map<LottoRank, Integer> data = new HashMap<>();
+        data.put(LottoRank.FIFTH, 1);
+        LottoRankResultsResponse lottoRankResultsResponse = new LottoRankResultsResponse(data);
 
         // when
-        double profitRate = lottoStore.calculateProfitRate(ticketCount, lottoRankResult);
+        double profitRate = lottoStore.calculateProfitRate(purchaseAmount, lottoRankResultsResponse);
 
         // then
         assertThat(profitRate).isCloseTo(0.36, within(0.01));

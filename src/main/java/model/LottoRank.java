@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public enum LottoRank {
     FIRST(1, 6, false, 2_000_000_000),
@@ -43,18 +44,23 @@ public enum LottoRank {
         return comparedOverlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT;
     }
 
-    public static LottoRank findByMatchCondition(
+    public static LottoRank findByOverlappedCountAndBonusNumber(
             int overlappedCount,
-            boolean isBonusNUmberOverlapped
+            boolean isBonusNumberOverlapped
     ) {
         return Arrays.stream(LottoRank.values())
-                .filter(rank -> {
-                    if (overlappedCount == REQUIRED_BONUS_OVERLAPPED_COUNT) {
-                        return rank.isRequiredBonusNumber() && rank.overlappedCount == overlappedCount;
-                    }
-                    return rank.overlappedCount == overlappedCount;
-                })
+                .filter(rank -> Objects.equals(rank.overlappedCount, overlappedCount))
+                .filter(rank -> checkBonusNumber(overlappedCount, rank.isRequiredBonusNumber(), isBonusNumberOverlapped))
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static boolean checkBonusNumber(
+            int overlappedCount,
+            boolean isRequiredBonusNumber,
+            boolean isBonusNumberOverlapped
+    ) {
+        return !requiredBonusNumber(overlappedCount) ||
+                (requiredBonusNumber(overlappedCount) && isRequiredBonusNumber == isBonusNumberOverlapped);
     }
 }
