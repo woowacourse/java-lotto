@@ -16,6 +16,7 @@ public class InputView implements AutoCloseable {
 
         return InputParser.parseToInt(input);
     }
+
     public String read(String prompt) {
         System.out.println(prompt);;
         return scanner.nextLine();
