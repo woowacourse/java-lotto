@@ -9,6 +9,6 @@ public final class RandomNumber {
 
     public static int generateRandomNumber(int origin, int bound) {
         Random random = new Random();
-        return random.nextInt(1, 45);
+        return random.nextInt(origin, bound);
     }
 }
