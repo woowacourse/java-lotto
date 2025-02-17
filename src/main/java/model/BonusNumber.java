@@ -21,10 +21,7 @@ public class BonusNumber {
     }
 
     public boolean isBonusNumber(Lotto lotto) {
-        if (lotto.getRandomNumbers().contains(bonusNumber)) {
-            return true;
-        }
-        return false;
+        return (lotto.isContainBonusNumber(bonusNumber));
     }
 
 }

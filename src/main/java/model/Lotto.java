@@ -32,4 +32,8 @@ public class Lotto {
                         .collect(Collectors.toList())
         ) + "]";
     }
+
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return randomNumbers.contains(bonusNumber);
+    }
 }
