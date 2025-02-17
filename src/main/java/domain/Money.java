@@ -3,18 +3,18 @@ package domain;
 public class Money {
     private final int value;
 
-    public static Money of(String input) {
+    public static Money of(String number) {
         try {
-            final int parsed = Integer.parseInt(input.trim());
-            return new Money(parsed);
+            final int parsedNumber = Integer.parseInt(number.trim());
+            return new Money(parsedNumber);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입 금액은 숫자여야 합니다.", e);
         }
     }
 
-    public Money(int input) {
-        validateIsPositive(input);
-        this.value = input;
+    public Money(int number) {
+        validateIsPositive(number);
+        this.value = number;
     }
 
     public int getValue() {
