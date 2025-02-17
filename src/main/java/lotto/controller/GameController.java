@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.Set;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.LottoMoney;
@@ -42,7 +43,6 @@ public class GameController {
         OutputView.writeLottoResultProfitRate(lottoResult.calculateLottoProfitRate(lottoMoney));
     }
 
-
     private LottoMoney storeLottoMoney() {
         try {
             int lottoMoney = InputView.readLottoMoney();
@@ -60,8 +60,8 @@ public class GameController {
 
     private Lotto storeWinningLottoNumbers() {
         try {
-            String response = InputView.readWinningNumbers();
-            return new Lotto(response);
+            Set<Integer> lottoNumbers = InputView.readWinningNumbers();
+            return new Lotto(lottoNumbers);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
             return storeWinningLottoNumbers();

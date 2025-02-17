@@ -17,12 +17,6 @@ public class Lotto {
 
     private Set<Integer> lotto = new HashSet<>();
 
-    public Lotto(String input) {
-        Set<Integer> numbers = parse(input);
-        validate(numbers);
-        this.lotto = numbers;
-    }
-
     public Lotto(Set<Integer> numbers) {
         validate(numbers);
         this.lotto = numbers;

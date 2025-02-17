@@ -3,6 +3,7 @@ package lotto.domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
+import java.util.Set;
 import lotto.util.LottoNumberGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +28,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과 일치 개수 확인 - 5개 Hit, Bonus True")
     @Test
     public void lottoMatch_5Hit_BonusTrue() {
-        Lotto winningNumbers = new Lotto("5, 7, 19, 26, 32, 44");
+        Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, "41");
 
         LottoResult lottoResult = new LottoResult();
@@ -44,7 +45,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과 일치 개수 확인 - 5개 Hit, Bonus False")
     @Test
     public void lottoMatch_5Hit_BonusFalse() {
-        Lotto winningNumbers = new Lotto("5, 7, 19, 26, 32, 44");
+        Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
 
         LottoResult lottoResult = new LottoResult();
@@ -61,7 +62,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과 일치 개수 확인 - 2개 Hit (3개 Hit 미만)")
     @Test
     public void lottoMatch_Under3Hit() {
-        Lotto winningNumbers = new Lotto("5, 7, 29, 6, 3, 4");
+        Lotto winningNumbers = new Lotto(Set.of(5, 7, 29, 6, 3, 4));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
 
         LottoResult lottoResult = new LottoResult();
@@ -78,7 +79,7 @@ public class LottoResultTest {
     @DisplayName("로또 결과 수익률 확인")
     @Test
     public void lottoProfitRate() {
-        Lotto winningNumbers = new Lotto("5, 7, 19, 26, 32, 44");
+        Lotto winningNumbers = new Lotto(Set.of(5, 7, 19, 26, 32, 44));
         WinningLotto winningLotto = new WinningLotto(winningNumbers, "11");
 
         LottoResult lottoResult = new LottoResult();
