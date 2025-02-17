@@ -11,10 +11,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public LottoNumber(NumberGenerator numberGenerator) {
-        this.number = numberGenerator.generate();
-    }
-
     public int getNumber() {
         return number;
     }
