@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import domain.properties.LottoProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
@@ -21,9 +23,9 @@ class LottoNumberTest {
     }
 
     @DisplayName("1~45 범위 외의 숫자 입력 시 예외 발생")
-    @Test
-    void outOfRangeCreationTest() {
-        int number = 46;
+    @ValueSource(ints = {0, 46})
+    @ParameterizedTest
+    void outOfRangeCreationTest(int number) {
 
         assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -43,5 +45,7 @@ class LottoNumberTest {
         LottoNumber upperLotto = LottoNumber.of(upper);
 
         assertThat(lowerLotto).isLessThan(upperLotto);
+        assertThat(upperLotto).isGreaterThan(lowerLotto);
+        assertThat(upperLotto).isEqualTo(LottoNumber.of(30));
     }
 }
