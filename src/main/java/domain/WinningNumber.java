@@ -37,27 +37,27 @@ public class WinningNumber {
     private void validateNumber(String winningNumber) {
         try {
             int number = Integer.parseInt(winningNumber);
-            throwRangeException(number);
-            throwDuplicateException(number);
+            validateRange(number);
+            validateDuplication(number);
         } catch (NumberFormatException e) {
-            throwDigitException(winningNumber);
+            validateDigit(winningNumber);
             throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
 
-    private void throwRangeException(int number) {
+    private void validateRange(int number) {
         if (number < LottoConstants.MIN_NUMBER || number > LottoConstants.MAX_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 1~45 사이의 정수로 입력해주세요.");
         }
     }
 
-    private void throwDuplicateException(int number) {
+    private void validateDuplication(int number) {
         if (numbers.contains(number)) {
             throw new IllegalArgumentException("당첨 번호 간 중복 없이 입력해주세요.");
         }
     }
 
-    private void throwDigitException(String winningNumber) {
+    private void validateDigit(String winningNumber) {
         if (winningNumber.length() > 10) {
             throw new IllegalArgumentException("당첨 번호는 10자리 이하의 정수로 입력해주세요.");
         }

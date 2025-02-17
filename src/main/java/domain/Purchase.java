@@ -23,20 +23,20 @@ public class Purchase {
     private void validate(String purchaseAmountInput) {
         try {
             int purchaseAmount = Integer.parseInt(purchaseAmountInput);
-            throwRangeException(purchaseAmount);
-            throwUnitException(purchaseAmount);
+            validateRange(purchaseAmount);
+            validateUnit(purchaseAmount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구입 금액은 1000 이상 100000 이하의 정수를 입력해주세요.");
         }
     }
 
-    private void throwRangeException(int purchaseAmount) {
+    private void validateRange(int purchaseAmount) {
         if (purchaseAmount < MIN_PURCHASE_AMOUNT || purchaseAmount > MAX_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException("구입 금액은 1000 이상 100000 이하의 정수를 입력해주세요.");
         }
     }
 
-    private void throwUnitException(int purchaseAmount) {
+    private void validateUnit(int purchaseAmount) {
         if (purchaseAmount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은 1000으로 나누어 떨어지는 정수를 입력해주세요.");
         }
