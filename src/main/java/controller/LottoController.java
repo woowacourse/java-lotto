@@ -10,6 +10,7 @@ import model.Lotto;
 import model.LottoMachine;
 import model.LottoNumber;
 import model.PurchaseAmount;
+import model.WinningLotto;
 import model.WinningNumbers;
 import model.WinningResult;
 import view.input.InputView;
@@ -37,12 +38,17 @@ public class LottoController {
         final List<Lotto> lottos = lottoMachine.issueLottos(purchaseAmount);
         outputView.printLottoNumbers(convertLottos(lottos));
 
-        final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers, 0);
-        final BonusBall bonusBall = executeWithRetry(() -> inputBonusBall(winningNumbers), 0);
+        final WinningLotto winningLotto = inputWinningLotto();
 
-        final WinningResult winningResult = WinningResult.of(lottos, winningNumbers, bonusBall);
+        final WinningResult winningResult = WinningResult.of(lottos, winningLotto);
         outputView.printLottoStatistics(winningResult.calculateRateOfRevenue(), winningResult.getLottoRanks(),
                 winningResult.isRevenue());
+    }
+
+    private WinningLotto inputWinningLotto() {
+        final WinningNumbers winningNumbers = executeWithRetry(this::inputWinningNumbers, 0);
+        final BonusBall bonusBall = executeWithRetry(() -> inputBonusBall(winningNumbers), 0);
+        return new WinningLotto(winningNumbers, bonusBall);
     }
 
     private PurchaseAmount inputPurchaseAmount() {

@@ -26,12 +26,11 @@ public class WinningResult {
         }
     }
 
-    public static WinningResult of(final List<Lotto> lottos, final WinningNumbers winningNumbers,
-                                   final BonusBall bonusBall) {
+    public static WinningResult of(final List<Lotto> lottos, final WinningLotto winningLotto) {
         final Map<LottoRank, Integer> lottoRanks = new HashMap<>();
 
         for (final Lotto lotto : lottos) {
-            final LottoRank lottoRank = LottoRank.of(lotto, winningNumbers, bonusBall);
+            final LottoRank lottoRank = LottoRank.of(lotto, winningLotto);
             lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
         }
 

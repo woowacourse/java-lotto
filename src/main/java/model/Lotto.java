@@ -42,9 +42,9 @@ public class Lotto {
         }
     }
 
-    public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
+    public int calculateWinningNumbersMatchCount(final WinningLotto winningLotto) {
         return (int) lottoNumbers.stream()
-                .filter(winningNumbers::containsLottoNumber)
+                .filter(winningLotto::containsLottoNumber)
                 .count();
     }
 

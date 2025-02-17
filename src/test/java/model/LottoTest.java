@@ -15,12 +15,17 @@ import org.junit.jupiter.api.Test;
 class LottoTest {
 
     private List<LottoNumber> lottoNumbers;
+    private WinningNumbers winningNumbers;
+    private BonusBall bonusBall;
 
     @BeforeEach
     public void initTestFixture() {
         lottoNumbers = new ArrayList<>(
                 Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
                         new LottoNumber(5), new LottoNumber(6)));
+        winningNumbers = new WinningNumbers(lottoNumbers);
+        bonusBall = new BonusBall(new LottoNumber(7), winningNumbers);
+
     }
 
     @Nested
@@ -42,11 +47,11 @@ class LottoTest {
         void calculateWinningNumbersMatchCount() {
             // given
             Lotto lotto = new Lotto(lottoNumbers);
-            WinningNumbers winningNumbers = new WinningNumbers(lottoNumbers);
+            WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
             int expected = 6;
 
             // when
-            int actual = lotto.calculateWinningNumbersMatchCount(winningNumbers);
+            int actual = lotto.calculateWinningNumbersMatchCount(winningLotto);
 
             // then
             assertThat(actual).isEqualTo(expected);
