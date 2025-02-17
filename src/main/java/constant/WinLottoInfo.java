@@ -14,7 +14,6 @@ public enum WinLottoInfo {
     NONE(2,  0);
 
     private final int matchNumberCount;
-
     private final int price;
 
     WinLottoInfo(int matchNumberCount,  int price) {

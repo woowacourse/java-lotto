@@ -4,13 +4,13 @@ import constant.WinLottoInfo;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map.Entry;
+import service.WinLottoService;
 
 public class Result {
     private final EnumMap<WinLottoInfo, Integer> result = new EnumMap<>(WinLottoInfo.class);
 
-    public Result(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
-        for (LottoNumbers purchasedLotto : lottoNumbers) {
-            WinLottoInfo winResult = WinLottoInfo.result(purchasedLotto, winLotto);
+    public Result(List<WinLottoInfo> winResults) { // ✅ 당첨 정보를 외부에서 주입
+        for (WinLottoInfo winResult : winResults) {
             result.put(winResult, result.getOrDefault(winResult, 0) + 1);
         }
     }
@@ -28,7 +28,7 @@ public class Result {
     }
 
     public int getCount(WinLottoInfo winLottoInfo) {
-        return result.get(winLottoInfo);
+        return result.getOrDefault(winLottoInfo,0);
     }
 
     public double totalReturn(int purchaseAmount) {
