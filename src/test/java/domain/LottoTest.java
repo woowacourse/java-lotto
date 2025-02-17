@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -16,8 +17,8 @@ class LottoTest {
 
     @ParameterizedTest
     @MethodSource("generateNotSixNumber")
-    void 로또_번호의_개수가_6개가_아닌경우_예외를_반환한다(Set<Number> numbers) {
-        assertThatThrownBy(() -> new Lotto(numbers))
+    void 로또_번호의_개수가_6개가_아닌경우_예외를_반환한다(List<Integer> numbers) {
+        assertThatThrownBy(() -> Lotto.createWinningLotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 6개여야 합니다.");
     }
@@ -30,9 +31,8 @@ class LottoTest {
     })
     void 번호를_포함하는지_판단한다(int number, boolean expected) {
         //given
-        Set<Number> numbers = Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5),
-                new Number(6));
-        Lotto lotto = new Lotto(numbers);
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = Lotto.createWinningLotto(numbers);
         //when
         boolean actual = lotto.contains(new Number(number));
         //then
@@ -41,7 +41,7 @@ class LottoTest {
 
     @Test
     void 로또_번호가_중복되는_경우_예외를_반환한다() {
-        assertThatThrownBy(() -> new Lotto(List.of(1, 1, 2, 3, 4, 5)))
+        assertThatThrownBy(() -> Lotto.createWinningLotto(List.of(1, 1, 2, 3, 4, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 중복되지 않아야 합니다.");
     }
@@ -49,8 +49,8 @@ class LottoTest {
     @Test
     void 서로_다른_로또에서_몇개의_숫자가_같은지_계산할_수_있다() {
         //given
-        Lotto lotto1 = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = new Lotto(List.of(1, 2, 3, 10, 11, 12));
+        Lotto lotto1 = Lotto.createWinningLotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.createRandomLotto((int size) -> List.of(1, 2, 3, 10, 11, 12));
 
         //when
         int actual = lotto1.calculateMatchCount(lotto2);
@@ -61,10 +61,8 @@ class LottoTest {
 
     static Stream<Arguments> generateNotSixNumber() {
         return Stream.of(
-                Arguments.of(Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5))),
-                Arguments.of(
-                        Set.of(new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6),
-                                new Number(7)))
+                Arguments.of(List.of(1, 2, 3, 4, 5)),
+                Arguments.of(List.of(1, 2, 3, 4, 5, 6, 7))
         );
     }
 
@@ -80,11 +78,27 @@ class LottoTest {
     })
     void 로또가_특정_번호를_포함하는지_판단할_수_있다(int value, boolean expected) {
         //given
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createRandomLotto((int size) -> List.of(1, 2, 3, 4, 5, 6));
         Number number = new Number(value);
         //when
         boolean actual = lotto.contains(number);
         //then
         assertThat(expected).isEqualTo(actual);
+    }
+
+    @Test
+    void 로또를_생성할_수_있다() {
+        //given
+        LottoPickStrategy fixNumberStrategy = (int size) -> List.of(1, 2, 3, 4, 5, 6);
+
+        //when
+        Lotto lotto = Lotto.createRandomLotto(fixNumberStrategy);
+
+        //then
+        assertThat(lotto)
+                .extracting("numbers")
+                .isEqualTo(Set.of(
+                        new Number(1), new Number(2), new Number(3), new Number(4), new Number(5), new Number(6)
+                ));
     }
 }

@@ -8,7 +8,6 @@ import domain.Money;
 import domain.Number;
 import domain.WinningLotto;
 import domain.WinningResult;
-import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -31,7 +30,7 @@ public class LottoController {
 
     public void start() {
         try {
-            LottoStore lottoStore = createLottoStore();
+            LottoStore lottoStore = new LottoStore(Number.createRandomLottoPickStrategy());
             Money purchaseLottoMoney = inputMoney(lottoStore);
             Lottos purchasedLottos = lottoStore.buy(purchaseLottoMoney);
             outputView.printPurchaseLottos(purchasedLottos);
@@ -50,11 +49,6 @@ public class LottoController {
         return Money.forPurchaseAmount(purchaseAmount, lottoStore);
     }
 
-    private LottoStore createLottoStore() {
-        LottoPickStrategy lottoPickStrategy = Number.createRandomLottoPickStrategy();
-        return new LottoStore(Lotto.createLottoMachine(lottoPickStrategy));
-    }
-
     private WinningLotto inputWinningLotto() {
         Lotto winningNumbers = inputWinningNumbers();
         Number bonusNumber = inputBonusNumber();
@@ -64,7 +58,7 @@ public class LottoController {
     private Lotto inputWinningNumbers() {
         String rawWinningNumbers = inputView.inputWinningNumbers();
         List<Integer> numbers = inputConverter.convertStringToWinningNumberValue(rawWinningNumbers);
-        return new Lotto(numbers);
+        return Lotto.createWinningLotto(numbers);
     }
 
     private Number inputBonusNumber() {

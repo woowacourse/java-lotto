@@ -16,7 +16,7 @@ class WinningLottoTest {
     void 보너스볼과_당첨번호가_중복된_경우_예외를_반환한다() {
         //given
         Number bonus = new Number(3);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createWinningLotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when & then
         assertThatThrownBy(() -> new WinningLotto(lotto, bonus))
@@ -29,9 +29,9 @@ class WinningLottoTest {
     void 당첨순위를_판단할_수_있다(List<Integer> numbers, Rank expected) {
         //given
         Number bonus = new Number(7);
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto lotto = Lotto.createWinningLotto(List.of(1, 2, 3, 4, 5, 6));
         WinningLotto winningLotto = new WinningLotto(lotto, bonus);
-        Lotto purchasedLotto = new Lotto(numbers);
+        Lotto purchasedLotto = Lotto.createRandomLotto((int size) -> numbers);
         //when
         Rank actual = winningLotto.calculateRank(purchasedLotto);
         //then

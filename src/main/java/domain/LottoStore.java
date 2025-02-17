@@ -1,5 +1,6 @@
 package domain;
 
+import domain.lottogeneratestrategy.LottoPickStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,10 @@ public class LottoStore {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private final LottoMachine lottoMachine;
+    private final LottoPickStrategy lottoPickStrategy;
 
-    public LottoStore(LottoMachine lottoMachine) {
-        this.lottoMachine = lottoMachine;
+    public LottoStore(LottoPickStrategy lottoPickStrategy) {
+        this.lottoPickStrategy = lottoPickStrategy;
     }
 
     public static Money calculatePurchaseAmount(int lottoCount) {
@@ -22,7 +23,7 @@ public class LottoStore {
         Money lottoPrice = new Money(LOTTO_PRICE);
         while (money.isGreaterOrEqualThan(lottoPrice)) {
             money = money.minus(lottoPrice);
-            lottos.add(lottoMachine.createLotto());
+            lottos.add(Lotto.createRandomLotto(lottoPickStrategy));
         }
 
         return new Lottos(lottos);

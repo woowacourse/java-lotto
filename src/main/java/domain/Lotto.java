@@ -15,41 +15,45 @@ public class Lotto {
 
     private final Set<Number> numbers;
 
-    public Lotto(Set<Number> numbers) {
-        validateNumberSize(numbers);
+    private Lotto(Set<Number> numbers) {
         this.numbers = numbers;
     }
 
-    public Lotto(List<Integer> number) {
+    public static Lotto createWinningLotto(List<Integer> number) {
         List<Number> numbers = number.stream().map(Number::new).toList();
         validateNumberSize(numbers);
         validateNonDuplicatedNumbers(numbers);
-        this.numbers = new HashSet<>(numbers);
+        return new Lotto(new HashSet<>(numbers));
     }
 
-    private void validateNumberSize(Collection<Number> numbers) {
-        if (!hasCorrectSize(numbers)) {
+    public static Lotto createRandomLotto(LottoPickStrategy lottoPickStrategy) {
+        Set<Number> numbers;
+        do {
+            numbers = new HashSet<>(selectNumbers(lottoPickStrategy));
+        } while (numbers.size() != NUMBERS_SIZE);
+        return new Lotto(numbers);
+    }
+
+    private static List<Number> selectNumbers(LottoPickStrategy lottoPickStrategy) {
+        List<Integer> numbers = lottoPickStrategy.pickNumbers(NUMBERS_SIZE);
+        return numbers.stream().map(Number::new).toList();
+    }
+
+    private static void validateNumberSize(Collection<Number> numbers) {
+        if (numbers.size() != NUMBERS_SIZE) {
             throw new IllegalArgumentException("로또 번호는 " + NUMBERS_SIZE + "개여야 합니다.");
         }
     }
 
-    private void validateNonDuplicatedNumbers(List<Number> numbers) {
+    private static void validateNonDuplicatedNumbers(List<Number> numbers) {
         Set<Number> nonDuplicatedNumbers = new HashSet<>(numbers);
         if (nonDuplicatedNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException("로또 번호는 중복되지 않아야 합니다.");
         }
     }
 
-    public static LottoMachine createLottoMachine(LottoPickStrategy strategy) {
-        return new LottoMachine(strategy, NUMBERS_SIZE);
-    }
-
     public boolean contains(Number number) {
         return numbers.contains(number);
-    }
-
-    public boolean hasCorrectSize(Collection<Number> numbers) {
-        return numbers.size() == NUMBERS_SIZE;
     }
 
     public int calculateMatchCount(Lotto lotto) {

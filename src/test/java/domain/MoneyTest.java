@@ -16,7 +16,7 @@ class MoneyTest {
 
     public MoneyTest() {
         LottoPickStrategy strategy = (int size) -> List.of(1, 2, 3, 4, 5, 6);
-        this.lottoStore = new LottoStore(Lotto.createLottoMachine(strategy));
+        this.lottoStore = new LottoStore(strategy);
     }
 
     @Test
