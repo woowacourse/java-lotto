@@ -19,11 +19,11 @@ class LottoRankTest {
         private WinningLotto winningLotto;
 
         public ValidCases() {
-            this.winningNumbers = new WinningNumbers(new ArrayList<>(
+            winningNumbers = new WinningNumbers(new ArrayList<>(
                     List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                             new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
-            this.bonusBall = BonusBall.of(7, winningNumbers);
-            this.winningLotto = new WinningLotto(winningNumbers, bonusBall);
+            bonusBall = BonusBall.of(7, winningNumbers);
+            winningLotto = new WinningLotto(winningNumbers, bonusBall);
         }
 
         @Test
