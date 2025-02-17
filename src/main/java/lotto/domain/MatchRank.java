@@ -16,10 +16,9 @@ public enum MatchRank {
         this.money = money;
     }
 
-    public static MatchRank getMatchRank(MatchResult matchResult) {
-        int matchCount = matchResult.matchCount();
+    public static MatchRank getMatchRank(int matchCount, boolean hasBonus) {
 
-        if (isMatchBonus(matchResult)) {
+        if (isMatchBonus(matchCount, hasBonus)) {
             return MATCH_BONUS;
         }
 
@@ -32,8 +31,8 @@ public enum MatchRank {
         return NO_MATCH;
     }
 
-    private static boolean isMatchBonus(MatchResult matchResult) {
-        return matchResult.matchCount() == MATCH_BONUS.number && matchResult.isBonusMatched();
+    private static boolean isMatchBonus(int matchCount, boolean hasBonus) {
+        return matchCount == MATCH_BONUS.number && hasBonus;
     }
 
     public int getNumber() {

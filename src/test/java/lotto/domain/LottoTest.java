@@ -26,23 +26,21 @@ class LottoTest {
     }
 
     @Test
-    @DisplayName("MatchCount()에서 로또 당첨 개수와 보너스 여부를 반환한다.")
+    @DisplayName("MatchCount()에서 로또 당첨 개수와 보너스 여부를 통해 MatchRank를 반환한다.")
     void test_MatchCount() {
         //given
-        List<Integer> list = List.of(1, 2, 3, 4, 5, 6);
-        Lotto lotto = new Lotto(LottoNumber.from(list));
-
         List<Integer> matchList = List.of(1, 2, 3, 4, 5, 7);
         Lotto matchLotto = new Lotto(LottoNumber.from(matchList));
-
         int bonus = 6;
 
+        List<Integer> list = List.of(1, 2, 3, 4, 5, 6); //5개 일치 + 보너스번호 이치
+        Lotto lotto = new Lotto(LottoNumber.from(list));
+
         //when
-        MatchResult dto = lotto.countMatchingNumbers(matchLotto, new LottoNumber(bonus));
+        MatchRank rank = lotto.countMatchingNumbers(matchLotto, new LottoNumber(bonus));
 
         //then
-        assertThat(dto.matchCount()).isEqualTo(5);
-        assertThat(dto.isBonusMatched()).isTrue();
+        assertThat(rank).isEqualTo(MatchRank.MATCH_BONUS);
     }
 
     @Test

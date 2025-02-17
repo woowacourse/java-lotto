@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Wallet {
     private final List<Lotto> lottos;
@@ -11,14 +12,18 @@ public class Wallet {
         this.lottos = lottos;
     }
 
-    public List<MatchResult> getMatchResults(WinningInform winningInform) {
-        List<MatchResult> matchResults = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            MatchResult matchResult = winningInform.match(lotto);
-            matchResults.add(matchResult);
+    public Map<MatchRank, Integer> getRankCounts(WinningInform winningInform) {
+        Map<MatchRank, Integer> matchRankResult = new EnumMap<>(MatchRank.class);
+        for (MatchRank rank : MatchRank.values()) {
+            matchRankResult.put(rank, 0);
         }
 
-        return matchResults;
+        for (Lotto lotto : lottos) {
+            MatchRank rank = winningInform.match(lotto);
+            matchRankResult.put(rank, matchRankResult.getOrDefault(rank, 0) + 1);
+        }
+
+        return matchRankResult;
     }
 
     public List<Lotto> getLottos() {

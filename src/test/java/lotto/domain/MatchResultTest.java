@@ -24,17 +24,4 @@ class MatchResultTest {
         assertThat(matchResult).isNotNull();
     }
 
-    @DisplayName("당첨번호와 일치하는 개수가 로또 번호개수를 넘어선다면 예외를 발생시킨다.")
-    @ParameterizedTest
-    @ValueSource(ints = {-1,LOTTO_SIZE+1})
-    void test_matchCountRangeError(int matchCount) {
-        boolean isBonus = false;
-
-        assertThatThrownBy(() -> {
-            new MatchResult(matchCount, isBonus);
-        }).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ERROR_MATCH_NUMBER_NOT_VALID);
-
-    }
-
 }

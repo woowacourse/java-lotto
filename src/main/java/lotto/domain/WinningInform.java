@@ -12,7 +12,7 @@ public class WinningInform {
         this.bonusNumber = bonusNumber;
     }
 
-    public MatchResult match(Lotto lotto) {
+    public MatchRank match(Lotto lotto) {
         return lotto.countMatchingNumbers(winningLotto, bonusNumber);
     }
 

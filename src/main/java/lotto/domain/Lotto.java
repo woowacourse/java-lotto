@@ -48,13 +48,15 @@ public class Lotto {
         }
     }
 
-    public MatchResult countMatchingNumbers(Lotto matchLotto, LottoNumber bonus) {
+    public MatchRank countMatchingNumbers(Lotto matchLotto, LottoNumber bonus) {
 
-        int count = (int) numbers.stream()
+        int matchCount = (int) numbers.stream()
                 .filter(matchLotto::contains)
                 .count();
 
-        return new MatchResult(count, contains(bonus));
+        MatchRank matchRank = MatchRank.getMatchRank(matchCount, contains(bonus));
+
+        return matchRank;
     }
 
     public boolean contains(LottoNumber lottoNumber) {

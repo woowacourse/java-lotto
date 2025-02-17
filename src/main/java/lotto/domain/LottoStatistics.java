@@ -15,23 +15,9 @@ public class LottoStatistics {
     }
 
     public static LottoStatistics from(Wallet wallet, WinningInform winningInform) {
-        List<MatchResult> results = wallet.getMatchResults(winningInform);
-        Map<MatchRank, Integer> rankCounts = calculateRankCounts(results);
+        Map<MatchRank, Integer> rankCounts = wallet.getRankCounts(winningInform);
         long totalPrize = calculateTotalPrize(rankCounts);
         return new LottoStatistics(rankCounts, totalPrize);
-    }
-
-    private static Map<MatchRank, Integer> calculateRankCounts(List<MatchResult> results) {
-        Map<MatchRank, Integer> counts = new EnumMap<>(MatchRank.class);
-        for (MatchRank rank : MatchRank.values()) {
-            counts.put(rank, 0);
-        }
-
-        for (MatchResult result : results) {
-            MatchRank rank = MatchRank.getMatchRank(result);
-            counts.put(rank, counts.getOrDefault(rank, 0) + 1);
-        }
-        return counts;
     }
 
     private static long calculateTotalPrize(Map<MatchRank, Integer> rankCounts) {
