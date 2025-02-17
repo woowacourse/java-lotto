@@ -16,12 +16,18 @@ public class WinnerNumber {
 
     public void compareWinning(Lotto lotto) {
         List<Integer> lottoNumber = lotto.getLottoNumber();
-
         Set<Integer> winNumber = new HashSet<>(winnerNumbers);
         Set<Integer> lottoNumbers = new HashSet<>(lottoNumber);
-
         lottoNumbers.retainAll(winNumber);
-        boolean isBonus = lottoNumber.contains(bonusBall);
-        LottoResult.addCount(lottoNumbers.size(), isBonus);
+        boolean bonusBall = isBonus(lottoNumber);
+        LottoResult.addCount(lottoNumbers.size(), bonusBall);
+    }
+
+    private boolean isBonus(List<Integer> lottoNumber) {
+        boolean isBonus = false;
+        if (lottoNumber.size() == 5){
+            isBonus = lottoNumber.contains(bonusBall);
+        }
+        return isBonus;
     }
 }
