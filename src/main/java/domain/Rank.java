@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public enum Rank {
     NONE("", Prize.NONE, MatchCount.NONE, false),
@@ -10,6 +12,9 @@ public enum Rank {
     THIRD("5개 일치 (1,500,000원)- ", Prize.THIRD, MatchCount.FIVE, false),
     SECOND("5개 일치, 보너스 볼 일치 (30,000,000원)- ", Prize.SECOND, MatchCount.FIVE, true),
     FIRST("6개 일치 (2,000,000,000원)- ", Prize.FIRST, MatchCount.SIX, false);
+
+    public static final int DEFAULT_COUNT = 0;
+    private static final int INCREMENT = 1;
 
     private final String message;
     private final long prize;
@@ -23,7 +28,7 @@ public enum Rank {
         this.bonusMatch = bonusMatch;
     }
 
-    private static class Prize {
+    private static final class Prize {
         private static final long NONE = 0L;
         private static final long FIFTH = 5_000L;
         private static final long FOURTH = 50_000L;
@@ -32,7 +37,7 @@ public enum Rank {
         private static final long FIRST = 2_000_000_000L;
     }
 
-    private static class MatchCount {
+    private static final class MatchCount {
         private static final int NONE = 0;
         private static final int THREE = 3;
         private static final int FOUR = 4;
@@ -46,6 +51,15 @@ public enum Rank {
                 .filter(rank -> rank.getCount() == matchCount && (!rank.isBonusMatch() || contains))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static LottoStats makeLottoResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusBall){
+        Map<Rank,Integer> ranks = new TreeMap<>();
+        for (Lotto lotto : lottos) {
+            Rank lottoRank = lotto.getRank(winningNumbers, bonusBall);
+            ranks.put(lottoRank, ranks.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREMENT);
+        }
+        return new LottoStats(ranks);
     }
 
     public String getMessage() {

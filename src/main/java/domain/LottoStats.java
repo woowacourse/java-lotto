@@ -1,36 +1,22 @@
 package domain;
 
-import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoStats {
-    private final int DEFAULT_COUNT = 0;
     private static final int PERCENTAGE = 100;
     private static final int ROUND_DECIMAL = 100;
-    private static final int INCREMENT = 1;
 
-    private final Map<Rank, Integer> rank;
-    private final List<Integer> winningNumbers;
-    private final int bonusBall;
+    private final Map<Rank, Integer> ranks;
 
-    public LottoStats(List<Integer> winningNumbers, int bonusBall) {
-        rank = new TreeMap<>();
-        this.winningNumbers = winningNumbers;
-        this.bonusBall = bonusBall;
-    }
 
-    public void calculateResult(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
-            Rank lottoRank = lotto.getRank(winningNumbers, bonusBall);
-            rank.put(lottoRank, rank.getOrDefault(lottoRank, DEFAULT_COUNT) + INCREMENT);
-        }
+    public LottoStats(Map<Rank,Integer> lottoRanks) {
+        ranks = lottoRanks;
     }
 
     public long getTotalPrize() {
         long totalPrize = 0L;
-        for (Rank lottoRank : rank.keySet()) {
-            totalPrize += lottoRank.getPrize() * rank.get(lottoRank);
+        for (Rank lottoRank : ranks.keySet()) {
+            totalPrize += lottoRank.getPrize() * ranks.get(lottoRank);
         }
         return totalPrize;
     }
@@ -50,7 +36,7 @@ public class LottoStats {
     }
 
     public Integer getRankCount(Rank lottoRank) {
-        return rank.getOrDefault(lottoRank, DEFAULT_COUNT);
+        return ranks.getOrDefault(lottoRank, Rank.DEFAULT_COUNT);
     }
 
     public String getEarningRate(int purchaseAmount) {

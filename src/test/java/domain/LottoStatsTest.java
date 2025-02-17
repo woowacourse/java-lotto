@@ -1,6 +1,5 @@
 package domain;
 
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +13,10 @@ class LottoStatsTest {
     @Test
     void _1등이_3개인_경우() {
         List<Lotto> lottos = new ArrayList<>();
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
         for (int i = 0; i < 3; i++) {
             lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
         }
-
-        lottoStats.calculateResult(lottos);
-
+        LottoStats lottoStats = Rank.makeLottoResult(lottos,List.of(1,2,3,4,5,6),7);
         assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(3);
     }
 
@@ -43,8 +39,7 @@ class LottoStatsTest {
                 new Lotto(List.of(17, 21, 29, 37, 42, 45)),
                 new Lotto(List.of(3, 8, 27, 30, 35, 44)));
 
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
-        lottoStats.calculateResult(lottos);
+        LottoStats lottoStats = Rank.makeLottoResult(lottos,List.of(1,2,3,4,5,6),7);
 
         assertThat(lottoStats.getRankCount(Rank.FIRST)).isEqualTo(0);
         assertThat(lottoStats.getRankCount(Rank.SECOND)).isEqualTo(0);
@@ -58,7 +53,6 @@ class LottoStatsTest {
     @Test
     void 총_상금_계산_테스트() {
         List<Lotto> lottos = new ArrayList<>();
-        LottoStats lottoStats = new LottoStats(List.of(1, 2, 3, 4, 5, 6), 7);
 
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6))); // 1등
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 7))); // 2등
@@ -66,9 +60,8 @@ class LottoStatsTest {
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 7, 8))); // 4등
         lottos.add(new Lotto(List.of(1, 2, 3, 7, 8, 9))); // 5등
 
-        lottoStats.calculateResult(lottos);
+        LottoStats lottoStats = Rank.makeLottoResult(lottos,List.of(1,2,3,4,5,6),7);
 
         assertThat(lottoStats.getTotalPrize()).isEqualTo(2031555000L);
     }
-
 }
