@@ -1,8 +1,12 @@
 package controller;
 
-import domain.*;
+import domain.Buyer;
+import domain.Lotto;
+import domain.LottoFactory;
+import domain.LottoStatistics;
+import domain.Money;
+import domain.WinningLotto;
 import java.util.List;
-import java.util.Map;
 import util.InputParser;
 import util.Validator;
 import view.InputView;

@@ -1,6 +1,8 @@
 package view;
 
-import static util.constant.Message.*;
+import static util.constant.Message.INPUT_BONUS_BALL_MESSAGE;
+import static util.constant.Message.INPUT_MONEY_MESSAGE;
+import static util.constant.Message.INPUT_WINNING_NUMBERS_MESSAGE;
 
 import java.util.Scanner;
 

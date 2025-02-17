@@ -1,6 +1,14 @@
 package view;
 
-import static util.constant.Message.*;
+import static util.constant.Message.DIVIDER_LINE;
+import static util.constant.Message.PROFIT_DAMAGE_MESSAGE;
+import static util.constant.Message.PROFIT_FORMAT;
+import static util.constant.Message.STATISTICS_BONUS_BALL_FORMAT;
+import static util.constant.Message.STATISTICS_FORMAT;
+import static util.constant.Message.STATISTICS_MATCH_FORMAT;
+import static util.constant.Message.STATISTICS_PRICE_FORMAT;
+import static util.constant.Message.STATISTICS_START_MESSAGE;
+import static util.constant.Message.TOTAL_LOTTO_FORMAT;
 import static util.constant.Values.PROFIT_DAMAGE_LIMIT;
 
 import domain.Lotto;
