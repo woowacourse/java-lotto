@@ -37,18 +37,14 @@ public enum Rank {
     }
 
     public static EnumMap<Rank, Integer> makeDefaultMap() {
-
         EnumMap<Rank, Integer> rankIntegerEnumMap = new EnumMap<>(Rank.class);
-
         for (Rank rank : Rank.values()) {
             rankIntegerEnumMap.put(rank, 0);
         }
-
         return rankIntegerEnumMap;
     }
 
     public static int calculateTotalPrize(EnumMap<Rank, Integer> lottoResult) {
-
         int totalPrize = 0;
         for (Rank rank : lottoResult.keySet()) {
             totalPrize += rank.prize * lottoResult.get(rank);
@@ -59,5 +55,4 @@ public enum Rank {
     public int getPrize() {
         return prize;
     }
-
 }
