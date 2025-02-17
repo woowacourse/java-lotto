@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
+import static lotto.constant.ErrorMessage.LOTTO_NUMBER_RANGE;
 import static lotto.domain.Lotto.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -15,7 +16,7 @@ class LottoTest {
     void 로또는_1과_45_사이의_번호가_아니면_예외를_던진다() {
         assertThatThrownBy(() -> validateLottoNumber(46))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
+                .hasMessage(LOTTO_NUMBER_RANGE.getErrorMessage());
     }
 
     @DisplayName("로또는 6개의 번호를 가진다")

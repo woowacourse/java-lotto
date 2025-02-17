@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Map;
 
-import static lotto.domain.PurchaseAmount.LOTTO_UNIT_PRICE;
+import static lotto.constant.Limit.LOTTO_UNIT_PRICE;
 
 public class WinningStatistics {
     private static final int TRUNCATION = 100;
@@ -15,7 +15,7 @@ public class WinningStatistics {
 
     public double calculateReturnRate(final int amount) {
         int total = calculateTotal();
-        double returnRate = (double) total / (amount * LOTTO_UNIT_PRICE);
+        double returnRate = (double) total / (amount * LOTTO_UNIT_PRICE.getValue());
         return Math.floor(returnRate * TRUNCATION) / TRUNCATION;
     }
 

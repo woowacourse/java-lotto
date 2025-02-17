@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.constant.Limit.LOTTO_SIZE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -20,7 +20,7 @@ class WinningNumbersTest {
     void 당첨_번호가_고유한_6개의_번호가_아니라면_예외를_던진다(List<Integer> inputWinningNumbers, String testName) {
         assertThatThrownBy(() -> new WinningNumbers(inputWinningNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(LOTTO_SIZE + "개의 고유한 번호를 입력해야 합니다.");
+                .hasMessage(LOTTO_SIZE.getValue() + "개의 고유한 번호를 입력해야 합니다.");
     }
 
     static Stream<Arguments> generateData() {

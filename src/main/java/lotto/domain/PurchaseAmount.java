@@ -1,9 +1,12 @@
 package lotto.domain;
 
-public class PurchaseAmount {
-    public static final int LOTTO_UNIT_PRICE = 1_000;
-    private static final int MAX_PURCHASE_AMOUNT = 100_000;
+import static lotto.constant.ErrorMessage.PURCHASE_AMOUNT_DIVIDE;
+import static lotto.constant.ErrorMessage.PURCHASE_AMOUNT_RANGE;
+import static lotto.constant.ErrorMessage.PURCHASE_AMOUNT_MAX;
+import static lotto.constant.Limit.LOTTO_UNIT_PRICE;
+import static lotto.constant.Limit.MAX_PURCHASE_AMOUNT;
 
+public class PurchaseAmount {
     private final int purchaseAmount;
 
     public PurchaseAmount(final int purchaseAmount) {
@@ -12,20 +15,20 @@ public class PurchaseAmount {
     }
 
     private void validatePurchaseAmount(final int purchaseAmount) {
-        if (purchaseAmount % LOTTO_UNIT_PRICE != 0) {
-            throw new IllegalArgumentException("구입금액은 %d원으로 나누어져야 합니다.".formatted(LOTTO_UNIT_PRICE));
+        if (purchaseAmount % LOTTO_UNIT_PRICE.getValue() != 0) {
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_DIVIDE.getErrorMessage());
         }
 
         if (purchaseAmount <= 0) {
-            throw new IllegalArgumentException("구입금액은 양수여야 합니다.");
+            throw new IllegalArgumentException(PURCHASE_AMOUNT_RANGE.getErrorMessage());
         }
 
-        if (purchaseAmount > MAX_PURCHASE_AMOUNT) {
-            throw  new IllegalArgumentException("구입금액은 최대 %d원까지입니다.".formatted(MAX_PURCHASE_AMOUNT));
+        if (purchaseAmount > MAX_PURCHASE_AMOUNT.getValue()) {
+            throw  new IllegalArgumentException(PURCHASE_AMOUNT_MAX.getErrorMessage());
         }
     }
 
     public int calculateLottoAmount() {
-        return purchaseAmount / LOTTO_UNIT_PRICE;
+        return purchaseAmount / LOTTO_UNIT_PRICE.getValue();
     }
 }

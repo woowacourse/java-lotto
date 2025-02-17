@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import static lotto.domain.Lotto.LOTTO_SIZE;
+import static lotto.constant.ErrorMessage.LOTTO_NUMBER_DUPLICATE;
+import static lotto.constant.ErrorMessage.LOTTO_NUMBER_SIZE;
+import static lotto.constant.Limit.LOTTO_SIZE;
 import static lotto.domain.Lotto.validateLottoNumber;
 
 public class WinningNumbers {
@@ -16,8 +18,8 @@ public class WinningNumbers {
     }
 
     private void validateWinningNumbers(final List<Integer> winningNumbers) {
-        if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("%d개의 고유한 번호를 입력해야 합니다.".formatted(LOTTO_SIZE));
+        if (new HashSet<>(winningNumbers).size() != LOTTO_SIZE.getValue()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_SIZE.getErrorMessage());
         }
 
         for (final int winningNumber : winningNumbers) {
@@ -27,7 +29,7 @@ public class WinningNumbers {
 
     public void validateBonusNumberDuplicated(final int bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(LOTTO_NUMBER_DUPLICATE.getErrorMessage());
         }
     }
 

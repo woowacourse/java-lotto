@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class Lotto {
-    public static final int MAX_LOTTO_NUMBER = 45;
-    public static final int MIN_LOTTO_NUMBER = 1;
-    public static final int LOTTO_SIZE = 6;
+import static lotto.constant.ErrorMessage.LOTTO_NUMBER_RANGE;
+import static lotto.constant.Limit.MAX_LOTTO_NUMBER;
+import static lotto.constant.Limit.MIN_LOTTO_NUMBER;
 
+public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(final Set<Integer> numbers) {
@@ -26,9 +26,8 @@ public class Lotto {
     }
 
     public static void validateLottoNumber(final int lottoNumber) {
-        if (lottoNumber < MIN_LOTTO_NUMBER || lottoNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(
-                    "로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
+        if (lottoNumber < MIN_LOTTO_NUMBER.getValue() || lottoNumber > MAX_LOTTO_NUMBER.getValue()) {
+            throw new IllegalArgumentException(LOTTO_NUMBER_RANGE.getErrorMessage());
         }
     }
 
