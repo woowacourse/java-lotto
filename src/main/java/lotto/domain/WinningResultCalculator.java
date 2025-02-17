@@ -19,11 +19,11 @@ public class WinningResultCalculator {
     }
 
     public WinningResult countLottoPrizes(final List<Lotto> lottos) {
-        Map<LottoAward, Integer> winningResult = initializeWinningResult();
+        final Map<LottoAward, Integer> winningResult = initializeWinningResult();
         for (Lotto lotto : lottos) {
-            int matchingCount = winningLotto.countMatchingLottoNumber(lotto);
-            boolean isBonusNumberMatched = lotto.contains(bonusNumber);
-            LottoAward lottoAward = LottoAward.from(matchingCount, isBonusNumberMatched);
+            final int matchingCount = winningLotto.countMatchingLottoNumber(lotto);
+            final boolean isBonusNumberMatched = lotto.contains(bonusNumber);
+            final LottoAward lottoAward = LottoAward.from(matchingCount, isBonusNumberMatched);
             winningResult.merge(lottoAward, MATCH_COUNT_INCREMENT, Integer::sum);
         }
         return new WinningResult(winningResult);
@@ -36,7 +36,7 @@ public class WinningResultCalculator {
     }
 
     private Map<LottoAward, Integer> initializeWinningResult() {
-        Map<LottoAward, Integer> winningResult = new EnumMap<>(LottoAward.class);
+        final Map<LottoAward, Integer> winningResult = new EnumMap<>(LottoAward.class);
         for (LottoAward lottoAward : LottoAward.ACTUAL_LOTTO_AWARD) {
             winningResult.put(lottoAward, INITIAL_AWARD_COUNT);
         }

@@ -25,25 +25,25 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPrice lottoPrice = getLottoPrice();
-        int lottoCount = getLottoCount(lottoPrice);
+        final LottoPrice lottoPrice = getLottoPrice();
+        final int lottoCount = getLottoCount(lottoPrice);
         outputView.printLottoCount(lottoCount);
-        List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
+        final List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
-        WinningResultCalculator winningResultCalculator = getWinningResultCalculator();
-        WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        final WinningResultCalculator winningResultCalculator = getWinningResultCalculator();
+        final WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
     }
 
     private LottoPrice getLottoPrice() {
-        int lottoPrice = inputView.readPurchasePrice();
+        final int lottoPrice = inputView.readPurchasePrice();
         return new LottoPrice(lottoPrice);
     }
 
     private int getLottoCount(final LottoPrice lottoPrice) {
-        int lottoCount = lottoPrice.calculateLottoCount();
+        final int lottoCount = lottoPrice.calculateLottoCount();
         return lottoCount;
     }
 
@@ -54,20 +54,20 @@ public class LottoController {
     }
 
     private WinningResultCalculator getWinningResultCalculator() {
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber();
+        final Lotto winningLotto = getWinningLotto();
+        final LottoNumber bonusNumber = getBonusNumber();
         return new WinningResultCalculator(winningLotto, bonusNumber);
     }
 
     private Lotto getWinningLotto() {
-        List<Integer> winningLottoNumbers = inputView.readWinningLottoNumbers();
-        Lotto winningLotto = new Lotto(winningLottoNumbers);
+        final List<Integer> winningLottoNumbers = inputView.readWinningLottoNumbers();
+        final Lotto winningLotto = new Lotto(winningLottoNumbers);
         return winningLotto;
     }
 
     private LottoNumber getBonusNumber() {
-        int bonusNumberInput = inputView.readBonusNumber();
-        LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+        final int bonusNumberInput = inputView.readBonusNumber();
+        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
         return bonusNumber;
     }
 }

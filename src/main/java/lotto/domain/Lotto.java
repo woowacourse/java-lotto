@@ -29,7 +29,7 @@ public class Lotto {
     }
 
     private void validateDuplicated(final List<Integer> values) {
-        boolean isDuplicated = values.stream()
+        final boolean isDuplicated = values.stream()
                 .distinct()
                 .count() != values.size();
         if (isDuplicated) {

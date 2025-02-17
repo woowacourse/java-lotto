@@ -15,9 +15,9 @@ public class LottoGenerator {
     private static final int NUMBER_START_INDEX = 0;
 
     public List<Lotto> generateLotto(final int count) {
-        List<Lotto> lottos = new ArrayList<>();
+        final List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            List<Integer> numbers = makeRandomNumbers(LOTTO_SIZE);
+            final List<Integer> numbers = makeRandomNumbers(LOTTO_SIZE);
             Collections.sort(numbers);
             lottos.add(new Lotto(numbers));
         }
@@ -25,11 +25,11 @@ public class LottoGenerator {
     }
 
     private List<Integer> makeRandomNumbers(final int size) {
-        List<Integer> numberRange = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
+        final List<Integer> numberRange = IntStream.rangeClosed(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(numberRange);
-        List<Integer> partialNumbers = numberRange.subList(NUMBER_START_INDEX, size);
+        final List<Integer> partialNumbers = numberRange.subList(NUMBER_START_INDEX, size);
         return partialNumbers;
     }
 }

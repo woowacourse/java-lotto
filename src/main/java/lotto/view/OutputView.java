@@ -23,13 +23,13 @@ public class OutputView {
     }
 
     public void printProfitRate(final double profitRate) {
-        double flooredProfitRage = Math.floor(profitRate * 100) / 100;
+        final double flooredProfitRage = Math.floor(profitRate * 100) / 100;
         String message = "총 수익률은 %.2f입니다.";
         message += makeResultMessage(profitRate);
         System.out.printf(message, flooredProfitRage);
     }
 
-    private String makeMatchingCountResult(LottoAward lottoAward) {
+    private String makeMatchingCountResult(final LottoAward lottoAward) {
         String result = "%d개 일치";
         if (lottoAward == LottoAward.SECOND_RANK) {
             result += ", 보너스 볼 일치";
