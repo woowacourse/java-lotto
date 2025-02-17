@@ -1,30 +1,23 @@
 package service;
 
+import domain.Lotto;
+import domain.Lottos;
 import error.ErrorMessage;
 import java.util.List;
 import java.util.stream.IntStream;
-import model.Lotto;
-import model.Lottos;
-import util.RandomGenerator;
 
 public class LottoGenerateService {
 
     private static final Integer PRICE = 1000;
 
-    public Lottos generateLottos(int purchaseAmount) {
+    public Lottos generateLottos(int purchaseAmount, NumbersStrategy strategy) {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
-        Lottos lottos = new Lottos();
-        IntStream.range(0, count)
-            .forEach(repeat -> insertLotto(lottos));
-        return lottos;
-    }
-
-    private void insertLotto(Lottos lottos) {
-        List<Integer> numbers = RandomGenerator.generateNumbers(1, 45, 6);
-        Lotto lotto = new Lotto(numbers);
-        lottos.addLotto(lotto);
+        List<Lotto> lottos = IntStream.range(0, count)
+            .mapToObj(repeat -> new Lotto(strategy.get()))
+            .toList();
+        return new Lottos(lottos);
     }
 
     private void validatePurchaseAmount(int purchaseAmount) {

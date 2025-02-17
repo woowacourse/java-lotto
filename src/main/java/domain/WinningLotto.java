@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import static error.ErrorMessage.NUMBER_OUT_OF_RANGE;
 import static error.ErrorMessage.WINNING_AND_BONUS_NUMBER_DUPLICATE;
@@ -7,8 +7,8 @@ import java.util.List;
 
 public class WinningLotto {
 
-    private Lotto basicLotto;
-    private int bonusNumber;
+    private final Lotto basicLotto;
+    private final int bonusNumber;
 
     public WinningLotto(Lotto basicLotto, int bonusNumber) {
         validateBonusNumber(basicLotto, bonusNumber);

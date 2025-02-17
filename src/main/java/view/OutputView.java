@@ -1,13 +1,13 @@
 package view;
 
-import dto.LottoDto;
-import dto.LottosDto;
-import dto.StatisticsDto;
+import domain.Lotto;
+import domain.Lottos;
+import domain.PrizeTier;
+import dto.Statistics;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import model.PrizeTier;
 
 public class OutputView {
 
@@ -17,27 +17,23 @@ public class OutputView {
     private static final String BONUS_MATCHED_MESSAGE = ", 보너스 볼 일치";
     private static final String PROFIT_RATE_FORMAT = "총 수익률은 %.2f입니다.";
 
-    public void printLottos(LottosDto lottosDto) {
-        List<LottoDto> lottoDtos = lottosDto.getLottoDtos();
-        System.out.printf("%d%s\n", lottoDtos.size(), PURCHASE_COUNT_MESSAGE);
-        printLottoNumbers(lottoDtos);
+    public void printLottos(Lottos lottos) {
+        List<Lotto> eachLottos = lottos.getLottos();
+
+        System.out.printf("%d%s\n", eachLottos.size(), PURCHASE_COUNT_MESSAGE);
+        eachLottos.stream()
+            .map(Lotto::getNumbers)
+            .forEach(System.out::println);
         System.out.println();
     }
 
-    private void printLottoNumbers(List<LottoDto> lottoDtos) {
-        for (LottoDto lottoDto : lottoDtos) {
-            List<Integer> numbers = lottoDto.getNumbers();
-            System.out.println(numbers.toString());
-        }
-    }
-
-    public void printStatistics(StatisticsDto statisticsDto) {
+    public void printStatistics(Statistics statistics) {
         System.out.println(STATISTICS_HEADER_MESSAGE);
-        Map<PrizeTier, Integer> prizeCounts = statisticsDto.getPrizeCounts();
+        Map<PrizeTier, Integer> prizeCounts = statistics.getPrizeCounts();
         PrizeTier[] prizeTiers = PrizeTier.values();
         Arrays.sort(prizeTiers, Collections.reverseOrder());
         printPrizeTiers(prizeTiers, prizeCounts);
-        System.out.printf(PROFIT_RATE_FORMAT, statisticsDto.getProfitRate());
+        System.out.printf(PROFIT_RATE_FORMAT, statistics.getProfitRate());
     }
 
     private void printPrizeTiers(PrizeTier[] prizeTiers, Map<PrizeTier, Integer> prizeCounts) {

@@ -1,14 +1,14 @@
 package dto;
 
+import domain.PrizeTier;
 import java.util.Map;
-import model.PrizeTier;
 
-public class StatisticsDto {
+public class Statistics {
 
-    private Map<PrizeTier, Integer> prizeCounts;
-    private double profitRate;
+    private final Map<PrizeTier, Integer> prizeCounts;
+    private final double profitRate;
 
-    public StatisticsDto(Map<PrizeTier, Integer> prizeCounts, double profitRate) {
+    public Statistics(Map<PrizeTier, Integer> prizeCounts, double profitRate) {
         this.prizeCounts = prizeCounts;
         this.profitRate = profitRate;
     }
