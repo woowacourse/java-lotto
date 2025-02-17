@@ -1,14 +1,20 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Numbers {
-    private final List<Integer> numbers;
+    private final List<Num> numbers;
 
     public Numbers(List<Integer> numbers) {
         sortingNumbers(numbers);
-        this.numbers = numbers;
+        List<Num> sortedNumbers = new ArrayList<>();
+        for(int number : numbers) {
+            sortedNumbers.add(new Num(number));
+            System.out.println(number);
+        }
+        this.numbers = sortedNumbers;
     }
 
     private void sortingNumbers(List<Integer> numbers) {
@@ -16,6 +22,11 @@ public class Numbers {
     }
 
     public List<Integer> getNumbers() {
-        return numbers;
+        List<Integer> numbersList = new ArrayList<>();
+        for(Num num : numbers) {
+                numbersList.add(num.getNum());
+        }
+        System.out.println(numbersList);
+        return numbersList;
     }
 }
