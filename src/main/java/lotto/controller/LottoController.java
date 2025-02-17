@@ -26,12 +26,12 @@ public class LottoController {
 
     public void run() {
         try {
-
             Money money = new Money(parseInt(inputView.readPurchaseMoney()));
             issueLottoTickets(money);
             printIssuedLottoTickets();
             WinningLotto winningLotto = createWinningLotto();
             WinningResults winningResults = new WinningResults(winningLotto, lottos);
+            winningResults.calculateWinningResults();
             outputView.printWinningResult(winningResults);
             double returnRatio = money.calculateReturnRatio(winningResults.calculateEarnedMoney());
             outputView.printWinningRatio(returnRatio);

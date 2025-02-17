@@ -13,16 +13,12 @@ public class WinningResults {
     public WinningResults(WinningLotto winningLotto, Lottos lottos) {
         this.winningLotto = winningLotto;
         this.lottos = lottos;
-        Map<Rank, Integer> ranks = saveRanks();
-        this.results = toResults(ranks);
+        this.results = new ArrayList<>();
     }
 
-    private Map<Rank, Integer> initRanks() {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        for (Rank rank : Rank.values()) {
-            ranks.put(rank, 0);
-        }
-        return ranks;
+    public void calculateWinningResults() {
+        Map<Rank, Integer> ranks = saveRanks();
+        toResults(ranks);
     }
 
     private Map<Rank, Integer> saveRanks() {
@@ -35,12 +31,18 @@ public class WinningResults {
         return ranks;
     }
 
-    private List<WinningResult> toResults(final Map<Rank, Integer> ranks) {
-        List<WinningResult> results = new ArrayList<>();
+    private Map<Rank, Integer> initRanks() {
+        Map<Rank, Integer> ranks = new LinkedHashMap<>();
+        for (Rank rank : Rank.values()) {
+            ranks.put(rank, 0);
+        }
+        return ranks;
+    }
+
+    private void toResults(final Map<Rank, Integer> ranks) {
         for (Rank rank : ranks.keySet()) {
             toResult(ranks, rank, results);
         }
-        return results;
     }
 
     private void toResult(final Map<Rank, Integer> ranks, final Rank rank,
