@@ -46,7 +46,7 @@ public class OutputView {
     }
 
     private void printStatistics(final WinningResultResponse response) {
-        if (response.isHasBonus() && response.getMatchingCount() == 5) {
+        if (isNeedBonusBallMatchingMessage(response)) {
             System.out.println(
                     "%d개, 보너스 볼 일치(%s원)- %d개".formatted(
                             response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
@@ -58,6 +58,10 @@ public class OutputView {
                 response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
                 response.getWinningCount()
         ));
+    }
+
+    private boolean isNeedBonusBallMatchingMessage(final WinningResultResponse response) {
+        return response.isHasBonus() && response.getMatchingCount() == 5;
     }
 
     public void printWinningRatio(final double returnRatio) {
