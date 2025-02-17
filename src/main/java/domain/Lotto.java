@@ -12,7 +12,7 @@ public class Lotto {
     private static final int LOTTO_MAX = 45;
     private static final int LOTTO_LENGTH = 6;
 
-    protected List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public static Lotto from(final List<Integer> numbers){
         validateLength(numbers);

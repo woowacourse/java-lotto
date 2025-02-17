@@ -10,8 +10,8 @@ public class WinningLotto{
     private static final int LOTTO_MIN = 1;
     private static final int LOTTO_MAX = 45;
 
-    private Lotto lotto;
-    private int bonusNumber;
+    private final Lotto lotto;
+    private final int bonusNumber;
 
     public WinningLotto(final List<Integer> numbers, final String bonusNumber) {
         this.lotto = Lotto.from(numbers);
