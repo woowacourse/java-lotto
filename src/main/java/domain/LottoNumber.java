@@ -14,16 +14,16 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return new LottoNumber(number);
     }
 
-    public boolean isSameValue(LottoNumber compared) {
-        return (lottoNumber == compared.lottoNumber);
-    }
-
     private void validate(int number) {
         if (number < LottoProperties.MIN_NUMBER || number > LottoProperties.MAX_NUMBER) {
             throw new IllegalArgumentException(
                     String.format("로또 번호는 %d부터 %d사이여야 합니다.", LottoProperties.MIN_NUMBER, LottoProperties.MAX_NUMBER)
             );
         }
+    }
+
+    public boolean isSameValue(LottoNumber compared) {
+        return (lottoNumber == compared.lottoNumber);
     }
 
     public int getLottoNumber() {
