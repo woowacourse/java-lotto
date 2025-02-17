@@ -3,7 +3,7 @@ package lotto.controller;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.util.NumberParser;
 import lotto.view.InputView;
@@ -27,10 +27,10 @@ public class LottoController {
         final int bonusNumber = requestBonusNumber();
         final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
 
-        List<Prize> prizes = lottos.calculatePrizes(winningLotto);
-        double earningRate = lottos.calculateEarningRate(prizes);
+        List<Rank> ranks = lottos.calculateRanks(winningLotto);
+        double earningRate = lottos.calculateEarningRate(ranks);
 
-        outputView.printLottoResult(Prize.count(prizes), earningRate);
+        outputView.printLottoResult(Rank.count(ranks), earningRate);
         inputView.close();
     }
 

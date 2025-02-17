@@ -37,16 +37,16 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public double calculateEarningRate(List<Prize> prizes) {
-        long prizeTotal = Prize.calculateTotalPrize(prizes);
-        return (double) prizeTotal / (getQuantity() * LOTTO_PRICE);
-    }
-
-    public List<Prize> calculatePrizes(WinningLotto winningLotto) {
+    public List<Rank> calculateRanks(WinningLotto winningLotto) {
         return lottos.stream()
-                .map(lotto -> Prize.getPrizePlace(
+                .map(lotto -> Rank.getPlace(
                         winningLotto.matchWinningNumbers(lotto), winningLotto.isBonusMatched(lotto)))
                 .toList();
+    }
+
+    public double calculateEarningRate(List<Rank> ranks) {
+        long prizeTotal = Rank.calculateTotalPrize(ranks);
+        return (double) prizeTotal / (getQuantity() * LOTTO_PRICE);
     }
 
     public int getQuantity() {

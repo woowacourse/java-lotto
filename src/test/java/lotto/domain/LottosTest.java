@@ -21,7 +21,7 @@ class LottosTest {
 
     @DisplayName("당첨 등수를 계산한다")
     @Test
-    void calculatePrizesTest() {
+    void calculateRanksTest() {
         Lotto winningNumbers = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
         WinningLotto winningLotto = WinningLotto.of(winningNumbers, bonusNumber);
@@ -36,9 +36,9 @@ class LottosTest {
         List<Lotto> myLotto = List.of(lotto1, lotto2, lotto3, lotto4, lotto5, lotto6);
         Lottos lottos = Lottos.of(myLotto);
 
-        List<Prize> prizes = lottos.calculatePrizes(winningLotto);
+        List<Rank> ranks = lottos.calculateRanks(winningLotto);
 
-        assertThat(prizes).isEqualTo(Arrays.stream(Prize.values()).toList());
+        assertThat(ranks).isEqualTo(Arrays.asList(Rank.values()));
     }
 
     @DisplayName("총 수익률을 계산한다")
@@ -66,8 +66,8 @@ class LottosTest {
 
         Lottos lottos = Lottos.of(myLotto);
 
-        double earningRate = lottos.calculateEarningRate(lottos.calculatePrizes(winningLotto));
-        double formattedRate = (long) (earningRate * 100) / 100.0;
+        double earningRate = lottos.calculateEarningRate(lottos.calculateRanks(winningLotto));
+        double formattedRate = Math.floor(earningRate * 100) / 100.0;
 
         assertThat(formattedRate).isEqualTo(0.35);
     }

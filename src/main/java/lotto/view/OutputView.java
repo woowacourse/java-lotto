@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.List;
 import java.util.Map;
 import lotto.domain.Lottos;
-import lotto.domain.Prize;
+import lotto.domain.Rank;
 
 public class OutputView {
     public void printPurchasedLottos(Lottos lottos) {
@@ -14,25 +14,25 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printLottoResult(Map<Prize, Integer> prizeCount, double earningRate) {
+    public void printLottoResult(Map<Rank, Integer> rankCount, double earningRate) {
         System.out.println("""
                 
                 당첨 통계
                 ---------""");
 
-        Prize.winningPlaces.forEach(prize -> printPrizeResult(prize, prizeCount.get(prize)));
+        Rank.winningPlaces.forEach(rank -> printWinningResult(rank, rankCount.get(rank)));
 
         System.out.printf("총 수익률은 %.2f입니다.", Math.floor(earningRate * 100) / 100.0);
         System.out.println();
     }
 
-    private void printPrizeResult(final Prize prize, final int count) {
-        if (prize.isBonusMatch()) {
+    private void printWinningResult(final Rank rank, final int count) {
+        if (rank.isBonusMatch()) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator(),
-                    prize.getMatchCount(), prize.getPrizeAmount(), count);
+                    rank.getMatchCount(), rank.getPrizeAmount(), count);
             return;
         }
         System.out.printf("%d개 일치 (%d원)- %d개" + System.lineSeparator(),
-                prize.getMatchCount(), prize.getPrizeAmount(), count);
+                rank.getMatchCount(), rank.getPrizeAmount(), count);
     }
 }
