@@ -22,14 +22,21 @@ public enum Rank {
     }
 
     public static Rank findBy(final int matchingCount, final boolean hasBonusNumber) {
-        Rank findRank = Arrays.stream(values())
+        if (isSecond(matchingCount, hasBonusNumber)) {
+            return SECOND;
+        }
+        return findFirstByMatchingCount(matchingCount);
+    }
+
+    private static boolean isSecond(final int matchingCount, final boolean hasBonusNumber) {
+        return hasBonusNumber == SECOND.bonusRequired && matchingCount == SECOND.matchingCount;
+    }
+
+    private static Rank findFirstByMatchingCount(final int matchingCount) {
+        return Arrays.stream(values())
                 .filter(rank -> rank.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(NONE);
-        if (findRank.equals(THIRD) && SECOND.bonusRequired == hasBonusNumber) {
-            return SECOND;
-        }
-        return findRank;
     }
 
     public int getMatchingCount() {
@@ -47,4 +54,5 @@ public enum Rank {
     public boolean isBonusRequired() {
         return this.bonusRequired;
     }
+
 }
