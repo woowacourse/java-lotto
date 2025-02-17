@@ -1,12 +1,12 @@
 package view;
 
+import static util.constant.Message.INPUT_BONUS_BALL_MESSAGE;
+import static util.constant.Message.INPUT_MONEY_MESSAGE;
+import static util.constant.Message.INPUT_WINNING_NUMBERS_MESSAGE;
+
 import java.util.Scanner;
 
 public class InputView {
-
-    private final String INPUT_MONEY_MESSAGE = "구입금액을 입력해 주세요.";
-    private final String INPUT_WINNING_NUMBERS_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
-    private final String INPUT_BONUS_BALL_MESSAGE = "보너스 볼을 입력해 주세요.";
 
     public String inputLottoMoney() {
         Scanner sc = new Scanner(System.in);
