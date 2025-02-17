@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoTicket {
@@ -11,12 +10,10 @@ public class LottoTicket {
         this.lottos = lottos;
     }
 
-    public List<MatchResultDto> deriveMatchResults(WinningNumber winningNumber, BonusNumber bonusNumber) {
-        List<MatchResultDto> results = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            results.add(lotto.deriveMatchResult(winningNumber, bonusNumber));
-        }
-        return results;
-
+    public List<MatchResultDto> deriveMatchResults(final WinningNumber winningNumber,
+                                                   final BonusNumber bonusNumber) {
+        return lottos.stream()
+                .map(lotto -> lotto.deriveMatchResult(winningNumber, bonusNumber))
+                .toList();
     }
 }

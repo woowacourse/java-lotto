@@ -9,7 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class WinningResultTest {
 
-    private final WinningResult winningResult = new WinningResult(Map.of(LottoRank.FIFTH_PLACE, 3));
+    private final WinningResult winningResult = new WinningResult(Map.of(LottoRank.FIFTH, 3));
     private PurchaseAmount purchaseAmount;
 
     @Test
