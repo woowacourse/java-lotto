@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class LottoGroup {
     private final List<Lotto> lottoGroup = new ArrayList<>();
 
-    public void processLottoTicketGeneration(Money money, LottoGenerator lottoGenerator) {
+    public void processLottoTicketGeneration(Money money, LottoGeneratorStrategy lottoGenerator) {
         final List<Integer> lottoNumbers = lottoGenerator.generateRandomNumbers();
 
         IntStream.range(0, money.getLottoTicketCount())

@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import lotto.utils.RandomNumberStrategy;
 
-public class LottoGenerator {
+public class LottoGenerator implements LottoGeneratorStrategy {
 
     RandomNumberStrategy randomNumberGenerator;
 
@@ -17,6 +17,7 @@ public class LottoGenerator {
         this.randomNumberGenerator = randomNumberGenerator;
     }
 
+    @Override
     public List<Integer> generateRandomNumbers() {
         final HashSet<Integer> randomNumbers = new HashSet<>();
 
