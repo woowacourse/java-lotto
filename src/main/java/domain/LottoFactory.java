@@ -13,11 +13,9 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
 
-    private final Money money;
     private final List<Lotto> lottos;
 
     public LottoFactory(Money money) {
-        this.money = money;
         this.lottos = createLottos(money);
     }
 
