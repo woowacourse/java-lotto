@@ -7,12 +7,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LottoNumberTest {
     @Test
     void 랜덤으로_숫자를_생성한다() {
+        //given
         NumberGenerator generator = (i, j) -> 3;
+
+        //when & then
         assertThat(LottoNumber.random(generator))
             .isEqualTo(new LottoNumber(3));
     }
@@ -20,6 +22,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {0, 46, -1})
     void _1부터_45사이의_숫자가_아닐_경우_예외를_반환한다(int number) {
+        //when & then
         assertThatThrownBy(() -> new LottoNumber(number))
             .isInstanceOf(IllegalArgumentException.class);
     }

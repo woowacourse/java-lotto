@@ -39,4 +39,8 @@ public enum Rank {
     public long getPrice() {
         return price;
     }
+
+    public long calculatePrice(int value) {
+        return this.price * value;
+    }
 }
