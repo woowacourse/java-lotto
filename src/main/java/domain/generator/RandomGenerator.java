@@ -9,9 +9,11 @@ import java.util.Random;
 
 public class RandomGenerator implements Generator {
 
+    private static final Random RANDOM = new Random();
+
     @Override
     public List<Integer> generate() {
-        return new Random()
+        return RANDOM
                 .ints(LOTTO_MIN, LOTTO_MAX + 1)
                 .distinct()
                 .limit(LOTTO_LENGTH)
