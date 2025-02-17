@@ -28,13 +28,13 @@ public class Lotto {
     }
 
     private void validateDuplicate(final List<Integer> numbers) {
-        if (!isDistinctNumber(numbers)) {
+        if (hasDuplicateNumber(numbers)) {
             throw new AppException(INVALID_LOTTO_NUMBER_DUPLICATE);
         }
     }
 
-    private boolean isDistinctNumber(final List<Integer> numbers) {
-        return numbers.stream().distinct().count() == numbers.size();
+    private boolean hasDuplicateNumber(final List<Integer> numbers) {
+        return numbers.stream().distinct().count() != numbers.size();
     }
 
     private void validateRange(List<Integer> numbers) {
