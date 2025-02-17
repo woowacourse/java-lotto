@@ -27,14 +27,14 @@ public class LottoNumber {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if (this == object) {
             return true;
         }
         if (object == null || getClass() != object.getClass()) {
             return false;
         }
-        LottoNumber inputNumber = (LottoNumber) object;
+        final LottoNumber inputNumber = (LottoNumber) object;
         return number == inputNumber.number;
     }
 
