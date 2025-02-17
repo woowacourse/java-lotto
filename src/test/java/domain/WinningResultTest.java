@@ -13,7 +13,7 @@ class WinningResultTest {
     @DisplayName("로또 당첨 결과를 계산을 성공한다.")
     @Test
     void countWinningResultTest() {
-        final LottoStore lottoStore = new LottoStore(new FakeRandomNumberGenerator(), new Money(10_000));
+        final LottoStore lottoStore = new LottoStore(new FakeRandomNumberGenerator(), new PurchaseAmount(10_000));
         final WinningNumber winningNumber = new WinningNumber(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new BonusNumber(7));
         final WinningResult winningResult = new WinningResult(winningNumber, lottoStore.issueLottos());
 

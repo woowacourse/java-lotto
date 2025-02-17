@@ -4,7 +4,7 @@ import domain.BonusNumber;
 import domain.Lotto;
 import domain.LottoRank;
 import domain.LottoStore;
-import domain.Money;
+import domain.PurchaseAmount;
 import domain.WinningNumber;
 import domain.WinningProfit;
 import domain.WinningResult;
@@ -25,9 +25,9 @@ public class LottoController {
     }
 
     public void run() {
-        final Money money = requestMoney();
+        final PurchaseAmount purchaseAmount = requestPurchaseAmount();
 
-        final LottoStore lottoStore = new LottoStore(new RandomNumbersGenerator(), money);
+        final LottoStore lottoStore = new LottoStore(new RandomNumbersGenerator(), purchaseAmount);
         final List<Lotto> lottos = lottoStore.issueLottos();
         outputView.printUserLottos(lottos);
 
@@ -38,12 +38,12 @@ public class LottoController {
         outputView.printWinningResult(countedWinningResult);
 
         final WinningProfit winningProfit = new WinningProfit(countedWinningResult);
-        outputView.printWinningProfit(winningProfit.calculateProfitRate(money.getAmount()));
+        outputView.printWinningProfit(winningProfit.calculateProfitRate(purchaseAmount.getAmount()));
     }
 
-    private Money requestMoney() {
-        outputView.printAskInputMoney();
-        return inputView.readMoney();
+    private PurchaseAmount requestPurchaseAmount() {
+        outputView.printAskInputPurchaseAmount();
+        return inputView.readPurchaseAmount();
     }
 
     private WinningNumber requestWinningNumber() {

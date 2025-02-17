@@ -14,7 +14,7 @@ public class WinningProfit {
 
     public double calculateProfitRate(final int amount) {
         if(amount == 0){
-            throw new AppException(Money.INVALID_MONEY_RANGE);
+            throw new AppException(PurchaseAmount.INVALID_PURCHASEAMOUNT_RANGE);
         }
         return calculateTotalPrice() / (double) amount;
     }

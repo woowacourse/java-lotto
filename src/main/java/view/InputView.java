@@ -1,7 +1,7 @@
 package view;
 
 import domain.BonusNumber;
-import domain.Money;
+import domain.PurchaseAmount;
 import domain.WinningNumber;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import utils.StringParser;
 public class InputView {
     private static final String DELIMITER_COMMA = ",";
 
-    public Money readMoney() {
+    public PurchaseAmount readPurchaseAmount() {
         Scanner scanner = new Scanner(System.in);
-        final int number = StringParser.parseToNumber(scanner.next(), Money.INVALID_MONEY_FORMAT);
-        return new Money(number);
+        final int number = StringParser.parseToNumber(scanner.next(), PurchaseAmount.INVALID_PURCHASEAMOUNT_FORMAT);
+        return new PurchaseAmount(number);
     }
 
     public BonusNumber readBonusNumber() {
