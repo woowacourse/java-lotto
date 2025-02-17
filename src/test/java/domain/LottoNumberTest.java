@@ -1,9 +1,10 @@
 package domain;
 
+import static domain.properties.LottoProperties.MAX_LOTTO_NUMBER;
+import static domain.properties.LottoProperties.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domain.properties.LottoProperties;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,8 +31,7 @@ class LottoNumberTest {
         assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(
-                        String.format("로또 번호는 %d부터 %d사이여야 합니다."
-                                , LottoProperties.MIN_NUMBER, LottoProperties.MAX_NUMBER)
+                        String.format("로또 번호는 %d부터 %d사이여야 합니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
                 );
     }
 

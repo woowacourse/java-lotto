@@ -1,8 +1,8 @@
 package domain;
 
-import static domain.properties.LottoProperties.COUNT_OF_NUMBERS;
-import static domain.properties.LottoProperties.MAX_NUMBER;
-import static domain.properties.LottoProperties.MIN_NUMBER;
+import static domain.properties.LottoProperties.COUNT_OF_LOTTO_NUMBERS;
+import static domain.properties.LottoProperties.MAX_LOTTO_NUMBER;
+import static domain.properties.LottoProperties.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,8 +15,8 @@ public class LottoGenerator {
 
     public static List<LottoNumber> generate() {
         Set<LottoNumber> numbers = new HashSet<>();
-        while (numbers.size() < COUNT_OF_NUMBERS) {
-            int randomNumber = random.nextInt(MAX_NUMBER) + MIN_NUMBER;
+        while (numbers.size() < COUNT_OF_LOTTO_NUMBERS) {
+            int randomNumber = random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER;
             numbers.add(LottoNumber.of(randomNumber));
         }
         return new ArrayList<>(numbers);

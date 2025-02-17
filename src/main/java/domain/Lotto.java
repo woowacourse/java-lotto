@@ -1,6 +1,6 @@
 package domain;
 
-import static domain.properties.LottoProperties.COUNT_OF_NUMBERS;
+import static domain.properties.LottoProperties.COUNT_OF_LOTTO_NUMBERS;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class Lotto {
     }
 
     private void validate(List<LottoNumber> numbers) {
-        if (numbers == null || numbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", COUNT_OF_NUMBERS));
+        if (numbers == null || numbers.size() != COUNT_OF_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException(String.format("로또 번호는 %d개여야 합니다.", COUNT_OF_LOTTO_NUMBERS));
         }
 
         if (containsDuplicate(numbers)) {

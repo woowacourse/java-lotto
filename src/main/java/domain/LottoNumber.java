@@ -1,6 +1,8 @@
 package domain;
 
-import domain.properties.LottoProperties;
+import static domain.properties.LottoProperties.MAX_LOTTO_NUMBER;
+import static domain.properties.LottoProperties.MIN_LOTTO_NUMBER;
+
 import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
@@ -16,9 +18,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validate(int number) {
-        if (number < LottoProperties.MIN_NUMBER || number > LottoProperties.MAX_NUMBER) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(
-                    String.format("로또 번호는 %d부터 %d사이여야 합니다.", LottoProperties.MIN_NUMBER, LottoProperties.MAX_NUMBER)
+                    String.format("로또 번호는 %d부터 %d사이여야 합니다.", MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
             );
         }
     }

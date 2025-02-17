@@ -14,7 +14,7 @@ class PurchaseAmountTest {
         int money = 12300;
 
         PurchaseAmount purchaseAmount = PurchaseAmount.of(money);
-        int quantity = purchaseAmount.calculateAvailableQuantity(LottoProperties.PRICE);
+        int quantity = purchaseAmount.calculateAvailableQuantity(LottoProperties.LOTTO_PRICE);
 
         assertThat(quantity).isEqualTo(12);
     }

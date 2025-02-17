@@ -1,12 +1,13 @@
 package controller;
 
+import static domain.properties.LottoProperties.LOTTO_PRICE;
+
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Prize;
 import domain.PurchaseAmount;
 import domain.WinningLotto;
-import domain.properties.LottoProperties;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class LottoController {
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         outputView.printLottoResult(prizes,
-                Prize.calculateEarningRate(prizes, lottos.getQuantity() * LottoProperties.PRICE)
+                Prize.calculateEarningRate(prizes, lottos.getQuantity() * LOTTO_PRICE)
         );
     }
 
@@ -47,7 +48,7 @@ public class LottoController {
 
     private Lottos createLottos(PurchaseAmount purchaseAmount) {
         Lottos lottos = Lottos.ofSize(
-                purchaseAmount.calculateAvailableQuantity(LottoProperties.PRICE)
+                purchaseAmount.calculateAvailableQuantity(LOTTO_PRICE)
         );
         outputView.printPurchasedLottos(lottos);
         return lottos;

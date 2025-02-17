@@ -1,10 +1,10 @@
 package domain;
 
+import static domain.properties.LottoProperties.COUNT_OF_LOTTO_NUMBERS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import domain.properties.LottoProperties;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -37,7 +37,7 @@ class LottoTest {
     void throwExceptionWithNull() {
         assertThatThrownBy(() -> Lotto.of(null))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(String.format("로또 번호는 %d개여야 합니다.", LottoProperties.COUNT_OF_NUMBERS));
+                .hasMessage(String.format("로또 번호는 %d개여야 합니다.", COUNT_OF_LOTTO_NUMBERS));
     }
 
     @DisplayName("로또 번호의 개수가 6개가 아닐 경우 예외를 던진다")
@@ -48,7 +48,7 @@ class LottoTest {
 
         assertThatThrownBy(() -> Lotto.of(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 6개여야 합니다.");
+                .hasMessage(String.format("로또 번호는 %d개여야 합니다.", COUNT_OF_LOTTO_NUMBERS));
     }
 
     @DisplayName("로또 객체 생성 시 숫자들을 정렬한다")
