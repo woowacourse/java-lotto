@@ -6,20 +6,20 @@ import model.LottoNumbers;
 import model.WinLotto;
 
 public enum WinLottoInfo {
-    FIRST(6, false, 2000000000),
-    SECOND(5, true, 30000000),
-    THIRD(5, false, 1500000),
-    FOURTH(4, false, 50000),
-    FIFTH(3, false, 5000),
-    NONE(2, false, 0);
+    FIRST(6,  2000000000),
+    SECOND(5,  30000000),
+    THIRD(5,  1500000),
+    FOURTH(4,  50000),
+    FIFTH(3,  5000),
+    NONE(2,  0);
 
     private final int matchNumberCount;
-    private final boolean matchBonusNumber;
+
     private final int price;
 
-    WinLottoInfo(int matchNumberCount, boolean matchBonusNumber, int price) {
+    WinLottoInfo(int matchNumberCount,  int price) {
         this.matchNumberCount = matchNumberCount;
-        this.matchBonusNumber = matchBonusNumber;
+
         this.price = price;
     }
 
