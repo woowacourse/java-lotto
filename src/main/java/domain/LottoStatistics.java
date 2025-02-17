@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LottoStatistics {
@@ -7,7 +8,7 @@ public class LottoStatistics {
     private final Map<LottoRank, Integer> lottoCounter;
 
     public LottoStatistics(Map<LottoRank, Integer> lottoCounter) {
-        this.lottoCounter = lottoCounter;
+        this.lottoCounter = new LinkedHashMap<>(lottoCounter);
     }
 
     public int calculateProfit() {

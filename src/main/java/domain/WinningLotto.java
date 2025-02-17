@@ -13,7 +13,7 @@ public class WinningLotto {
     public WinningLotto(List<Integer> winningNumbers, int bonusNumber) {
         validateWinningLotto(winningNumbers, bonusNumber);
 
-        this.winningNumbers = winningNumbers;
+        this.winningNumbers = new ArrayList<>(winningNumbers);
         this.bonusNumber = bonusNumber;
     }
 

@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class Buyer {
     private final List<Lotto> lottos;
 
     public Buyer(List<Lotto> lottos) {
-        this.lottos = lottos;
+        this.lottos = new ArrayList<>(lottos);
     }
 
     public String createResult() {
