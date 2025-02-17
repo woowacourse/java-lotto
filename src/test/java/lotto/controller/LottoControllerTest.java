@@ -1,6 +1,10 @@
-package lotto.domain;
+package lotto.controller;
 
 import lotto.constant.WinningTier;
+import lotto.domain.Lotto;
+import lotto.domain.WinningLotto;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ScoreboardTest {
+class LottoControllerTest {
 
     @DisplayName("발행된 로또의 당첨 등수를 찾을 수 있다.")
     @Test
@@ -22,9 +26,9 @@ class ScoreboardTest {
                 new Lotto(1, 2, 3, 8, 9, 10),
                 new Lotto(8, 9, 10, 11, 12, 13));
         WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
-        Scoreboard scoreboard = new Scoreboard();
+        LottoController lottoController = new LottoController(new InputView(), new OutputView());
 
-        List<WinningTier> actualTiers = scoreboard.findWinningTiers(lottos, winningLotto);
+        List<WinningTier> actualTiers = lottoController.getWinningTiers(lottos, winningLotto);
 
         assertThat(actualTiers).containsExactlyInAnyOrderElementsOf(Arrays.stream(WinningTier.values()).toList());
     }
