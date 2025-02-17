@@ -18,7 +18,7 @@ class WinningLottoTest {
         Number bonus = new Number(3);
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
-        //when //then
+        //when & then
         assertThatThrownBy(() -> new WinningLotto(lotto, bonus))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("보너스 볼 번호는 당첨 번호와 중복될 수 없습니다.");

@@ -39,7 +39,7 @@ class InputConverterTest {
     void 금액_입력_문자열이_정수가_아닌_경우_예외를_발생시킨다() {
         //given
         InputConverter converter = new InputConverter();
-        //when //then
+        //when & then
         assertThatThrownBy(() -> converter.convertStringToMoneyValue("aaaa"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("허용되지 않는 입력입니다.");
@@ -59,7 +59,7 @@ class InputConverterTest {
     void 보너스번호_입력_문자열이_정수가_아닌_경우_예외를_발생시킨다() {
         //given
         InputConverter converter = new InputConverter();
-        //when //then
+        //when & then
         assertThatThrownBy(() -> converter.convertStringToBonusNumberValue("aa"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("허용되지 않는 입력입니다.");
