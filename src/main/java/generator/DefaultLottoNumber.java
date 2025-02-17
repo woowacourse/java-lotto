@@ -1,8 +1,8 @@
 package generator;
 
-import static util.constant.Values.LOTTO_MAX_NUM;
-import static util.constant.Values.LOTTO_MIN_NUM;
-import static util.constant.Values.LOTTO_SIZE;
+import static util.constant.Value.LOTTO_MAX_NUM;
+import static util.constant.Value.LOTTO_MIN_NUM;
+import static util.constant.Value.LOTTO_SIZE;
 
 import java.util.ArrayList;
 import java.util.Collections;
