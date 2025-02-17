@@ -15,13 +15,13 @@ public class Lotto {
         validateLength(numbers);
         validateLottoDuplicate(numbers);
 
-        return new Lotto(numbers);
+        return new Lotto(numbers.stream()
+                .map(LottoNumber::from)
+                .toList());
     }
 
-    private Lotto(final List<Integer> numbers) {
-        this.numbers = numbers.stream()
-                .map(LottoNumber::from)
-                .toList();
+    private Lotto(final List<LottoNumber> numbers) {
+        this.numbers = numbers;
     }
 
     public boolean contains(final LottoNumber number) {
