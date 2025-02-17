@@ -13,29 +13,26 @@ public class WinningResults {
     public WinningResults(WinningLotto winningLotto, Lottos lottos) {
         this.winningLotto = winningLotto;
         this.lottos = lottos;
-        Map<Rank, Integer> ranks = scoreRanks();
+        Map<Rank, Integer> ranks = saveRanks();
         this.results = toResults(ranks);
     }
 
-    private Map<Rank, Integer> scoreRanks() {
+    private Map<Rank, Integer> initRanks() {
         Map<Rank, Integer> ranks = new LinkedHashMap<>();
-        initRanks(ranks);
-        saveRanks(ranks);
-        return ranks;
-    }
-
-    private void initRanks(final Map<Rank, Integer> ranks) {
         for (Rank rank : Rank.values()) {
             ranks.put(rank, 0);
         }
+        return ranks;
     }
 
-    private void saveRanks(final Map<Rank, Integer> ranks) {
+    private Map<Rank, Integer> saveRanks() {
+        Map<Rank, Integer> ranks = initRanks();
         for (Lotto lotto : lottos.getLottos()) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto.getWinningLotto());
             Rank findRank = Rank.findBy(matchingCount, lotto.hasNumber(winningLotto.getBonusNumber()));
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
+        return ranks;
     }
 
     private List<WinningResult> toResults(final Map<Rank, Integer> ranks) {
