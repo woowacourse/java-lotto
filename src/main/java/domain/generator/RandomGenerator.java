@@ -1,5 +1,9 @@
 package domain.generator;
 
+import static domain.Lotto.LOTTO_LENGTH;
+import static domain.Lotto.LOTTO_MAX;
+import static domain.Lotto.LOTTO_MIN;
+
 import java.util.List;
 import java.util.Random;
 
@@ -8,9 +12,9 @@ public class RandomGenerator implements Generator {
     @Override
     public List<Integer> generate() {
         return new Random()
-                .ints(1, 45 + 1)
+                .ints(LOTTO_MIN, LOTTO_MAX + 1)
                 .distinct()
-                .limit(6)
+                .limit(LOTTO_LENGTH)
                 .boxed()
                 .sorted()
                 .toList();
