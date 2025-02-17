@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.Lotto;
 import domain.Rank;
+import domain.ResultCalculator;
 import domain.WinningNumber;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-public class LottoResultRepositoryTest {
+public class ResultCalculatorTest {
 
-    private final LottoResultRepository lottoResultRepository = LottoResultRepository.create();
+    private final ResultCalculator resultCalculator = ResultCalculator.create();
     private WinningNumber winningNumber;
     private List<Lotto> lottos;
 
@@ -71,8 +72,8 @@ public class LottoResultRepositoryTest {
         int expectedValue) {
         lottos = new ArrayList<>();
         lottos.add(Lotto.from(givenNumbers));
-        lottoResultRepository.add(winningNumber, lottos);
-        Map<Rank, Integer> calculateResult = lottoResultRepository.getCalculateResult();
+        resultCalculator.calculate(winningNumber, lottos);
+        Map<Rank, Integer> calculateResult = resultCalculator.getCalculateResult();
         assertThat(calculateResult.get(expectedRank)).isEqualTo(expectedValue);
     }
 }

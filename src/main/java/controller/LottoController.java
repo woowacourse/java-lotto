@@ -1,7 +1,5 @@
 package controller;
 
-import static domain.LottoRules.WINNING_NUMBERS_REQUIRED;
-
 import creator.LottoCreator;
 import domain.Lotto;
 import domain.Profit;
@@ -10,9 +8,8 @@ import domain.Ticket;
 import domain.WinningNumber;
 import java.util.List;
 import java.util.Map;
-import repository.LottoRepository;
-import repository.LottoResultRepository;
-import utils.RandomNumber;
+import domain.LottoManager;
+import domain.ResultCalculator;
 import view.InputView;
 import view.OutputView;
 
@@ -20,15 +17,10 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final LottoRepository lottoRepository;
-    private final LottoResultRepository lottoResultRepository;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoRepository lottoRepository,
-        LottoResultRepository lottoResultRepository) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoRepository = lottoRepository;
-        this.lottoResultRepository = lottoResultRepository;
     }
 
     public void start() {
@@ -53,8 +45,9 @@ public class LottoController {
 
     private Map<Rank, Integer> calculateRankProcess(
         WinningNumber winningNumber, List<Lotto> lottos) {
-        lottoResultRepository.add(winningNumber, lottos);
-        Map<Rank, Integer> calculateResult = lottoResultRepository.getCalculateResult();
+        ResultCalculator resultCalculator = ResultCalculator.create();
+        resultCalculator.calculate(winningNumber, lottos);
+        Map<Rank, Integer> calculateResult = resultCalculator.getCalculateResult();
         outputView.printWinningStatistic(calculateResult);
         return calculateResult;
     }
@@ -67,12 +60,8 @@ public class LottoController {
     }
 
     private List<Lotto> purchaseLottoProcess(Ticket ticket) {
-        for (int i = 0; i < ticket.getQuantity(); i++) {
-            List<Integer> numbers = RandomNumber.generateNumbers(WINNING_NUMBERS_REQUIRED);
-            Lotto lotto = Lotto.from(numbers);
-            lottoRepository.addLotto(lotto);
-        }
-        List<Lotto> lottos = lottoRepository.getLottos();
+        LottoManager lottoManager = LottoManager.create();
+        List<Lotto> lottos = lottoManager.purchaseLottoByTicketQuantity(ticket);
         outputView.printLottos(lottos);
         return lottos;
     }
