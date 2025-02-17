@@ -20,14 +20,25 @@ class LottoTest {
     @CsvSource(value = {"1:true", "6:true", "8:false"}, delimiterString = ":")
     @ParameterizedTest
     void 특정_번호를_포함하는_지_여부를_반환할_수_있다(int number, boolean expected) {
+        //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThat(lotto.contains(number)).isEqualTo(expected);
+
+        //when
+        boolean result = lotto.contains(number);
+
+        //then
+        assertThat(result).isEqualTo(expected);
     }
 
     @DisplayName("번호가 1과 45 사이의 숫자가 아니면 예외를 던진다")
     @Test
     void 번호가_1과_45_사이의_번호가_아니면_예외를_던진다() {
-        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 46)))
+        //given
+        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 46);
+
+        //when
+        //then
+        assertThatThrownBy(() -> new Lotto(lottoNumbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
     }
@@ -36,6 +47,9 @@ class LottoTest {
     @MethodSource("returnWrongSizeNumbers")
     @ParameterizedTest
     void _6개의_고유한_번호가_아니라면_예외를_던진다(List<Integer> numbers) {
+        //given
+        //when
+        //then
         assertThatThrownBy(() -> new Lotto(numbers))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("6개의 고유한 번호를 입력해야 합니다.");
