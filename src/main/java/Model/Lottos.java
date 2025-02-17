@@ -7,7 +7,7 @@ public class Lottos {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(int price) {
         this.lottos = new ArrayList<>();

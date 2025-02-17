@@ -6,8 +6,8 @@ import java.util.Set;
 
 public class WinnerNumber {
 
-    private List<Integer> winnerNumbers;
-    private int bonusBall;
+    private final List<Integer> winnerNumbers;
+    private final int bonusBall;
 
     public WinnerNumber(List<Integer> winnerNumbers, int bonusBall) {
         this.winnerNumbers = winnerNumbers;
