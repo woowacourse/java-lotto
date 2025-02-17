@@ -11,7 +11,7 @@ public class LottoMachineTest {
     @DisplayName("로또 구입 금액만큼 로또 티켓 수 생성 확인")
     @Test
     public void lottoTicketNumber() {
-        LottoMoney lottoMoney = new LottoMoney("10000");
+        LottoMoney lottoMoney = new LottoMoney(10000);
         LottoTickets lottoTickets = new LottoTickets();
 
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator();

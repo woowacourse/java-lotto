@@ -15,7 +15,7 @@ public class LottoResultTest {
 
     @BeforeAll
     static void setUp() {
-        lottoMoney = new LottoMoney("1000");
+        lottoMoney = new LottoMoney(1000);
         LottoNumberGenerator lottoNumberGenerator = new LottoNumberGenerator(12345L);
         LottoMachine lottoMachine = new LottoMachine(lottoNumberGenerator);
         lottoTickets = new LottoTickets();

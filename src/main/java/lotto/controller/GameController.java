@@ -45,8 +45,8 @@ public class GameController {
 
     private LottoMoney storeLottoMoney() {
         try {
-            String response = InputView.readLottoMoney();
-            return new LottoMoney(response);
+            int lottoMoney = InputView.readLottoMoney();
+            return new LottoMoney(lottoMoney);
         } catch (IllegalArgumentException e) {
             OutputView.writeErrorMessage(e.getMessage());
             return storeLottoMoney();

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import lotto.view.InputView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,23 +12,21 @@ public class LottoMoneyTest {
     @Test
     public void lottoMoneyNumber() {
         String input = "money";
-        assertThatThrownBy(() -> new LottoMoney(input))
+        assertThatThrownBy(() -> InputView.validateAndParseLottoMoney(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 구입 금액이 1000원 미만인 예외")
     @Test
     public void lottoMoneyAmount() {
-        String input = "200";
-        assertThatThrownBy(() -> new LottoMoney(input))
+        assertThatThrownBy(() -> new LottoMoney(200))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("로또 구입 금액이 1000원 단위가 아닌 예외")
     @Test
     public void lottoMoneyUnit() {
-        String input = "1200";
-        assertThatThrownBy(() -> new LottoMoney(input))
+        assertThatThrownBy(() -> new LottoMoney(1200))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

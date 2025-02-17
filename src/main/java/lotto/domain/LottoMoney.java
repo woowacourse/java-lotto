@@ -2,25 +2,15 @@ package lotto.domain;
 
 import static lotto.util.Constant.LOTTO_MONEY_UNIT;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_AMOUNT;
-import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_NUMBER;
 import static lotto.util.ErrorHandler.INVALID_LOTTO_MONEY_UNIT;
 
 public class LottoMoney {
 
     private final int lottoMoney;
 
-    public LottoMoney(String input) {
-        int amount = validateAndParse(input);
-        validate(amount);
-        this.lottoMoney = amount;
-    }
-
-    private int validateAndParse(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw INVALID_LOTTO_MONEY_NUMBER.getException();
-        }
+    public LottoMoney(int lottoMoney) {
+        validate(lottoMoney);
+        this.lottoMoney = lottoMoney;
     }
 
     private void validate(int amount) {
