@@ -4,24 +4,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoNumbers {
+public class Lotto {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final String NUMBER_COUNT_EXCEPTION = "6개의 숫자를 입력해주세요.";
     private static final String NUMBER_DUPLICATE_EXCEPTION = "중복이 아닌 숫자를 입력해주세요";
 
     private final List<LottoNumber> numbers;
 
-    public LottoNumbers() {
+    public Lotto() {
         this.numbers = generateLottoNumbers();
     }
 
-    public LottoNumbers(List<Integer> numbers) {
+    public Lotto(List<Integer> numbers) {
         validateNumberCount(numbers);
         validateDuplicate(numbers);
         this.numbers = numbers.stream().map(LottoNumber::new).toList();
     }
 
-    public Integer countMatchNumber(LottoNumbers otherNumbers) {
+    public Integer countMatchNumber(Lotto otherNumbers) {
         List<LottoNumber> matchList = otherNumbers.getNumbers().stream()
                 .filter(otherNumber -> numbers.stream().anyMatch((number) -> number.equals(otherNumber)))
                 .toList();

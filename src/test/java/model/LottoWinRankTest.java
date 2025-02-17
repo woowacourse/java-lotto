@@ -7,16 +7,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class LottoWinRankTest {
-    List<LottoNumbers> lottoNumbersList = List.of(
-            new LottoNumbers(List.of(1, 2, 3, 4, 5, 6)),
-            new LottoNumbers(List.of(1, 2, 3, 4, 5, 7)),
-            new LottoNumbers(List.of(1, 2, 3, 4, 5, 8)),
-            new LottoNumbers(List.of(1, 2, 3, 4, 7, 8)),
-            new LottoNumbers(List.of(1, 2, 3, 10, 8, 9)),
-            new LottoNumbers(List.of(14, 15, 10, 11, 12, 13))
+    List<Lotto> lottoList = List.of(
+            new Lotto(List.of(1, 2, 3, 4, 5, 6)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 7)),
+            new Lotto(List.of(1, 2, 3, 4, 5, 8)),
+            new Lotto(List.of(1, 2, 3, 4, 7, 8)),
+            new Lotto(List.of(1, 2, 3, 10, 8, 9)),
+            new Lotto(List.of(14, 15, 10, 11, 12, 13))
     );
     WinLotto winLotto = new WinLotto(List.of(1, 2, 3, 4, 5, 6), 7);
-    List<LottoWinRank> resultList = lottoNumbersList.stream()
+    List<LottoWinRank> resultList = lottoList.stream()
             .map((purchasedLotto) -> LottoWinRank.calculateLottoWinRank(purchasedLotto, winLotto))
             .toList();
 

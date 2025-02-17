@@ -1,8 +1,8 @@
 package view;
 
 import java.util.Map.Entry;
+import model.Lotto;
 import model.LottoNumber;
-import model.LottoNumbers;
 import model.LottoStatistics;
 import model.LottoWinRank;
 import model.PurchasedLottos;
@@ -16,8 +16,8 @@ public class OutputView {
         purchasedLottos.getLottos().forEach(this::printLottoNumbers);
     }
 
-    private void printLottoNumbers(LottoNumbers lottoNumbers) {
-        System.out.println(lottoNumbers.getNumbers().stream().map(LottoNumber::getNumber).toList());
+    private void printLottoNumbers(Lotto lotto) {
+        System.out.println(lotto.getNumbers().stream().map(LottoNumber::getNumber).toList());
     }
 
     public void printResult(LottoStatistics lottoStatistics) {

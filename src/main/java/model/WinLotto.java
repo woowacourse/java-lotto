@@ -5,21 +5,21 @@ import java.util.List;
 public class WinLotto {
     private static final String BONUS_NUMBER_DUPLICATE_EXCEPTION = "당첨 번호와 중복이 아닌 숫자를 입력해주세요";
 
-    private final LottoNumbers lottoNumbers;
+    private final Lotto lotto;
     private final LottoNumber bonusNumber;
 
     public WinLotto(List<Integer> winNumbers, Integer bonusNumber) {
         validateDuplicate(winNumbers, bonusNumber);
-        this.lottoNumbers = new LottoNumbers(winNumbers);
+        this.lotto = new Lotto(winNumbers);
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
-    public Integer countMatchNumber(LottoNumbers lottoNumbers) {
-        return this.lottoNumbers.countMatchNumber(lottoNumbers);
+    public Integer countMatchNumber(Lotto lotto) {
+        return this.lotto.countMatchNumber(lotto);
     }
 
-    public Boolean bonusMatch(LottoNumbers lottoNumbers) {
-        return lottoNumbers.bonusMatch(this.bonusNumber);
+    public Boolean bonusMatch(Lotto lotto) {
+        return lotto.bonusMatch(this.bonusNumber);
     }
 
     private void validateDuplicate(List<Integer> winNumbers, Integer bonusNumber) {

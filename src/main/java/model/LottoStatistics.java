@@ -9,9 +9,9 @@ import java.util.Set;
 public class LottoStatistics {
     private final EnumMap<LottoWinRank, Integer> lottoStatistics = new EnumMap<>(LottoWinRank.class);
 
-    public LottoStatistics(List<LottoNumbers> lottoNumbers, WinLotto winLotto) {
+    public LottoStatistics(List<Lotto> purchasedLottos, WinLotto winLotto) {
         Arrays.stream(LottoWinRank.values()).forEach(lottoWinRank -> lottoStatistics.put(lottoWinRank, 0));
-        for (LottoNumbers purchasedLotto : lottoNumbers) {
+        for (Lotto purchasedLotto : purchasedLottos) {
             LottoWinRank winResult = LottoWinRank.calculateLottoWinRank(purchasedLotto, winLotto);
             lottoStatistics.put(winResult, lottoStatistics.get(winResult) + 1);
         }

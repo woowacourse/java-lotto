@@ -7,14 +7,14 @@ public class PurchasedLottos {
     private static final int LOTTO_PRICE = 1000;
     private static final String DIVIDABLE_EXCEPTION = "1000의 배수를 입력해주세요.";
 
-    private final List<LottoNumbers> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
     private final Integer purchaseAmount;
 
     public PurchasedLottos(Integer purchaseAmount) {
         validateDividable(purchaseAmount);
         int purchaseCount = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseCount; i++) {
-            lottos.add(new LottoNumbers());
+            lottos.add(new Lotto());
         }
         this.purchaseAmount = purchaseAmount;
     }
@@ -23,7 +23,7 @@ public class PurchasedLottos {
         return lottos.size();
     }
 
-    public List<LottoNumbers> getLottos() {
+    public List<Lotto> getLottos() {
         return lottos;
     }
 

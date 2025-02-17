@@ -20,7 +20,7 @@ public enum LottoWinRank {
         this.price = price;
     }
 
-    public static LottoWinRank calculateLottoWinRank(LottoNumbers purchasedLotto, WinLotto winLotto) {
+    public static LottoWinRank calculateLottoWinRank(Lotto purchasedLotto, WinLotto winLotto) {
         Integer matchNumberCount = winLotto.countMatchNumber(purchasedLotto);
         Boolean bonusMatch = winLotto.bonusMatch(purchasedLotto);
         return Arrays.stream(LottoWinRank.values())
