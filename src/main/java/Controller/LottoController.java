@@ -14,19 +14,14 @@ public class LottoController {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public void run() {
-        int price = getPrice();
-        Lottos lottos = getLottos(price);
+        int price = readPrice();
+        Lottos lottos = generateLottos(price);
         printLottoAmount(lottos);
-
-        List<Integer> winnerNumbers = getWinnerNumbers();
-
-        int bonusBall = getBonusBall(winnerNumbers);
-
+        List<Integer> winnerNumbers = readWinnerNumbers();
+        int bonusBall = readBonusBall(winnerNumbers);
         WinnerNumber winnerNumber = new WinnerNumber(winnerNumbers, bonusBall);
-
         compareWinning(lottos, winnerNumber);
         double result = LottoResult.lottoRateOfReturn(price);
-
         OutputView.winningStatistics(result);
         SCANNER.close();
     }
@@ -37,19 +32,20 @@ public class LottoController {
         }
     }
 
-    private int getBonusBall(List<Integer> winnerNumbers) {
+    private int readBonusBall(List<Integer> winnerNumbers) {
         OutputView.inputBonusBall();
         String inputBonusBall = SCANNER.nextLine();
         return InputView.inputBonusBall(inputBonusBall, winnerNumbers);
     }
 
-    private List<Integer> getWinnerNumbers() {
+    private List<Integer> readWinnerNumbers() {
+
         OutputView.inputWinnerNumbers();
         String inputWinnerNumbers = SCANNER.nextLine();
         return InputView.inputWinnerNumbers(inputWinnerNumbers);
     }
 
-    private Lottos getLottos(int lottoAmount) {
+    private Lottos generateLottos(int lottoAmount) {
         Lottos lottos = new Lottos(lottoAmount);
         OutputView.printLottoResults(lottos);
         return lottos;
@@ -59,7 +55,7 @@ public class LottoController {
         OutputView.printPurchaseCount(lottos.lottoSize());
     }
 
-    private int getPrice() {
+    private int readPrice() {
         OutputView.inputPurchaseAmount();
         String inputPrice = SCANNER.nextLine();
         return InputView.inputPrice(inputPrice);
