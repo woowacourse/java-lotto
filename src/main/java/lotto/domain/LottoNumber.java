@@ -24,6 +24,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         }
     }
 
+    public int toInteger() {
+        return number;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (o == null || getClass() != o.getClass()) {

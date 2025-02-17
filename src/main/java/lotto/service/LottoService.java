@@ -35,8 +35,8 @@ public class LottoService {
         return LottoGroup.from(lottoList);
     }
 
-    public String getLottoGroupMessage(LottoGroup lottoGroup) {
-        return lottoGroup.toString();
+    public List<List<Integer>> getLottoGroupMessage(LottoGroup lottoGroup) {
+        return lottoGroup.toIntegerLottosList();
     }
 
     public Lotto getWinnerNumber(List<Integer> winnerNumberInput) {

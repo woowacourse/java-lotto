@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LINE_SEPARATOR;
-
 import java.util.List;
-import java.util.StringJoiner;
 
 public class LottoGroup {
     private final List<Lotto> lottos;
@@ -20,14 +17,14 @@ public class LottoGroup {
         return lottos;
     }
 
+    public List<List<Integer>> toIntegerLottosList() {
+        return lottos.stream().map(Lotto::toIntegerList).toList();
+    }
+
     @Override
     public String toString() {
-        StringJoiner joiner = new StringJoiner(LINE_SEPARATOR);
-
-        for (Lotto lotto : lottos) {
-            joiner.add(lotto.toString());
-        }
-
-        return joiner.toString();
+        return "LottoGroup{" +
+                "lottos=" + lottos +
+                '}';
     }
 }

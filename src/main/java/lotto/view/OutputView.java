@@ -3,10 +3,12 @@ package lotto.view;
 import static lotto.common.Constants.LINE_SEPARATOR;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class OutputView {
 
+    private static final String DELIMITER = ", ";
     private static final List<String> CORRECT_MESSAGE = List.of("", "3개 일치 (5000원)- ", "4개 일치 (50000원)- ",
             "5개 일치 (1500000원)- ", "5개 일치, 보너스 볼 일치(30000000원)- ", "6개 일치 (2000000000원)- ");
 
@@ -17,9 +19,13 @@ public class OutputView {
         System.out.println("[ERROR] " + e.getMessage());
     }
 
-    public static void printLottoGroup(int getTicketCount, String lottoGroup) {
+    public static void printLottoGroup(int getTicketCount, List<List<Integer>> lottoList) {
         System.out.println(getTicketCount + "개를 구매했습니다.");
-        System.out.println(lottoGroup);
+
+        lottoList.stream()
+                .map(OutputView::formatLotto)
+                .forEach(System.out::println);
+
         System.out.println();
     }
 
@@ -29,6 +35,12 @@ public class OutputView {
                 .forEach(index -> System.out.println(CORRECT_MESSAGE.get(index) + correctCountValues.get(index) + "개"));
 
         printProfitRate(profitRate);
+    }
+
+    private static String formatLotto(List<Integer> lotto) {
+        return lotto.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(DELIMITER, "[", "]"));
     }
 
     private static void printNoticeResultMessage() {

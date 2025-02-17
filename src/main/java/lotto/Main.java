@@ -11,6 +11,4 @@ public class Main {
         LottoController controller = new LottoController(lottoService);
         controller.run();
     }
-
-
 }

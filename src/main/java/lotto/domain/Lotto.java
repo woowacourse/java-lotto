@@ -6,11 +6,9 @@ import static lotto.common.ErrorMessage.INVALID_LOTTO_NUM_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.StringJoiner;
 
 public class Lotto {
 
-    private static final String DELIMITER = ",";
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -44,14 +42,16 @@ public class Lotto {
                 .toList();
     }
 
+    public List<Integer> toIntegerList() {
+        return sortedInAscending(lottoNumbers).stream()
+                .map(LottoNumber::toInteger)
+                .toList();
+    }
+
     @Override
     public String toString() {
-        StringJoiner joiner = new StringJoiner(DELIMITER + " ", "[", "]");
-
-        for (LottoNumber lottoNumber : sortedInAscending(lottoNumbers)) {
-            joiner.add(lottoNumber.toString());
-        }
-
-        return joiner.toString();
+        return "Lotto{" +
+                "lottoNumbers=" + lottoNumbers +
+                '}';
     }
 }
