@@ -15,7 +15,6 @@ public class NumberGenerator {
             int randomNum = generateRandomNumber(minValue, maxValue);
             set.add(randomNum);
         } while (set.size() != makeQuantity);
-
         List<Integer> lottoNumbers = new ArrayList<>(set);
         Collections.sort(lottoNumbers);
         return lottoNumbers;

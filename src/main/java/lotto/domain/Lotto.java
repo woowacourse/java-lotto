@@ -24,7 +24,6 @@ public class Lotto {
     }
 
     public int checkMatchCount(List<Integer> winningNumbers) {
-
         int count = 0;
         for (int lottoNumber : lottoNumbers) {
             if (winningNumbers.contains(lottoNumber)) {
@@ -66,5 +65,4 @@ public class Lotto {
     public List<Integer> getLottoNumbers() {
         return lottoNumbers;
     }
-
 }

@@ -33,31 +33,24 @@ public class LottoManager {
     }
 
     public WinningNumbers makeWinningNumbers(String winningNumber, String bonusNumber) {
-
         List<Integer> parsedWinningNumbers = parseToIntegers(Splitter.splitByComma(winningNumber));
         int parsedBonusNumber = parseToInteger(bonusNumber);
-
         return new WinningNumbers(parsedWinningNumbers, parsedBonusNumber);
     }
 
     private Lotto makeLotto() {
-
         List<Integer> lottoNumbers = numberGeneratorWithUniqueValues(MAKE_QUANTITY, MIN_VALUE, MAX_VALUE);
         return new Lotto(lottoNumbers);
     }
 
     public EnumMap<Rank, Integer> makeStatistics(LottoBundle lottoBundle, WinningNumbers winningNumbers) {
-
         EnumMap<Rank, Integer> rankIntegerEnumMap = makeDefaultMap();
-
         for (Lotto lotto : lottoBundle.getLottoBundle()) {
             int matchCount = winningNumbers.checkMatchCount(lotto);
             boolean matchBonus = winningNumbers.checkMatchBonus(lotto);
             Rank currentRank = checkPrize(matchCount, matchBonus);
-
             rankIntegerEnumMap.put(currentRank, rankIntegerEnumMap.get(currentRank) + 1);
         }
-
         return rankIntegerEnumMap;
     }
 

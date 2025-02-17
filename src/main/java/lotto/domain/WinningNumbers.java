@@ -68,5 +68,4 @@ public class WinningNumbers {
             throw new LottoException(MUST_NOT_BE_DUPLICATED_BONUS_NUMBER);
         }
     }
-
 }
