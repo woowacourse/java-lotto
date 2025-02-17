@@ -13,7 +13,7 @@ public class LottoTest {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // 로또 번호가 5개 일치하고, 보너스 번호는 포함되지 않은 경우
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 10));
-        LottoRank rank = lotto.compareLotto(winningLotto);
+        LottoRank rank = lotto.checkLottoRank(winningLotto);
         Assertions.assertThat(rank).isEqualTo(LottoRank.THIRD_PLACE);
     }
 
@@ -23,7 +23,7 @@ public class LottoTest {
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         // 하나도 맞지 않는 경우
         Lotto lotto = new Lotto(List.of(11, 12, 13, 14, 15, 16));
-        LottoRank rank = lotto.compareLotto(winningLotto);
+        LottoRank rank = lotto.checkLottoRank(winningLotto);
         Assertions.assertThat(rank).isEqualTo(LottoRank.BOOM);
     }
 
