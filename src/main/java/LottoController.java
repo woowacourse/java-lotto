@@ -29,7 +29,7 @@ public class LottoController {
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottoWallet, winningLotto);
+        WinningResult winningResult = winningLotto.calculateWinningResult(lottoWallet);
         outputView.printWinningResult(winningResult);
         outputView.printRevenue(lottoManager.calculateRevenue(winningResult, money));
     }

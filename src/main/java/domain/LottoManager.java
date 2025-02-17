@@ -13,17 +13,6 @@ public class LottoManager {
         return new LottoWallet(lottos);
     }
 
-    public WinningResult calculateWinningResult(LottoWallet lottoWallet, WinningLotto winningLotto) {
-        WinningResult winningResult = new WinningResult();
-        for (Lotto lotto : lottoWallet.getLottoWallet()) {
-            final int matchedCount = winningLotto.countMatchedNumber(lotto);
-            final boolean isBonusMatched = winningLotto.isBonusNumberMatched(lotto);
-            WinningInfo winningInfo = WinningInfo.of(matchedCount, isBonusMatched);
-            winningResult.increaseCount(winningInfo, 1);
-        }
-        return winningResult;
-    }
-
     public float calculateRevenue(WinningResult winningResult, Money money) {
         return (float) winningResult.getTotalPrices() / money.getValue();
     }
