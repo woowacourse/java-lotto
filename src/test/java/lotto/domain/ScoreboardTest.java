@@ -15,13 +15,13 @@ class ScoreboardTest {
     @Test
     void 발행된_로또의_당첨_등수를_찾을_수_있다() {
         List<Lotto> lottos = List.of(
-                new Lotto(List.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 7)),
-                new Lotto(List.of(1, 2, 3, 4, 5, 8)),
-                new Lotto(List.of(1, 2, 3, 4, 8, 9)),
-                new Lotto(List.of(1, 2, 3, 8, 9, 10)),
-                new Lotto(List.of(8, 9, 10, 11, 12, 13)));
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
+                new Lotto(1, 2, 3, 4, 5, 6),
+                new Lotto(1, 2, 3, 4, 5, 7),
+                new Lotto(1, 2, 3, 4, 5, 8),
+                new Lotto(1, 2, 3, 4, 8, 9),
+                new Lotto(1, 2, 3, 8, 9, 10),
+                new Lotto(8, 9, 10, 11, 12, 13));
+        WinningLotto winningLotto = new WinningLotto(new Lotto(1, 2, 3, 4, 5, 6), 7);
         Scoreboard scoreboard = new Scoreboard();
 
         List<WinningTier> actualTiers = scoreboard.findWinningTiers(lottos, winningLotto);
