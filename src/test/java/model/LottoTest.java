@@ -3,70 +3,72 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class LottoTest {
 
+    private List<LottoNumber> lottoNumbers;
+    private WinningNumbers winningNumbers;
+    private BonusBall bonusBall;
+
+    @BeforeEach
+    public void initTestFixture() {
+        lottoNumbers = new ArrayList<>(
+                Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
+                        new LottoNumber(5), new LottoNumber(6)));
+        winningNumbers = new WinningNumbers(lottoNumbers);
+        bonusBall = new BonusBall(new LottoNumber(7), winningNumbers);
+
+    }
+
     @Nested
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("로또 번호가 적절하게 생성된다.")
         @Test
+        @DisplayName("로또 번호가 적절하게 생성된다.")
         void createLottoNumbers() {
-            // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
-
-            // when
+            // given & when
             Lotto actual = new Lotto(lottoNumbers);
 
             // then
             assertThat(actual.getLottoNumbers()).isEqualTo(lottoNumbers);
         }
 
-        @DisplayName("당첨 번호와 매칭 개수를 적절하게 비교한다.")
         @Test
+        @DisplayName("당첨 번호와 매칭 개수를 적절하게 비교한다.")
         void calculateWinningNumbersMatchCount() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
+            WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusBall);
+            int expected = 6;
 
-            WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
             // when
-            int matchCount = lotto.calculateWinningNumbersMatchCount(winningNumbers);
+            int actual = lotto.calculateWinningNumbersMatchCount(winningLotto);
 
             // then
-            assertThat(matchCount).isEqualTo(6);
+            assertThat(actual).isEqualTo(expected);
         }
 
-        @DisplayName("보너스 볼과 매칭을 적절하게 비교한다.")
         @Test
+        @DisplayName("보너스 볼과 매칭을 적절하게 비교한다.")
         void isContainsBonusNumber() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(30), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21)));
             Lotto lotto = new Lotto(lottoNumbers);
+            LottoNumber bonusBall = new LottoNumber(1);
 
-            WinningNumbers winningNumbers = new WinningNumbers(new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21))), new LottoNumber(30));
             // when
-            boolean containsBonusNumber = lotto.isContainsBonusNumber(winningNumbers);
+            boolean actual = lotto.isContainsNumber(bonusBall);
 
             // then
-            assertThat(containsBonusNumber).isTrue();
+            assertThat(actual).isTrue();
         }
     }
 
@@ -74,31 +76,26 @@ class LottoTest {
     @DisplayName("유효하지 않은 경우의 테스트")
     class InvalidCases {
 
-        @DisplayName("로또 번호가 6개가 아니면 예외가 발생한다.")
         @Test
+        @DisplayName("로또 번호가 6개가 아니면 예외가 발생한다.")
         void validateSize() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(8), new LottoNumber(45), new LottoNumber(21), new LottoNumber(30)));
+            lottoNumbers.add(new LottoNumber(10));
 
             // when & then
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.LOTTO_NUMBER_IS_INVALID_SIZE.getMessage());
         }
 
-        @DisplayName("로또 번호에 중복이 존재한다면 예외가 발생한다.")
         @Test
+        @DisplayName("로또 번호에 중복이 존재한다면 예외가 발생한다.")
         void validateDuplicate() {
             // given
-            List<LottoNumber> lottoNumbers = new ArrayList<>(
-                    List.of(new LottoNumber(1), new LottoNumber(3), new LottoNumber(9),
-                            new LottoNumber(1), new LottoNumber(45), new LottoNumber(21)));
+            lottoNumbers.removeLast();
+            lottoNumbers.add(new LottoNumber(1));
 
             // when & then
-            assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                    .isInstanceOf(IllegalArgumentException.class)
+            assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class)
                     .hasMessageContaining(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }

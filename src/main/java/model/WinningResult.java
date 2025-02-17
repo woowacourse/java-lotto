@@ -1,9 +1,10 @@
 package model;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class WinningResult {
 
@@ -13,47 +14,47 @@ public class WinningResult {
         validateRankSize(lottoRanks);
         this.lottoRanks = Map.copyOf(lottoRanks);
     }
-    
+
     private void validateRankSize(final Map<LottoRank, Integer> lottoRanks) {
-        lottoRanks.forEach((lottoRank, count) -> {
-            if (count < 0) {
-                throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
-            }
-        });
+        long negativeCount = lottoRanks.entrySet().stream()
+                .mapToInt(Entry::getValue)
+                .filter(count -> count < 0)
+                .count();
+
+        if (negativeCount > 0) {
+            throw new IllegalArgumentException(ErrorType.WINNING_RESULT_POSITIVE.getMessage());
+        }
     }
 
-    public static WinningResult of(final List<Lotto> lottos, final WinningNumbers winningNumbers) {
+    public static WinningResult of(final List<Lotto> lottos, final WinningLotto winningLotto) {
         final Map<LottoRank, Integer> lottoRanks = new HashMap<>();
 
         for (final Lotto lotto : lottos) {
-            final LottoRank lottoRank = LottoRank.of(lotto, winningNumbers);
+            final LottoRank lottoRank = LottoRank.of(lotto, winningLotto);
             lottoRanks.put(lottoRank, lottoRanks.getOrDefault(lottoRank, 0) + 1);
         }
+
         return new WinningResult(lottoRanks);
     }
 
     private long calculateRevenue() {
-        long revenue = 0;
-        for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            revenue += entry.getKey().getPrizeMoney() * entry.getValue();
-        }
-        return revenue;
+        return lottoRanks.entrySet().stream()
+                .mapToLong(entry -> entry.getKey().getPrizeMoney() * entry.getValue())
+                .sum();
     }
 
     private int calculateTotalLottoCount() {
-        int totalLottoCount = 0;
-        for (final Map.Entry<LottoRank, Integer> entry : lottoRanks.entrySet()) {
-            totalLottoCount += entry.getValue();
-        }
-        return totalLottoCount;
+        return lottoRanks.entrySet().stream()
+                .mapToInt(Map.Entry::getValue)
+                .sum();
     }
 
     private int calculateTotalLottoPrice() {
         return calculateTotalLottoCount() * Lotto.LOTTO_PRICE;
     }
 
-    public boolean isDamage() {
-        return calculateRateOfRevenue() < 1;
+    public boolean isRevenue() {
+        return calculateRateOfRevenue() >= 1;
     }
 
     public double calculateRateOfRevenue() {

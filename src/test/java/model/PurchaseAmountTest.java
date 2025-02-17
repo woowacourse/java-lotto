@@ -3,7 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ class PurchaseAmountTest {
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("구매 금액이 올바르게 생성 된다.")
         @Test
+        @DisplayName("구매 금액이 올바르게 생성 된다.")
         void createPurchaseAmount() {
             // given
             int money = 1000;
@@ -26,7 +26,7 @@ class PurchaseAmountTest {
             PurchaseAmount actual = new PurchaseAmount(money);
 
             // then
-            assertThat(actual.getMoney()).isEqualTo(money);
+            assertThat(actual).extracting("money").isEqualTo(money);
         }
 
     }
@@ -35,8 +35,8 @@ class PurchaseAmountTest {
     @DisplayName("유효하지 않은 경우의 테스트")
     class InvalidCases {
 
-        @DisplayName("구매 금액이 양수가 아니라면 예외가 발생한다.")
         @ParameterizedTest
+        @DisplayName("구매 금액이 양수가 아니라면 예외가 발생한다.")
         @ValueSource(ints = {0, -1})
         void validateNotPositive(final int money) {
             // given & when & then
@@ -45,8 +45,8 @@ class PurchaseAmountTest {
                     .hasMessageContaining(ErrorType.PURCHASE_AMOUNT_POSITIVE.getMessage());
         }
 
-        @DisplayName("구매 금액이 양수가 아니라면 예외가 발생한다.")
         @Test
+        @DisplayName("구매 금액이 양수가 아니라면 예외가 발생한다.")
         void validateNotDivideLottoPrice() {
             // given & when & then
             assertThatThrownBy(() -> new PurchaseAmount(Lotto.LOTTO_PRICE + 1))

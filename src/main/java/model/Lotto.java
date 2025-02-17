@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import constants.ErrorType;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Lotto {
 
     public static Lotto from(final List<Integer> lottoNumbers) {
         return new Lotto(lottoNumbers.stream()
-                .map(num -> new LottoNumber(num))
+                .map(LottoNumber::new)
                 .collect(Collectors.toList()));
     }
 
@@ -36,18 +36,20 @@ public class Lotto {
     }
 
     private void validateDuplicate(final List<LottoNumber> lottoNumbers) {
-        final Set<LottoNumber> set = new HashSet<>(lottoNumbers);
-        if (set.size() != lottoNumbers.size()) {
+        final Set<LottoNumber> deduplicatedLottoNumber = new HashSet<>(lottoNumbers);
+        if (deduplicatedLottoNumber.size() != lottoNumbers.size()) {
             throw new IllegalArgumentException(ErrorType.LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
 
-    public int calculateWinningNumbersMatchCount(final WinningNumbers winningNumbers) {
-        return winningNumbers.calculateLottoMatchCount(getLottoNumbers());
+    public int calculateWinningNumbersMatchCount(final WinningLotto winningLotto) {
+        return (int) lottoNumbers.stream()
+                .filter(winningLotto::containsLottoNumber)
+                .count();
     }
 
-    public boolean isContainsBonusNumber(final WinningNumbers winningNumbers) {
-        return winningNumbers.matchBonusNumber(getLottoNumbers());
+    public boolean isContainsNumber(final LottoNumber number) {
+        return lottoNumbers.contains(number);
     }
 
     public List<LottoNumber> getLottoNumbers() {

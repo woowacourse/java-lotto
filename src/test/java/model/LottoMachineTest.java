@@ -15,8 +15,8 @@ class LottoMachineTest {
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("로또 머신이 로또를 발급한다.")
         @Test
+        @DisplayName("로또 머신이 로또를 발급한다.")
         void issueLottos() {
             // given
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());

@@ -10,7 +10,7 @@ import view.input.InputView;
 import view.output.ConsoleOutputView;
 import view.output.OutputView;
 
-public abstract class LottoFactory {
+public class LottoFactory {
 
     public static InputParser inputParser() {
         return new BasicInputParser();
@@ -26,5 +26,8 @@ public abstract class LottoFactory {
 
     public static NumberGenerator numberGenerator() {
         return new RandomUniqueNumberGenerator(Lotto.LOTTO_NUMBER_START_INCLUSIVE, Lotto.LOTTO_NUMBER_END_INCLUSIVE);
+    }
+
+    private LottoFactory() {
     }
 }
