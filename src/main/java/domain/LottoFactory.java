@@ -8,16 +8,20 @@ import java.util.stream.IntStream;
 
 public class LottoFactory {
     private static final List<Integer> randomNumbers = new ArrayList<>(
-            IntStream.rangeClosed(1, 45)
+            IntStream.rangeClosed(Lotto.LOTTO_NUMBER_MIN, Lotto.LOTTO_NUMBER_MAX)
                     .boxed()
                     .toList()
     );
 
-    public final static int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_COUNT = 6;
 
     public static Lotto makeLotto() {
         Collections.shuffle(randomNumbers);
-        List<Integer> numbers = randomNumbers.stream().limit(6).sorted().collect(Collectors.toList());
+        List<Integer> numbers = randomNumbers.stream()
+                .limit(LOTTO_COUNT)
+                .sorted()
+                .collect(Collectors.toList());
         return new Lotto(numbers);
     }
 
