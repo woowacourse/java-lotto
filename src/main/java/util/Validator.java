@@ -4,6 +4,9 @@ import static util.constant.Message.*;
 
 public class Validator {
 
+    private Validator() {
+    }
+
     public static void inputValidatorIsNull(String input) {
         if (input.isBlank()) {
             throw new IllegalArgumentException(INPUT_NULL_ERROR);
