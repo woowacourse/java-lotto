@@ -29,7 +29,7 @@ public class WinningNumber {
     }
 
     private void validateNumberCount(String[] winningNumbers) {
-        if (winningNumbers.length != LottoConstants.NUMBER_COUNT) {
+        if (winningNumbers.length != Lotto.NUMBER_COUNT) {
             throw new IllegalArgumentException("당첨 번호를 \", \"로 구분된 6개의 정수로 입력해주세요.");
         }
     }

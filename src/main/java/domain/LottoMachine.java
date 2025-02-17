@@ -1,7 +1,5 @@
 package domain;
 
-import static domain.LottoConstants.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import util.NumberGenerator;
@@ -25,7 +23,8 @@ public class LottoMachine {
     private List<Integer> getUniqueRandomNumbers(List<Lotto> lottos) {
         List<Integer> randomNumbers;
         do {
-            randomNumbers = numberGenerator.pickUniqueRandomNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
+            randomNumbers = numberGenerator.pickUniqueRandomNumbers(
+                    Lotto.MIN_NUMBER, Lotto.MAX_NUMBER, Lotto.NUMBER_COUNT);
         } while (isDuplicated(randomNumbers, lottos));
         return randomNumbers;
     }
