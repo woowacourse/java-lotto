@@ -12,6 +12,14 @@ public class PurchaseAmount {
         this.money = money;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public int getLottoQuantity() {
+        return money / LOTTO_PRICE;
+    }
+    
     private void validatePurchaseAmountDividedByUnit(int value) {
         if (value % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은" + LOTTO_PRICE + "원 단위로 가능합니다.");
@@ -24,7 +32,4 @@ public class PurchaseAmount {
         }
     }
 
-    public int getMoney() {
-        return money;
-    }
 }

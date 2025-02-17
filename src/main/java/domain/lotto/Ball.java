@@ -11,6 +11,10 @@ public class Ball {
         validateRange(number);
         this.number = number;
     }
+    
+    public int getNumber() {
+        return number;
+    }
 
     private void validateRange(final int number) {
         if (number < MIN_BALL_NUMBER || number > MAX_BALL_NUMBER) {
@@ -18,7 +22,4 @@ public class Ball {
         }
     }
 
-    public int getNumber() {
-        return number;
-    }
 }

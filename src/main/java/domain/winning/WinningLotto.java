@@ -13,7 +13,14 @@ public class WinningLotto {
         this.lotto = new Lotto(winningNumbers);
         validateUniqueBall(bonusNumber);
         this.bonusBall = new Ball(bonusNumber);
+    }
 
+    public List<Integer> getWinningNumbers() {
+        return lotto.getBallNumbers();
+    }
+
+    public Integer getBonusNumber() {
+        return bonusBall.getNumber();
     }
 
     private void validateUniqueBall(int bonusNumber) {
@@ -22,13 +29,4 @@ public class WinningLotto {
         }
     }
 
-    public List<Integer> getWinningNumbers() {
-        return lotto.getBalls().stream()
-                .map(Ball::getNumber)
-                .toList();
-    }
-
-    public Integer getBonusNumber() {
-        return bonusBall.getNumber();
-    }
 }
