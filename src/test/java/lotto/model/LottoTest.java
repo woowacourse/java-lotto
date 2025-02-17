@@ -1,6 +1,7 @@
 package lotto.model;
 
 import static lotto.constant.LottoNumberConstants.*;
+import static lotto.model.LottoNumberFixture.generateLottoNumbersInRange;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -55,14 +56,6 @@ class LottoTest {
         Lotto lotto2 = new Lotto(lottoNumbers2);
 
         assertEquals(count, lotto1.getMatchCount(lotto2));
-    }
-
-    private static Set<LottoNumber> generateLottoNumbersInRange(int start, int end) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = start; i <= end; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-        return lottoNumbers;
     }
 
     private static Stream<Arguments> lottoNumberAndIsMatchResult() {

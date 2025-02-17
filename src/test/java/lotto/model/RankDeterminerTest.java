@@ -1,9 +1,8 @@
 package lotto.model;
 
+import static lotto.model.LottoNumberFixture.*;
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 import lotto.Rank;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -30,13 +29,5 @@ class RankDeterminerTest {
                 Arguments.arguments(new Lotto(generateLottoNumbersInRange(3, 8)), new LottoNumber(45), Rank.FOURTH),
                 Arguments.arguments(new Lotto(generateLottoNumbersInRange(4, 9)), new LottoNumber(45), Rank.FIFTH)
         );
-    }
-
-    private static Set<LottoNumber> generateLottoNumbersInRange(int start, int end) {
-        Set<LottoNumber> lottoNumbers = new HashSet<>();
-        for (int i = start; i <= end; i++) {
-            lottoNumbers.add(new LottoNumber(i));
-        }
-        return lottoNumbers;
     }
 }
