@@ -17,10 +17,6 @@ public class LottoNumber {
         this.number = parsedNumber;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     private int validateNumber(String number) {
         try {
             return Integer.parseInt(number);
@@ -33,6 +29,10 @@ public class LottoNumber {
         if (number < LottoConstants.LOTTO_MINIMUM_NUMBER.getNumber() || number > LottoConstants.LOTTO_MAXIMUM_NUMBER.getNumber()) {
             throw new IllegalArgumentException(ErrorMessage.RANGE_ERROR.getMessage());
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
 }

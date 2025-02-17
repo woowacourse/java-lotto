@@ -91,4 +91,5 @@ class LottoTest {
         //when & then
         assertThat(lotto.isMatchExist(bonusNumber)).isEqualTo(false);
     }
+
 }
