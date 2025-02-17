@@ -1,6 +1,6 @@
 package lotto.constant;
 
-import java.util.List;
+import java.util.Arrays;
 
 public enum WinningTier {
     FIRST(6, false, 2_000_000_000),
@@ -40,8 +40,7 @@ public enum WinningTier {
     }
 
     public static WinningTier find(int matches, boolean hasBonusMatch) {
-        List<WinningTier> allTiers = List.of(WinningTier.values());
-        return allTiers.stream()
+        return Arrays.stream(WinningTier.values())
                 .filter(tier -> tier.getMatches() == matches && meetsBonusRequirement(tier, hasBonusMatch))
                 .findFirst()
                 .orElse(WinningTier.EMPTY);
