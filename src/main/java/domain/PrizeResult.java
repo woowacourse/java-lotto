@@ -1,7 +1,6 @@
 package domain;
 
 import constant.LottoConstants;
-import java.util.Arrays;
 import java.util.EnumMap;
 
 public class PrizeResult {
@@ -15,10 +14,20 @@ public class PrizeResult {
     }
 
     private long calculatePrizeSum() {
-        return Arrays.stream(Rank.values())
-                .filter(rank -> !rank.isMiss())
-                .mapToLong(rank -> (long) result.getOrDefault(rank, 0) * rank.getPrize())
-                .sum();
+        long sum = 0;
+        for (Rank rank : Rank.values()) {
+            if (rank.isMiss()) {
+                continue;
+            }
+
+            sum += calculatePrize(rank);
+        }
+
+        return sum;
+    }
+
+    private long calculatePrize(Rank rank) {
+        return (long) result.getOrDefault(rank, 0) * rank.getPrize();
     }
 
     public double calculateProfit() {
