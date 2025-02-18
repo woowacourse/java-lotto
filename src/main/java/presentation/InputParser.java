@@ -1,5 +1,6 @@
-package controller;
+package presentation;
 
+import exception.IllegalPositiveIntegerException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class InputParser {
         try {
             return Integer.parseInt(text);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("양의 정수만 입력해야 합니다.");
+            throw new IllegalPositiveIntegerException();
         }
     }
 
@@ -17,7 +18,7 @@ public class InputParser {
             List<String> splittedText = Arrays.stream(text.split(",")).toList();
             return splittedText.stream().map(Integer::parseInt).toList();
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("양의 정수만 입력해야 합니다.");
+            throw new IllegalPositiveIntegerException();
         }
     }
 

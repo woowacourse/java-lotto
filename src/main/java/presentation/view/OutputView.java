@@ -1,7 +1,7 @@
-package view;
+package presentation.view;
 
 import domain.enums.Prize;
-import dto.OutputLottosDto;
+import dto.OutputPurchasedLottosDto;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,9 +11,9 @@ public class OutputView {
         System.out.println(buyQuantity + "개를 구매했습니다.");
     }
 
-    public static void printLottos(List<OutputLottosDto> outputLottosDtos) {
-        for (OutputLottosDto outputLottosDto : outputLottosDtos) {
-            System.out.println(outputLottosDto.lottos().toString());
+    public static void printLottos(List<OutputPurchasedLottosDto> outputPurchasedLottosDtos) {
+        for (OutputPurchasedLottosDto outputPurchasedLottosDto : outputPurchasedLottosDtos) {
+            System.out.println(outputPurchasedLottosDto.lottos().toString());
         }
     }
 
@@ -44,5 +44,9 @@ public class OutputView {
 
     public static void printRateOfReturn(double rateOfReturn) {
         System.out.println("총 수익률은 " + rateOfReturn + "입니다.");
+    }
+
+    public static void printError(String message) {
+        System.out.println("[ERROR] " + message);
     }
 }

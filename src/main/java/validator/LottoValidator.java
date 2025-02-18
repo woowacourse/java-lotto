@@ -1,6 +1,9 @@
 package validator;
 
+import domain.enums.LottoNumber;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoValidator {
     public static void validate(List<Integer> numbers) {
@@ -24,15 +27,11 @@ public class LottoValidator {
     }
 
     private static boolean isValidNumber(int number) {
-        return number > 0 && number <= 45;
+        return number >= LottoNumber.MIN_RANGE.getNumber() && number <= LottoNumber.MAX_RANGE.getNumber();
     }
 
     private static boolean hasDistinctNumber(List<Integer> numbers) {
-        int distinctedSize = numbers.stream()
-                .distinct()
-                .toList()
-                .size();
-
-        return numbers.size() != distinctedSize;
+        Set<Integer> noneDistinctNumbers = new HashSet<>(numbers);
+        return noneDistinctNumbers.size() != numbers.size();
     }
 }

@@ -1,4 +1,4 @@
-package controller;
+package presentation;
 
 import domain.AnswerLotto;
 import domain.Lottos;
@@ -6,12 +6,12 @@ import domain.Money;
 import domain.enums.Prize;
 import domain.numbergenerator.NumberGenerator;
 import domain.numbergenerator.RandomNumberGenerator;
-import dto.OutputLottosDto;
+import dto.OutputPurchasedLottosDto;
 import java.util.List;
 import java.util.Map;
 import service.LottoService;
-import view.InputView;
-import view.OutputView;
+import presentation.view.InputView;
+import presentation.view.OutputView;
 
 public class LottoController {
     private final LottoService lottoService;
@@ -21,19 +21,28 @@ public class LottoController {
     }
 
     public void run() {
+        try {
+            Money money = generateMoney();
+
+            Lottos lottos = getLottos(money.getBuyableLottoCount());
+            List<OutputPurchasedLottosDto> outputPurchasedLottosDtos = lottoService.getOutputLottosDtos(lottos.getLottos());
+            OutputView.printLottos(outputPurchasedLottosDtos);
+
+            List<Integer> answerNumbers = getAnswerNumbers();
+            int bonusNumber = getBonusNumber();
+            AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
+
+            printPrizeResult(answerLotto, lottos);
+        } catch (IllegalArgumentException exception) {
+            OutputView.printError(exception.getMessage());
+        }
+    }
+
+    private Money generateMoney() {
         Money money = getMoney();
         OutputView.printBuyQuantity(money.getBuyableLottoCount());
         OutputView.printChangeMoney(money.getChange());
-
-        Lottos lottos = getLottos(money.getBuyableLottoCount());
-        List<OutputLottosDto> outputLottosDtos = lottoService.getOutputLottosDtos(lottos.getLottos());
-        OutputView.printLottos(outputLottosDtos);
-
-        List<Integer> answerNumbers = getAnswerNumbers();
-        int bonusNumber = getBonusNumber();
-        AnswerLotto answerLotto = lottoService.getAnswerLotto(answerNumbers, bonusNumber);
-
-        printPrizeResult(answerLotto, lottos);
+        return money;
     }
 
     private void printPrizeResult(AnswerLotto answerLotto, Lottos lottos) {

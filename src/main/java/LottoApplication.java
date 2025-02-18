@@ -1,4 +1,4 @@
-import controller.LottoController;
+import presentation.LottoController;
 import service.LottoService;
 
 public class LottoApplication {
