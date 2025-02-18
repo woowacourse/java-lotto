@@ -3,7 +3,7 @@ package controller;
 import java.util.stream.IntStream;
 import model.Lotto;
 import model.LottoEvaluator;
-import model.LottoGenerater;
+import model.LottoGenerator;
 import model.LottoNumberPicker;
 import model.Lottos;
 import model.LottoPayment;
@@ -41,7 +41,7 @@ public class Controller {
 
     private Lottos generateLottos(LottoPayment lottoPayment) {
         LottoNumberPicker lottoNumberPicker = new LottoNumberPicker();
-        LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
+        LottoGenerator lottoGenerater = new LottoGenerator(lottoNumberPicker);
         return new Lottos(
                 IntStream.range(0, lottoPayment.computeTicketCount())
                         .mapToObj(i -> lottoGenerater.generateLotto())

@@ -5,10 +5,10 @@ import static constant.LottoConstant.LOTTO_NUMBER_COUNT;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class LottoGenerater {
+public class LottoGenerator {
     private final LottoNumberPicker lottoNumberPicker;
 
-    public LottoGenerater(LottoNumberPicker lottoNumberPicker) {
+    public LottoGenerator(LottoNumberPicker lottoNumberPicker) {
         this.lottoNumberPicker = lottoNumberPicker;
     }
 
