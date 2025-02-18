@@ -38,7 +38,7 @@ public enum WinningCase {
   }
 
   public long calculateEarnMoney(int winningCaseCount) {
-    return winningCaseCount * winningMoney;
+    return  (long) winningCaseCount * winningMoney;
   }
 
   public int getWinningMoney() {
