@@ -100,16 +100,14 @@ class LottoTest {
         assertThat(lotto.hasLottoNumber(bonusNumber)).isFalse();
     }
 
-    // TODO OutputView 테스트로 변경한다.
+    @DisplayName("오름차순으로 정렬되어 반환한다.")
+    @Test
+    void returnSortWithAscending() {
+        List<LottoNumber> lottoNumbers = Stream.of(45, 1, 44, 2, 43, 3).map(LottoNumber::new).toList();
+        Lotto lotto = new Lotto(lottoNumbers);
+        List<Integer> expected = List.of(1, 2, 3, 43, 44, 45);
 
-//    @DisplayName("출력은_오름차순으로_정렬된다")
-//    @Test
-//    void printWithSort() {
-//        List<LottoNumber> lottoNumbers = Stream.of(45, 1, 44, 2, 43, 3).map(LottoNumber::new).toList();
-//        Lotto lotto = new Lotto(lottoNumbers);
-//        String expect = "[1, 2, 3, 43, 44, 45]";
-//
-//        assertThat(lotto.toString()).hasToString(expect);
-//    }
+        assertThat(lotto.toIntegerList()).isEqualTo(expected);
+    }
 
 }

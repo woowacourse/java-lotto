@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Profit {
 
+    private static final long SKIP_NO_REWARD = 1;
     private static final int DEFAULT_INCREMENT = 1;
     private static final int INIT_VALUE = 0;
 
@@ -33,6 +34,8 @@ public class Profit {
     }
 
     public List<Integer> getRankCountList() {
-        return rankCounts.values().stream().toList();
+        return rankCounts.values().stream()
+                .limit(rankCounts.size() - SKIP_NO_REWARD)
+                .toList();
     }
 }

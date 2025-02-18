@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class OutputView {
 
     private static final String DELIMITER = ", ";
-    private static final List<String> CORRECT_MESSAGE = List.of("", "3개 일치 (5000원)- ", "4개 일치 (50000원)- ",
+    private static final List<String> CORRECT_MESSAGE = List.of("3개 일치 (5000원)- ", "4개 일치 (50000원)- ",
             "5개 일치 (1500000원)- ", "5개 일치, 보너스 볼 일치(30000000원)- ", "6개 일치 (2000000000원)- ");
 
     private OutputView() {
@@ -31,8 +31,11 @@ public class OutputView {
 
     public static void printStatics(List<Integer> correctCountValues, String profitRate) {
         printNoticeResultMessage();
-        IntStream.range(1, CORRECT_MESSAGE.size())
-                .forEach(index -> System.out.println(CORRECT_MESSAGE.get(index) + correctCountValues.get(index) + "개"));
+        int size = CORRECT_MESSAGE.size();
+
+        IntStream.range(0, size)
+                .forEach(index -> System.out.println(
+                        CORRECT_MESSAGE.get(index) + correctCountValues.get(size - 1 - index) + "개"));
 
         printProfitRate(profitRate);
     }

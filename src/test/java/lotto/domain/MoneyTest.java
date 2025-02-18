@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import static lotto.domain.Money.LOTTO_PRICE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,10 +12,12 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
+
     @DisplayName("로또의 가격 단위로 구매 가능하다.")
     @Test
     void availablePerLottoPrice() {
-        int maxMoney = Integer.MAX_VALUE / LOTTO_PRICE * LOTTO_PRICE;
+        int lottoPrice = 1000;
+        int maxMoney = Integer.MAX_VALUE / lottoPrice * lottoPrice;
 
         assertThatCode(() -> new Money(maxMoney))
                 .doesNotThrowAnyException();

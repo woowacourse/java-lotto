@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import lotto.common.ErrorMessage;
 
 public class Money {
-    static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_PRICE = 1000;
     private static final int SCALE_VALUE = 2;
     private final int amount;
 
