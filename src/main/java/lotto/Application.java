@@ -1,10 +1,9 @@
 package lotto;
 
-import static lotto.domain.Lotto.validateLottoNumber;
-
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
 import lotto.domain.SystemLottoGenerator;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
@@ -44,7 +43,7 @@ public class Application {
     private static WinningLotto getWinningLotto() {
         Lotto winningNumbers = getWinningNumbers();
         try {
-            int bonusNumber = getBonusNumber();
+            LottoNumber bonusNumber = getBonusNumber();
             return new WinningLotto(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -54,19 +53,16 @@ public class Application {
 
     private static Lotto getWinningNumbers() {
         try {
-            List<Integer> winningNumbers = InputView.inputWinningNumbers();
-            return new Lotto(winningNumbers);
+            return new Lotto(InputView.inputWinningNumbers());
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningNumbers();
         }
     }
 
-    private static int getBonusNumber() {
+    private static LottoNumber getBonusNumber() {
         try {
-            int bonusNumber = InputView.inputBonusNumber();
-            validateLottoNumber(bonusNumber);
-            return bonusNumber;
+            return new LottoNumber(InputView.inputBonusNumber());
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getBonusNumber();

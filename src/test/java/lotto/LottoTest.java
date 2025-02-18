@@ -1,13 +1,14 @@
 package lotto;
 
-import static lotto.domain.Lotto.MAX_LOTTO_NUMBER;
-import static lotto.domain.Lotto.MIN_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MAX_LOTTO_NUMBER;
+import static lotto.domain.LottoNumber.MIN_LOTTO_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +25,7 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         //when
-        boolean result = lotto.contains(number);
+        boolean result = lotto.contains(new LottoNumber(number));
 
         //then
         assertThat(result).isEqualTo(expected);

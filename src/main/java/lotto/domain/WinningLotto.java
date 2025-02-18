@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class WinningLotto {
     private final Lotto winningNumbers;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(final Lotto winningNumbers, final int bonusNumber) {
+    public WinningLotto(final Lotto winningNumbers, final LottoNumber bonusNumber) {
         validateBonusNumberDuplicated(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
@@ -28,20 +28,20 @@ public class WinningLotto {
         return new WinningStatistics(statistics);
     }
 
-    private Rank checkRank(final List<Integer> lottoNumbers, final List<Integer> winningNumbers,
-                           final int bonusNumber) {
+    private Rank checkRank(final List<LottoNumber> lottoNumbers, final List<LottoNumber> winningNumbers,
+                           final LottoNumber bonusNumber) {
         int matchCount = calculateMatchCount(lottoNumbers, winningNumbers);
         boolean hasBonusNumber = lottoNumbers.contains(bonusNumber);
         return Rank.checkRank(matchCount, hasBonusNumber);
     }
 
-    private int calculateMatchCount(final List<Integer> lottoNumbers, final List<Integer> winningNumbers) {
-        List<Integer> matchNumbers = new ArrayList<>(winningNumbers);
+    private int calculateMatchCount(final List<LottoNumber> lottoNumbers, final List<LottoNumber> winningNumbers) {
+        List<LottoNumber> matchNumbers = new ArrayList<>(winningNumbers);
         matchNumbers.retainAll(lottoNumbers);
         return matchNumbers.size();
     }
 
-    private void validateBonusNumberDuplicated(final Lotto winningNumbers, final int bonusNumber) {
+    private void validateBonusNumberDuplicated(final Lotto winningNumbers, final LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
         }

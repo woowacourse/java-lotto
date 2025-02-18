@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
@@ -24,7 +25,7 @@ class WinningLottoTest {
 
         //when
         //then
-        assertThatThrownBy(() -> new WinningLotto(winningNumbers, bonusNumber))
+        assertThatThrownBy(() -> new WinningLotto(winningNumbers, new LottoNumber(bonusNumber)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("당첨 번호와 보너스 번호는 중복될 수 없습니다.");
     }
@@ -39,7 +40,7 @@ class WinningLottoTest {
         lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 8))); // THIRD
         lottos.add(new Lotto(List.of(7, 8, 9, 10, 11, 12))); // NONE
 
-        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), 7);
+        WinningLotto winningLotto = new WinningLotto(new Lotto(List.of(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
 
         //when
         WinningStatistics result = winningLotto.calculateStatistics(lottos);
