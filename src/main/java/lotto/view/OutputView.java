@@ -63,7 +63,7 @@ public class OutputView {
     }
 
     public void printLottos(Lottos lottos) {
-        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottoCount()));
+        System.out.printf("%d개를 구매했습니다.%n", lottos.getLottoCount());
         for (Lotto lotto : lottos.getLottos()) {
             String lottoNumbers = lotto.getNumbers().toString();
             System.out.println(lottoNumbers);
