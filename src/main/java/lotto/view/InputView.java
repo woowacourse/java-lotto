@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import lotto.common.utill.InputParser;
 
-public class InputView implements AutoCloseable {
+public class InputView {
     private final Scanner scanner;
 
     public InputView() {
@@ -31,8 +31,4 @@ public class InputView implements AutoCloseable {
         return scanner.nextLine();
     }
 
-    @Override
-    public void close() throws Exception {
-        this.scanner.close();
-    }
 }
