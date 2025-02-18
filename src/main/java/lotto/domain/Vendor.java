@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.WinningTier;
-import lotto.utility.RandomGenerator;
+import lotto.utility.LottoNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ public class Vendor {
 
     private static final int MAX_RANDOM_VALUE = 45;
     private static final int LOTTO_PRICE = 1000;
-    private final RandomGenerator randomGenerator;
+    private final LottoNumberGenerator randomGenerator;
     private final int purchaseAmount;
 
-    public Vendor(RandomGenerator randomGenerator, int purchaseAmount) {
+    public Vendor(LottoNumberGenerator randomGenerator, int purchaseAmount) {
         this.validatePurchaseAmount(purchaseAmount);
         this.randomGenerator = randomGenerator;
         this.purchaseAmount = purchaseAmount;
