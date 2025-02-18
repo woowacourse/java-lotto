@@ -12,12 +12,10 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final RandomNumberGenerator randomNumberGenerator;
 
-    public LottoController(InputView inputView, OutputView outputView, RandomNumberGenerator randomNumberGenerator) {
+    public LottoController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.randomNumberGenerator = randomNumberGenerator;
     }
 
     public void run() {
@@ -35,7 +33,7 @@ public class LottoController {
             try {
                 outputView.printPurchaseAmountGuide();
                 int purchaseAmountInput = inputView.getPurchaseAmountInput();
-                return new UserLotto(randomNumberGenerator, purchaseAmountInput);
+                return new UserLotto(new RandomNumberGenerator(), purchaseAmountInput);
             } catch (IllegalArgumentException ex) {
                 outputView.printError(ex.getMessage());
             }

@@ -40,7 +40,7 @@ class UserLottoTest {
     @ParameterizedTest
     @ValueSource(ints = {1234, 0, -900})
     void purchaseLottoFailure(int purchaseAmount) {
-        assertThrows(IllegalArgumentException.class, () -> new UserLotto(new LottoNumberGenerator(), purchaseAmount));
+        assertThrows(IllegalArgumentException.class, () -> new UserLotto(new RandomNumberGenerator(), purchaseAmount));
     }
 
     @DisplayName("당첨 번호가 로또 번호와 6개 매치되면 1등이다")
@@ -105,7 +105,7 @@ class UserLottoTest {
         assertThat(ranks).containsEntry(Rank.FAIL, 1);
     }
 
-    private static class FixedNumberGenerator implements RandomNumberGenerator {
+    private static class FixedNumberGenerator implements NumberGenerator {
         @Override
         public Set<Integer> generateNumbers() {
             return Set.of(1, 2, 3, 4, 5, 6);

@@ -4,9 +4,7 @@ import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserLotto {
     private static final String PURCHASE_AMOUNT_1000_UNIT_EXCEPTION = "1000원 단위의 금액을 입력해주세요.\n";
@@ -15,14 +13,14 @@ public class UserLotto {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public UserLotto(RandomNumberGenerator randomNumberGenerator, int purchaseAmount) {
+    public UserLotto(NumberGenerator numberGenerator, int purchaseAmount) {
         if (!isPurchaseNumber1000Unit(purchaseAmount)) {
             throw new IllegalArgumentException(PURCHASE_AMOUNT_1000_UNIT_EXCEPTION);
         }
 
         int purchaseNumber = purchaseAmount / LOTTO_PRICE;
         for (int i = 0; i < purchaseNumber; i++) {
-            lottos.add(new Lotto(randomNumberGenerator.generateNumbers()));
+            lottos.add(new Lotto(numberGenerator.generateNumbers()));
         }
     }
 

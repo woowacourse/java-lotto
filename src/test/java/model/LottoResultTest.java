@@ -40,7 +40,7 @@ class LottoResultTest {
 
     }
 
-    private static class FixedNumberGenerator implements RandomNumberGenerator {
+    private static class FixedNumberGenerator implements NumberGenerator {
         @Override
         public Set<Integer> generateNumbers() {
             return Set.of(1, 2, 3, 4, 5, 6);
