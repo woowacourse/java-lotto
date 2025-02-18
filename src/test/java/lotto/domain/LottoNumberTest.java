@@ -15,9 +15,9 @@ class LottoNumberTest {
     @Test
     void 번호를_올바르게_생성한다() {
         //given
-        LottoNumber lottoNumber = new LottoNumber(5);
+        LottoNumber lottoNumber = LottoNumber.of(5);
         //when
-        boolean isEqual = lottoNumber.equals(new LottoNumber(5));
+        boolean isEqual = lottoNumber.equals(LottoNumber.of(5));
         //then
         assertThat(isEqual).isEqualTo(true);
     }
@@ -27,7 +27,7 @@ class LottoNumberTest {
     @CsvSource(value = {"0", "46", "47"})
     void 로또_번호는_1부터_45사이가_아니라면_예외를_발생한다(int number) {
         //then
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(LottoException.class)
                 .hasMessage("[ERROR] 범위를 벗어나는 숫자입니다.");
     }
@@ -36,13 +36,13 @@ class LottoNumberTest {
     @Test
     void 번호가_같다면_true를_반환한다() {
         //then
-        assertThat(new LottoNumber(5).equals(new LottoNumber(5))).isEqualTo(true);
+        assertThat(LottoNumber.of(5).equals(LottoNumber.of(5))).isEqualTo(true);
     }
 
     @DisplayName("번호가 다르다면 false를 반환한다.")
     @Test
     void 번호가_다르다면_false를_반환한다() {
         //then
-        assertThat(new LottoNumber(5).equals(new LottoNumber(6))).isEqualTo(false);
+        assertThat(LottoNumber.of(5).equals(LottoNumber.of(6))).isEqualTo(false);
     }
 }

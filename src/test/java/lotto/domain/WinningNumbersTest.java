@@ -3,7 +3,7 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import java.util.Set;
 import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,16 @@ class WinningNumbersTest {
     void 보너스_번호는_당첨_번호와_중복될_수_없다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
         //when & then
-        assertThatThrownBy(() -> new WinningNumbers(lotto, new LottoNumber(6)))
+        assertThatThrownBy(() -> new WinningNumbers(lotto, LottoNumber.of(6)))
                 .isInstanceOf(LottoException.class)
                 .hasMessage("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
     }
@@ -29,9 +34,14 @@ class WinningNumbersTest {
     void 로또와_비교하여_같은_숫자의_갯수를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        WinningNumbers winningNumbers = new WinningNumbers(lotto, new LottoNumber(8));
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
+        WinningNumbers winningNumbers = new WinningNumbers(lotto, LottoNumber.of(8));
 
         //when
         int matchCount = winningNumbers.checkMatchCount(lotto);
@@ -46,13 +56,21 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6)));
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
         Lotto lotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(7)));
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(7)));
 
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, new LottoNumber(7));
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, LottoNumber.of(7));
 
         //when
         boolean matchBonus = winningNumbers.checkMatchBonus(lotto);
@@ -67,13 +85,21 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6)));
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
         Lotto lotto = new Lotto(
-                List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(8)));
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
-        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, new LottoNumber(7));
+        WinningNumbers winningNumbers = new WinningNumbers(winningLotto, LottoNumber.of(7));
 
         //when
         boolean matchBonus = winningNumbers.checkMatchBonus(lotto);

@@ -15,13 +15,17 @@ public class WinningNumbers {
     }
 
     private void validateExistBonusNumber() {
-        if (winningNumbers.checkBonus(bonusNumber)) {
+        if (winningNumbers.hasNumber(bonusNumber)) {
             throw new LottoException(MUST_NOT_BE_DUPLICATED_BONUS);
         }
     }
 
     public int checkMatchCount(Lotto lotto) {
         return winningNumbers.checkMatchCount(lotto);
+    }
+
+    public Rank match(Lotto lotto) {
+        return Rank.checkPrize(checkMatchCount(lotto), checkMatchBonus(lotto));
     }
 
     public boolean checkMatchBonus(Lotto lotto) {

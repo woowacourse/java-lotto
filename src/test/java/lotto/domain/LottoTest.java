@@ -3,7 +3,9 @@ package lotto.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import lotto.exception.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +16,13 @@ class LottoTest {
     @Test
     void 로또_생성을_확인한다() {
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
         //when & then
         assertThat(lotto.getSize()).isEqualTo(6);
@@ -25,12 +32,19 @@ class LottoTest {
     @Test
     void 로또번호가_중복될시_에러를_발생한다() {
 
+        //given
+        Set<LottoNumber> numbers = new HashSet<>();
+        numbers.add(LottoNumber.of(1));
+        numbers.add(LottoNumber.of(2));
+        numbers.add(LottoNumber.of(3));
+        numbers.add(LottoNumber.of(5));
+        numbers.add(LottoNumber.of(6));
+        numbers.add(LottoNumber.of(6));
+
         //when & then
-        assertThatThrownBy(
-                () -> new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(5))))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 로또 번호는 중복될 수 없습니다.");
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
     }
 
     @DisplayName("로또의 사이즈가 다를시 에러를 발생한다")
@@ -39,8 +53,12 @@ class LottoTest {
 
         //when & then
         assertThatThrownBy(
-                () -> new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5))))
+                () -> new Lotto(
+                        Set.of(LottoNumber.of(1),
+                                LottoNumber.of(2),
+                                LottoNumber.of(3),
+                                LottoNumber.of(4),
+                                LottoNumber.of(5))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
     }
@@ -51,8 +69,13 @@ class LottoTest {
     void 로또와_당첨_번호와의_겹친_갯수를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
         //when
         int totalMatchCount = lotto.checkMatchCount(lotto);
@@ -66,11 +89,15 @@ class LottoTest {
     void 로또에_주어진_번호가_있다면_true를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
-
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
         //when
-        boolean hasNumber = lotto.hasNumber(new LottoNumber(5));
+        boolean hasNumber = lotto.hasNumber(LottoNumber.of(5));
 
         //then
         assertThat(hasNumber).isEqualTo(true);
@@ -81,11 +108,16 @@ class LottoTest {
     void 로또에_주어진_번호가_없다면_false를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
         //when
-        boolean hasNumber = lotto.hasNumber(new LottoNumber(10));
+        boolean hasNumber = lotto.hasNumber(LottoNumber.of(10));
 
         //then
         assertThat(hasNumber).isEqualTo(false);
@@ -96,24 +128,34 @@ class LottoTest {
     void 로또애_보너스_번호가_있다면_true를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        LottoNumber bonusNumber = new LottoNumber(5);
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
+        LottoNumber bonusNumber = LottoNumber.of(5);
 
         //when & then
-        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.hasNumber(bonusNumber)).isEqualTo(true);
     }
 
     @DisplayName("로또에 보너스 번호가 없다면 false를 반환한다.")
     @Test
-    void 로또애_보너스_번호가_없다면_true를_반환한다() {
+    void 로또애_보너스_번호가_없다면_false를_반환한다() {
 
         //given
-        Lotto lotto = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        Lotto lotto = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
         //when & then
-        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.hasNumber(bonusNumber)).isEqualTo(false);
     }
 }

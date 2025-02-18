@@ -2,8 +2,9 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,18 +15,28 @@ class LottoBundleTest {
     void 매칭되는_수의_갯수에_따라_당첨_통계를_확인한다() {
 
         //given
-        Lotto lotto1 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto1 = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
-        Lotto lotto2 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        Lotto lotto2 = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(7)));
 
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto1, lotto2));
 
-        WinningNumbers winningNumbers = new WinningNumbers(lotto1, new LottoNumber(8));
+        WinningNumbers winningNumbers = new WinningNumbers(lotto1, LottoNumber.of(8));
 
         //when
-        EnumMap<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
+        Map<Rank, Integer> lottoResult = lottoBundle.makeStatistics(winningNumbers);
 
         //then
         assertThat(lottoResult.get(Rank.FIRST_PRIDE)).isEqualTo(1);
@@ -38,11 +49,21 @@ class LottoBundleTest {
     void 로또의_갯수를_반환한다() {
 
         //given
-        Lotto lotto1 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6)));
+        Lotto lotto1 = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
-        Lotto lotto2 = new Lotto(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(7)));
+        Lotto lotto2 = new Lotto(
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
+                        LottoNumber.of(6)));
 
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto1, lotto2));
 

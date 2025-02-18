@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.service.LottoService;
+import lotto.controller.LottoController;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -9,10 +9,9 @@ public class Main {
 
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LottoService lottoService = new LottoService();
 
-        LottoMachine lottoMachine = new LottoMachine(inputView, outputView, lottoService);
+        LottoController lottoController = new LottoController(inputView, outputView);
 
-        lottoMachine.run();
+        lottoController.run();
     }
 }
