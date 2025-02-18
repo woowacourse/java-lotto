@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -17,7 +17,7 @@ public enum WinningStatus {
     private final boolean matchesBonusNumber;
     private final String expression;
 
-    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber, String expression){
+    WinningStatus(int price, int matchingCount, boolean matchesBonusNumber, String expression) {
         this.price = price;
         this.matchingCount = matchingCount;
         this.matchesBonusNumber = matchesBonusNumber;
@@ -31,16 +31,11 @@ public enum WinningStatus {
     }
 
     public static WinningStatus findBy(int matchingCount, boolean matchesBonusNumber) {
-        if(matchingCount == THIRD.matchingCount) {
-            if(matchesBonusNumber) return SECOND;
-            return THIRD;
-        }
-        for(WinningStatus winningStatus : WinningStatus.values()) {
-            if(winningStatus.matchingCount == matchingCount) {
-                return winningStatus;
-            }
-        }
-        return NONE;
+        return Arrays.stream(WinningStatus.values())
+                .filter(status -> status.matchingCount == matchingCount)
+                .filter(status -> status.matchesBonusNumber == matchesBonusNumber || status == THIRD)
+                .findFirst()
+                .orElse(NONE);
     }
 
     public String getExpression() {
