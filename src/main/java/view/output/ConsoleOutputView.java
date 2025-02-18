@@ -12,7 +12,7 @@ public class ConsoleOutputView implements OutputView {
     private static final String LOTTO_WINNING_RESULT_MATCH_MESSAGE = "%d개 일치%s(%d원)- %d개\n";
     private static final String LOTTO_WINNING_RESULT_BONUS_BALL_MESSAGE = ", 보너스 볼 일치";
     private static final String LOTTO_REVENUE_MESSAGE = "총 수익률은 %.2f입니다.(기준이 1이기 때문에 결과적으로 %s라는 의미임)\n";
-    private static final String LOTTO_REVENUE_DAMAGE_MESSAGE = "손해";
+    private static final String LOTTO_REVENUE_LOSS_MESSAGE = "손해";
     private static final String LOTTO_REVENUE_PROFIT_MESSAGE = "이익";
 
     @Override
@@ -29,13 +29,13 @@ public class ConsoleOutputView implements OutputView {
     public void printLottoStatistics(
         final double revenueRate,
         final Map<LottoRank, Integer> lottoRanks,
-        final boolean isDamage
+        final boolean isLoss
     ) {
         System.out.println(LOTTO_WINNING_RESULT_TITLE_MESSAGE);
         Arrays.stream(LottoRank.values())
             .filter(rank -> rank != LottoRank.FAIL)
             .forEach(rank -> printLottoResult(rank, lottoRanks));
-        printLottoRevenue(revenueRate, isDamage);
+        printLottoRevenue(revenueRate, isLoss);
     }
 
     private void printLottoResult(
@@ -52,11 +52,11 @@ public class ConsoleOutputView implements OutputView {
 
     private void printLottoRevenue(
         final double revenueRate,
-        final boolean isDamage
+        final boolean isLoss
     ) {
         String revenueDescription = LOTTO_REVENUE_PROFIT_MESSAGE;
-        if (isDamage) {
-            revenueDescription = LOTTO_REVENUE_DAMAGE_MESSAGE;
+        if (isLoss) {
+            revenueDescription = LOTTO_REVENUE_LOSS_MESSAGE;
         }
         System.out.printf(LOTTO_REVENUE_MESSAGE, revenueRate, revenueDescription);
     }

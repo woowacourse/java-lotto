@@ -43,7 +43,7 @@ public class WinningResult {
         return calculateTotalLottoCount() * Lotto.LOTTO_PRICE;
     }
 
-    public boolean isDamage() {
+    public boolean isLoss() {
         return calculateRateOfRevenue() < 1;
     }
 
