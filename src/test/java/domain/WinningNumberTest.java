@@ -2,6 +2,7 @@ package domain;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.List;
@@ -32,5 +33,17 @@ class WinningNumberTest {
                 () -> assertThat(lottoRank4).isEqualTo(LottoRank.RANK_4),
                 () -> assertThat(lottoRank5).isEqualTo(LottoRank.RANK_5)
         );
+    }
+
+    @Test
+    @DisplayName("당첨번호와 보너스번호가 중복되어 예외가 발생한다")
+    void validateDuplicateTest() {
+        //given
+        final Lotto winninglotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        final BonusNumber bonusNumber = new BonusNumber(6);
+        //should
+        assertThatIllegalArgumentException().isThrownBy(() -> new WinningNumber(winninglotto, bonusNumber))
+                .withMessageContaining("[ERROR]");
+
     }
 }
