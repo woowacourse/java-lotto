@@ -30,10 +30,10 @@ public class Controller {
         Money money = inputController.getMoney(LOTTO_PRIZE);
         LottoShop lottoShop = new LottoShop(
                 new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
-        int purchasedLottoCount = lottoShop.calculateLottoCount(money);
-        outputView.printLottoCount(purchasedLottoCount);
 
         List<Lotto> lottos = lottoShop.buyLottos(money);
+        outputView.printLottoCount(lottos.size());
+
         Wallet wallet = new Wallet(lottos);
         outputView.printWallet(WalletDto.from(wallet));
 

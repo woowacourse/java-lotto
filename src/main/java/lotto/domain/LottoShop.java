@@ -24,7 +24,7 @@ public class LottoShop {
         return lottos;
     }
 
-    public int calculateLottoCount(Money money) {
+    private int calculateLottoCount(Money money) {
         return money.amount() / LOTTO_PRIZE;
     }
 }
