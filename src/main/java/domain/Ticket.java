@@ -32,5 +32,4 @@ public class Ticket {
         }
         throw new IllegalArgumentException(INVALID_TICKET_PRICE.getMessage());
     }
-
 }

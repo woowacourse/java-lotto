@@ -22,20 +22,10 @@ public enum Rank {
     }
 
     public static Rank findRank(int matchCount, boolean isMatchBonusNumber) {
-        if (matchCount == 3) {
-            return FIFTH;
-        }
-        if (matchCount == 4) {
-            return FOURTH;
-        }
-        if (matchCount == 5) {
-            if (isMatchBonusNumber) {
-                return SECOND;
+        for (Rank rank : Rank.values()) {
+            if (rank.matchCount == matchCount && rank.matchBonus == isMatchBonusNumber) {
+                return rank;
             }
-            return THIRD;
-        }
-        if (matchCount == 6) {
-            return FIRST;
         }
         return NONE;
     }
