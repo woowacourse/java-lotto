@@ -21,14 +21,13 @@ public class Lotto {
   }
 
   public int compare(WinningNumber winningNumber) {
-    return (int) lottoNumbers.stream().filter(lottoNumber ->
-        winningNumber.isContain(lottoNumber)
+    return (int) lottoNumbers.stream().filter(winningNumber::isContain
     ).count();
   }
 
   public boolean compareBonusNumber(BonusNumber bonusNumber) {
     return lottoNumbers.stream()
-        .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
+        .anyMatch(bonusNumber::isContain);
   }
 
   public List<Integer> getLottoNumbers() {

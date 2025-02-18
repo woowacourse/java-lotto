@@ -26,7 +26,7 @@ public class WinningNumber {
 
   public boolean isContain(LottoNumber lottoNumber) {
     return lottoNumbers.stream()
-        .anyMatch(num -> lottoNumber.equals(num));
+        .anyMatch(lottoNumber::equals);
   }
 
   private void validateWinningNumber(String inputWinningNumber) {
@@ -38,7 +38,7 @@ public class WinningNumber {
       validateIsNumber(winningNumbers[i]);
     }
     List<Integer> parsedWinningNumbers = Arrays.stream(winningNumbers)
-        .map(((winningNumber) -> Integer.parseInt(winningNumber)))
+        .map((Integer::parseInt))
         .toList();
     validateDuplication(parsedWinningNumbers);
   }
