@@ -1,11 +1,10 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.list;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,14 +14,6 @@ import util.random.TestRandomUtil;
 class LottoFactoryTest {
 
     private LottoFactory lottoFactory;
-
-    private List<Integer> extractNumbersOfLotto(String lotto) {
-        return Arrays.stream(lotto
-                        .replaceAll("[\\[\\]]", "")
-                        .split(", "))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
 
     @BeforeEach
     void beforeEach() {
@@ -42,28 +33,28 @@ class LottoFactoryTest {
     @Test
     @DisplayName("발행된 티켓 내 숫자들은 모두 1 부터 45 사이여야 한다.")
     void validTicketRange() {
-        for (String issuedTicket : lottoFactory.issuedLottoTicketsToString()) {
-            List<Integer> numbers = extractNumbersOfLotto(issuedTicket);
-            numbers.forEach(number -> assertThat(number).isBetween(1, 45));
-        }
+        assertThat(lottoFactory)
+                .extracting("issuedLottoTickets", list(Lotto.class))
+                .flatExtracting("numbers")
+                .allSatisfy(number -> assertThat((Integer) number).isBetween(1, 45));
     }
 
     @Test
     @DisplayName("발행된 티켓 내 숫자 갯수는 6개여야 한다.")
     void validTicketSize() {
-        for (String issuedTicket : lottoFactory.issuedLottoTicketsToString()) {
-            List<Integer> numbers = extractNumbersOfLotto(issuedTicket);
-            assertThat(numbers.size()).isEqualTo(6);
-        }
+        assertThat(lottoFactory)
+                .extracting("issuedLottoTickets", list(Lotto.class))
+                .extracting("numbers")
+                .allSatisfy(numbers -> assertThat((List<Integer>) numbers).hasSize(6));
     }
 
     @Test
-    @DisplayName("발행된 티켓 내 숫자 갯수는 6개여야 한다.")
+    @DisplayName("발행된 티켓 내 숫자를 검증한다.")
     void validTicketNumbers() {
-        for (String issuedTicket : lottoFactory.issuedLottoTicketsToString()) {
-            List<Integer> numbers = extractNumbersOfLotto(issuedTicket);
-            assertThat(numbers).containsExactlyElementsOf(List.of(1, 5, 10, 15, 20, 25));
-        }
+        assertThat(lottoFactory)
+                .extracting("issuedLottoTickets", list(Lotto.class))
+                .extracting("numbers")
+                .allSatisfy(numbers -> assertThat(numbers).isEqualTo(List.of(1, 5, 10, 15, 20, 25)));
     }
 
     @Test
