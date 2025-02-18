@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 
 public class LottoResult {
+    public static final int LOTTO_PRICE = 1000;
     private final EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
 
     public LottoResult(UserLotto userLotto, WinningLotto winningLotto) {
@@ -23,15 +24,13 @@ public class LottoResult {
     }
 
     private int calculatePurchaseAmount() {
-        int purchaseCount = 0;
-        for (Rank rank : ranks.keySet()) {
-            if (rank.equals(Rank.FAIL)) {
-                continue;
-            }
-            purchaseCount += ranks.get(rank);
-        }
+        int purchaseCount = ranks.entrySet()
+                .stream()
+                .filter(entry -> !entry.getKey().equals(Rank.FAIL))
+                .mapToInt(Entry::getValue)
+                .sum();
 
-        return purchaseCount * 1000;
+        return purchaseCount * LOTTO_PRICE;
     }
 
     private long calculateProfit() {

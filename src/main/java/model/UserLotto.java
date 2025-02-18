@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserLotto {
     private static final String PURCHASE_AMOUNT_1000_UNIT_EXCEPTION = "1000원 단위의 금액을 입력해주세요.\n";
@@ -36,7 +37,7 @@ public class UserLotto {
         return lottosDto;
     }
 
-    public void calculateLottoResult(EnumMap<Rank, Integer> ranks, WinningLotto winningLotto) {
+    public void calculateLottoResult(Map<Rank, Integer> ranks, WinningLotto winningLotto) {
         for (Lotto lotto : lottos) {
             Rank rank = calculateRank(lotto, winningLotto);
             ranks.put(rank, ranks.get(rank) + 1);
