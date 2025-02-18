@@ -1,17 +1,19 @@
 package service;
 
+import constant.LottoConstants;
 import domain.Lotto;
 import java.util.Collections;
 import java.util.List;
+import validator.Validator;
 
 public class LottoMaker {
 
     private static LottoMaker instance;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final NumberGenerate numberGenerate;
 
-    private LottoMaker(LottoNumberGenerator lottoNumberGenerator) {
-        this.lottoNumberGenerator = lottoNumberGenerator;
+    private LottoMaker(NumberGenerate numberGenerate) {
+        this.numberGenerate = numberGenerate;
     }
 
     public static LottoMaker getInstance() {
@@ -22,8 +24,11 @@ public class LottoMaker {
     }
 
     public Lotto createLotto() {
-        List<Integer> generate = lottoNumberGenerator.generateLottoNumbers();
-        Collections.sort(generate);
-        return new Lotto(generate);
+        List<Integer> numbers = numberGenerate.generateRandomInRange(
+                LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END, LottoConstants.LOTTO_COUNT
+        );
+        Validator.isDuplicates(numbers);
+        Collections.sort(numbers);
+        return new Lotto(numbers);
     }
 }

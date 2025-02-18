@@ -9,26 +9,26 @@ public class Validator {
     private static final String NUMBER_ONLY_REGEX = "^[0-9]+$";
 
     public static void validateEmptyInput(String input) {
-        checkNullInput(input, "입력이 null 입니다.");
-        checkEmptyInput(input, "입력이 빈 문자열입니다.");
-        checkWhitespaceOnlyInput(input, "입력이 공백으로만 구성되어 있습니다.");
+        checkNullInput(input);
+        checkEmptyInput(input);
+        checkWhitespaceOnlyInput(input);
     }
 
-    private static void checkNullInput(String input, String errorMessage) {
+    private static void checkNullInput(String input) {
         if (input == null) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException("입력이 null 입니다.");
         }
     }
 
-    private static void checkEmptyInput(String input, String errorMessage) {
+    private static void checkEmptyInput(String input) {
         if (input.isEmpty()) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException("입력이 빈 문자열입니다.");
         }
     }
 
-    private static void checkWhitespaceOnlyInput(String input, String errorMessage) {
+    private static void checkWhitespaceOnlyInput(String input) {
         if (input.trim().isEmpty()) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new IllegalArgumentException("입력이 공백으로만 구성되어 있습니다.");
         }
     }
 

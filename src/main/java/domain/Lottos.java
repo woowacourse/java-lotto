@@ -6,7 +6,7 @@ public class Lottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos (List<Lotto> lottos){
+    public Lottos(List<Lotto> lottos){
         this.lottos = lottos;
     }
 
@@ -28,9 +28,7 @@ public class Lottos {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int idx = 0; idx < lottos.size(); idx++) {
-            sb.append(lottos.get(idx).getNumbers()).append("\n");
-        }
+        lottos.forEach(lotto -> sb.append(lotto.getNumbers()).append("\n"));
         return sb.toString();
     }
 }

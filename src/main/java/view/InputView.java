@@ -16,21 +16,21 @@ public class InputView {
         if (instance == null) {
             instance = new InputView();
         }
-
         return instance;
+    }
+
+    public String askLottoMoney() {
+        System.out.println(ASK_LOTTO_MONEY);
+        return getUserResponse();
     }
 
     public String askWinningNumber() {
         System.out.println(ASK_WINNING_NUMBER);
         return getUserResponse();
     }
+
     public String askBonusNumber() {
         System.out.println(ASK_BONUS_NUMBER);
-        return getUserResponse();
-    }
-
-    public String askForNormal() {
-        System.out.println(ASK_LOTTO_MONEY);
         return getUserResponse();
     }
 

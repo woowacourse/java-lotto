@@ -42,6 +42,6 @@ public class OutputView {
 
     public void displayLottoNumbers(Lottos lottos) {
         System.out.printf(SHOW_BUY_COUNT, lottos.size());
-        System.out.printf("%s%n", lottos.toString());
+        System.out.printf("%s%n", lottos);
     }
 }
