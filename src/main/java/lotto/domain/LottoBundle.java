@@ -19,8 +19,7 @@ public class LottoBundle {
                 .collect(Collectors.toMap(rank -> rank, rank -> 0));
 
         for (Lotto lotto : lottoBundle) {
-            Rank currentRank = Rank.checkPrize(winningNumbers.checkMatchCount(lotto),
-                    winningNumbers.checkMatchBonus(lotto));
+            Rank currentRank = winningNumbers.match(lotto);
             rankIntegerEnumMap.put(currentRank, rankIntegerEnumMap.get(currentRank) + 1);
         }
 

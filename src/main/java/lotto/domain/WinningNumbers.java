@@ -24,6 +24,10 @@ public class WinningNumbers {
         return winningNumbers.checkMatchCount(lotto);
     }
 
+    public Rank match(Lotto lotto) {
+        return Rank.checkPrize(checkMatchCount(lotto), checkMatchBonus(lotto));
+    }
+
     public boolean checkMatchBonus(Lotto lotto) {
         return lotto.hasNumber(bonusNumber);
     }
