@@ -23,8 +23,8 @@ public class LottoController {
     LottoDispenser lottoDispenser;
     do {
       lottoDispenser = buyLottoInput();
-      return lottoDispenser;
     } while (lottoDispenser == null);
+    return lottoDispenser;
   }
 
   private LottoDispenser buyLottoInput() {
@@ -45,8 +45,8 @@ public class LottoController {
     WinningNumber winningNumber;
     do {
       winningNumber = inputWinningNumber();
-      return winningNumber;
-    } while (winningNumber != null);
+    } while (winningNumber == null);
+    return winningNumber;
   }
 
   private WinningNumber inputWinningNumber() {
