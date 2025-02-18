@@ -54,9 +54,7 @@ public class Lotto {
                 .filter(matchLotto::contains)
                 .count();
 
-        MatchRank matchRank = MatchRank.getMatchRank(matchCount, contains(bonus));
-
-        return matchRank;
+        return MatchRank.getMatchRank(matchCount, contains(bonus));
     }
 
     public boolean contains(LottoNumber lottoNumber) {
