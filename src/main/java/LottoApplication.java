@@ -12,9 +12,7 @@ public class LottoApplication {
 
         try {
             lottoController.run();
-        } catch (IOException e) {
-            System.out.println("[IO Error] : " + e.getMessage());
-        } catch (IllegalArgumentException e) {
+        } catch (IOException | IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }

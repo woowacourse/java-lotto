@@ -4,21 +4,21 @@ import java.util.List;
 
 public class WinningLotto {
     private final Lotto winningLotto;
-    private final int bonusNumber;
+    private final LottoNumber bonusNumber;
 
-    private WinningLotto(final Lotto lotto, final int bonusNumber) {
+    private WinningLotto(final Lotto lotto, final LottoNumber bonusNumber) {
         validate(lotto, bonusNumber);
         this.winningLotto = lotto;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(final Lotto lotto, final int bonusNumber) {
+    private void validate(final Lotto lotto, final LottoNumber bonusNumber) {
         if (lotto.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }
     }
 
-    public static WinningLotto of(final Lotto lotto, final int bonusNumber) {
+    public static WinningLotto of(final Lotto lotto, final LottoNumber bonusNumber) {
         return new WinningLotto(lotto, bonusNumber);
     }
 

@@ -1,10 +1,14 @@
 package controller;
 
+import static domain.properties.LottoProperties.LOTTO_PRICE;
+
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Prize;
+import domain.PurchaseAmount;
 import domain.WinningLotto;
-import domain.properties.LottoProperties;
+import domain.lottogenerator.RandomLottoGenerator;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -22,45 +26,50 @@ public class LottoController {
     }
 
     public void run() throws IOException {
-        final int purchaseAmount = readPurchaseAmount();
+        PurchaseAmount purchaseAmount = readPurchaseAmount();
         Lottos lottos = createLottos(purchaseAmount);
 
-        final List<Integer> winningNumbers = readWinningNumbers();
-        final int bonusNumber = readBonusNumber();
+        List<LottoNumber> winningLottoNumbers = readWinningNumbers();
+        LottoNumber bonusLottoNumber = readBonusNumber();
 
-        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningLottoNumbers), bonusLottoNumber);
         List<Prize> prizes = winningLotto.calculatePrizes(lottos);
 
         outputView.printLottoResult(prizes,
-                Prize.calculateEarningRate(prizes, lottos.getQuantity() * LottoProperties.PRICE)
+                Prize.calculateEarningRate(prizes, lottos.getQuantity() * LOTTO_PRICE)
         );
     }
 
-    private int readPurchaseAmount() throws IOException {
+    private PurchaseAmount readPurchaseAmount() throws IOException {
         String rawPurchaseAmount = inputView.readPurchaseAmount();
         InputValidator.validateInteger(rawPurchaseAmount);
         final int purchaseAmount = Integer.parseInt(rawPurchaseAmount);
-        return purchaseAmount;
+        return PurchaseAmount.of(purchaseAmount);
     }
 
-    private Lottos createLottos(final int purchaseAmount) {
-        Lottos lottos = Lottos.ofSize(purchaseAmount / LottoProperties.PRICE);
+    private Lottos createLottos(PurchaseAmount purchaseAmount) {
+        Lottos lottos = Lottos.ofSize(
+                purchaseAmount.calculateAvailableQuantity(LOTTO_PRICE), new RandomLottoGenerator()
+        );
         outputView.printPurchasedLottos(lottos);
         return lottos;
     }
 
-    private List<Integer> readWinningNumbers() throws IOException {
+    private List<LottoNumber> readWinningNumbers() throws IOException {
         String rawWinningNumber = inputView.readWinningNumber();
         final List<String> rawWinningNumbers = Arrays.stream(rawWinningNumber.split(",")).map(String::trim).toList();
         InputValidator.validateElements(rawWinningNumbers);
         final List<Integer> winningNumbers = rawWinningNumbers.stream().map(Integer::parseInt).toList();
-        return winningNumbers;
+
+        return winningNumbers.stream()
+                .map(LottoNumber::of)
+                .toList();
     }
 
-    private int readBonusNumber() throws IOException {
+    private LottoNumber readBonusNumber() throws IOException {
         final String rawBonusNumber = inputView.readBonusNumber();
         InputValidator.validateInteger(rawBonusNumber);
         final int bonusNumber = Integer.parseInt(rawBonusNumber);
-        return bonusNumber;
+        return LottoNumber.of(bonusNumber);
     }
 }
