@@ -58,6 +58,18 @@ class WinningLottoTest {
         assertThat(lottosResult.getOrDefault(WinningCount.SIX, 0)).isEqualTo(1);
     }
 
+    @DisplayName("로또 이윤 계산 검증")
+    @Test
+    void calculateEarningRateTest() {
+        // given
+        Lottos lottos = new Lottos(4000, new RandomNumberGenerate());
+        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 44, 45), 7);
+        // when
+        Double earningRate = winningLotto.calculateEarningRate(lottos);
+        //
+        assertThat(earningRate).isEqualTo(38.75);
+    }
+
     static class RandomNumberGenerate implements RandomGenerator {
         private static List<Integer> numberList = List.of(1, 2, 3, 4, 5, 6, 1, 2, 3, 8, 9, 10, 1, 2, 3, 4, 5, 10,
                 1, 2, 3, 4, 5, 7);
