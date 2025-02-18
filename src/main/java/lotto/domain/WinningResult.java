@@ -12,8 +12,8 @@ public class WinningResult {
         this.winningResult = winningResult;
     }
 
-    public double calculateProfitRate(final LottoPrice lottoPrice) {
-        return lottoPrice.divideFrom(calculateTotalProfit());
+    public double calculateProfitRate(final int lottoPrice) {
+        return (double) calculateTotalProfit() / lottoPrice;
     }
 
     private int calculateTotalProfit() {

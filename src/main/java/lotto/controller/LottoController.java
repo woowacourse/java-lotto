@@ -5,7 +5,6 @@ import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
-import lotto.domain.LottoPrice;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResultCalculator;
 import lotto.util.StringParser;
@@ -28,20 +27,15 @@ public class LottoController {
     }
 
     public void run() {
-        final LottoPrice lottoPrice = makeLottoPrice();
+        final int lottoPrice = StringParser.parseInt(inputView.readPurchasePrice());
         final int lottoCount = calculateLottoCount(lottoPrice);
         final List<Lotto> lottos = lottoGenerator.generate(lottoCount);
         printPurchasedLottos(lottos);
         printWinningResult(lottos, lottoPrice);
     }
 
-    private LottoPrice makeLottoPrice() {
-        final int parsedAmount = StringParser.parseInt(inputView.readPurchasePrice());
-        return new LottoPrice(parsedAmount);
-    }
-
-    private int calculateLottoCount(final LottoPrice lottoPrice) {
-        final int lottoCount = lottoPrice.calculateLottoCount();
+    private int calculateLottoCount(final int lottoPrice) {
+        final int lottoCount = lottoGenerator.calculateLottoCount(lottoPrice);
         outputView.printLottoCount(lottoCount);
         return lottoCount;
     }
@@ -52,7 +46,7 @@ public class LottoController {
                 .forEach(System.out::println);
     }
 
-    private void printWinningResult(final List<Lotto> lottos, final LottoPrice lottoPrice) {
+    private void printWinningResult(final List<Lotto> lottos, final int lottoPrice) {
         final WinningResultCalculator winningResultCalculator = makeWinningResultCalculator();
         final WinningResult winningResult = winningResultCalculator.makeWinningResult(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());

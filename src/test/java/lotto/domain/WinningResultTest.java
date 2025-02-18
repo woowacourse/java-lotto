@@ -22,7 +22,7 @@ public class WinningResultTest {
     @Test
     void 수익률을_계산한다() {
         // Given
-        final LottoPrice purchasedPrice = new LottoPrice(14_000);
+        final int purchasedPrice = 14_000;
         final Map<LottoAward, Integer> expectedResult = Map.of(LottoAward.FIRST_RANK, 0, LottoAward.SECOND_RANK, 0,
                 LottoAward.THIRD_RANK, 0, LottoAward.FOURTH_RANK, 0, LottoAward.FIFTH_RANK, 1);
         final WinningResult winningResult = new WinningResult(expectedResult);

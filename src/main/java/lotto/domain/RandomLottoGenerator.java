@@ -12,9 +12,11 @@ import java.util.stream.IntStream;
 public class RandomLottoGenerator implements LottoGenerator {
 
     private static final int START_INDEX = 0;
+    private static final int UNIT_PRICE_OF_LOTTO = 1000;
 
-    public List<Lotto> generate(final int count) {
-        validate(count);
+    public List<Lotto> generate(final int price) {
+        validate(price);
+        final int count = calculateLottoCount(price);
         return IntStream.range(0, count)
                 .mapToObj(number -> makeRandomNumbers())
                 .map(HashSet::new)
@@ -22,9 +24,13 @@ public class RandomLottoGenerator implements LottoGenerator {
                 .toList();
     }
 
-    private void validate(final int count) {
-        if (count <= 0) {
-            throw new IllegalArgumentException("생성할 로또의 개수는 양수여야합니다.");
+    public int calculateLottoCount(final int price) {
+        return price / UNIT_PRICE_OF_LOTTO;
+    }
+
+    private void validate(final int price) {
+        if (price < UNIT_PRICE_OF_LOTTO) {
+            throw new IllegalArgumentException("로또 구입 금액은 1000원 이상이어야 합니다.");
         }
     }
 
