@@ -34,8 +34,8 @@ public class LottoGenerator {
         List<Integer> lottoNumbers = Parser.parseToIntegers(Splitter.splitByComma(winningNumber));
 
         List<LottoNumber> lotto = lottoNumbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .toList();
-        return new WinningNumbers(new Lotto(new HashSet<>(lotto)), new LottoNumber(Parser.parseToInteger(bonusNumber)));
+        return new WinningNumbers(new Lotto(new HashSet<>(lotto)), LottoNumber.of(Parser.parseToInteger(bonusNumber)));
     }
 }

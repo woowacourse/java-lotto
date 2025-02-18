@@ -2,8 +2,7 @@ package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +27,9 @@ class LottoGeneratorTest {
         //given
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lotto lotto = new Lotto(
-                new HashSet<>(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                        new LottoNumber(5), new LottoNumber(6))));
-        WinningNumbers winningNumbers = new WinningNumbers(lotto, new LottoNumber(8));
+                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                        LottoNumber.of(6)));
+        WinningNumbers winningNumbers = new WinningNumbers(lotto, LottoNumber.of(8));
         WinningNumbers madeWinningNumbers = lottoGenerator.makeWinningNumbers("1,2,3,4,5,6", "8");
 
         //when
