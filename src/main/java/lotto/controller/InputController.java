@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.common.utill.InputParser;
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
 import lotto.domain.Money;
@@ -18,10 +17,9 @@ public class InputController {
     public Money getMoney(int lottoPrice) {
         while (true) {
             try {
-                String moneyInput = inputView.read("구입금액을 입력해주세요.");
+                int amount = inputView.readMoneyAmount();
 
-                int moneyAmount = InputParser.parseToInt(moneyInput);
-                return new Money(moneyAmount, lottoPrice);
+                return new Money(amount, lottoPrice);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -44,9 +42,7 @@ public class InputController {
     private Lotto getWinningLotto() {
         while (true) {
             try {
-                String input = inputView.read("지난 주 당첨 번호를 입력해 주세요.");
-
-                List<Integer> numbers = InputParser.parseToList(input);
+                List<Integer> numbers = inputView.readWinningNumbers();
 
                 return new Lotto(LottoNumber.from(numbers));
             } catch (IllegalArgumentException e) {
@@ -58,21 +54,7 @@ public class InputController {
     private int getBonus() {
         while (true) {
             try {
-                int bonus = getInt("보너스 번호를 입력해주세요.");
-
-                return bonus;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private int getInt(String prompt) {
-        while (true) {
-            try {
-                String input = inputView.read(prompt);
-
-                return InputParser.parseToInt(input);
+                return inputView.readBonusNumber();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
