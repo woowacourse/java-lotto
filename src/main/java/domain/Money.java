@@ -5,7 +5,9 @@ import exception.ExceptionMessage;
 
 public class Money {
 
+    private static final int MAX_MONEY = 2_000_000_000;
     private static final int UNIT = 1_000;
+
     private final int amount;
 
     public Money(final int amount) {
@@ -25,7 +27,7 @@ public class Money {
     }
 
     private void validateRange(final int amount) {
-        if (amount < UNIT) {
+        if (amount < UNIT || amount > MAX_MONEY) {
             throw new AppException(ExceptionMessage.INVALID_MONEY_RANGE);
         }
     }
