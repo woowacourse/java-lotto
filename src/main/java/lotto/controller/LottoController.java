@@ -1,10 +1,9 @@
 package lotto.controller;
 
-import java.util.Arrays;
-import java.util.List;
 import lotto.domain.LottoGeneratorStrategy;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoNumbers;
 import lotto.domain.Money;
 import lotto.domain.Profit;
 import lotto.domain.WinnerLotto;
@@ -50,19 +49,12 @@ public class LottoController {
 
     private WinnerLotto readWinnerNumber(String input) {
         WinnerLotto.validateInputWinnerNumbers(input);
-        List<LottoNumber> winnerNumbers = parseLottoNumbers(input);
-        WinnerLotto.validateWinnerNumbers(winnerNumbers);
+        LottoNumbers winnerNumbers = LottoNumbers.from(input);
 
         return readBonusNumber(winnerNumbers);
     }
 
-    private List<LottoNumber> parseLottoNumbers(String input) {
-        return Arrays.stream(input.split(", "))
-                .map(LottoNumber::new)
-                .toList();
-    }
-
-    private WinnerLotto readBonusNumber(List<LottoNumber> winnerNumbers) {
+    private WinnerLotto readBonusNumber(LottoNumbers winnerNumbers) {
         LottoNumber bonusNumber = RecoveryUtils.executeWithRetry(InputView::readBonusNumber, LottoNumber::new);
 
         try {

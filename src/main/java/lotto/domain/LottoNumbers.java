@@ -2,6 +2,7 @@ package lotto.domain;
 
 import static lotto.common.Constants.LOTTO_NUM_SIZE;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
@@ -35,6 +36,12 @@ public class LottoNumbers {
         return lottoNumbers.stream()
                 .sorted()
                 .toList();
+    }
+
+    public static LottoNumbers from(String input) {
+        return new LottoNumbers(Arrays.stream(input.split(","))
+                .map(LottoNumber::new)
+                .toList());
     }
 
     public boolean contains(final LottoNumber lottoNumber) {

@@ -1,15 +1,10 @@
 package lotto.domain;
 
-import static lotto.common.Constants.LOTTO_NUM_SIZE;
-
-import java.util.HashSet;
-import java.util.List;
-
 public class WinnerLotto {
-    private final List<LottoNumber> winnerNumbers;
+    private final LottoNumbers winnerNumbers;
     private final LottoNumber bonusNumber;
 
-    public WinnerLotto(final List<LottoNumber> winnerNumbers, final LottoNumber bonusNumber) {
+    public WinnerLotto(final LottoNumbers winnerNumbers, final LottoNumber bonusNumber) {
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
@@ -19,7 +14,8 @@ public class WinnerLotto {
      * Lotto lotto - 강력한 타입 제한, Lotto의 객체를 통해 로또의 List<LottoNumbers>의 제약을 걸 수 있음.
      */
     public long getMatchCount(Lotto lotto) {
-        return winnerNumbers.stream()
+        return winnerNumbers.getLottoNumbers()
+                .stream()
                 .filter(lotto::contains)
                 .count();
     }
@@ -34,13 +30,7 @@ public class WinnerLotto {
         }
     }
 
-    public static void validateWinnerNumbers(List<LottoNumber> lottoNumbers) {
-        if (new HashSet<>(lottoNumbers).size() != LOTTO_NUM_SIZE) {
-            throw new IllegalArgumentException("중복은 불가능합니다.");
-        }
-    }
-
-    public static void validateBonusNumbers(List<LottoNumber> winnerNumbers, LottoNumber bonusNumber) {
+    public static void validateBonusNumbers(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         if (winnerNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 넘버가 당첨 번호에 중복됩니다.");
         }

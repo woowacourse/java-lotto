@@ -20,13 +20,13 @@ class ProfitTest {
         Money purchaseAmount = new Money("2000");
         List<LottoNumber> winningNumber = List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        WinnerLotto winnerLotto = new WinnerLotto(
-                new Lotto(new LottoNumbers(winningNumber)).getLottoNumbers().getLottoNumbers(), new LottoNumber(7));
+        WinnerLotto winnerLotto = new WinnerLotto(new Lotto(new LottoNumbers(winningNumber)).getLottoNumbers(),
+                new LottoNumber(7));
         LottoGroup lottoGroup = new LottoGroup();
         lottoGroup.processLottoTicketGeneration(purchaseAmount, lottoGenerator);
 
         // when
-        Profit result = Profit.calculateProfit(winnerLotto, lottoGroup);
+        Profit result = new Profit(winnerLotto, lottoGroup);
         Map<Rank, Integer> rankCounts = result.getRankCounts();
         final String profitRate = result.calculateAverageProfitRate(purchaseAmount);
         String expectedProfitRate = "2000000.00";
