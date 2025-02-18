@@ -75,7 +75,7 @@ public class LottoController {
     }
 
     private Profit getProfit(WinnerLotto winnerLotto) {
-        return Profit.calculateProfit(winnerLotto, lottoGroup);
+        return new Profit(winnerLotto, lottoGroup);
     }
 
 }

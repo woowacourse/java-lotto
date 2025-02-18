@@ -8,11 +8,12 @@ import java.util.Map;
 public class Profit {
     private final Map<Rank, Integer> rankCounts;
 
-    public Profit() {
+    public Profit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
         this.rankCounts = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             rankCounts.put(rank, 0);
         }
+        calculateProfit(winnerLotto, lottoGroup);
     }
 
     public String calculateAverageProfitRate(Money money) {
@@ -32,16 +33,13 @@ public class Profit {
         return rankCounts;
     }
 
-    public static Profit calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
-        Profit profit = new Profit();
-
+    private void calculateProfit(WinnerLotto winnerLotto, LottoGroup lottoGroup) {
         for (Lotto lotto : lottoGroup.getLottoGroup()) {
             long matchCount = winnerLotto.getMatchCount(lotto);
             boolean hasBonus = winnerLotto.hasBonus(lotto);
             Rank rank = Rank.find((int) matchCount, hasBonus);
-            profit.incrementCount(rank);
+            incrementCount(rank);
         }
-        return profit;
     }
 
     private void incrementCount(Rank key) {
