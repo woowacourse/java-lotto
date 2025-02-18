@@ -23,19 +23,30 @@ public class LottoController {
     }
 
     public void run() {
+        final Lottos lottos = issueLotto();
+        final WinningLotto winningLotto = createWinningLotto();
+        checkWinningResult(lottos, winningLotto);
+        inputView.close();
+    }
+
+    private Lottos issueLotto() {
         final int purchaseAmount = requestPurchaseAmount();
         Lottos lottos = Lottos.ofAmount(purchaseAmount);
         outputView.printPurchasedLottos(lottos);
+        return lottos;
+    }
 
+    private WinningLotto createWinningLotto() {
         final List<Integer> winningNumbers = requestWinningNumbers();
         final int bonusNumber = requestBonusNumber();
-        final WinningLotto winningLotto = WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+        return WinningLotto.of(Lotto.of(winningNumbers), bonusNumber);
+    }
 
+    private void checkWinningResult(final Lottos lottos, final WinningLotto winningLotto) {
         List<Rank> ranks = lottos.calculateRanks(winningLotto);
         double earningRate = lottos.calculateEarningRate(ranks);
 
         outputView.printLottoResult(Rank.count(ranks), earningRate);
-        inputView.close();
     }
 
     private int requestPurchaseAmount() {
