@@ -5,14 +5,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Numbers {
-    private final List<Num> numbers;
+    private final List<LottoNumber> numbers;
 
     public Numbers(List<Integer> numbers) {
         sortingNumbers(numbers);
-        List<Num> sortedNumbers = new ArrayList<>();
+        List<LottoNumber> sortedNumbers = new ArrayList<>();
         for(int number : numbers) {
-            sortedNumbers.add(new Num(number));
-            System.out.println(number);
+            sortedNumbers.add(new LottoNumber(number));
         }
         this.numbers = sortedNumbers;
     }
@@ -23,10 +22,9 @@ public class Numbers {
 
     public List<Integer> getNumbers() {
         List<Integer> numbersList = new ArrayList<>();
-        for(Num num : numbers) {
-                numbersList.add(num.getNum());
+        for(LottoNumber lottoNumber : numbers) {
+                numbersList.add(lottoNumber.getNum());
         }
-        System.out.println(numbersList);
         return numbersList;
     }
 }
