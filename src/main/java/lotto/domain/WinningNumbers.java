@@ -15,7 +15,7 @@ public class WinningNumbers {
     }
 
     private void validateExistBonusNumber() {
-        if (winningNumbers.checkBonus(bonusNumber)) {
+        if (winningNumbers.hasNumber(bonusNumber)) {
             throw new LottoException(MUST_NOT_BE_DUPLICATED_BONUS);
         }
     }

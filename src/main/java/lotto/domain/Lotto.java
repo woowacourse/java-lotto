@@ -32,10 +32,6 @@ public class Lotto {
         return lottoNumbers.contains(currentLottoNumber);
     }
 
-    public boolean checkBonus(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
-    }
-
     public int getSize() {
         return lottoNumbers.size();
     }
