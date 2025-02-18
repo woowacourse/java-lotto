@@ -20,7 +20,7 @@ public class LottoController {
         OutputView.printLottos(lottos);
         WinningNumbers winningNumbers = getWinningNumbers();
         BonusNumber bonusNumber = getBonusNumber(winningNumbers);
-        WinningStatistics winningStatistics = LottoMachine.calculateStatistics(lottos, winningNumbers, bonusNumber);
+        WinningStatistics winningStatistics = new WinningStatistics(lottos, winningNumbers, bonusNumber);
         double returnRate = winningStatistics.calculateReturnRate(purchaseAmount.calculateLottoAmount());
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
