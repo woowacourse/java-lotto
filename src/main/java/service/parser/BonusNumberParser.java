@@ -6,13 +6,19 @@ import validator.Validator;
 
 public class BonusNumberParser {
 
+    private static final String LOTTO_OUT_OF_RANGE = String.format(
+            "로또의 숫자가 %d~%d의 유효 범위를 벗어납니다.",
+            LottoConstants.LOTTO_NUMBER_START,
+            LottoConstants.LOTTO_NUMBER_END
+    );
+
     public static int parseBonusNumber(List<Integer> winningNumbers, String input) {
         Validator.validateEmptyInput(input);
         Validator.checkInvalidNumberForm(input);
 
         int bonusNumber = Integer.parseInt(input);
         Validator.checkOutOfRange(bonusNumber, LottoConstants.LOTTO_NUMBER_START, LottoConstants.LOTTO_NUMBER_END,
-                "로또의 숫자가 1~45의 유효 범위를 벗어납니다.");
+                LOTTO_OUT_OF_RANGE);
         validateDuplicateWithBonusNumber(winningNumbers, bonusNumber);
 
         return bonusNumber;
