@@ -1,21 +1,22 @@
 package controller;
 
-import static constant.LottoConstants.LOTTO_RANGE_MAX;
-import static constant.LottoConstants.LOTTO_RANGE_MIN;
-
-import constant.LottoConstants;
 import constant.WinningCount;
 import domain.Lottos;
 import domain.WinningLotto;
 import dto.IssuedLottosDto;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import util.LottoResultCalculator;
+import util.RandomGenerator;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
+
+    private final RandomGenerator randomGenerator;
+
+    public LottoController(RandomGenerator randomGenerator) {
+        this.randomGenerator = randomGenerator;
+    }
 
     public void start() {
         Lottos purchasedLottos = issueLotto();
@@ -23,19 +24,13 @@ public class LottoController {
         OutputView.printLottoReceipt(issuedLottosDto);
         WinningLotto winningLotto = makeWinningLotto();
         Map<WinningCount, Integer> result = winningLotto.getLottosResult(purchasedLottos);
-        Double earningRate = LottoResultCalculator.calculateEarningRate(result,
-                issuedLottosDto.lottos().size() * LottoConstants.LOTTO_PRICE.getValue());
+        Double earningRate = winningLotto.calculateEarningRate(purchasedLottos);
         OutputView.printLottoResult(result, earningRate);
     }
 
     private Lottos issueLotto() {
         int money = InputView.askMoney();
-        return new Lottos(money,
-                () -> {
-                    Random random = new Random();
-                    return random.nextInt(LOTTO_RANGE_MAX.getValue() - LOTTO_RANGE_MIN.getValue() + 1)
-                            + LOTTO_RANGE_MIN.getValue();
-                });
+        return new Lottos(money, randomGenerator);
     }
 
     private WinningLotto makeWinningLotto() {
@@ -43,5 +38,4 @@ public class LottoController {
         Integer bonusNumber = InputView.askBonusNumber();
         return new WinningLotto(numbers, bonusNumber);
     }
-
 }
