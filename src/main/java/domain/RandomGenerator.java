@@ -11,7 +11,7 @@ public class RandomGenerator {
 
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < count) {
-            int number = random.nextInt(end - start + 1) + start; // 난수 생성
+            int number = random.nextInt(end - start + 1) + start;
             numbers.add(number);
         }
         return new ArrayList<>(numbers);
