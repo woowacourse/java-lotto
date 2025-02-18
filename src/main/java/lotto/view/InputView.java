@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
-    private InputView() {
-    }
+    private InputView() {}
 
     public static int inputPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");

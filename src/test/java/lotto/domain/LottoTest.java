@@ -1,0 +1,41 @@
+package lotto.domain;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
+
+import static lotto.constant.ErrorMessage.LOTTO_NUMBER_RANGE;
+import static lotto.domain.Lotto.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+class LottoTest {
+    @DisplayName("로또는 1과 45 사이의 번호가 아니면 예외를 던진다")
+    @Test
+    void 로또는_1과_45_사이의_번호가_아니면_예외를_던진다() {
+        assertThatThrownBy(() -> validateLottoNumber(46))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(LOTTO_NUMBER_RANGE.getErrorMessage());
+    }
+
+    @DisplayName("로또는 6개의 번호를 가진다")
+    @Test
+    void 로또는_6개의_번호를_가진다() {
+        assertThat(new Lotto(NumbersGenerator.generateLottoNumbers()).getNumbers()).hasSize(6);
+    }
+
+    @DisplayName("로또는 중복되지 않는 숫자를 가진다")
+    @Test
+    void 로또는_중복되지_않는_숫자를_가진다() {
+        assertThat(new Lotto(NumbersGenerator.generateLottoNumbers()).getNumbers()).doesNotHaveDuplicates();
+    }
+
+    @DisplayName("로또가 보너스번호를 포함하는지 확인한다")
+    @Test
+    void 로또가_보너스번호를_포함하는지_확인한다() {
+        Lotto lotto = new Lotto(Set.of(1, 2, 3, 4, 5, 6));
+        int bonusNumber = 6;
+        assertThat(lotto.hasNumber(bonusNumber)).isTrue();
+    }
+}
