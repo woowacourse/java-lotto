@@ -1,5 +1,6 @@
 package domain;
 
+import static constant.LottoConstants.LOTTO_PRICE;
 import static exception.ExceptionMessage.LOTTO_NUMBER_DUPLICATED_ERROR;
 
 import constant.WinningCount;
@@ -33,6 +34,15 @@ public class WinningLotto {
             result.put(lottoResult, result.getOrDefault(lottoResult, 0) + 1);
         });
         return result;
+    }
+
+    public Double calculateEarningRate(Lottos lottos) {
+        Map<WinningCount, Integer> lottosResult = getLottosResult(lottos);
+        double sum = 0;
+        for (WinningCount winningCount : lottosResult.keySet()) {
+            sum += lottosResult.getOrDefault(winningCount, 0) * winningCount.getAmount();
+        }
+        return Math.round((sum * 100) / (lottos.getLottos().size() * LOTTO_PRICE.getValue())) / 100.0;
     }
 
     private WinningCount getLottoResult(Lotto lotto) {
