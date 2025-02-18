@@ -115,7 +115,7 @@ class LottoTest {
         LottoNumber bonusNumber = LottoNumber.of(5);
 
         //when & then
-        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.hasNumber(bonusNumber)).isEqualTo(true);
     }
 
     @DisplayName("로또에 보너스 번호가 없다면 false를 반환한다.")
@@ -129,6 +129,6 @@ class LottoTest {
         LottoNumber bonusNumber = LottoNumber.of(7);
 
         //when & then
-        assertThat(lotto.checkBonus(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.hasNumber(bonusNumber)).isEqualTo(false);
     }
 }
