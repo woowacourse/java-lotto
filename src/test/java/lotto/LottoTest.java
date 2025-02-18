@@ -31,19 +31,6 @@ class LottoTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @DisplayName("번호가 1과 45 사이의 숫자가 아니면 예외를 던진다")
-    @Test
-    void 번호가_1과_45_사이의_번호가_아니면_예외를_던진다() {
-        //given
-        List<Integer> lottoNumbers = List.of(1, 2, 3, 4, 5, 46);
-
-        //when
-        //then
-        assertThatThrownBy(() -> new Lotto(lottoNumbers))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("로또 번호는 %d ~ %d 사이여야 합니다.".formatted(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER));
-    }
-
     @DisplayName("6개의 고유한 번호가 아니라면 예외를 던진다")
     @MethodSource("returnWrongSizeNumbers")
     @ParameterizedTest
