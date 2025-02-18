@@ -1,12 +1,12 @@
 package domain;
 
-import static domain.LottoInformation.LOTTO_NUMBER_END;
-import static domain.LottoInformation.LOTTO_NUMBER_START;
+public class LottoNumber {
+    public static final int LOTTO_NUMBER_START = 1;
+    public static final int LOTTO_NUMBER_END = 45;
 
-public class Num {
     private int num;
 
-    public Num(int num) {
+    public LottoNumber(int num) {
         validate(num);
         this.num = num;
     }
