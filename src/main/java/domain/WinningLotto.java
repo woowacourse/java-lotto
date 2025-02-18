@@ -18,17 +18,18 @@ public class WinningLotto {
   }
 
   public Map<WinningCase, Integer> winningCalculate(List<Lotto> lottos) {
-    Map<WinningCase,Integer> winningResult = WinningCase.toMap();
-    for(Lotto lotto : lottos){
+    Map<WinningCase, Integer> winningResult = WinningCase.toMap();
+    for (Lotto lotto : lottos) {
       int sameCount = lotto.compare(winningNumber);
       boolean isBonus = lotto.compareBonusNumber(bonusNumber);
       WinningCase winningCase = WinningCase.getWinningCase(sameCount, isBonus);
-      winningResult.put(winningCase,winningResult.get(winningCase)+1);
+      winningResult.put(winningCase, winningResult.get(winningCase) + 1);
     }
     return winningResult;
   }
 
-  private void validateDuplicationBonusNumber(WinningNumber winningNumber, BonusNumber bonusNumber) {
+  private void validateDuplicationBonusNumber(WinningNumber winningNumber,
+      BonusNumber bonusNumber) {
     if (bonusNumber == null || bonusNumber.isDuplicate(winningNumber)) {
       throw new LottoException(INVALID_BONUS_NUMBER);
     }

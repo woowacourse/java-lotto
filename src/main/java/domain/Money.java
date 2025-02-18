@@ -24,7 +24,7 @@ public class Money {
   }
 
   public double calculateEarnMoneyRatio(long earnMoney) {
-    return  (double) earnMoney / money;
+    return (double) earnMoney / money;
   }
 
   private void validateMoney(String moneyInput) {
@@ -35,19 +35,19 @@ public class Money {
   }
 
   private void validateNumeric(String moneyInput) {
-    if(moneyInput == null || !StringUtility.isNumber(moneyInput)){
+    if (moneyInput == null || !StringUtility.isNumber(moneyInput)) {
       throw new LottoException(INVALID_MONEY);
     }
   }
 
   private void validateZeroMoney(int buyMoneyNumber) {
-    if(buyMoneyNumber == 0){
+    if (buyMoneyNumber == 0) {
       throw new LottoException(INVALID_MONEY);
     }
   }
 
   private void validateUnit(int buyMoneyNumber) {
-    if(buyMoneyNumber % MONEY_UNIT != 0){
+    if (buyMoneyNumber % MONEY_UNIT != 0) {
       throw new LottoException(INVALID_MONEY);
     }
   }
