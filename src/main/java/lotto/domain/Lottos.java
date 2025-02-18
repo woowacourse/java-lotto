@@ -54,6 +54,8 @@ public class Lottos {
     }
 
     public List<List<Integer>> getPurchasedLottos() {
-        return lottos.stream().map(Lotto::getNumbers).toList();
+        return lottos.stream()
+                .map(Lotto::getNumbers)
+                .toList();
     }
 }
