@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.LottoException;
 
 public class Lotto {
 
@@ -37,7 +38,7 @@ public class Lotto {
         Set<Integer> notDuplicatedNumbers = new HashSet<>(numbers);
         boolean isDuplicated = notDuplicatedNumbers.size() != numbers.size();
         if (isDuplicated) {
-            throw new IllegalArgumentException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+            throw new LottoException(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
         }
     }
 
@@ -45,14 +46,14 @@ public class Lotto {
         boolean isInRange = numbers.stream()
                 .allMatch(number -> number >= MIN_LOTTO_NUMBER && number <= MAX_LOTTO_NUMBER);
         if (!isInRange) {
-            throw new IllegalArgumentException(ExceptionMessage.OUT_OF_RANGE.getContent());
+            throw new LottoException(ExceptionMessage.OUT_OF_RANGE.getContent());
         }
     }
 
     private void validateSize(List<Integer> numbers) {
         boolean isIncorrectSize = numbers.size() != LOTTO_NUMBER_COUNT;
         if (isIncorrectSize) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
+            throw new LottoException(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
         }
     }
 }

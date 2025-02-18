@@ -1,10 +1,11 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.LottoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,9 +36,9 @@ class LottoTest {
     @Test
     void 입력된_로또_번호에서_중복_숫자가_존재하는지_검증한다() {
         List<Integer> numbers = List.of(1, 1, 2, 3, 4, 5);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessage(ExceptionMessage.DUPLICATED_NUMBERS.getContent());
     }
 
     @DisplayName("입력된 로또 번호들이 정해진 범위 내에 있는지 검증한다.")
@@ -45,18 +46,18 @@ class LottoTest {
     @ValueSource(ints = {-1, 0, 46})
     void 입력된_로또_번호들이_정해진_범위_내에_있는지_검증한다(int outOfRangeNumber) {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, outOfRangeNumber);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.OUT_OF_RANGE.getContent());
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessage(ExceptionMessage.OUT_OF_RANGE.getContent());
     }
 
     @DisplayName("입력된 로또 번호가 정해진 개수인지 검증한다.")
     @Test
     void 입력된_로또_번호가_정해진_개수인지_검증한다() {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7);
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Lotto(numbers))
-                .withMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
+        assertThatThrownBy(() -> new Lotto(numbers))
+                .isInstanceOf(LottoException.class)
+                .hasMessage(ExceptionMessage.INVALID_NUMBER_COUNT.getContent());
     }
 
     @DisplayName("현재 로또에 특정 번호가 포함되어 있는지 확인한다.")
