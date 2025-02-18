@@ -25,7 +25,7 @@ public class Vendor {
         }
     }
 
-    public int calculateLottoCount() {
+    private int calculateLottoCount() {
         return this.purchaseAmount / LOTTO_PRICE;
     }
 
