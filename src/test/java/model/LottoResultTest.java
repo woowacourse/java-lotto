@@ -17,7 +17,7 @@ class LottoResultTest {
 
     @BeforeEach
     void setUp() {
-        winningLotto = new WinningLotto(new ArrayList<>(List.of(1, 2, 3, 4, 5, 6)), 7);
+        winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), 7);
         userLotto = new UserLotto(new FixedNumberGenerator(), 1000);
     }
 

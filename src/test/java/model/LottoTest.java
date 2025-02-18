@@ -2,7 +2,9 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -36,5 +38,14 @@ class LottoTest {
                         () -> new Lotto(Set.of(1, 2, 3, 4, 5, 46))),
                 () -> Assertions.assertThrows(IllegalArgumentException.class, () -> new Lotto(Set.of(0, 2, 3, 4, 5, 6)))
         );
+    }
+
+    @DisplayName("lotto와 겹치는 숫자가 몇 개 있는지 계산한다")
+    @Test
+    void calculateDuplicateNumberTest() {
+        WinningLotto winningLotto = new WinningLotto(List.of(2, 3, 4, 5, 6, 7), 1);
+        Lotto lotto = new Lotto(new HashSet<>(Set.of(1, 2, 3, 4, 5, 6)));
+
+        org.junit.jupiter.api.Assertions.assertEquals(5, lotto.calculateDuplicateNumber(winningLotto.getWinningNumbers()));
     }
 }
