@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Bonus;
 import model.Lotto;
 import model.LottoConstant;
 import model.Prize;
+import model.RandomNumberGenerator;
 import model.WinningLotto;
 
 public class LottoFactory {
@@ -21,17 +21,16 @@ public class LottoFactory {
     private static final int LOTTO_MAX_RANGE = 45;
 
     private final int ticketNumber;
+    private final RandomNumberGenerator randomNumberGenerator;
     private final List<Lotto> issuedTickets;
 
-    private final Random random;
-
-    public static LottoFactory of(final int purchase) {
-        return new LottoFactory(purchase / LottoConstant.TICKET_PRICE_UNIT);
+    public static LottoFactory of(final int purchase, RandomNumberGenerator randomNumberGenerator) {
+        return new LottoFactory(purchase / LottoConstant.TICKET_PRICE_UNIT, randomNumberGenerator);
     }
 
-    private LottoFactory(final int ticketNumber) {
+    private LottoFactory(final int ticketNumber, RandomNumberGenerator randomNumberGenerator) {
         this.ticketNumber = ticketNumber;
-        this.random = new Random();
+        this.randomNumberGenerator = randomNumberGenerator;
         this.issuedTickets = IntStream.range(0, ticketNumber)
                 .mapToObj(i -> getIssueTicket())
                 .collect(Collectors.toList());
@@ -40,7 +39,7 @@ public class LottoFactory {
     private Lotto getIssueTicket() {
         HashSet<Integer> issuedTicket = new HashSet<>();
         while (issuedTicket.size() < LOTTO_SIZE) {
-            issuedTicket.add(getRandomNumber());
+            issuedTicket.add(randomNumberGenerator.generate(LOTTO_MAX_RANGE));
         }
         return new Lotto(new ArrayList<>(issuedTicket));
     }
@@ -75,10 +74,6 @@ public class LottoFactory {
             benefit += enumMap.get(prize) * prize.getPrizeAmount();
         }
         return benefit;
-    }
-
-    private int getRandomNumber() {
-        return random.nextInt(LOTTO_MAX_RANGE) + 1;
     }
 
     public int getTicketNumber() {

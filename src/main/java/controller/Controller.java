@@ -6,6 +6,7 @@ import model.Bonus;
 import model.Lotto;
 import model.LottoPurchase;
 import model.Prize;
+import model.RandomNumberGenerator;
 import model.WinningLotto;
 import service.LottoFactory;
 import view.InputView;
@@ -15,7 +16,8 @@ public class Controller {
 
     public void run() {
         LottoPurchase lottoPurchase = InputView.getPurchaseLotto();
-        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.amount());
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        LottoFactory lottoFactory = LottoFactory.of(lottoPurchase.amount(), randomNumberGenerator);
 
         OutputView.printLottoCount(lottoFactory);
         OutputView.printLottoTickets(lottoFactory);

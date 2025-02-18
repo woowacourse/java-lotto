@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.stream.Stream;
 import model.Lotto;
 import model.LottoConstant;
+import model.RandomNumberGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -19,7 +20,7 @@ class LottoFactoryTest {
     @BeforeAll
     static void beforeAll() {
         purchase = 10000;
-        lottoFactory = LottoFactory.of(purchase);
+        lottoFactory = LottoFactory.of(purchase, new RandomNumberGenerator());
     }
 
     @ParameterizedTest(name = "구매 티켓 갯수는 구매 금액에 나누기 {0}이여야 한다.")
