@@ -2,6 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoGenerator;
+import domain.LottoPurchaseManager;
 import domain.LottoResultCalculator;
 import domain.Rank;
 import domain.WinningInfo;
@@ -20,45 +21,41 @@ public class LottoController {
     }
 
     public void run() {
-        LottoGenerator lottoGenerator = new LottoGenerator();
-        LottoResultCalculator lottoResultCalculator = new LottoResultCalculator();
-
         try {
             int purchaseAmount = inputView.purchaseAmountInput();
-            List<Lotto> lottoBundle = purchaseLottoBundle(lottoGenerator, purchaseAmount);
-            WinningInfo winningInfo = generateWinningInfo(lottoGenerator);
-            Map<Rank, Integer> rankResult = calculateMatchingRank(lottoResultCalculator, winningInfo, lottoBundle);
-            calculateProfit(lottoResultCalculator, rankResult, purchaseAmount);
+            List<Lotto> lottoBundle = purchaseLottoBundle(purchaseAmount);
+            WinningInfo winningInfo = generateWinningInfo();
+            Map<Rank, Integer> rankResult = calculateMatchingRank(winningInfo, lottoBundle);
+            calculateProfit(rankResult, purchaseAmount);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private List<Lotto> purchaseLottoBundle(LottoGenerator lottoGenerator, int purchaseAmount) {
-        int lottoQuantity = lottoGenerator.purchaseLottoByAmount(purchaseAmount);
+    private List<Lotto> purchaseLottoBundle(int purchaseAmount) {
+        int lottoQuantity = LottoPurchaseManager.purchaseLottoByAmount(purchaseAmount);
         outputView.printPurchaseResult(lottoQuantity);
-        List<Lotto> lottoBundle = lottoGenerator.createLottoBundleForQuantity(lottoQuantity);
+        List<Lotto> lottoBundle = LottoGenerator.createLottoBundleForQuantity(lottoQuantity);
         outputView.printLottos(lottoBundle);
         return lottoBundle;
     }
 
-    private WinningInfo generateWinningInfo(LottoGenerator lottoGenerator) {
+    private WinningInfo generateWinningInfo() {
         String winningNumbers = inputView.winningNumbersInput();
-        Lotto lotto = lottoGenerator.createWinningLotto(winningNumbers);
+        Lotto lotto = LottoGenerator.createWinningLotto(winningNumbers);
         int bonusNumber = inputView.bonusNumberInput();
-        return lottoGenerator.createWinningInfo(lotto, bonusNumber);
+        return LottoGenerator.createWinningInfo(lotto, bonusNumber);
     }
 
-    private Map<Rank, Integer> calculateMatchingRank(LottoResultCalculator lottoResultCalculator,
-                                                     WinningInfo winningInfo, List<Lotto> lottoBundle) {
-        Map<Rank, Integer> rankResult = lottoResultCalculator.calculateMatchingRank(winningInfo, lottoBundle);
+    private Map<Rank, Integer> calculateMatchingRank(WinningInfo winningInfo, List<Lotto> lottoBundle) {
+        Map<Rank, Integer> rankResult = LottoResultCalculator.calculateMatchingRank(winningInfo, lottoBundle);
         outputView.printWinningStatistic(rankResult);
         return rankResult;
     }
 
-    private void calculateProfit(LottoResultCalculator lottoResultCalculator, Map<Rank, Integer> rankResult,
+    private void calculateProfit(Map<Rank, Integer> rankResult,
                                  int purchaseAmount) {
-        double calculateRate = lottoResultCalculator.calculateProfit(rankResult, purchaseAmount);
+        double calculateRate = LottoResultCalculator.calculateProfit(rankResult, purchaseAmount);
         outputView.printProfit(calculateRate);
     }
 }
