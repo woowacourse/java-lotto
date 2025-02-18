@@ -7,13 +7,12 @@ import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResultCalculator;
-import lotto.util.StringToIntParser;
+import lotto.view.StringToIntParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
 
-    public static final String DELIMITER = ",";
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoGenerator lottoGenerator;
@@ -26,46 +25,25 @@ public class LottoController {
     }
 
     public void run() {
-        LottoPrice lottoPrice = getLottoPrice();
-        int lottoCount = getLottoCount(lottoPrice);
-        List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
+        final LottoPrice lottoPrice = getLottoPrice();
+        final int lottoCount = getLottoCount(lottoPrice);
+        outputView.printLottoCount(lottoCount);
+        final List<Lotto> lottos = lottoGenerator.generateLotto(lottoCount);
         printPurchaseLottos(lottos);
 
-        WinningResultCalculator winningResultCalculator = getWinningResultCalculator();
-        WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
+        final WinningResultCalculator winningResultCalculator = getWinningResultCalculator();
+        final WinningResult winningResult = winningResultCalculator.countLottoPrizes(lottos);
         outputView.printWinningResult(winningResult.getWinningResult());
         outputView.printProfitRate(winningResult.calculateProfitRate(lottoPrice));
     }
 
-    private WinningResultCalculator getWinningResultCalculator() {
-        Lotto winningLotto = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber();
-        return new WinningResultCalculator(winningLotto, bonusNumber);
-    }
-
-    private Lotto getWinningLotto() {
-        String winningLottoNumbers = inputView.readWinningLottoNumbers();
-        String[] splittedWinningLottoNumbers = winningLottoNumbers.split(DELIMITER);
-        List<Integer> parsedWinningLottoNumbers = StringToIntParser.parseTokens(splittedWinningLottoNumbers);
-        Lotto winningLotto = new Lotto(parsedWinningLottoNumbers);
-        return winningLotto;
-    }
-
-    private LottoNumber getBonusNumber() {
-        String bonusNumberInput = inputView.readBonusNumber();
-        int parsedBonusNumber = StringToIntParser.parseInt(bonusNumberInput);
-        LottoNumber bonusNumber = new LottoNumber(parsedBonusNumber);
-        return bonusNumber;
-    }
-
     private LottoPrice getLottoPrice() {
-        int parsedAmount = StringToIntParser.parseInt(inputView.readPurchasePrice());
-        return new LottoPrice(parsedAmount);
+        final int lottoPrice = inputView.readPurchasePrice();
+        return new LottoPrice(lottoPrice);
     }
 
     private int getLottoCount(final LottoPrice lottoPrice) {
-        int lottoCount = lottoPrice.calculateLottoCount();
-        outputView.printLottoCount(lottoCount);
+        final int lottoCount = lottoPrice.calculateLottoCount();
         return lottoCount;
     }
 
@@ -73,5 +51,23 @@ public class LottoController {
         lottos.stream()
                 .map(Lotto::getNumbers)
                 .forEach(System.out::println);
+    }
+
+    private WinningResultCalculator getWinningResultCalculator() {
+        final Lotto winningLotto = getWinningLotto();
+        final LottoNumber bonusNumber = getBonusNumber();
+        return new WinningResultCalculator(winningLotto, bonusNumber);
+    }
+
+    private Lotto getWinningLotto() {
+        final List<Integer> winningLottoNumbers = inputView.readWinningLottoNumbers();
+        final Lotto winningLotto = new Lotto(winningLottoNumbers);
+        return winningLotto;
+    }
+
+    private LottoNumber getBonusNumber() {
+        final int bonusNumberInput = inputView.readBonusNumber();
+        final LottoNumber bonusNumber = new LottoNumber(bonusNumberInput);
+        return bonusNumber;
     }
 }

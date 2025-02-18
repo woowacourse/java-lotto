@@ -3,7 +3,6 @@ package lotto.domain;
 public class LottoPrice {
 
     private static final int UNIT_PRICE_OF_LOTTO = 1000;
-
     private final int amount;
 
     public LottoPrice(final int amount) {
@@ -15,7 +14,7 @@ public class LottoPrice {
         return amount / UNIT_PRICE_OF_LOTTO;
     }
 
-    public double divideFrom(int inputAmount) {
+    public double divideFrom(final int inputAmount) {
         return (double) inputAmount / amount;
     }
 
