@@ -8,7 +8,7 @@ import domain.Money;
 import domain.WinningNumber;
 import domain.WinningProfit;
 import domain.WinningResult;
-import dto.WinningRecipe;
+import dto.WinningRecipeGroup;
 import java.util.List;
 import java.util.Map;
 import utils.RandomNumbersGenerator;
@@ -36,7 +36,7 @@ public class LottoController {
         final WinningResult winningResult = new WinningResult(winningNumber, lottos);
 
         final Map<LottoRank, Integer> countedWinningResult = winningResult.countWinningResult();
-        outputView.printWinningResult(convertToWinningRecipes(countedWinningResult));
+        outputView.printWinningResult(WinningRecipeGroup.of(countedWinningResult));
 
         final WinningProfit winningProfit = new WinningProfit(countedWinningResult);
         outputView.printWinningProfit(winningProfit.calculateProfitRate(money.getAmount()));
@@ -54,11 +54,5 @@ public class LottoController {
     private Money requestMoney() {
         outputView.printAskInputMoney();
         return inputView.readMoney();
-    }
-
-    private List<WinningRecipe> convertToWinningRecipes(final Map<LottoRank, Integer> lottoRanks) {
-        return lottoRanks.entrySet().stream()
-                .map(WinningRecipe::of)
-                .toList();
     }
 }

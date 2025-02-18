@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import dto.WinningRecipe;
+import dto.WinningRecipeGroup;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,9 +38,9 @@ public class OutputView {
         printlnMessage(ASK_INPUT_BONUS_NUMBER);
     }
 
-    public void printWinningResult(final List<WinningRecipe> winningRecipes) {
+    public void printWinningResult(final WinningRecipeGroup winningRecipeGroup) {
         printlnMessage(LINE_SEPARATOR + WINNING_RESULT_HEADER);
-        final String message = winningRecipes.stream()
+        final String message = winningRecipeGroup.winningRecipes().stream()
                 .map(this::createWinningRecipeMessage)
                 .collect(Collectors.joining(LINE_SEPARATOR));
         printlnMessage(message);
