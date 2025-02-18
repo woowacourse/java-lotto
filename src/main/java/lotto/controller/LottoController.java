@@ -1,5 +1,9 @@
 package lotto.controller;
 
+import static lotto.view.PromptMessageContainer.ENTER_BONUS_NUMBER;
+import static lotto.view.PromptMessageContainer.ENTER_PHURCHASE_AMOUNT;
+import static lotto.view.PromptMessageContainer.ENTER_WINNING_NUMBERS;
+
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -35,17 +39,17 @@ public class LottoController {
     }
 
     private int requestPurchaseAmount() {
-        String rawPurchaseAmount = inputView.read("구입금액을 입력해 주세요.");
+        String rawPurchaseAmount = inputView.read(ENTER_PHURCHASE_AMOUNT);
         return NumberParser.parse(rawPurchaseAmount);
     }
 
     private List<Integer> requestWinningNumbers() {
-        String rawWinningNumber = inputView.read("지난 주 당첨 번호를 입력해 주세요.");
+        String rawWinningNumber = inputView.read(ENTER_WINNING_NUMBERS);
         return NumberParser.parseFromCSV(rawWinningNumber);
     }
 
     private int requestBonusNumber() {
-        final String rawBonusNumber = inputView.read("보너스 볼을 입력해 주세요.");
+        final String rawBonusNumber = inputView.read(ENTER_BONUS_NUMBER);
         return NumberParser.parse(rawBonusNumber);
     }
 }
