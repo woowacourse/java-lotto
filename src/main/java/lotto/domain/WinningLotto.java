@@ -11,7 +11,7 @@ public class WinningLotto {
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
         this.lotto = lotto;
-        this.validateBonusNumber(bonusNumber);
+        validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 

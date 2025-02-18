@@ -14,7 +14,7 @@ public class Vendor {
     private final int purchaseAmount;
 
     public Vendor(LottoNumberGenerator randomGenerator, int purchaseAmount) {
-        this.validatePurchaseAmount(purchaseAmount);
+        validatePurchaseAmount(purchaseAmount);
         this.randomGenerator = randomGenerator;
         this.purchaseAmount = purchaseAmount;
     }
@@ -31,7 +31,7 @@ public class Vendor {
 
     public Lottos issueLottos() {
         final int LOTTO_NUMBERS = 6;
-        int lottoCount = this.calculateLottoCount();
+        int lottoCount = calculateLottoCount();
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {

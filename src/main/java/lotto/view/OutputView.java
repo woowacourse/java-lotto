@@ -68,13 +68,13 @@ public class OutputView {
             String lottoNumbers = lotto.getNumbers().toString();
             System.out.println(lottoNumbers);
         }
-        this.printBlankLine();
+        printBlankLine();
     }
 
     public void printResults(List<WinningTier> winningTiers, double profit) {
         System.out.println("당첨 통계\n---------");
-        this.printWinningStatistics(winningTiers);
-        this.printProfit(profit);
-        this.printBlankLine();
+        printWinningStatistics(winningTiers);
+        printProfit(profit);
+        printBlankLine();
     }
 }

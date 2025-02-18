@@ -22,21 +22,21 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = inputView.readPurchaseAmount();
+        int purchaseAmount = this.inputView.readPurchaseAmount();
         Vendor vendor = new Vendor(new LottoNumberGenerator(), purchaseAmount);
         Lottos lottos = vendor.issueLottos();
-        outputView.printLottos(lottos);
+        this.outputView.printLottos(lottos);
 
-        WinningLotto winningLotto = this.getWinningLotto();
+        WinningLotto winningLotto = getWinningLotto();
         List<WinningTier> winningTiers = lottos.getWinningTiers(winningLotto);
 
         double profit = vendor.calculateProfit(winningTiers);
-        outputView.printResults(winningTiers, profit);
+        this.outputView.printResults(winningTiers, profit);
     }
 
     public WinningLotto getWinningLotto() {
-        Lotto winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber();
+        Lotto winningNumbers = this.inputView.readWinningNumbers();
+        int bonusNumber = this.inputView.readBonusNumber();
         return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

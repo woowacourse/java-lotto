@@ -11,7 +11,7 @@ public class InputView {
     private final Scanner scanner = new Scanner(System.in);
 
     private String readLine() {
-        return scanner.nextLine();
+        return this.scanner.nextLine();
     }
 
     private List<Integer> parseWinningNumbers(String content) {
@@ -23,7 +23,7 @@ public class InputView {
 
     public int readPurchaseAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        String content = this.readLine();
+        String content = readLine();
         System.out.println();
         InputValidator.validateBlank(content);
         InputValidator.validateNumberFormat(content);
@@ -32,15 +32,15 @@ public class InputView {
 
     public Lotto readWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String content = this.readLine();
+        String content = readLine();
         System.out.println();
-        List<Integer> winningNumbers = this.parseWinningNumbers(content);
+        List<Integer> winningNumbers = parseWinningNumbers(content);
         return new Lotto(winningNumbers);
     }
 
     public int readBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String content = this.readLine();
+        String content = readLine();
         System.out.println();
         InputValidator.validateNumberFormat(content);
         return Integer.parseInt(content);
