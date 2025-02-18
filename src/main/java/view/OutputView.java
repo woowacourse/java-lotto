@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import model.Lotto;
 import model.LottoRepository;
 import model.RankType;
+import model.Wallet;
+import model.WinningStatistics;
 
 public class OutputView {
     private static final String BUY_QUANTITY_PROMPT = "%d개를 구매했습니다.";
@@ -13,13 +15,14 @@ public class OutputView {
     private static final String WINNING_RATE_INFORMATION_1 = "총 수익률 %.2f입니다. (기준이 1이기 때문에 결과적으로 본전이라는 의미임)";
     private static final String LOTTO_RESULT_PRINT_FORMAT = "%d개 일치, (%d원)- %d개\n";
     private static final String LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
-    public static void printRandomLotto(LottoRepository lottoRepository) {
+
+    public static void printRandomLotto(final LottoRepository lottoRepository) {
         for (Lotto lotto : lottoRepository.getLottos()) {
             System.out.println(printLotto(lotto));
         }
     }
 
-    private static String printLotto(Lotto lotto) {
+    private static String printLotto(final Lotto lotto) {
         return "[" + String.join(", ",
                 lotto.getRandomNumbers().stream()
                         .map(String::valueOf)
@@ -27,8 +30,8 @@ public class OutputView {
         ) + "]";
     }
 
-    public static void printBuyQuantity(int quantity) {
-        System.out.println(String.format(BUY_QUANTITY_PROMPT, quantity));
+    public static void printBuyQuantity(final Wallet wallet) {
+        System.out.println(String.format(BUY_QUANTITY_PROMPT, wallet.getPurchasableQuantity()));
     }
 
     public static void printWinningRate(double winningRate) {
@@ -43,24 +46,33 @@ public class OutputView {
         System.out.println(String.format(WINNING_RATE_INFORMATION_UNDER_1, winningRate));
     }
 
-    public static void printResult(Map<RankType, Integer> rankTypeMap) {
+    public static void printResult(final WinningStatistics winningStatistics) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        System.out.println(makeLottoResult(rankTypeMap));
+        System.out.println(makeLottoResult(winningStatistics.getWinningStatistics()));
     }
 
-    public static String makeLottoResult(Map<RankType, Integer> map){
+    private static String makeLottoResult(final Map<RankType, Integer> map) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for(RankType rankType : map.keySet()){
-            if(rankType == RankType.SECOND){
-                stringBuilder.append(String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getWinningCount(), rankType.getPrice(), map.get(rankType)));
-                continue;
-            }
-            stringBuilder.append(String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getWinningCount(), rankType.getPrice(), map.get(rankType)));
+        for (RankType rankType : map.keySet()) {
+            appendLottoResult(map, stringBuilder, rankType);
         }
 
         return stringBuilder.toString();
+    }
+
+    private static void appendLottoResult(final Map<RankType, Integer> map, final StringBuilder stringBuilder,
+                                          final RankType rankType) {
+        if (rankType == RankType.SECOND) {
+            stringBuilder.append(
+                    String.format(LOTTO_RESULT_BONUS_BALL_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(),
+                            map.get(rankType)));
+            return;
+        }
+        stringBuilder.append(
+                String.format(LOTTO_RESULT_PRINT_FORMAT, rankType.getMatchCount(), rankType.getPrice(),
+                        map.get(rankType)));
     }
 
 }
