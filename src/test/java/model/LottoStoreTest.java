@@ -67,6 +67,27 @@ class LottoStoreTest {
         assertThat(profitRate).isCloseTo(expectedValue, within(0.1));
     }
 
+    @Test
+    void 당첨_결과를_세는_경우_DEFAULT는_제외하고_계산한다() {
+        List<LottoNumbers> lottoNumbers = List.of(
+                new LottoNumbers(List.of(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                        new LottoNumber(4), new LottoNumber(5), new LottoNumber(6)))
+        );
+
+        WinningLotto winningLotto = new WinningLotto(
+                new LottoNumbers(List.of(
+                        new LottoNumber(10), new LottoNumber(11), new LottoNumber(12),
+                        new LottoNumber(13), new LottoNumber(14), new LottoNumber(15))
+                ), new LottoNumber(16)
+        );
+
+        // when
+        LottoRankResult rankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);
+
+        // then
+        assertThat(rankResult.getRanks()).hasSize(0);
+    }
+
     private static Stream<Arguments> profitRateTestCases() {
         return Stream.of(
                 Arguments.of(1000, LottoRank.FIRST, 2000000),

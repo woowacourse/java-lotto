@@ -34,7 +34,7 @@ class LottoRankCalculatorTest {
                 Arguments.of(List.of(1, 2, 3, 4, 5, 8), LottoRank.THIRD),
                 Arguments.of(List.of(1, 2, 3, 4, 8, 9), LottoRank.FOURTH),
                 Arguments.of(List.of(1, 2, 3, 8, 9, 10), LottoRank.FIFTH),
-                Arguments.of(List.of(1, 2, 8, 9, 10, 11), null)
+                Arguments.of(List.of(1, 2, 8, 9, 10, 11), LottoRank.DEFAULT)
         );
     }
 

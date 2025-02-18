@@ -7,7 +7,8 @@ public enum LottoRank {
     SECOND(5, true, 30_000_000),
     THIRD(5, false, 1_500_000),
     FOURTH(4, false, 50_000),
-    FIFTH(3, false, 5_000);
+    FIFTH(3, false, 5_000),
+    DEFAULT(0, false, 0);
 
     private static final int REQUIRED_BONUS_OVERLAPPED_COUNT = SECOND.overlappedCount;
     private final int overlappedCount;
@@ -43,7 +44,11 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(rank -> isMatchingRank(overlappedCount, isBonusNumberOverlapped, rank))
                 .findFirst()
-                .orElse(null);
+                .orElse(DEFAULT);
+    }
+
+    public boolean isInRank() {
+        return !this.equals(DEFAULT);
     }
 
     private static boolean isMatchingRank(

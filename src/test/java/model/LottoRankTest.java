@@ -18,7 +18,7 @@ class LottoRankTest {
                 Arguments.of(5, false, LottoRank.THIRD),
                 Arguments.of(4, false, LottoRank.FOURTH),
                 Arguments.of(3, false, LottoRank.FIFTH),
-                Arguments.of(2, false, null)
+                Arguments.of(2, false, LottoRank.DEFAULT)
         );
     }
 
@@ -33,11 +33,11 @@ class LottoRankTest {
     }
 
     @Test
-    void 로또티켓의_결과가_순위_밖이라면_null을_반환한다() {
+    void 로또티켓의_결과가_순위_밖이라면_DEFAULT를_반환한다() {
         // when
         LottoRank rank = LottoRank.findByMatchCondition(2, false);
 
         // then
-        assertThat(rank).isNull();
+        assertThat(rank).isEqualTo(LottoRank.DEFAULT);
     }
 }

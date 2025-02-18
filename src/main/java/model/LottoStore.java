@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.IntStream;
 import model.numbers.LottoNumbers;
 import model.numbers.LottoNumbersGenerator;
@@ -46,7 +45,9 @@ public class LottoStore {
     }
 
     private List<LottoRank> calculateRank(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto) {
-        return lottoNumbers.stream().map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
-                .filter(Objects::nonNull).toList();
+        return lottoNumbers.stream()
+                .map(lottoTicket -> lottoRankCalculator.calculate(lottoTicket, winningLotto))
+                .filter(LottoRank::isInRank)
+                .toList();
     }
 }
