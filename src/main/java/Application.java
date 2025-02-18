@@ -10,6 +10,5 @@ public class Application {
 
         Controller controller = new Controller(inputView, outputView);
         controller.run();
-
     }
 }

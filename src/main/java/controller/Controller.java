@@ -1,15 +1,17 @@
 package controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Lotto;
 import model.LottoEvaluator;
 import model.LottoGenerater;
+import model.LottoNumber;
 import model.LottoNumberPicker;
 import model.Lottos;
 import model.Money;
-import model.Number;
 import model.WinningLotto;
-import util.Parser;
+import util.InputConverter;
 import view.InputView;
 import view.OutputView;
 import view.dto.LottosDTO;
@@ -29,11 +31,11 @@ public class Controller {
         LottoEvaluator lottoEvaluator = new LottoEvaluator(inputWinningLotto());
         ResultDTO resultDTO = ResultDTO.from(lottoEvaluator.getResult(lottos), lottoEvaluator.computeProfit(lottos));
         outputView.printResult(resultDTO);
-        inputView.closeScanner();
     }
 
     private Lottos buyLottos() {
-        Money money = Parser.parseMoney(inputView.inputMoney());
+        Integer inputMoney = InputConverter.parseInt(inputView.inputMoney());
+        Money money = new Money(inputMoney);
         Lottos lottos = generateLottos(money);
         outputView.printLottos(LottosDTO.from(lottos));
         return lottos;
@@ -44,16 +46,21 @@ public class Controller {
         LottoGenerater lottoGenerater = new LottoGenerater(lottoNumberPicker);
         return new Lottos(
                 IntStream.range(0, money.computeTicketCount())
-                .mapToObj(i -> lottoGenerater.generateLotto())
-                .toList()
+                        .mapToObj(i -> lottoGenerater.generateLotto())
+                        .toList()
         );
     }
 
     private WinningLotto inputWinningLotto() {
         String rawWinningLotto = inputView.inputWinningLotto();
-        Lotto lotto = Parser.parseLotto(rawWinningLotto);
+        List<String> splittedWinningLotto = InputConverter.splitByDelimiter(rawWinningLotto);
+        Lotto lotto = new Lotto(
+                splittedWinningLotto.stream()
+                        .map(singleNumber -> new LottoNumber(InputConverter.parseInt(singleNumber)))
+                        .collect(Collectors.toSet()));
+
         String rawBonusNumber = inputView.inputBonus();
-        Number bonusNumber = Parser.parseNumber(rawBonusNumber);
-        return new WinningLotto(lotto, bonusNumber);
+        LottoNumber bonusLottoNumber = new LottoNumber(InputConverter.parseInt(rawBonusNumber));
+        return new WinningLotto(lotto, bonusLottoNumber);
     }
 }

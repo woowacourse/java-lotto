@@ -1,11 +1,11 @@
 package model;
 
-public record Number(int value) implements Comparable<Number> {
+import static constant.LottoConstant.MAX_LOTTO_NUMBER;
+import static constant.LottoConstant.MIN_LOTTO_NUMBER;
 
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+public record LottoNumber(int value) implements Comparable<LottoNumber> {
 
-    public Number {
+    public LottoNumber {
         if (value < MIN_LOTTO_NUMBER || value > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(String.format("로또 번호는 %d 이상 %d 이하여야 합니다.",
                     MIN_LOTTO_NUMBER,
@@ -15,12 +15,7 @@ public record Number(int value) implements Comparable<Number> {
     }
 
     @Override
-    public int compareTo(Number o) {
+    public int compareTo(LottoNumber o) {
         return this.value - o.value;
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }
