@@ -3,9 +3,11 @@ package view;
 import dto.LottoDto;
 import dto.LottoResultDto;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import model.LottoNumber;
 import model.Rank;
 
 public class OutputView {
@@ -29,7 +31,10 @@ public class OutputView {
     public void printPurchaseLottos(List<LottoDto> lottosDto) {
         System.out.printf(PURCHASE_LOTTO_NUMBER_GUIDE_FORM, lottosDto.size());
         for (LottoDto lottoDto : lottosDto) {
-            List<String> sortedList = lottoDto.lotto().stream().sorted().map(String::valueOf).toList();
+            List<String> sortedList = lottoDto.lotto().stream()
+                    .sorted()
+                    .map(String::valueOf)
+                    .toList();
             printLotto(sortedList);
         }
         System.out.println();

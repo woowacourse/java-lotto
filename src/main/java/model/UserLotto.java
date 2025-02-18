@@ -44,18 +44,18 @@ public class UserLotto {
     }
 
     private Rank calculateRank(Lotto lotto, WinningLotto winningLotto) {
-        int duplicateNumber = getDuplicateNumber(lotto, winningLotto);
-        if (duplicateNumber == BONUS_REQUIRED_RANK_NUMBER && winningLotto.isBonusMatch(lotto)) {
+        int duplicateCount = getDuplicateNumber(lotto, winningLotto);
+        if (duplicateCount == BONUS_REQUIRED_RANK_NUMBER && winningLotto.isBonusMatch(lotto)) {
             return Rank.SECOND;
         }
 
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.getMatchNumber() == duplicateNumber)
+                .filter(rank -> rank.getMatchNumber() == duplicateCount)
                 .findFirst()
                 .orElse(Rank.FAIL);
     }
 
     private int getDuplicateNumber(Lotto lotto, WinningLotto winningLotto) {
-        return winningLotto.calculateDuplicateNumber(lotto.toDto().lotto());
+        return lotto.calculateDuplicateNumber(winningLotto.getWinningNumbers());
     }
 }
