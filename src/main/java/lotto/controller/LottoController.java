@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.LottoGeneratorStrategy;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoGroup;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoNumbers;
@@ -15,12 +15,12 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final LottoGeneratorStrategy lottoGenerator;
+    private final LottoGenerator lottoGenerator;
     private final LottoGroup lottoGroup;
 
-    public LottoController(LottoGeneratorStrategy lottoGenerator, LottoGroup lottoGroup) {
-        this.lottoGenerator = lottoGenerator;
+    public LottoController(LottoGroup lottoGroup, LottoGenerator lottoGenerator) {
         this.lottoGroup = lottoGroup;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void run() {

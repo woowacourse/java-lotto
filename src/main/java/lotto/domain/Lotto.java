@@ -17,6 +17,7 @@ public class Lotto {
         return lottoNumbers;
     }
 
+
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");

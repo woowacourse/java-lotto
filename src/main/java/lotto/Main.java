@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         LottoGenerator lottoGenerator = new LottoGenerator(new RandomNumberGenerator());
-        LottoController controller = new LottoController(lottoGenerator, new LottoGroup());
+        LottoController controller = new LottoController(new LottoGroup(), lottoGenerator);
         controller.run();
     }
 }
