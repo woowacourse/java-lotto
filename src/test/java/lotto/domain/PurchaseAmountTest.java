@@ -1,8 +1,9 @@
 package lotto.domain;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.PurchaseAmountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,8 +17,8 @@ class PurchaseAmountTest {
         String messageTemplate = ExceptionMessage.INVALID_PURCHASE_AMOUNT.getContent();
         String expectedMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> new PurchaseAmount(invalidAmount))
-                .withMessage(expectedMessage);
+        assertThatThrownBy(() -> new PurchaseAmount(invalidAmount))
+                .isInstanceOf(PurchaseAmountException.class)
+                .hasMessage(expectedMessage);
     }
 }

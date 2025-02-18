@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.PurchaseAmountException;
 
 public class PurchaseAmount {
 
@@ -24,7 +25,7 @@ public class PurchaseAmount {
         if (isInValidAmount) {
             String messageTemplate = ExceptionMessage.INVALID_PURCHASE_AMOUNT.getContent();
             String exceptionMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
-            throw new IllegalArgumentException(exceptionMessage);
+            throw new PurchaseAmountException(exceptionMessage);
         }
     }
 }
