@@ -1,20 +1,31 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static domain.LottoInformation.LOTTO_COUNT;
 
 public class Lotto {
 
-    private final Numbers numbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(Numbers numbers) {
-        validate(numbers.getNumbers());
-        this.numbers = numbers;
+    public Lotto(List<Integer> numbers) {
+        validate(numbers);
+        sortingNumbers(numbers);
+        List<LottoNumber> sortedNumbers = new ArrayList<>();
+        for (int number : numbers) {
+            sortedNumbers.add(new LottoNumber(number));
+        }
+        this.lottoNumbers = sortedNumbers;
     }
 
     public List<Integer> getNumbers() {
-        return numbers.getNumbers();
+        List<Integer> numbersList = new ArrayList<>();
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            numbersList.add(lottoNumber.getNum());
+        }
+        return numbersList;
     }
 
     private void validate(List<Integer> numbers) {
@@ -35,4 +46,9 @@ public class Lotto {
         }
         throw new IllegalArgumentException();
     }
+
+    private void sortingNumbers(List<Integer> numbers) {
+        numbers.sort(Comparator.naturalOrder());
+    }
+
 }
