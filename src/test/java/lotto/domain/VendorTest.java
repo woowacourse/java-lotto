@@ -14,6 +14,13 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 class VendorTest {
 
+    static class TestLottoNumberGenerator extends LottoNumberGenerator {
+        @Override
+        public List<Integer> generateNumbers(int maxNumber, int count) {
+            return List.of(1, 2, 3, 4, 5, 6);
+        }
+    }
+
     @DisplayName("입력된 구매 금액이 1000단위가 아닌 경우 예외 발생")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 1_500})
@@ -30,6 +37,17 @@ class VendorTest {
         Lottos lottos = vendor.issueLottos();
 
         assertThat(lottos.getLottoCount()).isEqualTo(expectedCount);
+    }
+
+    @DisplayName("로또 구매 시 무작위의 번호를 가진 로또 객체를 생성할 수 있다.")
+    @Test
+    void 로또_구매_시_무작위의_번호를_가진_로또_객체를_생성할_수_있다() {
+        final int purchaseAmount = 1_000;
+        Lotto expectedInstance = new Lotto(1, 2, 3, 4, 5, 6);
+        Vendor vendor = new Vendor(new TestLottoNumberGenerator(), purchaseAmount);
+        Lottos lottos = vendor.issueLottos();
+
+        assertThat(lottos.getLottos().getFirst()).isEqualTo(expectedInstance);
     }
 
     @DisplayName("수익률을 올바르게 계산할 수 있다.")
