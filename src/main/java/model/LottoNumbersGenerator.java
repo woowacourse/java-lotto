@@ -19,3 +19,4 @@ public class LottoNumbersGenerator implements NumbersGenerator {
                 .toList();
     }
 }
+

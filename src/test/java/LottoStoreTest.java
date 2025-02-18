@@ -47,6 +47,14 @@ class LottoStoreTest {
     }
 
     @Test
+    void 구입_개수가_0이하라면_예외를_발생시킨다() {
+        int purchaseCount = -1;
+        assertThatThrownBy(() -> lottoStore.createLottoTickets(purchaseCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 구매 개수는 0 이상이어야 합니다");
+    }
+
+    @Test
     void 당첨결과_개수를_센다() {
         // given
         List<LottoTicketResponse> lottoTickets = List.of(new LottoTicketResponse(List.of(1, 2, 3, 4, 5, 6)));

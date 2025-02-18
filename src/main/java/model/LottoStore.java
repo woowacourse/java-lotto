@@ -42,6 +42,10 @@ public class LottoStore {
     }
 
     public List<LottoTicketResponse> createLottoTickets(int purchaseCount) {
+        if (purchaseCount < 0) {
+            throw new IllegalArgumentException("[ERROR] 구매 개수는 0 이상이어야 합니다");
+        }
+
         return IntStream.range(0, purchaseCount)
                 .mapToObj(count -> new LottoTicket(numbersGenerator.generate()))
                 .map(lottoDtoMapper::toLottoTicketResponse)
