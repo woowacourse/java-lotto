@@ -7,9 +7,9 @@ public class LottoMachine {
     public static final int LOTTO_UNIT_PRICE = 1000;
     private static final int MAX_PURCHASE_AMOUNT = 100000;
 
-    private final LottoNumberGenerator lottoNumberGenerator;
+    private final LottoGenerator lottoNumberGenerator;
 
-    public LottoMachine(final LottoNumberGenerator lottoNumberGenerator) {
+    public LottoMachine(final LottoGenerator lottoNumberGenerator) {
         this.lottoNumberGenerator = lottoNumberGenerator;
     }
 
@@ -41,6 +41,6 @@ public class LottoMachine {
     }
 
     private Lotto createLotto() {
-        return new Lotto(lottoNumberGenerator.generate());
+        return lottoNumberGenerator.generate();
     }
 }

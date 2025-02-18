@@ -5,7 +5,7 @@ import static lotto.domain.Lotto.validateLottoNumber;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.domain.SystemLottoNumberGenerator;
+import lotto.domain.SystemLottoGenerator;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
@@ -23,7 +23,7 @@ public class Application {
 
     private static List<Lotto> purchaseLottos() {
         try {
-            LottoMachine lottoMachine = new LottoMachine(new SystemLottoNumberGenerator());
+            LottoMachine lottoMachine = new LottoMachine(new SystemLottoGenerator());
             int purchaseAmount = getPurchaseAmount();
             return lottoMachine.purchase(purchaseAmount);
         } catch (final IllegalArgumentException e) {

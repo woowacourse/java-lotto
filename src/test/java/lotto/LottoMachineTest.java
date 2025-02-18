@@ -3,7 +3,7 @@ package lotto;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
-import lotto.mock.TestLottoNumberGenerator;
+import lotto.mock.TestLottoGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class LottoMachineTest {
-    private final LottoMachine lottoMachine = new LottoMachine(new TestLottoNumberGenerator());
+    private final LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator());
 
     @DisplayName("구입금액이 1000원으로 나누어 떨어지지 않으면 예외를 던진다")
     @Test
@@ -74,7 +74,7 @@ class LottoMachineTest {
     @Test
     void 발행된_로또는_적정_범위에서_6개의_고유한_번호를_가진다() {
         //given
-        LottoMachine lottoMachine = new LottoMachine(new TestLottoNumberGenerator());
+        LottoMachine lottoMachine = new LottoMachine(new TestLottoGenerator());
 
         //when
         Lotto result = lottoMachine.purchase(1000).get(0);
