@@ -38,7 +38,7 @@ public class LottoController {
     private WinningLottoDto makeWinningLotto() {
         List<Integer> numbers = InputView.askWinningLotto();
         Integer bonusNumber = InputView.askBonusNumber();
-        return openLottoService.makeWinningLotto(numbers, bonusNumber);
+        return openLottoService.makeWinningLottoDto(numbers, bonusNumber);
     }
 
 

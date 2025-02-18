@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class OpenLottoService {
 
-    public WinningLottoDto makeWinningLotto(List<Integer> numbers, Integer bonusNumber) {
-        WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
-        return winningLotto.getWinningLottoDto();
+
+    public WinningLottoDto makeWinningLottoDto(List<Integer> numbers, Integer bonusNumber) {
+        return new WinningLottoDto(numbers, bonusNumber);
     }
 
     public Map<WinningCount, Integer> openResult(WinningLottoDto winningLottoDto, IssuedLottosDto issuedLottosDto) {

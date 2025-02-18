@@ -12,7 +12,7 @@ class IssuedLottoDtoTest {
     @Test
     void equalsTest1() {
         List<IssuedLottoDto> dtos = new ArrayList<>(
-                List.of(new IssuedLottoDto(List.of(2, 1, 3, 4, 5, 6)),
+                List.of(new IssuedLottoDto(List.of(1, 2, 3, 4, 5, 6)),
                         new IssuedLottoDto(List.of(1, 2, 3, 4, 5, 7)),
                         new IssuedLottoDto(List.of(1, 2, 3, 4, 5, 8))));
 

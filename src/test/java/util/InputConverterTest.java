@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import view.InputConverter;
 
 class InputConverterTest {
     @DisplayName("정상 숫자 반환 테스트")

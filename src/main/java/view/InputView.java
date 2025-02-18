@@ -1,22 +1,21 @@
 package view;
 
-import static exception.ErrorMessage.SYSTEM_ERROR;
-
-import exception.LottoException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-import util.InputConverter;
 
 public class InputView {
+
+    private static final String SYSTEM_ERROR_MASSAGE = "시스템 오류";
+
     public static int askMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertNumber(br.readLine());
         } catch (IOException IOE) {
-            throw LottoException.from(SYSTEM_ERROR);
+            throw new RuntimeException(SYSTEM_ERROR_MASSAGE);
         }
     }
 
@@ -26,7 +25,7 @@ public class InputView {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertWinningLotto(br.readLine());
         } catch (IOException IOE) {
-            throw LottoException.from(SYSTEM_ERROR);
+            throw new RuntimeException(SYSTEM_ERROR_MASSAGE);
         }
     }
 
@@ -36,7 +35,7 @@ public class InputView {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             return InputConverter.convertNumber(br.readLine());
         } catch (IOException IOE) {
-            throw LottoException.from(SYSTEM_ERROR);
+            throw new RuntimeException(SYSTEM_ERROR_MASSAGE);
         }
     }
 

@@ -9,7 +9,7 @@ import static exception.ErrorMessage.PRICE_UNIT_ERROR;
 import domain.Lotto;
 import dto.IssuedLottoDto;
 import dto.IssuedLottosDto;
-import exception.LottoException;
+import exception.UserInputException;
 import java.util.ArrayList;
 import java.util.List;
 import util.RandomNumberGenerator;
@@ -37,10 +37,10 @@ public class IssueLottoService {
 
     private void validateMoney(int money) {
         if (money <= 0) {
-            throw LottoException.from(PRICE_RANGE_ERROR);
+            throw UserInputException.from(PRICE_RANGE_ERROR);
         }
         if (money % LOTTO_PRICE.getValue() != 0) {
-            throw LottoException.from(PRICE_UNIT_ERROR);
+            throw UserInputException.from(PRICE_UNIT_ERROR);
         }
     }
 

@@ -1,9 +1,9 @@
-package util;
+package view;
 
 import static exception.ErrorMessage.INPUT_FORMAT_ERROR;
 import static exception.ErrorMessage.NUMBER_TYPE_ERROR;
 
-import exception.LottoException;
+import exception.UserInputException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,13 +28,13 @@ public class InputConverter {
         private static void validateWinningLottoPattern(String originalInput) {
             String input = originalInput.trim();
             if (!input.matches(INPUT_FORMAT_PATTERN)) {
-                throw LottoException.from(INPUT_FORMAT_ERROR);
+                throw UserInputException.from(INPUT_FORMAT_ERROR);
             }
         }
 
         private static void validateNumberFormat(String input) {
             if (!input.matches(NUMBER_TYPE_PATTERN)) {
-                throw LottoException.from(NUMBER_TYPE_ERROR);
+                throw UserInputException.from(NUMBER_TYPE_ERROR);
             }
         }
     }
