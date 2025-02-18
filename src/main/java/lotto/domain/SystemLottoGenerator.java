@@ -9,11 +9,13 @@ import java.util.Random;
 import java.util.Set;
 
 public class SystemLottoGenerator implements LottoGenerator {
+    private static final Random RANDOM = new Random();
+
     @Override
     public Lotto generate() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < LOTTO_SIZE) {
-            numbers.add(new Random().nextInt(MAX_LOTTO_NUMBER - 1) + 1);
+            numbers.add(RANDOM.nextInt(MAX_LOTTO_NUMBER - 1) + 1);
         }
         return new Lotto(new ArrayList<>(numbers));
     }
