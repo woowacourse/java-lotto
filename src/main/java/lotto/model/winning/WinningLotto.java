@@ -45,9 +45,17 @@ public class WinningLotto {
     private void saveMatchingRanks(final List<Lotto> lottos, final Map<Rank, Integer> ranks) {
         for (Lotto lotto : lottos) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
-            Rank findRank = Rank.findBy(matchingCount, lotto.hasNumber(bonusNumber));
+            boolean bonusRequired = Rank.isNeedBonusRequired(matchingCount);
+            Rank findRank = findRankByBonusRequired(lotto, bonusRequired, matchingCount);
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
+    }
+
+    private Rank findRankByBonusRequired(final Lotto lotto, final boolean bonusRequired, final int matchingCount) {
+        if (bonusRequired) {
+            return Rank.findBy(matchingCount, lotto.hasNumber(bonusNumber));
+        }
+        return Rank.findBy(matchingCount, false);
     }
 
 }

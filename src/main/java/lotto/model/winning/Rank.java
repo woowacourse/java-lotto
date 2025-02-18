@@ -11,6 +11,7 @@ public enum Rank {
     SECOND(5, true, 30_000_000L),
     FIRST(6, false, 2_000_000_000L);
 
+    private static final int BONUS_REQUIRED_MATCHING_COUNT = 5;
     private final int matchingCount;
     private final boolean bonusRequired;
     private final long winningAmount;
@@ -21,22 +22,15 @@ public enum Rank {
         this.winningAmount = winningAmount;
     }
 
-    public static Rank findBy(final int matchingCount, final boolean hasBonusNumber) {
-        if (isSecond(matchingCount, hasBonusNumber)) {
-            return SECOND;
-        }
-        return findFirstByMatchingCount(matchingCount);
-    }
-
-    private static boolean isSecond(final int matchingCount, final boolean hasBonusNumber) {
-        return hasBonusNumber == SECOND.bonusRequired && matchingCount == SECOND.matchingCount;
-    }
-
-    private static Rank findFirstByMatchingCount(final int matchingCount) {
+    public static Rank findBy(final int matchingCount, final boolean bonusRequired) {
         return Arrays.stream(values())
-                .filter(rank -> rank.matchingCount == matchingCount)
+                .filter(rank -> rank.bonusRequired == bonusRequired && rank.matchingCount == matchingCount)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static boolean isNeedBonusRequired(final int matchingCount) {
+        return matchingCount == BONUS_REQUIRED_MATCHING_COUNT;
     }
 
     public int getMatchingCount() {
