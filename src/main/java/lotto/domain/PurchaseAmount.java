@@ -11,6 +11,14 @@ public class PurchaseAmount {
         this.amount = amount;
     }
 
+    public int calculateCountPerUnit() {
+        return amount / Lotto.LOTTO_PRICE;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
     private void validateUnit(int purchaseAmount) {
         boolean isInValidAmount = purchaseAmount % Lotto.LOTTO_PRICE != 0 || purchaseAmount <= 0;
         if (isInValidAmount) {

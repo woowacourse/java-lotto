@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.config.ApplicationConfiguration;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
+import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningLotto;
 import lotto.domain.WinningTier;
 import lotto.view.InputView;
@@ -22,17 +23,18 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = readPurchaseAmount();
+        PurchaseAmount purchaseAmount = readPurchaseAmount();
         List<Lotto> lottos = purchaseLottos(purchaseAmount);
         List<WinningTier> winningTiers = findWinningTiers(lottos);
         printWinningResult(winningTiers, purchaseAmount);
     }
 
-    private int readPurchaseAmount() {
-        return inputView.readPurchaseAmount();
+    private PurchaseAmount readPurchaseAmount() {
+        int amount = inputView.readPurchaseAmount();
+        return new PurchaseAmount(amount);
     }
 
-    private List<Lotto> purchaseLottos(int purchaseAmount) {
+    private List<Lotto> purchaseLottos(PurchaseAmount purchaseAmount) {
         List<Lotto> lottos = lottoMachine.purchaseLotto(purchaseAmount);
         outputView.printLottos(lottos);
         return lottos;
@@ -45,8 +47,8 @@ public class LottoController {
         return lottoMachine.findWinningTiers(lottos, winningLotto);
     }
 
-    private void printWinningResult(List<WinningTier> tiers, int purchaseAmount) {
-        double profit = lottoMachine.calculateProfit(tiers, purchaseAmount);
+    private void printWinningResult(List<WinningTier> tiers, PurchaseAmount amount) {
+        double profit = lottoMachine.calculateProfit(tiers, amount);
         outputView.printResults(tiers, profit);
     }
 }

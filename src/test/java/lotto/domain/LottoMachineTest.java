@@ -22,11 +22,11 @@ class LottoMachineTest {
     @DisplayName("구매 금액에 해당하는 로또를 구매할 수 있다.")
     @Test
     void 구매_금액에_해당하는_로또를_구매할_수_있다() {
-        int givenPurchaseAmount = 10000;
+        PurchaseAmount givenAmount = new PurchaseAmount(10000);
 
-        List<Lotto> actualLottos = lottoMachine.purchaseLotto(givenPurchaseAmount);
+        List<Lotto> actualLottos = lottoMachine.purchaseLotto(givenAmount);
 
-        assertThat(actualLottos).hasSize(givenPurchaseAmount / Lotto.LOTTO_PRICE);
+        assertThat(actualLottos).hasSize(givenAmount.getAmount() / Lotto.LOTTO_PRICE);
     }
 
     @DisplayName("단위에 맞지 않는 구매 금액이 입력될 경우 예외가 발생한다.")
@@ -36,7 +36,7 @@ class LottoMachineTest {
         String expectedMessage = String.format(messageTemplate, Lotto.LOTTO_PRICE);
 
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> lottoMachine.purchaseLotto(1010))
+                .isThrownBy(() -> lottoMachine.purchaseLotto(new PurchaseAmount(1010)))
                 .withMessage(expectedMessage);
     }
 
@@ -60,7 +60,7 @@ class LottoMachineTest {
     @Test
     void 수익률을_올바르게_계산할_수_있다() {
         List<WinningTier> winningTiers = List.of(WinningTier.FOURTH, WinningTier.FIFTH, WinningTier.EMPTY);
-        int purchaseAmount = 5000;
+        PurchaseAmount purchaseAmount = new PurchaseAmount(5000);
         double expectedProfit = 11;
 
         assertThat(lottoMachine.calculateProfit(winningTiers, purchaseAmount)).isEqualTo(expectedProfit);
