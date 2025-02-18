@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -25,6 +26,18 @@ class LottoNumberTest {
     void testLottoNumber_rangeException(int number) {
         assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또 번호의 비교 결과를 검증한다.")
+    @Test
+    void test_compareTo() {
+        LottoNumber number1 = of(1);
+        LottoNumber number2 = of(1);
+        LottoNumber number3 = of(2);
+
+        assertThat(number1.compareTo(number3)).isNegative();
+        assertThat(number3.compareTo(number1)).isPositive();
+        assertThat(number1.compareTo(number2)).isZero();
     }
 
 }
