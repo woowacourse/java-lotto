@@ -37,7 +37,7 @@ public class Lotto {
         );
     }
 
-    public static int generateNumber() {
+    private static int generateNumber() {
         Random random = new Random();
         return random.nextInt(MAX_LOTTO_NUMBER) + 1;
     }
