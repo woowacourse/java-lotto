@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 class LottoTest {
 
     @Test
-    @DisplayName("되는 로또")
+    @DisplayName("유효한 로또 번호를 입력 시 성공")
     void validLotto() {
         Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6);
