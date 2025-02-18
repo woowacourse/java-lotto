@@ -32,7 +32,7 @@ public class InputParser {
 
     public int getInput() {
         if (inputs.size() != 1) {
-            throw new IllegalArgumentException("숫자는 하나만 들어와야 합니다.");
+            throw new IllegalArgumentException(CommonExceptionType.INVALID_ARGUMENTS_SIZE.getMessage(1));
         }
         return inputs.get(0);
     }

@@ -21,11 +21,11 @@ public enum Prize {
     }
 
     public static EnumMap<Prize, Integer> initializeMap() {
-        EnumMap<Prize, Integer> enumMap = new EnumMap<>(Prize.class);
+        EnumMap<Prize, Integer> prizeCountMap = new EnumMap<>(Prize.class);
         for (Prize prize : Prize.values()) {
-            enumMap.put(prize, 0);
+            prizeCountMap.put(prize, 0);
         }
-        return enumMap;
+        return prizeCountMap;
     }
 
     public static Prize find(int matchCount, boolean matchesBonusNumber) {

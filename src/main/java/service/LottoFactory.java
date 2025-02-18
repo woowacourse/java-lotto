@@ -6,31 +6,31 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import model.Bonus;
 import model.Lotto;
+import model.LottoConstant;
 import model.Prize;
+import model.RandomNumberGenerator;
+import model.WinningLotto;
 
 public class LottoFactory {
 
-    public static final int LOTTO_PURCHASE_UNIT = 1_000;
     private static final int LOTTO_SIZE = 6;
     private static final int LOTTO_MAX_RANGE = 45;
 
     private final int ticketNumber;
+    private final RandomNumberGenerator randomNumberGenerator;
     private final List<Lotto> issuedTickets;
 
-    private final Random random;
-
-    public static LottoFactory of(final int purchase) {
-        return new LottoFactory(purchase / LOTTO_PURCHASE_UNIT);
+    public static LottoFactory of(final int purchase, RandomNumberGenerator randomNumberGenerator) {
+        return new LottoFactory(purchase / LottoConstant.TICKET_PRICE_UNIT, randomNumberGenerator);
     }
 
-    private LottoFactory(final int ticketNumber) {
+    private LottoFactory(final int ticketNumber, RandomNumberGenerator randomNumberGenerator) {
         this.ticketNumber = ticketNumber;
-        this.random = new Random();
+        this.randomNumberGenerator = randomNumberGenerator;
         this.issuedTickets = IntStream.range(0, ticketNumber)
                 .mapToObj(i -> getIssueTicket())
                 .collect(Collectors.toList());
@@ -39,16 +39,18 @@ public class LottoFactory {
     private Lotto getIssueTicket() {
         HashSet<Integer> issuedTicket = new HashSet<>();
         while (issuedTicket.size() < LOTTO_SIZE) {
-            issuedTicket.add(getRandomNumber());
+            issuedTicket.add(randomNumberGenerator.generate(LOTTO_MAX_RANGE));
         }
         return new Lotto(new ArrayList<>(issuedTicket));
     }
 
-    public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
+    public EnumMap<Prize, Integer> getStatistic(WinningLotto winningLotto) {
         EnumMap<Prize, Integer> prizeMap = initializeMap();
+        Lotto lotto = winningLotto.getLotto();
+        Bonus bonus = winningLotto.getBonus();
         for (Lotto issuedTicket : issuedTickets) {
             int matchCount = checkLottoNumber(lotto, issuedTicket);
-            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.getNumbers());
+            boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.numbers());
             Prize foundPrize = Prize.find(matchCount, matchesBonus);
             prizeMap.put(foundPrize, prizeMap.get(foundPrize) + 1);
         }
@@ -57,8 +59,8 @@ public class LottoFactory {
     }
 
     private int checkLottoNumber(Lotto lotto, Lotto issuedTicket) {
-        return (int) issuedTicket.getNumbers().stream()
-                .filter(issuedNumber -> lotto.getNumbers().contains(issuedNumber))
+        return (int) issuedTicket.numbers().stream()
+                .filter(issuedNumber -> lotto.numbers().contains(issuedNumber))
                 .count();
     }
 
@@ -72,10 +74,6 @@ public class LottoFactory {
             benefit += enumMap.get(prize) * prize.getPrizeAmount();
         }
         return benefit;
-    }
-
-    private int getRandomNumber() {
-        return random.nextInt(LOTTO_MAX_RANGE) + 1;
     }
 
     public int getTicketNumber() {
