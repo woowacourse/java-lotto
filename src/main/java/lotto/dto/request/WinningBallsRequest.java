@@ -1,11 +1,11 @@
 package lotto.dto.request;
 
-import lotto.dto.ConvertUtil;
+import lotto.dto.util.ConvertUtil;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.dto.ConvertUtil.convertToNumber;
+import static lotto.dto.util.ConvertUtil.convertToNumber;
 
 public record WinningBallsRequest(
     List<Integer> winningNumbers,

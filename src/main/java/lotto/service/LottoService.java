@@ -1,18 +1,22 @@
 package lotto.service;
 
-import lotto.domain.*;
-import lotto.dto.response.LottosResponse;
-import lotto.dto.request.PaymentRequest;
-import lotto.dto.response.ResultResponse;
-import lotto.dto.request.WinningBallsRequest;
-
 import java.util.Map;
-import lotto.util.RandomNumberGenerator;
+import lotto.domain.Bank;
+import lotto.domain.Lotto;
+import lotto.domain.LottoResult;
+import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.WinningLotto;
+import lotto.domain.util.impl.RandomLottoGenerator;
+import lotto.dto.request.PaymentRequest;
+import lotto.dto.request.WinningBallsRequest;
+import lotto.dto.response.LottosResponse;
+import lotto.dto.response.ResultResponse;
 
 public class LottoService {
     private final Bank bank;
     private Lottos lottos;
-    private WinningNumbers winningNumbers;
+    private WinningLotto winningLotto;
 
     public LottoService() {
         this.bank = new Bank();
@@ -20,16 +24,17 @@ public class LottoService {
 
     public LottosResponse buyLottos(PaymentRequest request) {
         bank.pay(request.payment());
-        this.lottos = new Lottos(new RandomNumberGenerator(), request.payment());
+        this.lottos = new Lottos(new RandomLottoGenerator(), request.payment());
         return LottosResponse.from(lottos);
     }
 
-    public void setWinningBalls(WinningBallsRequest request) {
-        winningNumbers = new WinningNumbers(new Lotto(request.winningNumbers()), request.bonusNumber());
+    public void initWinningLotto(WinningBallsRequest request) {
+        this.winningLotto = new WinningLotto(new Lotto(request.winningNumbers()), request.bonusNumber());
     }
 
-    public ResultResponse getResult() {
-        Map<Rank, Long> rankCount = lottos.getRankCount(winningNumbers);
-        return ResultResponse.of(rankCount, bank.calculateRateOfReturn(rankCount));
+    public ResultResponse calculateResult() {
+        Map<Rank, Long> rankCount = this.lottos.calculateWinnings(winningLotto);
+        LottoResult result = new LottoResult(rankCount);
+        return ResultResponse.of(rankCount, result.calculateRateOfReturn(this.bank.getUsedMoney()));
     }
 }

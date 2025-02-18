@@ -17,7 +17,7 @@ public class InputView {
         return PaymentRequest.from(scanner.nextLine());
     }
 
-    public WinningBallsRequest readWinningBalls() {
+    public WinningBallsRequest readWinningLotto() {
         return WinningBallsRequest.of(readWinningNumbers(), readBonusNumber());
     }
 

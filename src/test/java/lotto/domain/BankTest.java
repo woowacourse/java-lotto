@@ -1,28 +1,31 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class BankTest {
+    private Bank bank;
+
+    @BeforeEach
+    void setUp() {
+        bank = new Bank();
+    }
+
     @Test
     void 구입_금액만큼_money가_증가한다() {
-        Bank bank = new Bank();
         bank.pay(5000);
 
         assertThat(bank).extracting("usedMoney").isEqualTo(5000);
     }
 
-    @Test
-    void 수익률을_계산한다() {
-        Bank bank = new Bank();
-        bank.pay(10000);
-        Map<Rank, Long> map = Map.of(Rank.FIFTH, 1L);
-        BigDecimal result = bank.calculateRateOfReturn(map);
-        assertThat(result.setScale(2, RoundingMode.HALF_UP).doubleValue()).isEqualTo(0.50);
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    void 금액은_0원_이상_지불해야_한다(int payment) {
+        assertThatThrownBy(() -> bank.pay(payment)).isInstanceOf(IllegalArgumentException.class);
     }
 }

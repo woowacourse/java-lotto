@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public enum Rank {
     FIRST(6, false, 2_000_000_000),
@@ -21,7 +20,7 @@ public enum Rank {
         this.price = price;
     }
 
-    public static Rank of(int matchCount, boolean matchBonus) {
+    public static Rank of(final int matchCount, final boolean matchBonus) {
         Rank found = Arrays.stream(values())
                 .filter(rank -> rank.matchCount == matchCount)
                 .findFirst()
@@ -33,10 +32,8 @@ public enum Rank {
         return found;
     }
 
-    public static long calculateTotalPrice(Map<Rank, Long> result) {
-        return result.entrySet().stream()
-                .mapToLong(set -> set.getKey().price * set.getValue())
-                .sum();
+    public long multiplyPrice(final Long value) {
+        return this.price * value;
     }
 
     public int getMatchCount() {
