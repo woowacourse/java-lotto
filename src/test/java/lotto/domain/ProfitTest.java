@@ -37,7 +37,8 @@ class ProfitTest {
     })
     void testProfitCalculation(long winningPrize, int spentMoney, double expectedRate, boolean expectedIsProfit) {
         // when
-        Profit profit = Profit.from(winningPrize, new Money(spentMoney, LOTTO_PRIZE));
+        int lottoPrice = 1000;
+        Profit profit = Profit.from(winningPrize, new Money(spentMoney, lottoPrice));
 
 
         // then
@@ -55,7 +56,9 @@ class ProfitTest {
     })
     void testInvalidSpentMoneyThrowsException(long winningPrize, int spentMoney) {
         // then
-        assertThatThrownBy(() -> Profit.from(winningPrize, new Money(spentMoney, LOTTO_PRIZE)))
+        int lottoPrice = 1000;
+
+        assertThatThrownBy(() -> Profit.from(winningPrize, new Money(spentMoney, lottoPrice)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

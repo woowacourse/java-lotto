@@ -16,7 +16,7 @@ class LottoShopTest {
     @Test
     void test_buyLottos() {
         // given
-        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+        Money money = new Money(5000, 1000);
 
         LottoShop lottoShop = new LottoShop(
                 new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
@@ -31,7 +31,7 @@ class LottoShopTest {
     @DisplayName("돈으로 구매할 수 있는 로또 개수를 계산한다.")
     @Test
     void test_calculateLottoCount() {
-        Money money = new Money(LOTTO_PRIZE * 5, LOTTO_PRIZE);
+        Money money = new Money(5000, 1000);
 
         LottoShop lottoShop = new LottoShop(
                 new RandomNumbersGenerator(LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM, LOTTO_SIZE));
