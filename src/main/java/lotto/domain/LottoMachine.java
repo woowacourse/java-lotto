@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LottoMachine {
     public static final int LOTTO_UNIT_PRICE = 1000;
@@ -16,12 +17,9 @@ public class LottoMachine {
     public List<Lotto> purchase(final int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
         int lottoAmount = purchaseAmount / LOTTO_UNIT_PRICE;
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoAmount; i++) {
-            Lotto lotto = createLotto();
-            lottos.add(lotto);
-        }
-        return lottos;
+        return Stream.generate(this::createLotto)
+                .limit(lottoAmount)
+                .toList();
     }
 
     private void validatePurchaseAmount(final int purchaseAmount) {
