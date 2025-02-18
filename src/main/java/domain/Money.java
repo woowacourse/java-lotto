@@ -19,10 +19,6 @@ public class Money {
     return money / MONEY_UNIT;
   }
 
-  public int calculateBuyLottoCount() {
-    return calculateBuyLottoAmount();
-  }
-
   public double calculateEarnMoneyRatio(long earnMoney) {
     return (double) earnMoney / money;
   }

@@ -14,7 +14,7 @@ public class LottoDispenser {
 
   public LottoDispenser(String buyMoneyInput) {
     this.money = new Money(buyMoneyInput);
-    lottos = generateLottos(money.calculateBuyLottoCount());
+    lottos = generateLottos(money.calculateBuyLottoAmount());
   }
 
   public DrawResultDto getDrawResult(WinningLotto winningLotto) {
