@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Lotto {
@@ -7,10 +8,14 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
     }
 
-    public LottoRank compareLotto(WinningLotto winningLotto) {
+    public List<Integer> getNumbers() {
+        return new ArrayList<>(numbers);
+    }
+
+    public LottoRank checkLottoRank(WinningLotto winningLotto) {
         int winningCounter = (int) numbers.stream()
             .filter(winningLotto::containsWinningNumber)
             .count();
@@ -19,10 +24,5 @@ public class Lotto {
             .anyMatch(winningLotto::isBonusNumber);
 
         return LottoRank.findLottoRank(winningCounter, bonusChecker);
-    }
-
-    @Override
-    public String toString() {
-        return numbers.toString();
     }
 }

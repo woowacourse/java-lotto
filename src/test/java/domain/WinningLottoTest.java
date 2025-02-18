@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class WinnigLottoTest {
+public class WinningLottoTest {
 
     @Test
     @DisplayName("당첨 로또 정상 생성")

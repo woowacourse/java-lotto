@@ -1,34 +1,56 @@
 package view;
 
+import static util.constant.Message.DIVIDER_LINE;
+import static util.constant.Message.PROFIT_DAMAGE_MESSAGE;
+import static util.constant.Message.PROFIT_FORMAT;
+import static util.constant.Message.STATISTICS_BONUS_BALL_FORMAT;
+import static util.constant.Message.STATISTICS_FORMAT;
+import static util.constant.Message.STATISTICS_MATCH_FORMAT;
+import static util.constant.Message.STATISTICS_PRICE_FORMAT;
+import static util.constant.Message.STATISTICS_START_MESSAGE;
+import static util.constant.Message.TOTAL_LOTTO_FORMAT;
+import static util.constant.Values.PROFIT_DAMAGE_LIMIT;
+
+import domain.Lotto;
 import domain.LottoRank;
+import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    private final String TOTAL_LOTTO_FORMAT = "%d개를 구매했습니다.\n";
-    private final String STATICS_FORMAT = "%s- %d개\n";
-    private final String PROFIT_FORMAT = "총 수익률은 %.2f입니다.";
-
-    public void displayLottos(int totalLotto, String result) {
+    public void displayLottos(int totalLotto, List<Lotto> lottos) {
         System.out.printf(TOTAL_LOTTO_FORMAT, totalLotto);
-        System.out.println(result);
+
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 
     public void displayResult(Map<LottoRank, Integer> lottoResult) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
-        for (LottoRank lottoRank : lottoResult.keySet()) {
-            if (lottoRank == lottoRank.BOOM) {
-                continue;
-            }
-            System.out.printf(STATICS_FORMAT, lottoRank.toString(), lottoResult.get(lottoRank));
+        System.out.println(STATISTICS_START_MESSAGE);
+        System.out.println(DIVIDER_LINE);
+
+        lottoResult.keySet()
+            .stream()
+            .filter(lottoRank -> lottoRank != LottoRank.BOOM)
+            .forEach(lottoRank -> {
+                String rankInfo = formatRankInfo(lottoRank);
+                System.out.printf(STATISTICS_FORMAT, rankInfo, lottoResult.get(lottoRank));
+            });
+    }
+
+    private String formatRankInfo(LottoRank lottoRank) {
+        String rankInfo = String.format(STATISTICS_MATCH_FORMAT, lottoRank.winningCounter);
+        if (lottoRank.bonusChecker) {
+            rankInfo += STATISTICS_BONUS_BALL_FORMAT;
         }
+        return rankInfo + String.format(STATISTICS_PRICE_FORMAT, lottoRank.prize);
     }
 
     public void displayProfit(double profit) {
         System.out.printf(PROFIT_FORMAT, profit);
-        if (profit < 1.0) {
-            System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        if (profit < PROFIT_DAMAGE_LIMIT) {
+            System.out.println(PROFIT_DAMAGE_MESSAGE);
         }
     }
 }

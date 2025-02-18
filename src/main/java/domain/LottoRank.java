@@ -12,9 +12,9 @@ public enum LottoRank {
     SECOND_PLACE(5, true, 30_000_000),
     FIRST_PLACE(6, false, 2_000_000_000);
 
-    public int winningCounter;
-    public boolean bonusChecker;
-    public int prize;
+    public final int winningCounter;
+    public final boolean bonusChecker;
+    public final int prize;
 
     LottoRank(int winningCounter, boolean bonusChecker, int prize) {
         this.winningCounter = winningCounter;
@@ -41,18 +41,5 @@ public enum LottoRank {
 
     public int multiplyPrice(int counter) {
         return prize * counter;
-    }
-
-    @Override
-    public String toString() {
-        String result = "";
-        result += String.valueOf(winningCounter) + "개 일치 ";
-
-        if (bonusChecker) {
-            result += ", 보너스 볼 일치 ";
-        }
-
-        result += "(" + prize + ")";
-        return result;
     }
 }

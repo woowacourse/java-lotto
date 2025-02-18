@@ -18,7 +18,7 @@ public class Money {
     }
 
     public double calculateProfitRate(int profit) {
-        return (double)profit / money;
+        return (double) profit / money;
     }
 
     private void validateRange(int money) {

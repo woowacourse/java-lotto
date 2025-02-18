@@ -1,8 +1,5 @@
 package domain;
 
-import static domain.LottoRank.*;
-
-import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
