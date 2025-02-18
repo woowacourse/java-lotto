@@ -33,7 +33,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (WinningResultResponse response : getAscendingResultsByWinningAmount(responses)) {
-            printStatistics(response);
+            printLottoWinningStatistics(response);
         }
     }
 
@@ -44,7 +44,7 @@ public class OutputView {
                 .toList();
     }
 
-    private void printStatistics(final WinningResultResponse response) {
+    private void printLottoWinningStatistics(final WinningResultResponse response) {
         if (isNeedBonusBallMatchingMessage(response)) {
             System.out.printf(
                     "%d개, 보너스 볼 일치(%s원)- %d개" + System.lineSeparator(), response.getMatchingCount(),
