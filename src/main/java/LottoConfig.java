@@ -1,7 +1,7 @@
 import controller.LottoController;
-import controller.dto.LottoDtoMapper;
-import model.LottoNumberGenerator;
-import model.LottoRankCalculator;
+import controller.LottoDtoMapper;
+import model.numbers.LottoNumbersGenerator;
+import model.rank.LottoRankCalculator;
 import model.LottoStore;
 import view.InputParser;
 import view.InputView;
@@ -19,6 +19,6 @@ public class LottoConfig {
     }
 
     private LottoStore lottoStore() {
-        return new LottoStore(new LottoNumberGenerator(), new LottoRankCalculator());
+        return new LottoStore(new LottoNumbersGenerator(), new LottoRankCalculator());
     }
 }

@@ -1,9 +1,8 @@
 package controller.dto;
 
-import model.LottoRank;
+import model.rank.LottoRank;
 
 public record LottoRankResponse(
-        int rankOrder,
         int overlappedCount,
         int prizeMoney,
         boolean isBonusMatched,
@@ -12,7 +11,6 @@ public record LottoRankResponse(
 
     public static LottoRankResponse of(LottoRank lottoRank, int rankMatchCount) {
         return new LottoRankResponse(
-                lottoRank.getRankOrder(),
                 lottoRank.getOverlappedCount(),
                 lottoRank.getPrizeMoney(),
                 lottoRank.isRequiredBonusNumber(),
