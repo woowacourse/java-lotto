@@ -17,8 +17,7 @@ class CashierTest {
             "10_000, 10"
     }, delimiter = ',')
     void ok(int amount, int count) {
-        Cashier cashier = new Cashier();
-        List<Lotto> lottos = cashier.payForLotto(amount);
+        List<Lotto> lottos = Cashier.payForLotto(amount);
 
         assertThat(lottos.size()).isEqualTo(count);
     }
@@ -27,9 +26,8 @@ class CashierTest {
     @ParameterizedTest
     @ValueSource(ints = {999, 1_001})
     void shouldThrowException_WhenInvalidUnit(int invalidAmount) {
-        Cashier cashier = new Cashier();
-
-        assertThatThrownBy(() -> cashier.payForLotto(invalidAmount))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> Cashier.payForLotto(invalidAmount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("로또는 1,000원 단위로 구매할 수 있습니다.");
     }
 }

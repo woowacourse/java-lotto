@@ -16,22 +16,22 @@ public class InputView {
 
     public List<Integer> requestWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String input = Console.readLine();
+        final String input = Console.readLine();
         return parseWinningNumbers(input);
     }
 
-    private List<Integer> parseWinningNumbers(String input) {
-        String[] split = splitWithRegex(input, COMMA);
-        List<Integer> numbers = convertToIntegers(split);
+    private List<Integer> parseWinningNumbers(final String input) {
+        final String[] split = splitWithRegex(input, COMMA);
+        final List<Integer> numbers = convertToIntegers(split);
         return List.copyOf(numbers);
     }
 
-    private String[] splitWithRegex(String value, String regex) {
+    private String[] splitWithRegex(final String value, final String regex) {
         return value.split(regex);
     }
 
-    private List<Integer> convertToIntegers(String[] split) {
-        List<Integer> numbers = new ArrayList<>();
+    private List<Integer> convertToIntegers(final String[] split) {
+        final List<Integer> numbers = new ArrayList<>();
         for (String token : split) {
             int number = parseInt(token);
             validatePositive(number);
@@ -42,17 +42,17 @@ public class InputView {
 
     public int requestBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        String input = Console.readLine();
+        final String input = Console.readLine();
         return parseBonusNumber(input);
     }
 
-    private int parseBonusNumber(String input) {
+    private int parseBonusNumber(final String input) {
         int bonusNumber = parseInt(input);
         validatePositive(bonusNumber);
         return bonusNumber;
     }
 
-    private int parseInt(String value) {
+    private int parseInt(final String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {

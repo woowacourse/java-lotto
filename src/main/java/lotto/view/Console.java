@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.Scanner;
 
-public class Console {
+public final class Console {
 
     private static final Scanner scanner = new Scanner(System.in);
 

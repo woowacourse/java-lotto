@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import lotto.controller.LottoDto;
-import lotto.Rank;
+import lotto.model.Rank;
 
 public class OutputView {
 
