@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
+import lotto.domain.Lottos;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -61,10 +62,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printLottos(List<Lotto> lottos) {
-        String content = String.format("%d개를 구매했습니다.", lottos.size());
-        System.out.println(content);
-        for (Lotto lotto : lottos) {
+    public void printLottos(Lottos lottos) {
+        System.out.println(String.format("%d개를 구매했습니다.", lottos.getLottoCount()));
+        for (Lotto lotto : lottos.getLottos()) {
             String lottoNumbers = lotto.getNumbers().toString();
             System.out.println(lottoNumbers);
         }

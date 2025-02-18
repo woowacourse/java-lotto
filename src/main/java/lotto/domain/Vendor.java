@@ -29,7 +29,7 @@ public class Vendor {
         return this.purchaseAmount / LOTTO_PRICE;
     }
 
-    public List<Lotto> issueLottos() {
+    public Lottos issueLottos() {
         final int LOTTO_NUMBERS = 6;
         int lottoCount = this.calculateLottoCount();
         List<Lotto> lottos = new ArrayList<>();
@@ -39,7 +39,7 @@ public class Vendor {
             lottos.add(new Lotto(randoms));
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public double calculateProfit(List<WinningTier> winningTiers) {
