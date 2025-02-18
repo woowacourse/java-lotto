@@ -1,25 +1,19 @@
 package model;
 
-import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public class LottoCalculator {
 
     private final Map<LottoResult, Integer> winningLottoCounter;
 
     public LottoCalculator() {
-        this.winningLottoCounter = Arrays.stream(LottoResult.values())
-                .collect(
-                        Collectors.toMap(
-                                lottoResult -> lottoResult,
-                                lottoResult -> 0)
-                );
+        this.winningLottoCounter = new EnumMap<>(LottoResult.class);
     }
 
-    public void compareWinning(int count, boolean isBonus) {
-        LottoResult targetResult = LottoResult.findTargetResult(count, isBonus);
+    public void compareWinning(int winningNumberCount, boolean isBonus) {
+        LottoResult targetResult = LottoResult.findTargetResult(winningNumberCount, isBonus);
         winningLottoCounter.put(targetResult, winningLottoCounter.getOrDefault(targetResult, 0) + 1);
     }
 
