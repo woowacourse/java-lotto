@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.exception_message.ExceptionMessage;
+import lotto.exceptions.ExceptionMessage;
 import lotto.utility.RandomGenerator;
 
 public class LottoMachine {

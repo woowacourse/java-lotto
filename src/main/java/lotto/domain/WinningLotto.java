@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
-import lotto.exception_message.ExceptionMessage;
+import lotto.exceptions.ExceptionMessage;
 
 public class WinningLotto {
 

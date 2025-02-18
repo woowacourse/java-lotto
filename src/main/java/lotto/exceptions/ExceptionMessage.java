@@ -1,4 +1,4 @@
-package lotto.exception_message;
+package lotto.exceptions;
 
 public enum ExceptionMessage {
     DUPLICATED_NUMBERS("중복되는 번호가 있습니다."),

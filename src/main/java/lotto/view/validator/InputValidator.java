@@ -1,7 +1,7 @@
 package lotto.view.validator;
 
 import java.util.List;
-import lotto.exception_message.ExceptionMessage;
+import lotto.exceptions.ExceptionMessage;
 
 public class InputValidator {
 
