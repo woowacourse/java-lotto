@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.EnumMap;
+import java.util.Map;
 
 public enum Rank {
     FIRST_PRIDE(6, false, 2_000_000_000),
@@ -28,7 +28,7 @@ public enum Rank {
                 .orElse(BOOM);
     }
 
-    public static int calculateTotalPrize(EnumMap<Rank, Integer> lottoResult) {
+    public static int calculateTotalPrize(Map<Rank, Integer> lottoResult) {
         return lottoResult.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().prize * entry.getValue())
                 .sum();
