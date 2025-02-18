@@ -1,11 +1,8 @@
 package domain;
 
-import global.exception.ExceptionMessage;
-import global.generator.Generator;
-import global.generator.RandomGenerator;
-import java.util.Arrays;
+import domain.exception.ExceptionMessage;
+import domain.generator.Generator;
 import java.util.EnumMap;
-import java.util.Map.Entry;
 
 public class Money {
     private static final int LOTTO_PRICE = 1000;
@@ -23,8 +20,8 @@ public class Money {
     }
 
     public Lottos buyLottos(Generator generator) {
-        LottosFactory lottosFactory = new LottosFactory(generator);
-        return lottosFactory.from(money / LOTTO_PRICE);
+        LottosFactory lottosFactory = new LottosFactory();
+        return lottosFactory.from(money / LOTTO_PRICE, generator);
     }
 
     public double calculateProfit(final EnumMap<Rank, Integer> countRank) {

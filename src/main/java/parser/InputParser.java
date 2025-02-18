@@ -1,6 +1,6 @@
 package parser;
 
-import static global.exception.ExceptionMessage.INVALID_FORMAT;
+import static domain.exception.ExceptionMessage.INVALID_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
