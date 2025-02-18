@@ -17,5 +17,4 @@ public class InputParser {
             .map(Integer::parseInt)
             .collect(Collectors.toList());
     }
-
 }

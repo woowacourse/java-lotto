@@ -29,5 +29,4 @@ public class RandomNumberTest {
         assertThat(randomNumbers2.size()).isEqualTo(9);
         assertThat(randomNumbers3.size()).isEqualTo(8);
     }
-
 }

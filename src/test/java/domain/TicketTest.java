@@ -25,5 +25,4 @@ public class TicketTest {
         int expectedTicketAmount = 5;
         assertThat(ticket.getQuantity()).isEqualTo(expectedTicketAmount);
     }
-
 }

@@ -16,5 +16,4 @@ public class InputParserTest {
         List<Integer> parsedNumbers = InputParser.parseAndCreateWinningNumbers(inputWinningNumbers);
         assertThat(parsedNumbers).isEqualTo(expectedNumbers);
     }
-
 }

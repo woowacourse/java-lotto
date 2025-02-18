@@ -90,5 +90,4 @@ public class LottoTest {
         });
         assertThat(exception.getMessage()).isEqualTo(expectedMessage);
     }
-
 }

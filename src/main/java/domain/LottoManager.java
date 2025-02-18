@@ -27,5 +27,4 @@ public class LottoManager {
         }
         return Collections.unmodifiableList(lottos);
     }
-
 }

@@ -75,5 +75,4 @@ public class ProfitTest {
         Profit profit = Profit.of(calculateResult, purchaseAmount);
         assertThat(profit.getResult()).isEqualTo(expectedProfit);
     }
-
 }
