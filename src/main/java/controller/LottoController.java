@@ -6,6 +6,7 @@ import domain.winning.Matcher;
 import domain.winning.WinningCounter;
 import domain.winning.WinningLotto;
 import domain.winning.Yield;
+import infrastructure.RandomNumberGenerator;
 import java.util.List;
 import view.InputView;
 import view.OutputView;
@@ -21,23 +22,32 @@ public class LottoController {
     }
 
     public void run() {
-        int inputPurchaseAmount = inputView.askPurchaseAmount();
-        PurchaseAmount purchaseAmount = new PurchaseAmount(inputPurchaseAmount);
-        Lottos lottos = issueLottos(purchaseAmount.getMoney());
+        PurchaseAmount purchaseAmount = purchase();
+        Lottos lottos = issueLottos(purchaseAmount);
 
-        List<Integer> winningNumbers = inputView.askWinningNumbers();
-        int bonusNumber = inputView.askBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+        WinningLotto winningLotto = announceWinningLotto();
 
-        List<WinningCounter> winningCounters = matchAndCountWinningLottos(winningLotto, lottos);
-        calculateYield(purchaseAmount.getMoney(), winningCounters);
+        List<WinningCounter> winningCounters = matchAndCountWinning(winningLotto, lottos);
+        calculateYield(purchaseAmount, winningCounters);
     }
 
-    private Lottos issueLottos(int purchaseAmount) {
-        Lottos lottos = Lottos.create(purchaseAmount);
+    private PurchaseAmount purchase() {
+        int inputPurchaseAmount = inputView.askPurchaseAmount();
+        return new PurchaseAmount(inputPurchaseAmount);
+    }
 
-        int quantity = lottos.getQuantity();
-        outputView.printLottoQuantity(quantity);
+    private WinningLotto announceWinningLotto() {
+        List<Integer> winningNumbers = inputView.askWinningNumbers();
+        int bonusNumber = inputView.askBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
+    }
+
+    private Lottos issueLottos(PurchaseAmount purchaseAmount) {
+        int lottoQuantity = purchaseAmount.getLottoQuantity();
+        outputView.printLottoQuantity(lottoQuantity);
+
+        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        Lottos lottos = Lottos.issue(purchaseAmount.getMoney(), randomNumberGenerator);
 
         lottos.getLottos()
                 .forEach(lotto -> outputView.printLotto(lotto.getBallNumbers()));
@@ -45,7 +55,7 @@ public class LottoController {
         return lottos;
     }
 
-    private List<WinningCounter> matchAndCountWinningLottos(WinningLotto winningLotto, Lottos lottos) {
+    private List<WinningCounter> matchAndCountWinning(WinningLotto winningLotto, Lottos lottos) {
         List<Matcher> matchers = lottos.getLottos().stream()
                 .map(lotto -> Matcher.count(winningLotto, lotto))
                 .toList();
@@ -56,8 +66,8 @@ public class LottoController {
         return winningCounters;
     }
 
-    private void calculateYield(int purchaseAmount, List<WinningCounter> winningCounters) {
-        Yield yield = Yield.calculate(purchaseAmount, winningCounters);
+    private void calculateYield(PurchaseAmount purchaseAmount, List<WinningCounter> winningCounters) {
+        Yield yield = Yield.calculate(purchaseAmount.getMoney(), winningCounters);
         outputView.printYield(yield.getYield());
     }
 }
