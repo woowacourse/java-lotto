@@ -21,9 +21,9 @@ class LottoCalculatorTest {
 
         for (LottoResult result : LottoResult.values()) {
             int expected = lottoCalculator.findTargetResultCount(
-                    LottoResult.findTargetResult(result.getPrice(), result.isBonus()));
-            Assertions.assertThat(expected)
-                    .isEqualTo(1);
+                    LottoResult.findTargetResult(result.getPrice(), result.isBonus())
+            );
+            Assertions.assertThat(expected).isEqualTo(1);
         }
     }
 
