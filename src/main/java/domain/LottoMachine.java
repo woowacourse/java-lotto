@@ -1,6 +1,8 @@
 package domain;
 
-import static domain.LottoInformation.*;
+import static domain.LottoInformation.LOTTO_COUNT;
+import static domain.LottoNumber.LOTTO_NUMBER_END;
+import static domain.LottoNumber.LOTTO_NUMBER_START;
 
 public class LottoMachine {
 
