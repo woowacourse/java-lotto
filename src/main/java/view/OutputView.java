@@ -69,3 +69,4 @@ public class OutputView {
         System.out.println(message);
     }
 
+}
