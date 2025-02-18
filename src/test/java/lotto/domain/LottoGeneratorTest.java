@@ -27,7 +27,11 @@ class LottoGeneratorTest {
         //given
         LottoGenerator lottoGenerator = new LottoGenerator();
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         WinningNumbers winningNumbers = new WinningNumbers(lotto, LottoNumber.of(8));
         WinningNumbers madeWinningNumbers = lottoGenerator.makeWinningNumbers("1,2,3,4,5,6", "8");

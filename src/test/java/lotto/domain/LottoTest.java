@@ -17,7 +17,11 @@ class LottoTest {
     void 로또_생성을_확인한다() {
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         //when & then
@@ -50,7 +54,10 @@ class LottoTest {
         //when & then
         assertThatThrownBy(
                 () -> new Lotto(
-                        Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4),
+                        Set.of(LottoNumber.of(1),
+                                LottoNumber.of(2),
+                                LottoNumber.of(3),
+                                LottoNumber.of(4),
                                 LottoNumber.of(5))))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 로또의 갯수가 일치하지 않습니다.");
@@ -63,7 +70,11 @@ class LottoTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         //when
@@ -79,7 +90,11 @@ class LottoTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         //when
         boolean hasNumber = lotto.hasNumber(LottoNumber.of(5));
@@ -94,7 +109,11 @@ class LottoTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         //when
@@ -110,7 +129,11 @@ class LottoTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         LottoNumber bonusNumber = LottoNumber.of(5);
 
@@ -124,7 +147,11 @@ class LottoTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         LottoNumber bonusNumber = LottoNumber.of(7);
 

@@ -16,7 +16,11 @@ class WinningNumbersTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         //when & then
@@ -31,7 +35,11 @@ class WinningNumbersTest {
 
         //given
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         WinningNumbers winningNumbers = new WinningNumbers(lotto, LottoNumber.of(8));
 
@@ -48,10 +56,18 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(7)));
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, LottoNumber.of(7));
@@ -69,10 +85,18 @@ class WinningNumbersTest {
 
         //given
         Lotto winningLotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
         Lotto lotto = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         WinningNumbers winningNumbers = new WinningNumbers(winningLotto, LottoNumber.of(7));

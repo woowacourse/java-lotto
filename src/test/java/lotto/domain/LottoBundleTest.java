@@ -16,11 +16,19 @@ class LottoBundleTest {
 
         //given
         Lotto lotto1 = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         Lotto lotto2 = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(7)));
 
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto1, lotto2));
@@ -42,11 +50,19 @@ class LottoBundleTest {
 
         //given
         Lotto lotto1 = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         Lotto lotto2 = new Lotto(
-                Set.of(LottoNumber.of(1), LottoNumber.of(2), LottoNumber.of(3), LottoNumber.of(4), LottoNumber.of(5),
+                Set.of(LottoNumber.of(1),
+                        LottoNumber.of(2),
+                        LottoNumber.of(3),
+                        LottoNumber.of(4),
+                        LottoNumber.of(5),
                         LottoNumber.of(6)));
 
         LottoBundle lottoBundle = new LottoBundle(List.of(lotto1, lotto2));
