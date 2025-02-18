@@ -7,11 +7,11 @@ import lotto.exception.LottoException;
 
 public class Splitter {
 
-    public static List<String> splitByComma(String input) {
+    private static final String COMMA_SPLIT_REGEX = "\\s*\\d+\\s*(,\\s*\\d+\\s*)*";
 
-        String regex = "\\s*\\d+\\s*(,\\s*\\d+\\s*)*";
+    public static List<String> splitByComma(String input) {
         try {
-            if (!input.matches(regex)) {
+            if (!input.matches(COMMA_SPLIT_REGEX)) {
                 throw new LottoException(INVALID_INPUT);
             }
             return List.of(input.split(","));

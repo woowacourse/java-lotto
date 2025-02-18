@@ -8,7 +8,6 @@ import lotto.exception.LottoException;
 public class Parser {
 
     public static int parseToInteger(String input) {
-
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -17,7 +16,6 @@ public class Parser {
     }
 
     public static List<Integer> parseToIntegers(List<String> input) {
-
         try {
             return input.stream().map(Parser::parseToInteger).toList();
         } catch (NumberFormatException e) {

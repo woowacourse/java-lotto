@@ -3,6 +3,6 @@ package lotto.exception;
 public class LottoException extends IllegalArgumentException {
 
     public LottoException(ExceptionMessage message) {
-        super(message.toString());
+        super(message.getMessage());
     }
 }

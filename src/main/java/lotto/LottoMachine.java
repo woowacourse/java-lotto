@@ -30,9 +30,9 @@ public class LottoMachine {
         LottoBundle lottoBundle = makeLottoBundle(amountPaid);
         outputView.lottoQuantityPrint(lottoBundle.getLottoQuantity());
         outputView.lottoStatusPrint(lottoBundle);
+
         WinningNumbers winningNumbers = makeWinningNumber();
         EnumMap<Rank, Integer> lottoResult = lottoManager.makeStatistics(lottoBundle, winningNumbers);
-
         outputView.lottoStatisticsPrint(lottoResult, lottoManager.calculateTotalResult(lottoResult, amountPaid));
     }
 

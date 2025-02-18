@@ -12,7 +12,6 @@ public class Main {
         LottoManager lottoManager = new LottoManager();
 
         LottoMachine lottoMachine = new LottoMachine(inputView, outputView, lottoManager);
-
         lottoMachine.run();
     }
 }
