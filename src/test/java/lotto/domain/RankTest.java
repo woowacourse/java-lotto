@@ -30,24 +30,12 @@ class RankTest {
         assertThat(currentRank).isEqualTo(rank);
     }
 
-    @DisplayName("기본 맵을 생성한다.")
-    @Test
-    void 기본_맵을_생성한다() {
-
-        //given
-        Map<Rank, Integer> defaultMap = Rank.makeDefaultMap();
-
-        //when & then
-        assertThat(defaultMap.size()).isEqualTo(6);
-        assertThat(defaultMap.get(FIRST_PRIDE)).isEqualTo(0);
-    }
-
     @DisplayName("로또 결과에 따른 당첨 금액을 반환한다")
     @Test
     void 로또_결과에_따른_당첨_금액을_반환한다() {
 
         //given
-        EnumMap<Rank, Integer> lottoResult = new EnumMap<>(Rank.class);
+        Map<Rank, Integer> lottoResult = new EnumMap<>(Rank.class);
         lottoResult.put(FIRST_PRIDE, 1);
 
         //when
