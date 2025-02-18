@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Lotto {
@@ -16,20 +15,6 @@ public class Lotto {
 
     public LottoNumbers getLottoNumbers() {
         return lottoNumbers;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(lottoNumbers);
     }
 
     @Override
