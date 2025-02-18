@@ -11,7 +11,7 @@ import lotto.util.NumberFormatter;
 public class OutputView {
 
     public void printChangeAmount(final int changeAmount) {
-        System.out.println("로또 구매 후 남은 잔돈은 %s원 입니다.".formatted(getFormattedMoney(changeAmount)));
+        System.out.printf("로또 구매 후 남은 잔돈은 %s원 입니다." + System.lineSeparator(), getFormattedMoney(changeAmount));
     }
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
@@ -46,17 +46,16 @@ public class OutputView {
 
     private void printStatistics(final WinningResultResponse response) {
         if (isNeedBonusBallMatchingMessage(response)) {
-            System.out.println(
-                    "%d개, 보너스 볼 일치(%s원)- %d개".formatted(
-                            response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
-                            response.getWinningCount()
-                    ));
+            System.out.printf(
+                    "%d개, 보너스 볼 일치(%s원)- %d개" + System.lineSeparator(), response.getMatchingCount(),
+                    getFormattedMoney(response.getWinningAmount()), response.getWinningCount()
+            );
             return;
         }
-        System.out.println("%d개 일치 (%s원)- %d개".formatted(
-                response.getMatchingCount(), getFormattedMoney(response.getWinningAmount()),
-                response.getWinningCount()
-        ));
+        System.out.printf(
+                "%d개 일치 (%s원)- %d개" + System.lineSeparator(), response.getMatchingCount(),
+                getFormattedMoney(response.getWinningAmount()), response.getWinningCount()
+        );
     }
 
     private boolean isNeedBonusBallMatchingMessage(final WinningResultResponse response) {
@@ -64,7 +63,7 @@ public class OutputView {
     }
 
     public void printWinningRatio(final double returnRatio) {
-        System.out.println("총 수익률은 %s입니다.".formatted(NumberFormatter.formatReturnRatio(returnRatio)));
+        System.out.printf("총 수익률은 %s입니다." + System.lineSeparator(), NumberFormatter.formatReturnRatio(returnRatio));
     }
 
     public void printErrorMessage(final String message) {
