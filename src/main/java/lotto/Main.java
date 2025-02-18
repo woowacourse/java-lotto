@@ -3,7 +3,7 @@ package lotto;
 import lotto.controller.LottoController;
 import lotto.model.Cashier;
 import lotto.model.LottoMachine;
-import lotto.model.RandomNumberPicker;
+import lotto.model.RandomLottoNumberPicker;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -23,6 +23,6 @@ public class Main {
     }
 
     private static LottoMachine createRandomLottoMachine() {
-        return new LottoMachine(new RandomNumberPicker());
+        return new LottoMachine(new RandomLottoNumberPicker());
     }
 }

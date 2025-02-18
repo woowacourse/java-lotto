@@ -13,9 +13,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("랜덤 번호 생성기 테스트")
-class RandomNumberPickerTest {
+class RandomLottoNumberPickerTest {
 
-    private final RandomNumberPicker randomNumberPicker = new RandomNumberPicker();
+    private final RandomLottoNumberPicker randomLottoNumberPicker = new RandomLottoNumberPicker();
 
     @DisplayName("정상적인 경우")
     @Nested
@@ -25,7 +25,7 @@ class RandomNumberPickerTest {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 10})
         void countOfPickedNumbers(int count) {
-            Set<Integer> numbers = randomNumberPicker
+            Set<Integer> numbers = randomLottoNumberPicker
                     .pickNumbersInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX, count);
 
             assertThat(numbers)
@@ -36,7 +36,7 @@ class RandomNumberPickerTest {
         @ParameterizedTest
         @ValueSource(ints = {1, 2, 10})
         void numbersInRange(int count) {
-            Set<Integer> numbers = randomNumberPicker
+            Set<Integer> numbers = randomLottoNumberPicker
                     .pickNumbersInRange(LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX, count);
 
             for (Integer number : numbers) {
@@ -53,7 +53,7 @@ class RandomNumberPickerTest {
         @DisplayName("범위가 잘못된 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenInvalidRange() {
-            assertThatThrownBy(() -> randomNumberPicker.pickNumbersInRange(1, 0, 1))
+            assertThatThrownBy(() -> randomLottoNumberPicker.pickNumbersInRange(1, 0, 1))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("시작값은 끝값보다 작아야 합니다.");
         }
@@ -61,7 +61,7 @@ class RandomNumberPickerTest {
         @DisplayName("뽑을 숫자의 개수가 0개인 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenCountIsZero() {
-            assertThatThrownBy(() -> randomNumberPicker.pickNumbersInRange(1, 10, 0))
+            assertThatThrownBy(() -> randomLottoNumberPicker.pickNumbersInRange(1, 10, 0))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("뽑을 숫자의 개수는 1개 이상이어야 합니다.");
         }
@@ -69,7 +69,7 @@ class RandomNumberPickerTest {
         @DisplayName("요청한 개수가 범위 내 숫자보다 많은 경우 예외가 발생한다.")
         @Test
         void shouldThrowException_WhenCountIsGreaterThanRange() {
-            assertThatThrownBy(() -> randomNumberPicker.pickNumbersInRange(1, 10, 11))
+            assertThatThrownBy(() -> randomLottoNumberPicker.pickNumbersInRange(1, 10, 11))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("요청한 개수가 범위 내 숫자보다 많을 수 없습니다.");
         }
