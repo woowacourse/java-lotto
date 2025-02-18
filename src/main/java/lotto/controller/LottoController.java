@@ -1,52 +1,55 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Money;
 import lotto.domain.Prizes;
-import lotto.domain.RandomNumber;
 import lotto.domain.WinningLotto;
+import lotto.util.NumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
-    private Lottos lottos;
-    private WinningLotto winningLotto;
+    private final NumberGenerator numberGenerator;
 
-    public LottoController(final InputView inputView, final OutputView outputView) {
+    public LottoController(final InputView inputView, final OutputView outputView, final NumberGenerator numberGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.numberGenerator = numberGenerator;
     }
 
     public void run() {
         Money money = new Money(inputView.inputMoney());
-        purchaseLotto(money);
-        operateWinningLotto();
-        operateStatistics(money);
+        Lottos lottos = purchaseLotto(money);
+
+        outputView.printLottos(lottos);
+
+        WinningLotto winningLotto = operateWinningLotto();
+        operateStatistics(money, winningLotto, lottos);
         inputView.closeScanner();
     }
 
-    private void operateWinningLotto() {
+    private WinningLotto operateWinningLotto() {
         Lotto winningLottoNumber = new Lotto(inputView.inputWinningLotto());
-        String bonusNumber = inputView.inputBonusNumber();
-        winningLotto = new WinningLotto(winningLottoNumber, bonusNumber);
+        LottoNumber bonusNumber = new LottoNumber(inputView.inputBonusNumber());
+        return new WinningLotto(winningLottoNumber, bonusNumber);
     }
 
-    private void operateStatistics(Money money) {
-        Prizes prizes = lottos.calculatePrize(winningLotto);
+    private void operateStatistics(Money money, WinningLotto winningLotto, Lottos lottos) {
+        Prizes prizes = winningLotto.calculatePrize(lottos);
         double totalProfit = prizes.calculateProfit(money);
 
-        outputView.printResult(prizes.toString().trim());
+        outputView.printResult(prizes);
         outputView.printProfitRate(totalProfit);
     }
 
-    private void purchaseLotto(Money money) {
+    private Lottos purchaseLotto(Money money) {
         int lottoCounts = money.countsLotto();
         outputView.printCount(lottoCounts);
-        lottos = new Lottos(lottoCounts, new RandomNumber());
-        outputView.printLottos(lottos);
+        return new Lottos(lottoCounts, numberGenerator);
     }
 
 }

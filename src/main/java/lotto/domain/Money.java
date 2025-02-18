@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.constant.ErrorMessage;
-import lotto.util.Parser;
 
 public class Money {
 
@@ -23,23 +22,33 @@ public class Money {
     }
 
     private void validate(String money) {
-        int validatedMoney = Parser.validateNumber(money, ErrorMessage.PURCHASE_FORMAT_ERROR.getMessage());
+        int validatedMoney = validateMoney(money, ErrorMessage.PURCHASE_FORMAT_ERROR.getMessage());
         validateUnit(validatedMoney);
         validateNegative(validatedMoney);
         validateLimit(validatedMoney);
         this.money = validatedMoney;
     }
 
+    private int validateMoney(String money, String message) {
+        try {
+            return Integer.parseInt(money);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+    
     private void validateUnit(int validatedMoney) {
         if (validatedMoney % THOUSAND != 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_UNIT_ERROR.getMessage());
         }
     }
+
     private void validateNegative(int validatedMoney) {
         if (validatedMoney <= ZERO) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_MINIMUM_ERROR.getMessage());
         }
     }
+
     private void validateLimit(int validatedMoney) {
         if (validatedMoney > MAXIMUM) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_MAXIMUM_ERROR.getMessage());

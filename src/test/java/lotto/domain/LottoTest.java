@@ -76,19 +76,20 @@ class LottoTest {
     void 보너스_번호_매칭_확인() {
         //given
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        int bonusNumber = 3;
+        LottoNumber bonusNumber = new LottoNumber(3);
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(true);
+        assertThat(lotto.isMatchExist(bonusNumber)).isEqualTo(true);
     }
 
     @Test
     void 보너스_번호_매칭_실패() {
         //given
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        int bonusNumber = 7;
+        LottoNumber bonusNumber = new LottoNumber(7);
 
         //when & then
-        assertThat(lotto.checkBonusNumberMatch(bonusNumber)).isEqualTo(false);
+        assertThat(lotto.isMatchExist(bonusNumber)).isEqualTo(false);
     }
+
 }
