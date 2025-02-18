@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -33,7 +34,7 @@ public class Lotto {
     }
 
     private void validateLottoDuplicate(List<LottoNumber> numbers) {
-        HashSet<LottoNumber> set = new HashSet<>(numbers);
+        Set<LottoNumber> set = new HashSet<>(numbers);
         if (set.size() != numbers.size()) {
             throw LottoException.from(LOTTO_NUMBER_DUPLICATED_ERROR);
         }
