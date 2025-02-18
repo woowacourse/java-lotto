@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class MatchRankTest {
 
-    @DisplayName("getMatchStatistics 정상 작동 테스트")
+    @DisplayName("일치 개수와 보너스 여부를 통해 올바른 로또 당첨 등급을 가져올 수 있다.")
     @ParameterizedTest
     @CsvSource({
             "0, false, NO_MATCH",
@@ -21,7 +21,7 @@ class MatchRankTest {
             "5, true, MATCH_BONUS",
             "6, false, MATCH_SIX",
     })
-    void testGetMatchStatistics(int matchCount, boolean isBonusMatched, String expectedRankStr) {
+    void testGetMatchRank(int matchCount, boolean isBonusMatched, String expectedRankStr) {
         MatchRank expectedRank = MatchRank.valueOf(expectedRankStr);
 
         MatchRank matchRank = getMatchRank(matchCount, isBonusMatched);
