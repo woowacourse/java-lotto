@@ -21,8 +21,7 @@ class LottoWinningCheckerTest {
         Lotto lotto = new Lotto(myNumbers);
         Lotto winningNumbersLotto = new Lotto(winningNumbers);
 
-        Lottos lottos = new Lottos();
-        lottos.addLotto(lotto);
+        Lottos lottos = new Lottos(lotto);
 
         WinningNumberWithBonusNumber winningNumberWithBonusNumber = new WinningNumberWithBonusNumber(winningNumbersLotto, bonusNumber);
 

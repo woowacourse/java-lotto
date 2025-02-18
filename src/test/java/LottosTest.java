@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +22,13 @@ class LottosTest {
         List<Integer> numbers3 = Arrays.asList(1, 2, 31, 4, 5, 6);
         List<Integer> numbers4 = Arrays.asList(1, 21, 3, 4, 5, 6);
 
-        Lottos lottos = new Lottos();
+        List<Lotto> numbers=new ArrayList<>();
+        numbers.add(new Lotto(numbers1));
+        numbers.add(new Lotto(numbers2));
+        numbers.add(new Lotto(numbers3));
+        numbers.add(new Lotto(numbers4));
+        Lottos lottos = new Lottos(numbers);
 
-        lottos.addLotto(new Lotto(numbers1));
-        lottos.addLotto(new Lotto(numbers2));
-        lottos.addLotto(new Lotto(numbers3));
-        lottos.addLotto(new Lotto(numbers4));
         //when & then
         assertThat(lottos.getLottos().size()).isEqualTo(4);
     }
