@@ -30,12 +30,12 @@ public class LottoMachine {
         return new ReturnOfInvestmentResultResponse(returnOfInvestment, InvestmentOutcome.determine(returnOfInvestment));
     }
 
+    public double calculateReturnOfInvestment(final int totalPrice) {
+        return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
+    }
+
     private static void validatePurchaseMoney(final int purchaseMoney) {
         validateRange(purchaseMoney, LOTTO_PRICE, Integer.MAX_VALUE);
         validateDivisibility(purchaseMoney, LOTTO_PRICE);
-    }
-
-    private double calculateReturnOfInvestment(final int totalPrice) {
-        return Math.round(((double) totalPrice / purchaseMoney) * 100) / 100.0;
     }
 }
