@@ -10,8 +10,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import testUtil.StaticNumberPicker;
+import util.NumberPicker;
 
 class LottosTest {
+
+    @Test
+    void 로또들을_구입한다() {
+        //given
+        int purchaseMoney = 3000;
+        NumberPicker numberPicker = new StaticNumberPicker(List.of(
+            List.of(1, 2, 3, 4, 5, 6),
+            List.of(14, 15, 16, 13, 12, 9),
+            List.of(43, 41, 40, 23, 35, 22)
+        ));
+
+        //when
+        Lottos lottos = Lottos.purchase(purchaseMoney, numberPicker);
+
+        //then
+        assertThat(lottos.getLottoCount()).isEqualTo(3);
+    }
 
     @Test
     void 로또_당첨_통계를_계산한다() {
