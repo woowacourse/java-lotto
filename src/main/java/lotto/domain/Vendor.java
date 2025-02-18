@@ -11,12 +11,12 @@ public class Vendor {
     private static final int MAX_RANDOM_VALUE = 45;
     private static final int LOTTO_PRICE = 1000;
     private static final int LOTTO_NUMBERS = 6;
-    private final LottoNumberGenerator randomGenerator;
+    private final LottoNumberGenerator lottoNumberGenerator;
     private final int purchaseAmount;
 
-    public Vendor(LottoNumberGenerator randomGenerator, int purchaseAmount) {
+    public Vendor(LottoNumberGenerator lottoNumberGenerator, int purchaseAmount) {
         validatePurchaseAmount(purchaseAmount);
-        this.randomGenerator = randomGenerator;
+        this.lottoNumberGenerator = lottoNumberGenerator;
         this.purchaseAmount = purchaseAmount;
     }
 
@@ -35,7 +35,7 @@ public class Vendor {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> randoms = this.randomGenerator.generateNumbers(MAX_RANDOM_VALUE, LOTTO_NUMBERS);
+            List<Integer> randoms = this.lottoNumberGenerator.generateNumbers(MAX_RANDOM_VALUE, LOTTO_NUMBERS);
             lottos.add(new Lotto(randoms));
         }
 
