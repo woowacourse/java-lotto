@@ -67,13 +67,6 @@ public class LottoController {
                 .toList());
     }
 
-    private void addSortedLottoNumbers(final Lotto lottoTicket, final List<List<Integer>> issuedLottoNumbers) {
-        issuedLottoNumbers.add(new ArrayList<>(lottoTicket.getNumbers())
-                .stream()
-                .sorted()
-                .toList());
-    }
-
     private void printWinningResult(final WinningResultResponses winningResultResponses, final Money buyingAmount) {
         outputView.printWinningResult(winningResultResponses);
         outputView.printWinningRatio(
