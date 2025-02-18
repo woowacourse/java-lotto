@@ -40,13 +40,10 @@ public class LottoDispenser {
   }
 
   private long calculateTotalEarnMoney(Map<WinningCase, Integer> winningCalculateResult) {
-    long earnMoneySum = 0;
-    for (Entry<WinningCase, Integer> winningCaseIntegerEntry : winningCalculateResult.entrySet()) {
-      long earnMoney = winningCaseIntegerEntry.getKey()
-          .calculateEarnMoney(winningCaseIntegerEntry.getValue());
-      earnMoneySum += earnMoney;
-    }
-    return earnMoneySum;
+    return winningCalculateResult.entrySet()
+        .stream()
+        .mapToLong(entry -> entry.getKey().calculateEarnMoney(entry.getValue()))
+        .sum();
   }
 
 }
