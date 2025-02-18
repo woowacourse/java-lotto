@@ -1,8 +1,10 @@
 package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 import java.util.List;
+import java.util.stream.Stream;
 import model.numbers.LottoNumber;
 import model.numbers.LottoNumbers;
 import model.numbers.LottoNumbersGenerator;
@@ -11,6 +13,9 @@ import model.rank.LottoRank;
 import model.rank.LottoRankCalculator;
 import model.rank.LottoRankResult;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class LottoStoreTest {
 
@@ -47,9 +52,34 @@ class LottoStoreTest {
         assertThat(purchasedLotto).hasSize(1);
     }
 
+    @ParameterizedTest
+    @MethodSource("profitRateTestCases")
+    void 올바르게_수익률을_계산한다(int paidAmountValue, LottoRank rank, double expectedValue) {
+        // given
+        PaidAmount paidAmount = new PaidAmount(paidAmountValue);
+        LottoRankResult rankResult = new LottoRankResult();
+        rankResult.updateRankCount(rank);
+
+        // when
+        double profitRate = lottoStore.calculateProfitRate(paidAmount, rankResult);
+
+        // then
+        assertThat(profitRate).isCloseTo(expectedValue, within(0.1));
+    }
+
+    private static Stream<Arguments> profitRateTestCases() {
+        return Stream.of(
+                Arguments.of(1000, LottoRank.FIRST, 2000000),
+                Arguments.of(1000, LottoRank.SECOND, 30000),
+                Arguments.of(1000, LottoRank.THIRD, 1500),
+                Arguments.of(1000, LottoRank.FOURTH, 50)
+        );
+    }
+
     private List<LottoNumber> fromIntegerListToLottoNumberList(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
                 .toList();
     }
+
 }
