@@ -32,7 +32,7 @@ public class LottoNumbers {
         return lottoNumbers;
     }
 
-    public List<LottoNumber> sorted(final List<LottoNumber> lottoNumbers) {
+    private List<LottoNumber> sorted(final List<LottoNumber> lottoNumbers) {
         return lottoNumbers.stream()
                 .sorted()
                 .toList();
