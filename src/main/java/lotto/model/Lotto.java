@@ -22,7 +22,8 @@ public class Lotto {
 
     private void validateNumbers(Set<Integer> numbers) {
         Objects.requireNonNull(numbers, "로또 번호는 null이 될 수 없습니다.");
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
+        boolean isInvalidSize = numbers.size() != LOTTO_NUMBER_COUNT;
+        if (isInvalidSize) {
             throw new IllegalArgumentException("로또 번호는 %d개여야 합니다.".formatted(LOTTO_NUMBER_COUNT));
         }
         for (int number : numbers) {

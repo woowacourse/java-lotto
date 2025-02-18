@@ -28,7 +28,8 @@ public class LottoMachine {
     }
 
     private void validateCount(int count) {
-        if (count <= 0) {
+        boolean isLessThanOne = count < 1;
+        if (isLessThanOne) {
             throw new IllegalArgumentException("로또는 최소 1개 이상 발급할 수 있습니다.");
         }
     }
