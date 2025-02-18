@@ -22,7 +22,7 @@ public enum LottoRanking {
         this.prize = prize;
     }
 
-    public static LottoRanking from(int correctCount, boolean isCorrectBonusNumber) {
+    public static LottoRanking of(int correctCount, boolean isCorrectBonusNumber) {
         return Arrays.stream(LottoRanking.values())
                 .filter(ranking -> ranking.correctCount == correctCount)
                 .filter(ranking -> !ranking.isNeedBonus || isCorrectBonusNumber)

@@ -1,10 +1,4 @@
-package service;
-
-import domain.Lotto;
-import domain.LottoRanking;
-import domain.LottoResult;
-import domain.Lottos;
-import domain.WinningNumberWithBonusNumber;
+package domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +16,11 @@ public class LottoWinningChecker {
 
 
     private LottoRanking check(Lotto lotto, WinningNumberWithBonusNumber winningNumberWithBonusNumber) {
-        List<Integer> numbers = new ArrayList<>(lotto.getNumbers());
+        List<LottoNumber> numbers = new ArrayList<>(lotto.getNumbers());
         numbers.retainAll(winningNumberWithBonusNumber.winningNumber().getNumbers());
 
         int correctCount = numbers.size();
         boolean isBonusCollect = lotto.getNumbers().contains(winningNumberWithBonusNumber.bonusNumber());
-        return LottoRanking.from(correctCount, isBonusCollect);
+        return LottoRanking.of(correctCount, isBonusCollect);
     }
 }

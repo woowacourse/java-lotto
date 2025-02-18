@@ -1,4 +1,5 @@
-import domain.LottoRanking;
+package domain;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,9 +22,8 @@ class LottoRankingTest {
     })
     void 올바른_등수를_반환한다(int correctCount, boolean isCorrectBonus, LottoRanking expectedRanking) {
         // given
-
         // when
-        LottoRanking ranking = LottoRanking.from(correctCount, isCorrectBonus);
+        LottoRanking ranking = LottoRanking.of(correctCount, isCorrectBonus);
 
         // then
         assertThat(ranking).isEqualTo(expectedRanking);

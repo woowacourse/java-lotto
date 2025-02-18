@@ -19,11 +19,10 @@ public record LottoResult(
     }
 
     public long getTotalPrize() {
-        long totalPrize = 0;
-        for (LottoRanking ranking : result.keySet()) {
-            totalPrize += (long) ranking.getPrize() * result.get(ranking);
-        }
-        return totalPrize;
+
+        return result.entrySet().stream()
+                .mapToLong(entry -> (long) entry.getKey().getPrize() * entry.getValue())
+                .sum();
     }
 
     public int getCount() {
