@@ -30,7 +30,7 @@ class LottoStatisticsTest {
     private static Stream<LottoStatisticsTestData> provideTestData() {
         // 케이스 1: 모든 MatchRank가 한개씩 있는 경우
         Lotto winningLotto = new Lotto(LottoNumber.from(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonus = new LottoNumber(7);
+        LottoNumber bonus = LottoNumber.of(7);
         WinningInform winningInform = new WinningInform(winningLotto, bonus);
 
         Lotto ticket1 = new Lotto(LottoNumber.from(List.of(1, 2, 3, 7, 8, 9))); //3개 매칭

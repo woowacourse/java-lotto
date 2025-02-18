@@ -2,7 +2,9 @@ package lotto.domain;
 
 import static lotto.common.exception.ErrorMessage.ERROR_NUMBER_RANGE;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -10,14 +12,21 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOTTO_RANGE_MINIMUM = 1;
     public static final int LOTTO_RANGE_MAXIMUM = 45;
 
+    private static final Map<Integer, LottoNumber> CACHE = new HashMap<>();
+
     private final int number;
 
-    public LottoNumber(int number) {
-        validate(number);
+    private LottoNumber(int number) {
         this.number = number;
     }
 
-    private void validate(int number) {
+    public static LottoNumber of(int number) {
+        validate(number);
+
+        return CACHE.computeIfAbsent(number, LottoNumber::new);
+    }
+
+    private static void validate(int number) {
         if (number < LOTTO_RANGE_MINIMUM || number > LOTTO_RANGE_MAXIMUM) {
             throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
         }
@@ -25,7 +34,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> from(List<Integer> numbers) {
         return numbers.stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::of)
                 .collect(Collectors.toList());
     }
 

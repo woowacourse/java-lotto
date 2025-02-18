@@ -14,7 +14,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {LOTTO_RANGE_MINIMUM, LOTTO_RANGE_MAXIMUM})
     void test_LottoNumber(int number) {
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.of(number);
 
         assertThat(lottoNumber).isNotNull();
     }
@@ -23,7 +23,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {LOTTO_RANGE_MINIMUM - 1, LOTTO_RANGE_MAXIMUM + 1})
     void testLottoNumber_rangeException(int number) {
-        assertThatThrownBy(() -> new LottoNumber(number))
+        assertThatThrownBy(() -> LottoNumber.of(number))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

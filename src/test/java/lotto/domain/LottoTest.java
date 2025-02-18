@@ -37,7 +37,7 @@ class LottoTest {
         Lotto lotto = new Lotto(LottoNumber.from(list));
 
         //when
-        MatchRank rank = lotto.countMatchingNumbers(matchLotto, new LottoNumber(bonus));
+        MatchRank rank = lotto.countMatchingNumbers(matchLotto, LottoNumber.of(bonus));
 
         //then
         assertThat(rank).isEqualTo(MatchRank.MATCH_BONUS);

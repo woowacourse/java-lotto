@@ -16,7 +16,7 @@ class WinningInformTest {
         Lotto winningLotto = new Lotto(LottoNumber.from(List.of(1,2,3,4,5,6)));
         int bonus = 7;
 
-        WinningInform winningInform = new WinningInform(winningLotto, new LottoNumber(bonus));
+        WinningInform winningInform = new WinningInform(winningLotto, LottoNumber.of(bonus));
         assertThat(winningInform).isNotNull();
     }
 
@@ -24,7 +24,7 @@ class WinningInformTest {
     @Test
     void test_bonusDuplicate() {
         Lotto winningLotto = new Lotto(LottoNumber.from(List.of(1,2,3,4,5,6)));
-        LottoNumber bonus = new LottoNumber(6);
+        LottoNumber bonus = LottoNumber.of(6);
 
         assertThatThrownBy(() -> {
             new WinningInform(winningLotto, bonus);

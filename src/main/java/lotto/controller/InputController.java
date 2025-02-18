@@ -32,7 +32,7 @@ public class InputController {
                 Lotto winningLotto = getWinningLotto();
                 int bonus = getBonus();
 
-                return new WinningInform(winningLotto, new LottoNumber(bonus));
+                return new WinningInform(winningLotto, LottoNumber.of(bonus));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
