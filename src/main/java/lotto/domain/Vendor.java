@@ -10,6 +10,7 @@ public class Vendor {
 
     private static final int MAX_RANDOM_VALUE = 45;
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_NUMBERS = 6;
     private final LottoNumberGenerator randomGenerator;
     private final int purchaseAmount;
 
@@ -30,7 +31,6 @@ public class Vendor {
     }
 
     public Lottos issueLottos() {
-        final int LOTTO_NUMBERS = 6;
         int lottoCount = calculateLottoCount();
         List<Lotto> lottos = new ArrayList<>();
 
