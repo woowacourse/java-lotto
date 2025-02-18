@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import static lotto.view.PromptMessageContainer.ENTER_BONUS_NUMBER;
-import static lotto.view.PromptMessageContainer.ENTER_PHURCHASE_AMOUNT;
+import static lotto.view.PromptMessageContainer.ENTER_PURCHASE_AMOUNT;
 import static lotto.view.PromptMessageContainer.ENTER_WINNING_NUMBERS;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class LottoController {
     }
 
     private int requestPurchaseAmount() {
-        String rawPurchaseAmount = inputView.read(ENTER_PHURCHASE_AMOUNT);
+        String rawPurchaseAmount = inputView.read(ENTER_PURCHASE_AMOUNT);
         return NumberParser.parse(rawPurchaseAmount);
     }
 
