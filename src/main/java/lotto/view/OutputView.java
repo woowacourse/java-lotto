@@ -27,7 +27,7 @@ public class OutputView {
     }
 
     private void printWinningResult(final Rank rank, final int count) {
-        if (rank.isBonusMatch()) {
+        if (rank.isSecondPlace()) {
             System.out.printf("%d개 일치, 보너스 볼 일치(%d원)- %d개" + System.lineSeparator(),
                     rank.getMatchCount(), rank.getPrizeAmount(), count);
             return;

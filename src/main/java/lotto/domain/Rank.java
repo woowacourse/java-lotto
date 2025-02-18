@@ -51,12 +51,12 @@ public enum Rank {
         return rankCount;
     }
 
-    public int getMatchCount() {
-        return matchCount;
+    public boolean isSecondPlace() {
+        return SECOND_PLACE.equals(this);
     }
 
-    public boolean isBonusMatch() {
-        return isBonusMatch;
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getPrizeAmount() {
