@@ -39,10 +39,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof LottoNumber)) {
+        if (!(o instanceof LottoNumber lottoNumber)) {
             return false;
         }
-        LottoNumber lottoNumber = (LottoNumber) o;
         return Objects.equals(this.number, lottoNumber.number);
     }
 
