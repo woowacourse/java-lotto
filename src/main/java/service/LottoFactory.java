@@ -13,6 +13,7 @@ import model.Bonus;
 import model.Lotto;
 import model.LottoConstant;
 import model.Prize;
+import model.WinningLotto;
 
 public class LottoFactory {
 
@@ -44,8 +45,10 @@ public class LottoFactory {
         return new Lotto(new ArrayList<>(issuedTicket));
     }
 
-    public EnumMap<Prize, Integer> getStatistic(Lotto lotto, Bonus bonus) {
+    public EnumMap<Prize, Integer> getStatistic(WinningLotto winningLotto) {
         EnumMap<Prize, Integer> prizeMap = initializeMap();
+        Lotto lotto = winningLotto.getLotto();
+        Bonus bonus = winningLotto.getBonus();
         for (Lotto issuedTicket : issuedTickets) {
             int matchCount = checkLottoNumber(lotto, issuedTicket);
             boolean matchesBonus = checkBonus(bonus.getNumber(), issuedTicket.numbers());

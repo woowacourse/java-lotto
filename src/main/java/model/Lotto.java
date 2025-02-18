@@ -4,22 +4,27 @@ import exception.CommonExceptionType;
 import exception.LottoExceptionType;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
-public record Lotto(List<Integer> numbers) {
+public final class Lotto {
+    private final List<Integer> numbers;
+
 
     public static Lotto of(final List<Integer> inputs) {
         validateArgumentsSize(inputs);
         return new Lotto(inputs);
     }
 
-    public Lotto {
+    public Lotto(List<Integer> numbers) {
         validateRange(numbers);
         validateDuplicate(numbers);
+        this.numbers = numbers;
     }
 
     private static void validateArgumentsSize(final List<Integer> numbers) {
         if (numbers.size() != LottoConstant.SIZE) {
-            throw new IllegalArgumentException(CommonExceptionType.INVALID_ARGUMENTS_SIZE.getMessage(LottoConstant.SIZE));
+            throw new IllegalArgumentException(
+                    CommonExceptionType.INVALID_ARGUMENTS_SIZE.getMessage(LottoConstant.SIZE));
         }
     }
 
@@ -39,4 +44,32 @@ public record Lotto(List<Integer> numbers) {
             throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
         }
     }
+
+    public List<Integer> numbers() {
+        return numbers;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        var that = (Lotto) obj;
+        return Objects.equals(this.numbers, that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "Lotto[" +
+                "numbers=" + numbers + ']';
+    }
+
 }
