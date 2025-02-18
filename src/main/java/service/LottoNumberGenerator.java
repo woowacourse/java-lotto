@@ -24,9 +24,10 @@ public class LottoNumberGenerator implements NumberGenerate {
 
     @Override
     public List<Integer> generateRandomInRange(int start, int end, int size) {
-        ArrayList<Integer> numbersOfRange = IntStream.rangeClosed(start, end)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Integer> numbersOfRange = new ArrayList<>();
+        for (int number = start; number <= end; number++) {
+            numbersOfRange.add(number);
+        }
 
         Collections.shuffle(numbersOfRange);
         return numbersOfRange.subList(LOTTO_FROM_INDEX, size);
