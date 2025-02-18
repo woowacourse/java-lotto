@@ -26,7 +26,7 @@ public class LottoController {
         List<LottoNumbers> lottoNumbers = createLottoNumbers(paidAmount);
         WinningLotto winningLotto = createWinningLotto();
 
-        getResult(lottoNumbers, winningLotto, paidAmount);
+        processLottoResult(lottoNumbers, winningLotto, paidAmount);
     }
 
     private List<LottoNumbers> createLottoNumbers(PaidAmount paidAmount) {
@@ -43,7 +43,7 @@ public class LottoController {
         return lottoDtoMapper.toWinningLotto(winningLottoRequest);
     }
 
-    private void getResult(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto, PaidAmount paidAmount) {
+    private void processLottoResult(List<LottoNumbers> lottoNumbers, WinningLotto winningLotto, PaidAmount paidAmount) {
         LottoRankResult lottoRankResult = lottoStore.calculateRankMatchCount(lottoNumbers, winningLotto);
         lottoConsoleView.printLottoRankResults(lottoDtoMapper.toLottoRankResponses(lottoRankResult));
 
