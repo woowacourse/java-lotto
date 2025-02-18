@@ -2,12 +2,13 @@ package lotto.view.validator;
 
 import java.util.List;
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.InputException;
 
 public class InputValidator {
 
     public void validateBlank(String content) {
         if (content == null || content.isBlank()) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_INPUT.getContent());
+            throw new InputException(ExceptionMessage.INVALID_INPUT.getContent());
         }
     }
 
@@ -15,7 +16,7 @@ public class InputValidator {
         try {
             Integer.parseInt(numericContent);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
+            throw new InputException(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
         }
     }
 
@@ -23,7 +24,7 @@ public class InputValidator {
         try {
             List<Integer> numbers = numericContents.stream().map(Integer::parseInt).toList();
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
+            throw new InputException(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
         }
     }
 }

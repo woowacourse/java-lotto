@@ -1,11 +1,12 @@
 package lotto.view.validator;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
 import java.util.stream.Stream;
 import lotto.exceptions.ExceptionMessage;
+import lotto.exceptions.InputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,9 +30,9 @@ class InputValidatorTest {
     @NullSource
     @ValueSource(strings = {"", " "})
     void 비어있는_값이_입력되는_것을_검증할_수_있다(String input) {
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputValidator.validateBlank(input))
-                .withMessage(ExceptionMessage.INVALID_INPUT.getContent());
+        assertThatThrownBy(() -> inputValidator.validateBlank(input))
+                .isInstanceOf(InputException.class)
+                .hasMessage(ExceptionMessage.INVALID_INPUT.getContent());
     }
 
     @DisplayName("하나의 문자열이 숫자형인지 검증할 수 있다.")
@@ -44,9 +45,9 @@ class InputValidatorTest {
             return;
         }
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputValidator.validateNumberFormat(input))
-                .withMessage(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
+        assertThatThrownBy(() -> inputValidator.validateNumberFormat(input))
+                .isInstanceOf(InputException.class)
+                .hasMessage(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
     }
 
     @DisplayName("여러개의 문자열이 숫자형인지 검증할 수 있다.")
@@ -59,9 +60,9 @@ class InputValidatorTest {
             return;
         }
 
-        assertThatIllegalArgumentException()
-                .isThrownBy(() -> inputValidator.validateNumberFormat(inputs))
-                .withMessage(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
+        assertThatThrownBy(() -> inputValidator.validateNumberFormat(inputs))
+                .isInstanceOf(InputException.class)
+                .hasMessage(ExceptionMessage.INVALID_NUMBER_FORMAT.getContent());
     }
 
     static Stream<Arguments> 여러개의_문자열이_숫자형인지_검증할_수_있다() {
