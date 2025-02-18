@@ -1,10 +1,10 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PurchaseAmountTest {
 
@@ -21,12 +21,25 @@ class PurchaseAmountTest {
 
     @Test
     @DisplayName("구매 금액이 1000원 단위가 아닌 경우, 예외를 발생시킨다.")
-    void validateCollectAmount() {
+    void validateUnitOfThousandWon() {
+        assertThatThrownBy(() -> new PurchaseAmount(25670))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 1000원 단위어야 합니다.");
+    }
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            purchaseAmount = new PurchaseAmount(25670);
-        });
+    @Test
+    @DisplayName("구매 금액이 0인 경우, 예외를 발생시킨다.")
+    void throwsExceptionWhenAmountIsZero() {
+        assertThatThrownBy(() -> new PurchaseAmount(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 양수여야 합니다.");
+    }
 
-        assertThat(exception.getMessage()).isEqualTo("구매 금액은 1000원 단위어야 합니다.");
+    @Test
+    @DisplayName("구매 금액이 음수인 경우, 예외를 발생시킨다.")
+    void throwsExceptionWhenAmountIsNegative() {
+        assertThatThrownBy(() -> new PurchaseAmount(-1))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("구매 금액은 양수여야 합니다.");
     }
 }

@@ -21,7 +21,7 @@ public class LottoController {
         OutputView.printProfitRate(winningResult.calculateProfitRate(purchaseAmount));
     }
 
-    public LottoTicket issueTicket(PurchaseAmount purchaseAmount) {
+    public LottoTicket issueTicket(final PurchaseAmount purchaseAmount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < purchaseAmount.countNumberOfPurchases(); i++) {
             List<Integer> lottoNumbers = LottoNumberGenerator.generate();
@@ -31,7 +31,7 @@ public class LottoController {
         return new LottoTicket(lottos);
     }
 
-    private List<MatchResultDto> getMatchResultDtos(LottoTicket lottoTicket) {
+    private List<MatchResultDto> getMatchResultDtos(final LottoTicket lottoTicket) {
         WinningNumber winningNumber = new WinningNumber(InputView.inputWinningNumbers());
         BonusNumber bonusNumber = new BonusNumber(InputView.inputBonusNumber());
         return lottoTicket.deriveMatchResults(winningNumber, bonusNumber);

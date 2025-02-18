@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class LottoRankTest {
 
@@ -33,12 +31,32 @@ class LottoRankTest {
 
     @Test
     @DisplayName("로또 3등 당첨 테스트")
-    void findRank_First_Place() {
+    void findThirdRank() {
         MatchResultDto matchResultDto = new MatchResultDto(5, false);
 
         LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
 
         assertThat(lottoRank.getWinningAmount()).isEqualTo(1_500_000L);
+    }
+
+    @Test
+    @DisplayName("로또 4등 당첨 테스트")
+    void findForthRank() {
+        MatchResultDto matchResultDto = new MatchResultDto(4, false);
+
+        LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
+
+        assertThat(lottoRank.getWinningAmount()).isEqualTo(50_000L);
+    }
+
+    @Test
+    @DisplayName("로또 5등 당첨 테스트")
+    void findFifthRank() {
+        MatchResultDto matchResultDto = new MatchResultDto(3, false);
+
+        LottoRank lottoRank = LottoRank.findRankWithMatchResult(matchResultDto);
+
+        assertThat(lottoRank.getWinningAmount()).isEqualTo(5_000L);
     }
 
     @Test
@@ -56,7 +74,7 @@ class LottoRankTest {
     void getRankInfo() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertFalse(rankInfo.containsKey(LottoRank.NO_REWARD));
+        assertThat(rankInfo.containsKey(LottoRank.NONE)).isFalse();
     }
 
     @Test
@@ -64,7 +82,7 @@ class LottoRankTest {
     void getRankMessage() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertEquals("6개 일치 (2000000000원)", rankInfo.get(LottoRank.FIRST_PLACE));
-        assertEquals("5개 일치, 보너스 볼 일치(30000000원)", rankInfo.get(LottoRank.SECOND_PLACE));
+        assertThat(rankInfo.get(LottoRank.FIRST)).isEqualTo("6개 일치 (2000000000원)");
+        assertThat(rankInfo.get(LottoRank.SECOND)).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)");
     }
 }
