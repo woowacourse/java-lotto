@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,22 +20,29 @@ class LottoResultTest {
     }
 
     @Test
-    void 당첨이_되지_않았을_경우() {
+    void 당첨_로또_번호_개수가_2개_이하인_경우_수익() {
+        int correctNumberCount = 2;
+        boolean isBonus = false;
+        int expectProfit = 0;
 
-        LottoResult.addCount(2, false);
+        LottoResult.addCount(correctNumberCount, isBonus);
 
         for (LottoResult result : LottoResult.values()) {
-            Assertions.assertThat(result.getCount()).isEqualTo(0);
+            Assertions.assertThat(result.getCount()).isEqualTo(expectProfit);
         }
     }
 
     @Test
-    void 로또_결과() {
+    void 최종_수익률_테스트() {
         int price = 14000;
-        LottoResult.addCount(3, false);
-        Assertions.assertThat(LottoResult.FIFTH.getCount()).isEqualTo(1);
+        int correctNumberCount = 3;
+        boolean isBonus = false;
         double result = LottoResult.lottoRateOfReturn(price);
-        Assertions.assertThat(result).isEqualTo(0.35);
+        double expectRateOfReturn = 0.35;
+
+        LottoResult.addCount(correctNumberCount, isBonus);
+
+        Assertions.assertThat(result).isEqualTo(expectRateOfReturn);
     }
 
 }
