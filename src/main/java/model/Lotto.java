@@ -4,7 +4,6 @@ import exception.CommonExceptionType;
 import exception.LottoExceptionType;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
 public final class Lotto {
     private final List<Integer> numbers;
@@ -39,8 +38,8 @@ public final class Lotto {
     }
 
     private void validateDuplicate(final List<Integer> inputs) {
-        HashSet<Integer> set = new HashSet<>(inputs);
-        if (inputs.size() != set.size()) {
+        HashSet<Integer> uniqueInputs = new HashSet<>(inputs);
+        if (inputs.size() != uniqueInputs.size()) {
             throw new IllegalArgumentException(LottoExceptionType.LOTTO_DUPLICATE.getMessage());
         }
     }
@@ -48,28 +47,4 @@ public final class Lotto {
     public List<Integer> numbers() {
         return numbers;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != this.getClass()) {
-            return false;
-        }
-        var that = (Lotto) obj;
-        return Objects.equals(this.numbers, that.numbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numbers);
-    }
-
-    @Override
-    public String toString() {
-        return "Lotto[" +
-                "numbers=" + numbers + ']';
-    }
-
 }

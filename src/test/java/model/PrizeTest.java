@@ -11,9 +11,9 @@ class PrizeTest {
     @Test
     @DisplayName("map 초기화가 잘 되는 지 확인")
     void initializeMap() {
-        EnumMap<Prize, Integer> prizeMap = Prize.initializeMap();
+        EnumMap<Prize, Integer> prizeCountMap = Prize.initializeMap();
         for (Prize prize : Prize.values()) {
-            assertThat(prizeMap.get(prize)).isEqualTo(0);
+            assertThat(prizeCountMap.get(prize)).isEqualTo(0);
         }
     }
 
