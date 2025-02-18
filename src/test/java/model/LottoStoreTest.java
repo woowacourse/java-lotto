@@ -35,6 +35,18 @@ class LottoStoreTest {
         assertThat(lottoRankResult.getCountByRank(LottoRank.SECOND)).isEqualTo(1);
     }
 
+    @Test
+    void 지불한_금액만큼_로또를_구매한다() {
+        // given
+        PaidAmount paidAmount = new PaidAmount(1000);
+
+        // when
+        List<LottoNumbers> purchasedLotto = lottoStore.purchase(paidAmount);
+
+        // then
+        assertThat(purchasedLotto).hasSize(1);
+    }
+
     private List<LottoNumber> fromIntegerListToLottoNumberList(List<Integer> numbers) {
         return numbers.stream()
                 .map(LottoNumber::new)
