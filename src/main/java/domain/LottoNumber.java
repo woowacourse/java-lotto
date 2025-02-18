@@ -4,7 +4,7 @@ public class LottoNumber {
     public static final int LOTTO_NUMBER_START = 1;
     public static final int LOTTO_NUMBER_END = 45;
 
-    private int num;
+    private final int num;
 
     public LottoNumber(int num) {
         validate(num);
