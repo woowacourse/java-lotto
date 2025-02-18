@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class LottoRankTest {
 
@@ -76,7 +74,7 @@ class LottoRankTest {
     void getRankInfo() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertFalse(rankInfo.containsKey(LottoRank.NONE));
+        assertThat(rankInfo.containsKey(LottoRank.NONE)).isFalse();
     }
 
     @Test
@@ -84,7 +82,7 @@ class LottoRankTest {
     void getRankMessage() {
         Map<LottoRank, String> rankInfo = LottoRank.getRankInfo();
 
-        assertEquals("6개 일치 (2000000000원)", rankInfo.get(LottoRank.FIRST));
-        assertEquals("5개 일치, 보너스 볼 일치(30000000원)", rankInfo.get(LottoRank.SECOND));
+        assertThat(rankInfo.get(LottoRank.FIRST)).isEqualTo("6개 일치 (2000000000원)");
+        assertThat(rankInfo.get(LottoRank.SECOND)).isEqualTo("5개 일치, 보너스 볼 일치(30000000원)");
     }
 }
