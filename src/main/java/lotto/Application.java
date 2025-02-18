@@ -13,22 +13,22 @@ import lotto.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        List<Lotto> lottos = purchaseLottos();
+        int purchaseAmount = getPurchaseAmount();
+        List<Lotto> lottos = purchaseLottos(purchaseAmount);
         OutputView.printLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         WinningStatistics winningStatistics = winningLotto.calculateStatistics(lottos);
-        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoMachine.LOTTO_UNIT_PRICE);
+        double returnRate = winningStatistics.calculateReturnRate(purchaseAmount);
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
 
-    private static List<Lotto> purchaseLottos() {
+    private static List<Lotto> purchaseLottos(final int purchaseAmount) {
         try {
             LottoMachine lottoMachine = new LottoMachine(new SystemLottoGenerator());
-            int purchaseAmount = getPurchaseAmount();
             return lottoMachine.purchase(purchaseAmount);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return purchaseLottos();
+            return purchaseLottos(purchaseAmount);
         }
     }
 
