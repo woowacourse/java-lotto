@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import service.LottoNumberGenerator;
 
-
 public class LottoNumberGeneratorTest {
     @DisplayName("로또번호생성기_셔플_테스트")
     @Test

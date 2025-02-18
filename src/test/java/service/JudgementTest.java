@@ -1,7 +1,5 @@
 package service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import domain.Lotto;
 import domain.Lottos;
 import domain.PrizeResult;

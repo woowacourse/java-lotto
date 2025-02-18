@@ -1,7 +1,5 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import constant.LottoConstants;
 import java.util.List;
 import java.util.stream.Stream;
