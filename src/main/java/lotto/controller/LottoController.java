@@ -3,9 +3,9 @@ package lotto.controller;
 import java.util.HashSet;
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoGenerator;
 import lotto.domain.LottoNumber;
 import lotto.domain.LottoPrice;
-import lotto.domain.RandomLottoGenerator;
 import lotto.domain.WinningResult;
 import lotto.domain.WinningResultCalculator;
 import lotto.util.StringParser;
@@ -18,19 +18,19 @@ public class LottoController {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final RandomLottoGenerator randomLottoGenerator;
+    private final LottoGenerator lottoGenerator;
 
     public LottoController(final InputView inputView, final OutputView outputView,
-                           final RandomLottoGenerator randomLottoGenerator) {
+                           final LottoGenerator lottoGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.randomLottoGenerator = randomLottoGenerator;
+        this.lottoGenerator = lottoGenerator;
     }
 
     public void run() {
         final LottoPrice lottoPrice = makeLottoPrice();
         final int lottoCount = calculateLottoCount(lottoPrice);
-        final List<Lotto> lottos = randomLottoGenerator.generate(lottoCount);
+        final List<Lotto> lottos = lottoGenerator.generate(lottoCount);
         printPurchasedLottos(lottos);
         printWinningResult(lottos, lottoPrice);
     }
