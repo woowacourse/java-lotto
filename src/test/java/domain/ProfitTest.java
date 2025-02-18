@@ -27,19 +27,19 @@ public class ProfitTest {
 
         @DisplayName("구매 금액이 1000, 1등이 당첨되었을 경우, 2000000.0의 수익률이 결과로 나와야 한다")
         @Test
-        void profit_test_1() {
+        void purchase_amount_1000_and_1st_case() {
             assertValidateProfit(1000, List.of(Rank.FIRST), 2000000.0);
         }
 
         @DisplayName("구매 금액이 5000, 5등이 당첨되었을 경우, 1.0의 수익률이 결과로 나와야 한다")
         @Test
-        void profit_test_2() {
+        void purchase_amount_5000_and_5st_case() {
             assertValidateProfit(5000, List.of(Rank.FIFTH), 1.0);
         }
 
         @DisplayName("구매 금액이 1000, 미당첨일 경우, 수익률은 0.0이어야 한다.")
         @Test
-        void profit_test_3() {
+        void purchase_amount_1000_and_none_case() {
             assertValidateProfit(1000, List.of(Rank.NONE), 0.0);
         }
     }
@@ -50,15 +50,15 @@ public class ProfitTest {
 
         @DisplayName("구매 금액이 5000, 1등, 2등에 당첨되었을 경우, 406000.0의 수익률이 결과로 나와야 한다")
         @Test
-        void profits_test_1() {
+        void purchase_amount_5000_and_1st_and_2st_case() {
             assertValidateProfit(5000,
                 List.of(Rank.FIRST, Rank.SECOND),
                 406000.0);
         }
 
-        @DisplayName("구매 금액이 5000, 5등에 2번 당첨되었을 경우, 의 수익률이 결과로 나와야 한다")
+        @DisplayName("구매 금액이 5000, 5등에 2번 당첨되었을 경우, 2.0의 수익률이 결과로 나와야 한다")
         @Test
-        void profits_test_2() {
+        void purchase_amount_5000_and_5st_two_case() {
             assertValidateProfit(5000,
                 List.of(Rank.FIFTH, Rank.FIFTH),
                 2.0);
