@@ -1,11 +1,11 @@
 package lotto.model.winning;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lotto.model.lotto.Lotto;
 import lotto.model.lotto.LottoNumber;
-import lotto.model.lotto.Lottos;
 
 public class WinningLotto {
 
@@ -18,22 +18,22 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningResultResponses calculateWinning(final Lottos lottos) {
+    public WinningResultResponses calculateWinning(final List<Lotto> lottos) {
         Map<Rank, Integer> ranks = findRanks(lottos);
         return new WinningResultResponses(ranks);
     }
 
-    private Map<Rank, Integer> findRanks(final Lottos lottos) {
-        Map<Rank, Integer> ranks = new LinkedHashMap<>();
+    private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
+        if (lotto.hasNumber(bonusNumber)) {
+            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
+        }
+    }
+
+    private Map<Rank, Integer> findRanks(final List<Lotto> lottos) {
+        Map<Rank, Integer> ranks = new HashMap<>();
         initRanks(ranks);
         saveMatchingRanks(lottos, ranks);
         return ranks;
-    }
-
-    private void validateDuplication(final Lotto lotto, final LottoNumber bonusNumber) {
-        if (lotto.hasBonus(bonusNumber)) {
-            throw new IllegalArgumentException("로또 번호와 보너스 번호는 중복될 수 없습니다.");
-        }
     }
 
     private void initRanks(final Map<Rank, Integer> ranks) {
@@ -42,12 +42,20 @@ public class WinningLotto {
         }
     }
 
-    private void saveMatchingRanks(final Lottos lottos, final Map<Rank, Integer> ranks) {
-        for (Lotto lotto : lottos.getLottos()) {
+    private void saveMatchingRanks(final List<Lotto> lottos, final Map<Rank, Integer> ranks) {
+        for (Lotto lotto : lottos) {
             int matchingCount = lotto.calculateMatchingCount(winningLotto);
-            Rank findRank = Rank.findBy(matchingCount, lotto.hasBonus(bonusNumber));
+            boolean bonusRequired = Rank.isNeedBonusRequired(matchingCount);
+            Rank findRank = findRankByBonusRequired(lotto, bonusRequired, matchingCount);
             ranks.put(findRank, ranks.getOrDefault(findRank, 0) + 1);
         }
+    }
+
+    private Rank findRankByBonusRequired(final Lotto lotto, final boolean bonusRequired, final int matchingCount) {
+        if (bonusRequired) {
+            return Rank.findBy(matchingCount, lotto.hasNumber(bonusNumber));
+        }
+        return Rank.findBy(matchingCount, false);
     }
 
 }

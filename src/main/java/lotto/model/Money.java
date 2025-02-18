@@ -10,8 +10,8 @@ public class Money {
     }
 
     private void validateLessThanZero(final int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("금액은 0원 미만일 수 없습니다.");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("금액은 0원 이하일 수 없습니다.");
         }
     }
 
@@ -19,9 +19,17 @@ public class Money {
         return amount / unitPrice;
     }
 
+    public int calculateChange(final int lottoPrice) {
+        return amount - (lottoPrice * calculateBuyingCount(lottoPrice));
+    }
+
     public double calculateReturnRatio(final long totalReturnMoney) {
         double returnRatio = (double) totalReturnMoney / amount;
         return Math.floor(returnRatio * 100) / 100;
+    }
+
+    public boolean isLessThan(final int otherAmount) {
+        return this.amount < otherAmount;
     }
 
 }

@@ -1,50 +1,77 @@
 package lotto.view;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.model.winning.WinningResultResponse;
 import lotto.model.winning.WinningResultResponses;
+import lotto.util.NumberFormatter;
 
 public class OutputView {
 
-    private static final String WINNING_RESULT_FORMAT = "%d개 일치 (%d원)- %d개";
-    private static final String WINNING_SECOND_RESULT_FORMAT = "%d개, 보너스 볼 일치(%d원)- %d개";
+    public void printChangeAmount(final int changeAmount) {
+        System.out.printf("로또 구매 후 남은 잔돈은 %s원 입니다." + System.lineSeparator(), getFormattedMoney(changeAmount));
+    }
 
     public void printIssuedLottos(final List<List<Integer>> issuedLottoNumbers) {
         for (List<Integer> issuedLottoNumber : issuedLottoNumbers) {
-            System.out.println(issuedLottoNumber.stream()
+            List<Integer> sortedLottoNumber = sortAscendingLottoNumber(issuedLottoNumber);
+            System.out.println(sortedLottoNumber.stream()
                     .map(String::valueOf)
                     .collect(Collectors.joining(", ", "[", "]")));
         }
     }
 
+    private List<Integer> sortAscendingLottoNumber(final List<Integer> issuedLottoNumber) {
+        return issuedLottoNumber.stream()
+                .sorted()
+                .toList();
+    }
+
     public void printWinningResult(final WinningResultResponses responses) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (WinningResultResponse response : responses.getResponses()) {
-            printStatistics(response);
+        for (WinningResultResponse response : getAscendingResultsByWinningAmount(responses)) {
+            printLottoWinningStatistics(response);
         }
     }
 
-    private static void printStatistics(final WinningResultResponse response) {
-        if (response.isHasBonus() && response.getMatchingCount() == 5) {
-            System.out.println(
-                    WINNING_SECOND_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                            response.getWinningCount()));
+    private List<WinningResultResponse> getAscendingResultsByWinningAmount(final WinningResultResponses responses) {
+        return responses.getResponses()
+                .stream()
+                .sorted(Comparator.comparingLong(WinningResultResponse::getWinningAmount))
+                .toList();
+    }
+
+    private void printLottoWinningStatistics(final WinningResultResponse response) {
+        if (isNeedBonusBallMatchingMessage(response)) {
+            System.out.printf(
+                    "%d개, 보너스 볼 일치(%s원)- %d개" + System.lineSeparator(), response.getMatchingCount(),
+                    getFormattedMoney(response.getWinningAmount()), response.getWinningCount()
+            );
             return;
         }
-        System.out.println(WINNING_RESULT_FORMAT.formatted(response.getMatchingCount(), response.getWinningAmount(),
-                response.getWinningCount()));
+        System.out.printf(
+                "%d개 일치 (%s원)- %d개" + System.lineSeparator(), response.getMatchingCount(),
+                getFormattedMoney(response.getWinningAmount()), response.getWinningCount()
+        );
+    }
+
+    private boolean isNeedBonusBallMatchingMessage(final WinningResultResponse response) {
+        return response.isHasBonus() && response.getMatchingCount() == 5;
     }
 
     public void printWinningRatio(final double returnRatio) {
-        String winningRatioFormat = "총 수익률은 %.2f입니다.";
-        System.out.println(winningRatioFormat.formatted(returnRatio));
+        System.out.printf("총 수익률은 %s입니다." + System.lineSeparator(), NumberFormatter.formatReturnRatio(returnRatio));
     }
 
     public void printErrorMessage(final String message) {
         System.out.println(String.join(" : ", "[ERROR]", message));
+    }
+
+    private String getFormattedMoney(final long moneyAmount) {
+        return NumberFormatter.formatMoney(moneyAmount);
     }
 
 }

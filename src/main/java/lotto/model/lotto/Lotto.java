@@ -3,24 +3,22 @@ package lotto.model.lotto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
     public static final int LOTTO_SIZE = 6;
 
-    private final Set<LottoNumber> lottoNumbers;
+    private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(final List<Integer> lottoNumbers) {
-        validate(lottoNumbers);
-        this.lottoNumbers = toSortedLottoNumbers(lottoNumbers);
+    public Lotto(final List<Integer> numbers) {
+        validate(numbers);
+        this.lottoNumbers = toLottoNumbers(numbers);
     }
 
-    private TreeSet<LottoNumber> toSortedLottoNumbers(final List<Integer> lottoNumbers) {
+    private List<LottoNumber> toLottoNumbers(final List<Integer> lottoNumbers) {
         return lottoNumbers.stream()
                 .map(LottoNumber::draw)
-                .collect(Collectors.toCollection(TreeSet::new));
+                .toList();
     }
 
     private void validate(final List<Integer> numbers) {
@@ -41,14 +39,14 @@ public class Lotto {
         }
     }
 
-    public boolean hasBonus(final LottoNumber lottoNumber) {
+    public boolean hasNumber(final LottoNumber lottoNumber) {
         return lottoNumbers.stream()
                 .anyMatch((thisLottoNumber) -> thisLottoNumber.equals(lottoNumber));
     }
 
     public int calculateMatchingCount(final Lotto otherLotto) {
         return (int) otherLotto.lottoNumbers.stream()
-                .filter(this::hasBonus)
+                .filter(this::hasNumber)
                 .count();
     }
 
