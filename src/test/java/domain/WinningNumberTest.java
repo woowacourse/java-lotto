@@ -18,7 +18,7 @@ public class WinningNumberTest {
         int bonusNumber = 6;
 
         assertThatThrownBy(() -> {
-            WinningNumber winningNumber = WinningNumber.of(lotto, bonusNumber);
+            WinningNumber.of(lotto, bonusNumber);
         }).isInstanceOf(IllegalArgumentException.class)
             .hasMessage(BONUS_NUMBER_ALREADY_EXIST.getMessage());
     }

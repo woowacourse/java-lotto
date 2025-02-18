@@ -16,7 +16,7 @@ public class LottoTest {
 
     @Nested
     @DisplayName("숫자가 6개가 아닐 경우 예외를 발생시킨다.")
-    class validateLength {
+    class ValidateLength {
 
         @DisplayName("숫자가_6개를_초과한_경우_예외가_발생해야_한다")
         @Test
@@ -51,7 +51,7 @@ public class LottoTest {
 
     @Nested
     @DisplayName("숫자 생성 테스트")
-    class validateGenerateNumber {
+    class ValidateGenerateNumber {
 
         @DisplayName("1~45 사이의 숫자일 경우, 로또 객체는 성공적으로 생성되어야 한다")
         @Test

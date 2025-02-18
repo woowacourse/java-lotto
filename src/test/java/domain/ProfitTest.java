@@ -23,7 +23,7 @@ public class ProfitTest {
 
     @Nested
     @DisplayName("단일 당첨 케이스")
-    class singleProfit {
+    class SingleProfit {
 
         @DisplayName("구매 금액이 1000, 1등이 당첨되었을 경우, 2000000.0의 수익률이 결과로 나와야 한다")
         @Test
@@ -46,7 +46,7 @@ public class ProfitTest {
 
     @Nested
     @DisplayName("중복 당첨 케이스")
-    class profits {
+    class Profits {
 
         @DisplayName("구매 금액이 5000, 1등, 2등에 당첨되었을 경우, 406000.0의 수익률이 결과로 나와야 한다")
         @Test

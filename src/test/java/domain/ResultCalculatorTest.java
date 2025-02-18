@@ -1,11 +1,7 @@
-package repository;
+package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import domain.Lotto;
-import domain.Rank;
-import domain.ResultCalculator;
-import domain.WinningNumber;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +26,7 @@ public class ResultCalculatorTest {
 
     @Nested
     @DisplayName("로또 번호와 당첨 번호 비교 로직 검증 테스트 코드")
-    class validateLottoCalculate {
+    class ValidateLottoCalculate {
 
         @DisplayName("숫자가 6개 적중할 경우, 1등에 당첨되어야 한다.")
         @Test

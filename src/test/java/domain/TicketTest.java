@@ -13,7 +13,7 @@ public class TicketTest {
     @Test
     void invalid_ticket_price() {
         assertThatThrownBy(() -> {
-            Ticket ticket = Ticket.create(1200);
+            Ticket.create(1200);
         }).isInstanceOf(IllegalArgumentException.class)
             .hasMessage(INVALID_TICKET_PRICE.getMessage());
     }
