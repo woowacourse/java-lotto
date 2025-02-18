@@ -32,7 +32,7 @@ public class Lotto {
         }
     }
 
-    public static int getPurchaseableCount(int money) {
+    public static int getPurchasableCount(int money) {
         return money / PRICE;
     }
 
