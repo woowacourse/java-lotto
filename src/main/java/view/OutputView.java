@@ -3,6 +3,7 @@ package view;
 import static constant.message.InputMessage.LOTTO_PURCHASE_GUIDANCE;
 import static constant.message.InputMessage.WINNING_BONUS_GUIDANCE;
 import static constant.message.InputMessage.WINNING_LOTTO_GUIDANCE;
+import static constant.message.InputMessage.LOTTO_PURCHASE_RESULT;
 import static constant.message.StatisticsMessage.FIFTH_PLACE_STATISTICS;
 import static constant.message.StatisticsMessage.FIRST_PLACE_STATISTICS;
 import static constant.message.StatisticsMessage.FOUR_PLACE_STATISTICS;
@@ -10,8 +11,7 @@ import static constant.message.StatisticsMessage.SECOND_PLACE_STATISTICS;
 import static constant.message.StatisticsMessage.THIRD_PLACE_STATISTICS;
 import static constant.message.StatisticsMessage.WINNING_STATISTIC_TITLE;
 import static constant.message.StatisticsMessage.WINNING_STATISTICS_SEPARATOR;
-import static constant.message.OutputViewMessage.TOTAL_PROFIT_RATE_RESULT;
-import static constant.message.OutputViewMessage.LOTTO_PURCHASE_RESULT;
+import static constant.message.StatisticsMessage.TOTAL_PROFIT_RATE_RESULT;
 
 import java.util.EnumMap;
 import model.Prize;
