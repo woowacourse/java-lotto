@@ -23,11 +23,15 @@ public class LottoController {
         LottoGenerator lottoGenerator = new LottoGenerator();
         LottoResultCalculator lottoResultCalculator = new LottoResultCalculator();
 
-        int purchaseAmount = inputView.purchaseAmountInput();
-        List<Lotto> lottoBundle = purchaseLottoBundle(lottoGenerator, purchaseAmount);
-        WinningInfo winningInfo = generateWinningInfo(lottoGenerator);
-        Map<Rank, Integer> rankResult = calculateMatchingRank(lottoResultCalculator, winningInfo, lottoBundle);
-        calculateProfit(lottoResultCalculator, rankResult, purchaseAmount);
+        try {
+            int purchaseAmount = inputView.purchaseAmountInput();
+            List<Lotto> lottoBundle = purchaseLottoBundle(lottoGenerator, purchaseAmount);
+            WinningInfo winningInfo = generateWinningInfo(lottoGenerator);
+            Map<Rank, Integer> rankResult = calculateMatchingRank(lottoResultCalculator, winningInfo, lottoBundle);
+            calculateProfit(lottoResultCalculator, rankResult, purchaseAmount);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private List<Lotto> purchaseLottoBundle(LottoGenerator lottoGenerator, int purchaseAmount) {
