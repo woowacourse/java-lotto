@@ -11,7 +11,7 @@ import view.validator.LottoInputValidator;
 public class LottoNumberTest {
 
   @ParameterizedTest
-  @ValueSource(ints = {0,1,2,46})
+  @ValueSource(ints = {0,46})
   @DisplayName("로또_번호는_1부터_45_값만_가질_수_있습니다")
   void 로또_번호는_1부터_45_값만_가질_수_있습니다(int number) {
     assertThatThrownBy(() -> {
