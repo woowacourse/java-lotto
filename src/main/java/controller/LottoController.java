@@ -11,16 +11,19 @@ import service.LottoGenerateService;
 import service.LottoStatisticsService;
 import service.RandomLottoNumbersGenerator;
 import util.InputConverter;
-import view.ViewFacade;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
 
-    private final ViewFacade viewFacade;
+    private final InputView inputView;
+    private final OutputView outputView;
     private final LottoGenerateService lottoGenerateService;
     private final LottoStatisticsService lottoStatisticsService;
 
     public LottoController(Container container) {
-        this.viewFacade = container.getViewFacade();
+        this.inputView = container.getInputView();
+        this.outputView = container.getOutputView();
         this.lottoGenerateService = container.getLottoGenerateService();
         this.lottoStatisticsService = container.getStatisticsService();
     }
@@ -32,20 +35,20 @@ public class LottoController {
     }
 
     private PurchaseHistory processLottoPurchase() {
-        int purchaseAmount = InputConverter.convertToInteger(viewFacade.getPurchaseInput());
+        int purchaseAmount = InputConverter.convertToInteger(inputView.getPurchaseInput());
         Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
             new RandomLottoNumbersGenerator());
-        viewFacade.printLottos(lottos);
+        outputView.printLottos(lottos);
         return new PurchaseHistory(lottos, purchaseAmount);
     }
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
         List<Integer> basicNumbers = InputConverter.convertToIntegers(
-            viewFacade.getWinningNumbers());
+            inputView.getWinningNumbers());
         List<LottoNumber> lottoNumbers = basicNumbers.stream().map(LottoNumber::new).toList();
         Lotto basicLotto = new Lotto(lottoNumbers);
 
-        int bonusNumber = InputConverter.convertToInteger(viewFacade.getBonusNumber());
+        int bonusNumber = InputConverter.convertToInteger(inputView.getBonusNumber());
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
         WinningLotto winningLotto = new WinningLotto(basicLotto, bonusLottoNumber);
@@ -57,7 +60,7 @@ public class LottoController {
             purchaseHistory.lottos,
             purchaseHistory.purchaseAmount
         );
-        viewFacade.printLottoStatistics(lottoStatisticsDto);
+        outputView.printLottoStatistics(lottoStatisticsDto);
     }
 
     private record PurchaseHistory(Lottos lottos, int purchaseAmount) {
