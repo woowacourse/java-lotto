@@ -9,6 +9,6 @@ public class LottoApplication {
         final InputView inputView = new InputView();
         final OutputView outputView = new OutputView();
         final LottoController lottoController = new LottoController(inputView, outputView);
-        lottoController.run();
+        lottoController.playLotto();
     }
 }

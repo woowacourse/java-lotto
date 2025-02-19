@@ -10,9 +10,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
 
-    @DisplayName("구입 금액이 1_000원 미만이므로 예외가 발생한다")
+    @DisplayName("구입 금액이 1_000원 이상 2_000_000_000원 이하가 아니므로 예외가 발생한다")
     @ParameterizedTest
-    @ValueSource(ints = {-1, 0, 100, 999})
+    @ValueSource(ints = {-1, 0, 100, 999, 2_000_000_001})
     void validateRangeTest(final int number) {
         //given
         //when
