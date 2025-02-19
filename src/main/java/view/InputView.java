@@ -1,33 +1,29 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputView {
 
     private final InputValidator inputValidator = new InputValidator();
 
-    public String getPurchaseAmountInput() {
+    public int getPurchaseAmountInput() {
         String input = getInput();
-        inputValidator.validatePurchaseAmount(input);
-
-        return input;
+        return inputValidator.validatePurchaseAmount(input);
     }
 
-    public String getWinningNumberInput() {
+    public List<Integer> getWinningNumberInput() {
         String input = getInput();
-        inputValidator.validateWinningNumber(input);
-
-        return input;
+        return inputValidator.validateWinningNumber(input);
     }
 
-    public String getBonusInput() {
-        return getInput();
+    public int getBonusInput() {
+        String input = getInput();
+        return inputValidator.validateBonusInput(input);
     }
 
     private String getInput() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.next();
-
-        return input;
+        return scanner.nextLine();
     }
 }

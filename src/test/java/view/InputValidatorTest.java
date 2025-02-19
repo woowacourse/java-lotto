@@ -1,11 +1,9 @@
 package view;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -33,4 +31,19 @@ class InputValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("당첨번호가 숫자가 아니라면 예외를 발생시킨다")
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5,abc", "!@#,1,2,3,4,5"})
+    void winningNumberNotNumberTest(String winningNumber) {
+        assertThatThrownBy(() -> inputValidator.validateWinningNumber(winningNumber))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("보너스 번호가 숫자가 아니라면 예외를 발생시킨다")
+    @ParameterizedTest
+    @ValueSource(strings = {"abc", "!@#"})
+    void bonusNumberInputTest(String bonus) {
+        assertThatThrownBy(() -> inputValidator.validateBonusInput(bonus))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
