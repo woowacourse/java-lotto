@@ -42,7 +42,7 @@ public class Lotto {
 
     private static void validateSize(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("당첨 번호는 6개 입력해야 합니다.");
+            throw new IllegalArgumentException(ErrorCode.WINNING_NUMBERS_QUANTITY_NOT_SIX.getMessage());
         }
     }
 

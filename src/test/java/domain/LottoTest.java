@@ -1,5 +1,6 @@
 package domain;
 
+import static domain.Lotto.MAX_LOTTO_SIZE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
@@ -49,6 +50,10 @@ class LottoTest {
         public int generate() {
             int generatedNumber = numbers.get(index);
             index += 1;
+
+            if (index == MAX_LOTTO_SIZE) {
+                index = 0;
+            }
 
             return generatedNumber;
         }

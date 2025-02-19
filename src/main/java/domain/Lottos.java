@@ -19,14 +19,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos issueByMoney(int money) {
+    public static Lottos issueByMoney(int money, NumberGenerator numberGenerator) {
         int quantity = money / LOTTO_PRICE;
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
         List<Lotto> generatedLottos = new ArrayList<>();
 
         for (int i = 0; i < quantity; i++) {
-            Lotto issuedLotto = Lotto.issueByNumberGenerator(randomNumberGenerator);
+            Lotto issuedLotto = Lotto.issueByNumberGenerator(numberGenerator);
             generatedLottos.add(issuedLotto);
         }
 
