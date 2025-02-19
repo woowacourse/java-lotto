@@ -54,23 +54,14 @@ class LottoMachineTest {
 
     @Test
     void 로또_결과_정상_반환_테스트() {
-        MockedNumberGenerator generator1 = new MockedNumberGenerator();
-        generator1.setNumbersToGenerate(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto1 = Lotto.generateFrom(generator1);
-
-        MockedNumberGenerator generator2 = new MockedNumberGenerator();
-        generator2.setNumbersToGenerate(Arrays.asList(1, 2, 3, 4, 5, 7));
-        Lotto lotto2 = Lotto.generateFrom(generator2);
-
-        MockedNumberGenerator generator3 = new MockedNumberGenerator();
-        generator3.setNumbersToGenerate(Arrays.asList(10, 11, 12, 13, 14, 15));
-        Lotto lotto3 = Lotto.generateFrom(generator3);
-
+        Lotto lotto1 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.of(Arrays.asList(1, 2, 3, 4, 5, 7));
+        Lotto lotto3 = Lotto.of(Arrays.asList(10, 11, 12, 13, 14, 15));
         List<Lotto> lottos = Arrays.asList(lotto1, lotto2, lotto3);
 
         WinningLotto winningLotto = WinningLotto.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        LottoMachine lottoMachine = new LottoMachine(new MockedNumberGenerator()); // Dummy generator 사용
 
-        LottoMachine lottoMachine = new LottoMachine(new MockedNumberGenerator());
         List<LottoPrize> results = lottoMachine.getLottoResults(lottos, winningLotto);
 
         assertThat(results)
