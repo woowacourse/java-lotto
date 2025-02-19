@@ -1,10 +1,11 @@
 package controller;
 
 import static util.InputConverter.convertToInteger;
-import static util.InputConverter.convertToList;
+import static util.InputConverter.convertToIntegers;
 
 import config.Container;
 import domain.Lotto;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.WinningLotto;
 import dto.Statistics;
@@ -41,11 +42,14 @@ public class LottoController {
     }
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
-        List<Integer> basicNumbers = convertToList(viewFacade.getWinningNumbers());
-        Lotto basicLotto = new Lotto(basicNumbers);
-        int bonusNumber = convertToInteger(viewFacade.getBonusNumber());
+        List<Integer> basicNumbers = convertToIntegers(viewFacade.getWinningNumbers());
+        List<LottoNumber> lottoNumbers = basicNumbers.stream().map(LottoNumber::new).toList();
+        Lotto basicLotto = new Lotto(lottoNumbers);
 
-        WinningLotto winningLotto = new WinningLotto(basicLotto, bonusNumber);
+        int bonusNumber = convertToInteger(viewFacade.getBonusNumber());
+        LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
+
+        WinningLotto winningLotto = new WinningLotto(basicLotto, bonusLottoNumber);
         purchaseHistory.lottos.rankAll(winningLotto);
     }
 

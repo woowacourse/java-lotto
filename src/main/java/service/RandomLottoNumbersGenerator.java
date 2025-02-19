@@ -1,5 +1,6 @@
 package service;
 
+import domain.LottoNumber;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -20,10 +21,11 @@ public class RandomLottoNumbersGenerator implements LottoNumbersGenerator {
     }
 
     @Override
-    public List<Integer> generate() {
+    public List<LottoNumber> generate() {
         Set<Integer> uniqueNumbers = generateUniqueNumbers();
         return uniqueNumbers.stream()
             .sorted()
+            .map(LottoNumber::new)
             .toList();
     }
 }
