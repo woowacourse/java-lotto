@@ -43,7 +43,6 @@ public class LottoTest {
     );
   }
 
-
   @ParameterizedTest
   @MethodSource("lottoNumbers")
   @DisplayName("사용자가_구매한_로또_내역을_정렬하여_출력한다")
