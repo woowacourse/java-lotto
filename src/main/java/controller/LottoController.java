@@ -6,12 +6,12 @@ import static util.InputConverter.convertToList;
 import config.Container;
 import domain.Lotto;
 import domain.Lottos;
-import dto.Statistics;
 import domain.WinningLotto;
+import dto.Statistics;
 import java.util.List;
 import service.LottoGenerateService;
+import service.RandomLottoNumbersGenerator;
 import service.StatisticsService;
-import util.RandomGenerator;
 import view.ViewFacade;
 
 public class LottoController {
@@ -35,7 +35,7 @@ public class LottoController {
     private PurchaseHistory processLottoPurchase() {
         int purchaseAmount = convertToInteger(viewFacade.getPurchaseInput());
         Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
-            () -> RandomGenerator.generateNumbers(1, 45, 6));
+            new RandomLottoNumbersGenerator());
         viewFacade.printLottos(lottos);
         return new PurchaseHistory(lottos, purchaseAmount);
     }
