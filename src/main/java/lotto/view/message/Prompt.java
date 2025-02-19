@@ -1,4 +1,4 @@
-package lotto.view.constant;
+package lotto.view.message;
 
 public enum Prompt {
     PURCHASE("구입금액을 입력해 주세요."),

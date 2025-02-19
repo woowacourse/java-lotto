@@ -1,7 +1,6 @@
-package lotto.domain.constant;
+package lotto.domain;
 
 import java.util.List;
-import lotto.domain.WinningCondition;
 
 public enum WinningTier {
     FIRST(new WinningCondition(6, false), 2000000000),

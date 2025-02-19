@@ -1,4 +1,4 @@
-package lotto.view.constant;
+package lotto.view.message;
 
 public enum OutputMessage {
     PURCHASE_COMPLETE("%d개를 구매했습니다."),
