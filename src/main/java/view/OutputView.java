@@ -14,7 +14,7 @@ public class OutputView {
     private static final String NUMBER_CLOSE_BRACE = "]";
     private static final String NUMBER_DELIMITER = ", ";
 
-    public void printTicketPurchaseAmount(TicketAmountResponse response) {
+    public void printLottoPurchaseAmount(LottoAmountResponse response) {
         System.out.println(response.amount() + PURCHASE_DONE);
     }
 

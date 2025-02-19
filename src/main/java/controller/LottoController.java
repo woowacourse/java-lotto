@@ -1,11 +1,11 @@
 package controller;
 
-import dto.TicketAmountResponse;
-import global.utils.Validator;
-import model.LottoResult;
-import model.Lottos;
-import model.Ticket;
-import model.WinningLotto;
+import dto.LottoAmountResponse;
+import global.utils.Parser;
+import domain.LottoResult;
+import domain.Lottos;
+import domain.LottoMachine;
+import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -20,33 +20,32 @@ public class LottoController {
     }
 
     public void run() {
-        Ticket ticket = createTicket();
-        printTicketPurchaseAmount(ticket);
+        LottoMachine lottoMachine = buyLotto();
+        printLottoPurchaseAmount(lottoMachine);
 
-        Lottos lottos = new Lottos(ticket.getTicketAmount());
+        Lottos lottos = new Lottos(lottoMachine.getTicketAmount());
         outputView.printLottos(lottos.createResponse());
 
         WinningLotto winningLotto = enterWinningAndBonusNumber();
         LottoResult lottoResult = new LottoResult(lottos, winningLotto);
 
-        printLottoResult(lottoResult, ticket);
+        printLottoResult(lottoResult, lottoMachine);
     }
 
-    private void printTicketPurchaseAmount(final Ticket ticket) {
-        TicketAmountResponse ticketAmount = ticket.createTicketResponse();
-        outputView.printTicketPurchaseAmount(ticketAmount);
+    private void printLottoPurchaseAmount(final LottoMachine lottoMachine) {
+        LottoAmountResponse lottoAmount = lottoMachine.createLottoAmountResponse();
+        outputView.printLottoPurchaseAmount(lottoAmount);
     }
 
-    private Ticket createTicket() {
+    private LottoMachine buyLotto() {
         int purchaseAmount = enterPrice();
-        return new Ticket(purchaseAmount);
+        return new LottoMachine(purchaseAmount);
     }
 
     private int enterPrice() {
         try {
             String input = inputView.enterPurchasePrice();
-            Validator.validateNumeric(input);
-            return Integer.parseInt(input);
+            return Parser.parseInteger(input);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e);
             return enterPrice();
@@ -64,9 +63,9 @@ public class LottoController {
         }
     }
 
-    private void printLottoResult(final LottoResult lottoResult, final Ticket ticket) {
+    private void printLottoResult(final LottoResult lottoResult, final LottoMachine lottoMachine) {
         outputView.printLottoResult(lottoResult.createResponse());
         int totalPrice = lottoResult.calculateTotalPrice();
-        outputView.printReturnOfInvestmentResult(ticket.createReturnOfInvestmentResponse(totalPrice));
+        outputView.printReturnOfInvestmentResult(lottoMachine.createReturnOfInvestmentResponse(totalPrice));
     }
 }

@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import dto.LottosResponse;
 
@@ -10,8 +10,7 @@ public class Lottos {
     private final List<Lotto> lottos;
 
     public Lottos(final int ticketAmount) {
-        lottos = new ArrayList<>();
-        addLottos(ticketAmount);
+        lottos = new ArrayList<>(generateLottos(ticketAmount));
     }
 
     public Lottos(final List<Lotto> lottos) {
@@ -27,12 +26,14 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos() {
-        return lottos;
+        return new ArrayList<>(lottos);
     }
 
-    private void addLottos(final int ticketAmount) {
+    private List<Lotto> generateLottos(final int ticketAmount) {
+        List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < ticketAmount; i++) {
             lottos.add(new Lotto());
         }
+        return lottos;
     }
 }

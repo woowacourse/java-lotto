@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 public enum InvestmentOutcome {
     BENEFIT("이익"),
