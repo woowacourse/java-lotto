@@ -1,8 +1,5 @@
 package controller;
 
-import static util.InputConverter.convertToInteger;
-import static util.InputConverter.convertToIntegers;
-
 import config.Container;
 import domain.Lotto;
 import domain.LottoNumber;
@@ -11,8 +8,9 @@ import domain.WinningLotto;
 import dto.LottoStatisticsDto;
 import java.util.List;
 import service.LottoGenerateService;
-import service.RandomLottoNumbersGenerator;
 import service.LottoStatisticsService;
+import service.RandomLottoNumbersGenerator;
+import util.InputConverter;
 import view.ViewFacade;
 
 public class LottoController {
@@ -34,7 +32,7 @@ public class LottoController {
     }
 
     private PurchaseHistory processLottoPurchase() {
-        int purchaseAmount = convertToInteger(viewFacade.getPurchaseInput());
+        int purchaseAmount = InputConverter.convertToInteger(viewFacade.getPurchaseInput());
         Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
             new RandomLottoNumbersGenerator());
         viewFacade.printLottos(lottos);
@@ -42,11 +40,12 @@ public class LottoController {
     }
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
-        List<Integer> basicNumbers = convertToIntegers(viewFacade.getWinningNumbers());
+        List<Integer> basicNumbers = InputConverter.convertToIntegers(
+            viewFacade.getWinningNumbers());
         List<LottoNumber> lottoNumbers = basicNumbers.stream().map(LottoNumber::new).toList();
         Lotto basicLotto = new Lotto(lottoNumbers);
 
-        int bonusNumber = convertToInteger(viewFacade.getBonusNumber());
+        int bonusNumber = InputConverter.convertToInteger(viewFacade.getBonusNumber());
         LottoNumber bonusLottoNumber = new LottoNumber(bonusNumber);
 
         WinningLotto winningLotto = new WinningLotto(basicLotto, bonusLottoNumber);
