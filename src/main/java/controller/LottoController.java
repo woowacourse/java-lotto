@@ -1,101 +1,93 @@
 package controller;
 
+import domain.BonusNumber;
+import domain.LottoDispenser;
+import domain.WinningLotto;
+import domain.WinningNumber;
+import dto.DrawResultDto;
 import exception.LottoException;
-import service.LottoService;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
 public class LottoController {
 
-    private final LottoService lottoService;
+  public void startLotto() {
+    LottoDispenser lottoDispenser = buyLotto();
+    displayBuyLottos(lottoDispenser);
+    WinningNumber winningNumber = settingWinningNumbers();
+    WinningLotto winningLotto = settingWinningLotto(winningNumber);
+    displayDrawResult(lottoDispenser.getDrawResult(winningLotto));
+  }
 
-    public LottoController(LottoService lottoService) {
-        this.lottoService = lottoService;
-    }
+  private LottoDispenser buyLotto() {
+    LottoDispenser lottoDispenser;
+    do {
+      lottoDispenser = buyLottoInput();
+    } while (lottoDispenser == null);
+    return lottoDispenser;
+  }
 
-    public void startLotto() {
-        buyLotto();
-        settingWinningNumbers();
-        settingBonusNumbers();
-        printWinningResult();
+  private LottoDispenser buyLottoInput() {
+    try {
+      return new LottoDispenser(InputView.inputBuyLottoMoney());
+    } catch (LottoException lottoException) {
+      OutputView.printError(lottoException);
+      return null;
     }
+  }
 
-    private void buyLotto() {
-        boolean retry = true;
-        while(retry) {
-            retry = buyLottoInput();
-        }
-        displayBuyLottos();
-    }
+  private void displayBuyLottos(LottoDispenser lottoDispenser) {
+    OutputView.printBuyLottos(lottoDispenser.getBuyLottos());
+  }
 
-    private boolean buyLottoInput() {
-        try{
-            String inputBuyLottoMoney = InputView.inputBuyLottoMoney();
-            inputBuyLottoMoney(inputBuyLottoMoney);
-        }catch (LottoException lottoException){
-            OutputView.printError(lottoException);
-            return true;
-        }
-        return false;
-    }
+  private WinningNumber settingWinningNumbers() {
+    WinningNumber winningNumber;
+    do {
+      winningNumber = inputWinningNumber();
+    } while (winningNumber == null);
+    return winningNumber;
+  }
 
-    private void inputBuyLottoMoney(String inputBuyLottoMoney) {
-        lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
+  private WinningNumber inputWinningNumber() {
+    try {
+      List<Integer> inputLottoNumbers = InputView.inputWinningNumber();
+      return new WinningNumber(inputLottoNumbers);
+    } catch (LottoException lottoException) {
+      OutputView.printError(lottoException);
+      return null;
     }
+  }
 
-    private void settingWinningNumbers() {
-        boolean retry = true;
-        while(retry) {
-            retry = inputWinningNumber();
-        }
+  private WinningLotto settingWinningLotto(WinningNumber winningNumber) {
+    WinningLotto winningLotto = null;
+    while (winningLotto == null) {
+      winningLotto = checkWinningLotto(winningNumber);
     }
+    return winningLotto;
+  }
 
-    private boolean inputWinningNumber() {
-        try{
-            String inputWinningNumber = InputView.inputWinningNumber();
-            inputWinningNumber(inputWinningNumber);
-        }catch (LottoException lottoException){
-            OutputView.printError(lottoException);
-            return true;
-        }
-        return false;
+  private WinningLotto checkWinningLotto(WinningNumber winningNumber) {
+    try {
+      int inputBonusNumber = InputView.inputBonusNumber();
+      return generateWinningLotto(winningNumber, new BonusNumber(inputBonusNumber));
+    } catch (LottoException lottoException) {
+      OutputView.printError(lottoException);
+      return null;
     }
+  }
 
-    private void settingBonusNumbers() {
-        boolean retry = true;
-        while(retry) {
-            retry = inputBonusNumber();
-        }
+  private WinningLotto generateWinningLotto(WinningNumber winningNumber, BonusNumber bonusNumber) {
+    try {
+      return new WinningLotto(winningNumber, bonusNumber);
+    } catch (LottoException lottoException) {
+      OutputView.printError(lottoException);
+      return null;
     }
+  }
 
-    private boolean inputBonusNumber() {
-        try{
-            String inputBonusNumber = InputView.inputBonusNumber();
-            inputBonusNumber(inputBonusNumber);
-        }catch (LottoException lottoException){
-            OutputView.printError(lottoException);
-            return true;
-        }
-        return false;
-    }
+  private void displayDrawResult(DrawResultDto drawResultDto) {
+    OutputView.printDrawResult(drawResultDto);
+  }
 
-    private void printWinningResult() {
-        System.out.println(formattingWinningResult());
-    }
-
-    public void displayBuyLottos() {
-        OutputView.printBuyLottos(lottoService.getBuyLottos());
-    }
-
-    public String formattingWinningResult() {
-        return lottoService.winningCalculate();
-    }
-
-    public void inputWinningNumber(String inputWinningNumber) {
-        lottoService.inputWinningNumber(inputWinningNumber);
-    }
-
-    public void inputBonusNumber(String inputBonusNumber){
-        lottoService.inputBonusNumber(inputBonusNumber);
-    }
 }
