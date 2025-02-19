@@ -22,10 +22,6 @@ public class WinningLottoNumbers {
         }
     }
 
-    public List<Integer> getValues() {
-        return values.stream().map(WinningLottoNumber::getValue).toList();
-    }
-
     public boolean contains(int value) {
         return values.contains(WinningLottoNumber.from(value));
     }

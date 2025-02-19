@@ -24,10 +24,6 @@ public class WinningLottoNumber {
         }
     }
 
-    public int getValue() {
-        return value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) {
