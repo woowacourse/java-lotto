@@ -1,8 +1,6 @@
 package lotto.utils;
 
-import java.util.Arrays;
-
-public  class NumberUtils {
+public class NumberUtils {
 
     private NumberUtils() {
     }
