@@ -1,6 +1,5 @@
 package controller;
 
-import config.Container;
 import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
@@ -16,17 +15,10 @@ import view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
-    private final LottoGenerateService lottoGenerateService;
-    private final LottoStatisticsService lottoStatisticsService;
-
-    public LottoController(Container container) {
-        this.inputView = container.getInputView();
-        this.outputView = container.getOutputView();
-        this.lottoGenerateService = container.getLottoGenerateService();
-        this.lottoStatisticsService = container.getStatisticsService();
-    }
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
+    private final LottoGenerateService lottoGenerateService = new LottoGenerateService();
+    private final LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
 
     public void run() {
         PurchaseHistory purchaseHistory = processLottoPurchase();
@@ -36,15 +28,13 @@ public class LottoController {
 
     private PurchaseHistory processLottoPurchase() {
         int purchaseAmount = InputConverter.convertToInteger(inputView.getPurchaseInput());
-        Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount,
-            new RandomLottoNumbersGenerator());
+        Lottos lottos = lottoGenerateService.generateLottos(purchaseAmount, new RandomLottoNumbersGenerator());
         outputView.printLottos(lottos);
         return new PurchaseHistory(lottos, purchaseAmount);
     }
 
     private void processLottoDrawing(PurchaseHistory purchaseHistory) {
-        List<Integer> basicNumbers = InputConverter.convertToIntegers(
-            inputView.getWinningNumbers());
+        List<Integer> basicNumbers = InputConverter.convertToIntegers(inputView.getWinningNumbers());
         List<LottoNumber> lottoNumbers = basicNumbers.stream().map(LottoNumber::new).toList();
         Lotto basicLotto = new Lotto(lottoNumbers);
 
