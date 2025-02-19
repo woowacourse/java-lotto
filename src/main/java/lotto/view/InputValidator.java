@@ -1,8 +1,8 @@
-package lotto.util;
+package lotto.view;
 
 public class InputValidator {
 
-    public static void validate(final String input) {
+    static void validate(final String input) {
         if (input == null) {
             throw new IllegalArgumentException("입력값은 null일 수 없습니다.");
         }

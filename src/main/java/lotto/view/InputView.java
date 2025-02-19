@@ -3,7 +3,6 @@ package lotto.view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import lotto.util.InputValidator;
 
 public class InputView {
 
@@ -25,13 +24,13 @@ public class InputView {
     }
 
     private String getInput() {
-        String input = readLine();
+        final String input = readLine();
         InputValidator.validate(input);
         return input;
     }
 
     private String readLine() {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         try {
             return bufferedReader.readLine();
         } catch (IOException e) {

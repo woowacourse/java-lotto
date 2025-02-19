@@ -2,34 +2,18 @@ package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
-    private final List<LottoNumber> numbers;
+    static final int LOTTO_SIZE = 6;
 
-    public Lotto(final List<Integer> values) {
-        validate(values);
-        this.numbers = makeNumber(values);
-    }
+    private final Set<LottoNumber> numbers;
 
-    private void validate(final List<Integer> values) {
-        validateDuplicated(values);
+    public Lotto(final Set<Integer> values) {
         validateSize(values);
-    }
-
-    private void validateSize(final List<Integer> values) {
-        if (values.size() != LottoGenerator.LOTTO_SIZE) {
-            throw new IllegalArgumentException("로또 번호의 개수는 6개여야 합니다.");
-        }
-    }
-
-    private void validateDuplicated(final List<Integer> values) {
-        boolean isDuplicated = values.stream()
-                .distinct()
-                .count() != values.size();
-        if (isDuplicated) {
-            throw new IllegalArgumentException("중복되지 않은 로또 번호를 입력해 주세요.");
-        }
+        this.numbers = makeNumber(values);
     }
 
     public int countMatchingLottoNumber(final Lotto lotto) {
@@ -38,19 +22,20 @@ public class Lotto {
                 .count();
     }
 
-    boolean isDuplicateNumber(final LottoNumber inputNumber) {
-        return numbers.stream()
-                .anyMatch(number -> number.equals(inputNumber));
-    }
-
     boolean contains(final LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
-    private List<LottoNumber> makeNumber(final List<Integer> values) {
+    private void validateSize(final Set<Integer> values) {
+        if (values.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 중복되지 않은 6개의 숫자여야 합니다.");
+        }
+    }
+
+    private Set<LottoNumber> makeNumber(final Set<Integer> values) {
         return values.stream()
-                .map(LottoNumber::new)
-                .toList();
+                .map(LottoNumber::from)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -66,9 +51,10 @@ public class Lotto {
         return Objects.hashCode(numbers);
     }
 
-    public List<Integer> getNumbers() {
+    public List<Integer> getSortedNumbers() {
         return numbers.stream()
                 .map(LottoNumber::getNumber)
+                .sorted()
                 .toList();
     }
 }
