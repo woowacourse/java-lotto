@@ -1,6 +1,9 @@
+package domain;
+
+import static domain.LottoInformation.LOTTO_PRICE;
+
 public class Price {
 
-    public static final int LOTTO_PRICE = 1000;
     private final int value;
 
     public Price(String value) {
@@ -19,7 +22,7 @@ public class Price {
             return;
         }
 
-        throw new IllegalArgumentException("로또 단위는 1000원 입니다. 1000원 단위로 입력해주세요 입력된 (" + value + ")는 1000원 단위의 수가 아닙니다.");
+        throw new IllegalArgumentException(String.format("로또 단위는 %d원 입니다. %d원 단위로 입력해주세요 입력된 (%s)는 로또 단위의 수가 아닙니다.", LOTTO_PRICE, LOTTO_PRICE, value, LOTTO_PRICE));
     }
 
     private int validateNumberFormat(String value) {
@@ -32,5 +35,13 @@ public class Price {
 
     public int getValue() {
         return value;
+    }
+
+    public int divide(int lottoPrice) {
+        return value / lottoPrice;
+    }
+
+    public int getTicketCount() {
+        return divide(LOTTO_PRICE);
     }
 }

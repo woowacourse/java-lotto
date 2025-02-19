@@ -1,3 +1,5 @@
+package domain;
+
 public record WinningNumberWithBonusNumber(
         Lotto winningNumber,
         int bonusNumber

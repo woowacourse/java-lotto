@@ -1,3 +1,5 @@
+package enums;
+
 import java.util.Arrays;
 
 public enum LottoRanking {

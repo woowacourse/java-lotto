@@ -1,15 +1,13 @@
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+package domain;
+
+import java.util.*;
 
 public class RandomGenerator {
     private RandomGenerator() {
     }
 
     public static List<Integer> generateUniqueRandomNumbers(int count, int start, int end) {
-        SecureRandom random = new SecureRandom();
+        Random random = new Random();
 
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() < count) {
@@ -18,4 +16,6 @@ public class RandomGenerator {
         }
         return new ArrayList<>(numbers);
     }
+
+
 }
