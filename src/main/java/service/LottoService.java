@@ -38,4 +38,9 @@ public class LottoService {
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
         return winningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
     }
+
+    public String buyLottoResult(LottoDispenser lottoDispenser) {
+        return lottoBuyResultFormatter.formattingBuyLottoResult(lottoDispenser.getLottos());
+    }
 }
+

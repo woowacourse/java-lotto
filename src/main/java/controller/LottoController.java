@@ -18,7 +18,7 @@ public class LottoController {
     }
 
     public String formattingBuyLottoResult(LottoDispenser lottoDispenser) {
-        return lottoDispenser.buyLottoResult();
+        return lottoService.buyLottoResult(lottoDispenser);
     }
 
     public String formattingWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,

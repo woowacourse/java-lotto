@@ -26,10 +26,7 @@ public class Application {
     }
 
     private static LottoDispenser buyLotto() {
-        LottoDispenser lottoDispenser = null;
-        while (lottoDispenser == null) {
-            lottoDispenser = buyLottoInput();
-        }
+        LottoDispenser lottoDispenser = buyLottoInput();
         OutputView.printBuyLotto(lottoController.formattingBuyLottoResult(lottoDispenser));
         return lottoDispenser;
     }
@@ -40,16 +37,12 @@ public class Application {
             return lottoController.inputBuyLottoMoney(inputBuyLottoMoney);
         } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
-            return null;
+            return buyLottoInput();
         }
     }
 
     private static WinningNumber generateWinningNumber() {
-        WinningNumber winningNumber = null;
-        while (winningNumber == null) {
-            winningNumber = inputWinningNumber();
-        }
-        return winningNumber;
+        return inputWinningNumber();
     }
 
     private static WinningNumber inputWinningNumber() {
@@ -58,16 +51,12 @@ public class Application {
             return lottoController.inputWinningNumber(inputWinningNumber);
         } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
-            return null;
+            return inputWinningNumber();
         }
     }
 
     private static BonusNumber generateBonusNumbers() {
-        BonusNumber bonusNumber = null;
-        while (bonusNumber == null) {
-            bonusNumber = inputBonusNumber();
-        }
-        return bonusNumber;
+        return inputBonusNumber();
     }
 
     private static BonusNumber inputBonusNumber() {
@@ -76,7 +65,7 @@ public class Application {
             return lottoController.inputBonusNumber(inputBonusNumber);
         } catch (LottoException lottoException) {
             OutputView.printError(lottoException);
-            return null;
+            return inputBonusNumber();
         }
     }
 

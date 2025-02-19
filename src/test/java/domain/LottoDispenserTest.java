@@ -64,7 +64,8 @@ public class LottoDispenserTest {
         String bonusNumber = "7";
         MockingLottoService mockingLottoService = new MockingLottoService(new WinningCalculateFormatter());
         List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(testLottoNumbers, lottoBuyResultFormatter));
+        lottos.add(new Lotto(testLottoNumbers));
         assertThat(mockingLottoService.winningCalculate(lottos, winningNumber, bonusNumber)).contains("총 수익률은 2000000");
     }
 }
+
