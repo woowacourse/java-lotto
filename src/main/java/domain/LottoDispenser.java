@@ -8,11 +8,13 @@ import java.util.Map;
 
 public class LottoDispenser {
 
+  private LottoNumberGenerator lottoNumberGenerator;
   private final List<Lotto> lottos;
   private final Money money;
 
   public LottoDispenser(int buyMoney) {
     this.money = new Money(buyMoney);
+    this.lottoNumberGenerator = new LottoNumberGenerator(new RandomNumberGenerator());
     lottos = generateLottos(money.calculateBuyLottoAmount());
   }
 
@@ -33,7 +35,7 @@ public class LottoDispenser {
   private List<Lotto> generateLottos(int lottoCount) {
     List<Lotto> lottos = new ArrayList<>();
     for (int i = 0; i < lottoCount; i++) {
-      lottos.add(new Lotto(LottoRandomGenerator.generateNumbers()));
+      lottos.add(new Lotto(lottoNumberGenerator.generateNumbers()));
     }
     return lottos;
   }
