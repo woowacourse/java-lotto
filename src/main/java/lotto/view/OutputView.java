@@ -3,36 +3,36 @@ package lotto.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lotto.controller.LottoDto;
-import lotto.Rank;
+import lotto.rule.Rank;
+import lotto.model.Lotto;
 
 public class OutputView {
 
-    public void printLottos(List<LottoDto> lottos) {
+    public void printLottos(List<Lotto> lottos) {
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.forEach(lotto -> System.out.println(lotto.numbers()));
+        lottos.forEach(lotto -> System.out.println(lotto.getNumbers()));
     }
 
-    public void printResult(Map<Rank, Integer> ranks) {
-        System.out.println("당첨 통계 \n---------");
+    public void printWinningStatistics(Map<Rank, Integer> ranks) {
+        System.out.println("\n당첨 통계\n---------");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NO_PRIZE)
-                .forEach(rank -> printRankResult(rank, ranks.getOrDefault(rank, 0)));
+                .forEach(rank -> printWinningRankCount(rank, ranks.get(rank)));
     }
 
-    private void printRankResult(Rank rank, int count) {
-        String bonusText = getBonusText(rank);
-        System.out.println(getRankResultMessage(rank, count, bonusText));
+    private void printWinningRankCount(Rank rank, int count) {
+        String bonusText = getBonusMatchMessage(rank);
+        System.out.println(formatRankResultMessage(rank, count, bonusText));
     }
 
-    private String getBonusText(Rank rank) {
+    private String getBonusMatchMessage(Rank rank) {
         if (rank.requiresBonusMatch()) {
             return ", 보너스 볼 일치";
         }
         return "";
     }
 
-    private String getRankResultMessage(Rank rank, int count, String bonusText) {
+    private String formatRankResultMessage(Rank rank, int count, String bonusText) {
         return "%d개 일치%s (%d원) - %d개".formatted(rank.getMatchCount(), bonusText, rank.getWinningAmount(), count);
     }
 

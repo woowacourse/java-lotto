@@ -1,4 +1,4 @@
-package lotto;
+package lotto.rule;
 
 import java.util.Arrays;
 
