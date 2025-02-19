@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.constant.WinningTier;
-import lotto.utility.RandomGenerator;
+import lotto.utility.LottoNumberGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,13 @@ public class Vendor {
 
     private static final int MAX_RANDOM_VALUE = 45;
     private static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_NUMBERS = 6;
+    private final LottoNumberGenerator lottoNumberGenerator;
     private final int purchaseAmount;
 
-    public Vendor(int purchaseAmount) {
-        this.validatePurchaseAmount(purchaseAmount);
+    public Vendor(LottoNumberGenerator lottoNumberGenerator, int purchaseAmount) {
+        validatePurchaseAmount(purchaseAmount);
+        this.lottoNumberGenerator = lottoNumberGenerator;
         this.purchaseAmount = purchaseAmount;
     }
 
@@ -23,24 +26,20 @@ public class Vendor {
         }
     }
 
-    public int calculateLottoCount() {
+    private int calculateLottoCount() {
         return this.purchaseAmount / LOTTO_PRICE;
     }
 
-    public List<Lotto> issueLottos() {
-        int lottoCount = this.calculateLottoCount();
-        RandomGenerator randomGenerator = new RandomGenerator();
+    public Lottos issueLottos() {
+        int lottoCount = calculateLottoCount();
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> randoms = randomGenerator.generateUniqueRandomNumbers(MAX_RANDOM_VALUE)
-                    .stream()
-                    .sorted()
-                    .toList();
+            List<Integer> randoms = this.lottoNumberGenerator.generateNumbers(MAX_RANDOM_VALUE, LOTTO_NUMBERS);
             lottos.add(new Lotto(randoms));
         }
 
-        return lottos;
+        return new Lottos(lottos);
     }
 
     public double calculateProfit(List<WinningTier> winningTiers) {

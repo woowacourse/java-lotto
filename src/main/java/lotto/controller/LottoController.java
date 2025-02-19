@@ -2,9 +2,10 @@ package lotto.controller;
 
 import lotto.constant.WinningTier;
 import lotto.domain.Lotto;
-import lotto.domain.Scoreboard;
+import lotto.domain.Lottos;
 import lotto.domain.Vendor;
 import lotto.domain.WinningLotto;
+import lotto.utility.LottoNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,19 +22,21 @@ public class LottoController {
     }
 
     public void run() {
-        int purchaseAmount = inputView.readPurchaseAmount();
-        Vendor vendor = new Vendor(purchaseAmount);
-        List<Lotto> lottos = vendor.issueLottos();
-        outputView.printLottos(lottos);
+        int purchaseAmount = this.inputView.readPurchaseAmount();
+        Vendor vendor = new Vendor(new LottoNumberGenerator(), purchaseAmount);
+        Lottos lottos = vendor.issueLottos();
+        this.outputView.printLottos(lottos);
 
-        Lotto winningNumbers = inputView.readWinningNumbers();
-        int bonusNumber = inputView.readBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
-
-        Scoreboard scoreboard = new Scoreboard();
-        List<WinningTier> winningTiers = scoreboard.findWinningTiers(lottos, winningLotto);
+        WinningLotto winningLotto = getWinningLotto();
+        List<WinningTier> winningTiers = lottos.getWinningTiers(winningLotto);
 
         double profit = vendor.calculateProfit(winningTiers);
-        outputView.printResults(winningTiers, profit);
+        this.outputView.printResults(winningTiers, profit);
+    }
+
+    public WinningLotto getWinningLotto() {
+        Lotto winningNumbers = this.inputView.readWinningNumbers();
+        int bonusNumber = this.inputView.readBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }

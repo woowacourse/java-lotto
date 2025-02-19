@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto {
 
@@ -12,10 +10,26 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        this.validateDuplication(numbers);
-        this.validateRange(numbers);
-        this.validateSize(numbers);
+        validateDuplication(numbers);
+        validateRange(numbers);
+        validateSize(numbers);
         this.numbers = numbers.stream().sorted().toList();
+    }
+
+    public Lotto(int... numbers) {
+        this(Arrays.stream(numbers).boxed().toList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Lotto lotto = (Lotto) o;
+        return Objects.equals(numbers, lotto.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(numbers);
     }
 
     private void validateDuplication(List<Integer> numbers) {
