@@ -21,18 +21,8 @@ public class LottoStats {
         return totalPrize;
     }
 
-    public String toString() {
-        StringBuilder stats = new StringBuilder();
-        for (Rank lottoRank : Rank.values()) {
-            stats.append(getStatus(lottoRank));
-        }
-        return stats.toString();
-    }
-
-    private String getStatus(Rank lottoRank) {
-        if (lottoRank == Rank.NONE) return "";
-        return lottoRank.getMessage() +
-                getRankCount(lottoRank) + "개\n";
+    public int getStatusCount(Rank lottoRank) {
+        return getRankCount(lottoRank);
     }
 
     public Integer getRankCount(Rank lottoRank) {

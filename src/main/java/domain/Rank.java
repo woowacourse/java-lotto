@@ -6,23 +6,21 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public enum Rank {
-    NONE("", Prize.NONE, MatchCount.NONE, false),
-    FIFTH("3개 일치 (5,000원)- ", Prize.FIFTH, MatchCount.THREE, false),
-    FOURTH("4개 일치 (50,000원)- ", Prize.FOURTH, MatchCount.FOUR, false),
-    THIRD("5개 일치 (1,500,000원)- ", Prize.THIRD, MatchCount.FIVE, false),
-    SECOND("5개 일치, 보너스 볼 일치 (30,000,000원)- ", Prize.SECOND, MatchCount.FIVE, true),
-    FIRST("6개 일치 (2,000,000,000원)- ", Prize.FIRST, MatchCount.SIX, false);
+    NONE(Prize.NONE, MatchCount.NONE, false),
+    FIFTH(Prize.FIFTH, MatchCount.THREE, false),
+    FOURTH(Prize.FOURTH, MatchCount.FOUR, false),
+    THIRD(Prize.THIRD, MatchCount.FIVE, false),
+    SECOND(Prize.SECOND, MatchCount.FIVE, true),
+    FIRST(Prize.FIRST, MatchCount.SIX, false);
 
     public static final int DEFAULT_COUNT = 0;
     private static final int INCREMENT = 1;
 
-    private final String message;
     private final long prize;
     private final int count;
     private final boolean bonusMatch;
 
-    Rank(String message, long prize, int count, boolean bonusMatch) {
-        this.message = message;
+    Rank(long prize, int count, boolean bonusMatch) {
         this.prize = prize;
         this.count = count;
         this.bonusMatch = bonusMatch;
@@ -62,10 +60,6 @@ public enum Rank {
         return new LottoStats(ranks);
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public Long getPrize() {
         return prize;
     }
@@ -76,5 +70,13 @@ public enum Rank {
 
     public boolean isBonusMatch() {
         return bonusMatch;
+    }
+
+    public boolean isSecond() {
+        return this == Rank.SECOND;
+    }
+
+    public boolean isNotNone() {
+        return this != Rank.NONE;
     }
 }
