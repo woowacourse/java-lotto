@@ -8,23 +8,23 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.WinningLotto;
-import dto.Statistics;
+import dto.LottoStatisticsDto;
 import java.util.List;
 import service.LottoGenerateService;
 import service.RandomLottoNumbersGenerator;
-import service.StatisticsService;
+import service.LottoStatisticsService;
 import view.ViewFacade;
 
 public class LottoController {
 
     private final ViewFacade viewFacade;
     private final LottoGenerateService lottoGenerateService;
-    private final StatisticsService statisticsService;
+    private final LottoStatisticsService lottoStatisticsService;
 
     public LottoController(Container container) {
         this.viewFacade = container.getViewFacade();
         this.lottoGenerateService = container.getLottoGenerateService();
-        this.statisticsService = container.getStatisticsService();
+        this.lottoStatisticsService = container.getStatisticsService();
     }
 
     public void run() {
@@ -54,11 +54,11 @@ public class LottoController {
     }
 
     private void processStatistics(PurchaseHistory purchaseHistory) {
-        Statistics statistics = statisticsService.produceStatistics(
+        LottoStatisticsDto lottoStatisticsDto = lottoStatisticsService.produceStatistics(
             purchaseHistory.lottos,
             purchaseHistory.purchaseAmount
         );
-        viewFacade.printStatistics(statistics);
+        viewFacade.printLottoStatistics(lottoStatisticsDto);
     }
 
     private record PurchaseHistory(Lottos lottos, int purchaseAmount) {

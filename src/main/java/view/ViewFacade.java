@@ -1,7 +1,7 @@
 package view;
 
 import domain.Lottos;
-import dto.Statistics;
+import dto.LottoStatisticsDto;
 
 public class ViewFacade {
 
@@ -29,7 +29,7 @@ public class ViewFacade {
         outputView.printLottos(lottos);
     }
 
-    public void printStatistics(Statistics statistics) {
-        outputView.printStatistics(statistics);
+    public void printLottoStatistics(LottoStatisticsDto lottoStatisticsDto) {
+        outputView.printLottoStatistics(lottoStatisticsDto);
     }
 }

@@ -3,7 +3,7 @@ package view;
 import domain.Lotto;
 import domain.Lottos;
 import domain.PrizeTier;
-import dto.Statistics;
+import dto.LottoStatisticsDto;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,13 +27,13 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printStatistics(Statistics statistics) {
+    public void printLottoStatistics(LottoStatisticsDto lottoStatisticsDto) {
         System.out.println(STATISTICS_HEADER_MESSAGE);
-        Map<PrizeTier, Integer> prizeCounts = statistics.getPrizeCounts();
+        Map<PrizeTier, Integer> prizeCounts = lottoStatisticsDto.getPrizeCounts();
         PrizeTier[] prizeTiers = PrizeTier.values();
         Arrays.sort(prizeTiers, Collections.reverseOrder());
         printPrizeTiers(prizeTiers, prizeCounts);
-        System.out.printf(PROFIT_RATE_FORMAT, statistics.getProfitRate());
+        System.out.printf(PROFIT_RATE_FORMAT, lottoStatisticsDto.getProfitRate());
     }
 
     private void printPrizeTiers(PrizeTier[] prizeTiers, Map<PrizeTier, Integer> prizeCounts) {

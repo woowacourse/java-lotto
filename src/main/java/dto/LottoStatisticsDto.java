@@ -3,12 +3,12 @@ package dto;
 import domain.PrizeTier;
 import java.util.Map;
 
-public class Statistics {
+public class LottoStatisticsDto {
 
     private final Map<PrizeTier, Integer> prizeCounts;
     private final double profitRate;
 
-    public Statistics(Map<PrizeTier, Integer> prizeCounts, double profitRate) {
+    public LottoStatisticsDto(Map<PrizeTier, Integer> prizeCounts, double profitRate) {
         this.prizeCounts = prizeCounts;
         this.profitRate = profitRate;
     }

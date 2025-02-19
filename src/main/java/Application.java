@@ -1,7 +1,7 @@
 import config.Container;
 import controller.LottoController;
 import service.LottoGenerateService;
-import service.StatisticsService;
+import service.LottoStatisticsService;
 import view.InputView;
 import view.OutputView;
 import view.ViewFacade;
@@ -14,10 +14,10 @@ public class Application {
         ViewFacade viewFacade = new ViewFacade(inputView, outputView);
 
         LottoGenerateService lottoGenerateService = new LottoGenerateService();
-        StatisticsService statisticsService = new StatisticsService();
+        LottoStatisticsService lottoStatisticsService = new LottoStatisticsService();
 
         Container container = new Container(
-            viewFacade, inputView, outputView, lottoGenerateService, statisticsService
+            viewFacade, inputView, outputView, lottoGenerateService, lottoStatisticsService
         );
 
         LottoController lottoController = new LottoController(container);

@@ -1,7 +1,7 @@
 package config;
 
 import service.LottoGenerateService;
-import service.StatisticsService;
+import service.LottoStatisticsService;
 import view.InputView;
 import view.OutputView;
 import view.ViewFacade;
@@ -12,23 +12,23 @@ public class Container {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoGenerateService lottoGenerateService;
-    private final StatisticsService statisticsService;
+    private final LottoStatisticsService lottoStatisticsService;
 
     public Container(ViewFacade viewFacade, InputView inputView, OutputView outputView,
-        LottoGenerateService lottoGenerateService, StatisticsService statisticsService) {
+        LottoGenerateService lottoGenerateService, LottoStatisticsService lottoStatisticsService) {
         this.viewFacade = viewFacade;
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoGenerateService = lottoGenerateService;
-        this.statisticsService = statisticsService;
+        this.lottoStatisticsService = lottoStatisticsService;
     }
 
     public ViewFacade getViewFacade() {
         return viewFacade;
     }
 
-    public StatisticsService getStatisticsService() {
-        return statisticsService;
+    public LottoStatisticsService getStatisticsService() {
+        return lottoStatisticsService;
     }
 
     public LottoGenerateService getLottoGenerateService() {
