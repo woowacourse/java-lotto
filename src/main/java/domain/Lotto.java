@@ -1,7 +1,6 @@
 package domain;
 
 import exception.LottoException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +42,7 @@ public class Lotto {
                 .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return Collections.unmodifiableList(lottoNumbers);
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
     }
 }

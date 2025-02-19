@@ -18,7 +18,7 @@ public class LottoBuyResultFormatter {
     public String formattingBuyLottoResult(List<Lotto> lottos) {
         StringBuilder stringBuilder = new StringBuilder(String.format(BUY_LOTTO_AMOUNT_FORMAT, lottos.size()));
         for (Lotto lotto : lottos) {
-            stringBuilder.append(lotto.getLottoNumbers())
+            stringBuilder.append(lotto.lottoNumbers())
                     .append("\n");
         }
         return stringBuilder.toString();
