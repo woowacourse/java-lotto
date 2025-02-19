@@ -1,32 +1,24 @@
 package configure;
 
 import controller.LottoController;
-import service.IssueLottoService;
-import service.OpenLottoService;
+import util.RandomGenerator;
+import util.RandomGeneratorImpl;
 
 public class Configure {
     private static LottoController lottoController;
-    private static IssueLottoService issueLottoService;
-    private static OpenLottoService openLottoService;
-
-    public IssueLottoService issueLottoService() {
-        if (issueLottoService == null) {
-            return new IssueLottoService();
-        }
-        return issueLottoService;
-    }
-
-    public OpenLottoService openLottoService() {
-        if (openLottoService == null) {
-            return new OpenLottoService();
-        }
-        return openLottoService;
-    }
+    private static RandomGenerator randomGenerator;
 
     public LottoController lottoController() {
         if (lottoController == null) {
-            return new LottoController(issueLottoService(), openLottoService());
+            return new LottoController(randomGenerator());
         }
         return lottoController;
+    }
+
+    public RandomGenerator randomGenerator() {
+        if (randomGenerator == null) {
+            return new RandomGeneratorImpl();
+        }
+        return randomGenerator;
     }
 }
