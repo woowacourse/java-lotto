@@ -1,28 +1,33 @@
 package lotto;
 
-import static lotto.Lotto.validateLottoNumber;
-
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
+import lotto.domain.LottoNumber;
+import lotto.domain.SystemLottoGenerator;
+import lotto.domain.WinningLotto;
+import lotto.domain.WinningStatistics;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        List<Lotto> lottos = purchaseLottos();
+        int purchaseAmount = getPurchaseAmount();
+        List<Lotto> lottos = purchaseLottos(purchaseAmount);
         OutputView.printLottos(lottos);
         WinningLotto winningLotto = getWinningLotto();
         WinningStatistics winningStatistics = winningLotto.calculateStatistics(lottos);
-        double returnRate = winningStatistics.calculateReturnRate(lottos.size() * LottoManager.LOTTO_UNIT_PRICE);
+        double returnRate = winningStatistics.calculateReturnRate(purchaseAmount);
         OutputView.printWinningStatistics(winningStatistics, returnRate);
     }
 
-    private static List<Lotto> purchaseLottos() {
+    private static List<Lotto> purchaseLottos(final int purchaseAmount) {
         try {
-            int purchaseAmount = getPurchaseAmount();
-            return LottoManager.purchase(purchaseAmount);
+            LottoMachine lottoMachine = new LottoMachine(new SystemLottoGenerator());
+            return lottoMachine.purchase(purchaseAmount);
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return purchaseLottos();
+            return purchaseLottos(purchaseAmount);
         }
     }
 
@@ -36,9 +41,9 @@ public class Application {
     }
 
     private static WinningLotto getWinningLotto() {
-        WinningNumbers winningNumbers = getWinningNumbers();
+        Lotto winningNumbers = getWinningNumbers();
         try {
-            int bonusNumber = getBonusNumber();
+            LottoNumber bonusNumber = getBonusNumber();
             return new WinningLotto(winningNumbers, bonusNumber);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -46,21 +51,18 @@ public class Application {
         }
     }
 
-    private static WinningNumbers getWinningNumbers() {
+    private static Lotto getWinningNumbers() {
         try {
-            List<Integer> winningNumbers = InputView.inputWinningNumbers();
-            return new WinningNumbers(winningNumbers);
+            return new Lotto(InputView.inputWinningNumbers());
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getWinningNumbers();
         }
     }
 
-    private static int getBonusNumber() {
+    private static LottoNumber getBonusNumber() {
         try {
-            int bonusNumber = InputView.inputBonusNumber();
-            validateLottoNumber(bonusNumber);
-            return bonusNumber;
+            return new LottoNumber(InputView.inputBonusNumber());
         } catch (final IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return getBonusNumber();
