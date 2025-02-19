@@ -1,25 +1,26 @@
 package view;
 
-import static constant.OutputViewMessage.FIFTH_PLACE_STATISTICS;
-import static constant.OutputViewMessage.FIRST_PLACE_STATISTICS;
-import static constant.OutputViewMessage.FOUR_PLACE_STATISTICS;
-import static constant.OutputViewMessage.LOTTO_PURCHASE_GUIDANCE;
-import static constant.OutputViewMessage.SECOND_PLACE_STATISTICS;
-import static constant.OutputViewMessage.THIRD_PLACE_STATISTICS;
-import static constant.OutputViewMessage.TOTAL_PROFIT_RATE_RESULT;
-import static constant.OutputViewMessage.LOTTO_PURCHASE_RESULT;
-import static constant.OutputViewMessage.WINNING_BONUS_GUIDANCE;
-import static constant.OutputViewMessage.WINNING_LOTTO_GUIDANCE;
-import static constant.OutputViewMessage.WINNING_STATISTIC_TITLE;
-import static constant.OutputViewMessage.WINNING_STATISTICS_SEPARATOR;
+import static constant.message.InputMessage.LOTTO_PURCHASE_GUIDANCE;
+import static constant.message.InputMessage.WINNING_BONUS_GUIDANCE;
+import static constant.message.InputMessage.WINNING_LOTTO_GUIDANCE;
+import static constant.message.InputMessage.LOTTO_PURCHASE_RESULT;
+import static constant.message.StatisticsMessage.FIFTH_PLACE_STATISTICS;
+import static constant.message.StatisticsMessage.FIRST_PLACE_STATISTICS;
+import static constant.message.StatisticsMessage.FOUR_PLACE_STATISTICS;
+import static constant.message.StatisticsMessage.SECOND_PLACE_STATISTICS;
+import static constant.message.StatisticsMessage.THIRD_PLACE_STATISTICS;
+import static constant.message.StatisticsMessage.WINNING_STATISTIC_TITLE;
+import static constant.message.StatisticsMessage.WINNING_STATISTICS_SEPARATOR;
+import static constant.message.StatisticsMessage.TOTAL_PROFIT_RATE_RESULT;
 
 import java.util.EnumMap;
-import java.util.List;
-import model.Lotto;
 import model.Prize;
 import model.LottoFactory;
 
 public class OutputView {
+
+    private OutputView() {
+    }
 
     public static void printLottoPurchaseGuidance() {
         print(LOTTO_PURCHASE_GUIDANCE.getMessage());
@@ -34,19 +35,16 @@ public class OutputView {
     }
 
     public static void printLottoCount(final LottoFactory lottoFactory) {
-        print(LOTTO_PURCHASE_RESULT.getMessage(lottoFactory.getLottoCount()));
+        print(LOTTO_PURCHASE_RESULT.getMessage(lottoFactory.lottoCountToString()));
     }
 
     public static void printLottoTickets(final LottoFactory lottoFactory) {
-        List<Lotto> issuedLottoTickets = lottoFactory.getIssuedLottoTickets();
-        issuedLottoTickets.stream()
-                .map(lotto -> lotto.getNumbers().toString())
-                .forEach(OutputView::print);
+        lottoFactory.issuedLottoTicketsToString().forEach(OutputView::print);
 
         printNewLine();
     }
 
-    public static void printStatistics(EnumMap<Prize, Integer> prizes) {
+    public static void printStatistics(final EnumMap<Prize, Integer> prizes) {
         printNewLine();
         print(WINNING_STATISTIC_TITLE.getMessage());
         print(WINNING_STATISTICS_SEPARATOR.getMessage());
@@ -57,7 +55,7 @@ public class OutputView {
         print(FIRST_PLACE_STATISTICS.getMessage(prizes.get(Prize.FIRST_PLACE)));
     }
 
-    public static void printBenefit(LottoFactory lottoFactory, EnumMap<Prize, Integer> prizes) {
+    public static void printBenefit(final LottoFactory lottoFactory, final EnumMap<Prize, Integer> prizes) {
         double winningAmount = lottoFactory.getWinningAmount(prizes);
         String result = lottoFactory.lossOrGain(winningAmount);
         print(TOTAL_PROFIT_RATE_RESULT.getMessage(winningAmount, result));

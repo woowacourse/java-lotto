@@ -10,8 +10,8 @@ class PrizeTest {
 
     @Test
     @DisplayName("map 초기화가 잘 되는 지 확인")
-    void initializeMap() {
-        EnumMap<Prize, Integer> prizeMap = Prize.initializeMap();
+    void initialize() {
+        EnumMap<Prize, Integer> prizeMap = Prize.initialize();
         for (Prize prize : Prize.values()) {
             assertThat(prizeMap.get(prize)).isEqualTo(0);
         }

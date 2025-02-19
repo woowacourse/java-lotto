@@ -9,6 +9,9 @@ public class InputView {
 
     static Scanner scanner = new Scanner(System.in);
 
+    private InputView() {
+    }
+
     public static LottoPurchase getPurchaseLotto() {
         return LottoPurchase.of(getInput());
     }
