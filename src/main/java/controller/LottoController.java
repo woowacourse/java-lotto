@@ -6,6 +6,7 @@ import domain.WinningLotto;
 import domain.WinningNumber;
 import dto.DrawResultDto;
 import exception.LottoException;
+import java.util.List;
 import view.InputView;
 import view.OutputView;
 
@@ -29,8 +30,7 @@ public class LottoController {
 
   private LottoDispenser buyLottoInput() {
     try {
-      String inputBuyLottoMoney = InputView.inputBuyLottoMoney();
-      return new LottoDispenser(inputBuyLottoMoney);
+      return new LottoDispenser(InputView.inputBuyLottoMoney());
     } catch (LottoException lottoException) {
       OutputView.printError(lottoException);
       return null;
@@ -51,8 +51,8 @@ public class LottoController {
 
   private WinningNumber inputWinningNumber() {
     try {
-      String inputWinningNumber = InputView.inputWinningNumber();
-      return new WinningNumber(inputWinningNumber);
+      List<Integer> inputLottoNumbers = InputView.inputWinningNumber();
+      return new WinningNumber(inputLottoNumbers);
     } catch (LottoException lottoException) {
       OutputView.printError(lottoException);
       return null;
@@ -69,7 +69,7 @@ public class LottoController {
 
   private WinningLotto checkWinningLotto(WinningNumber winningNumber) {
     try {
-      String inputBonusNumber = InputView.inputBonusNumber();
+      int inputBonusNumber = InputView.inputBonusNumber();
       return generateWinningLotto(winningNumber, new BonusNumber(inputBonusNumber));
     } catch (LottoException lottoException) {
       OutputView.printError(lottoException);

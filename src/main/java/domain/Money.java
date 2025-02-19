@@ -1,7 +1,6 @@
 package domain;
 
 import exception.LottoException;
-import utility.StringUtility;
 
 public class Money {
 
@@ -10,9 +9,9 @@ public class Money {
 
   private final int money;
 
-  public Money(String money) {
+  public Money(int money) {
     validateMoney(money);
-    this.money = Integer.parseInt(money);
+    this.money = money;
   }
 
   public int calculateBuyLottoAmount() {
@@ -23,17 +22,9 @@ public class Money {
     return (double) earnMoney / money;
   }
 
-  private void validateMoney(String moneyInput) {
-    validateNumeric(moneyInput);
-    int buyMoneyNumber = Integer.parseInt(moneyInput);
-    validateZeroMoney(buyMoneyNumber);
-    validateUnit(buyMoneyNumber);
-  }
-
-  private void validateNumeric(String moneyInput) {
-    if (moneyInput == null || !StringUtility.isNumber(moneyInput)) {
-      throw new LottoException(INVALID_MONEY);
-    }
+  private void validateMoney(int buyMoney) {
+    validateZeroMoney(buyMoney);
+    validateUnit(buyMoney);
   }
 
   private void validateZeroMoney(int buyMoneyNumber) {

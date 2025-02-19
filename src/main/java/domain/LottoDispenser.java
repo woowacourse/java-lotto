@@ -5,15 +5,14 @@ import dto.DrawResultDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class LottoDispenser {
 
   private final List<Lotto> lottos;
   private final Money money;
 
-  public LottoDispenser(String buyMoneyInput) {
-    this.money = new Money(buyMoneyInput);
+  public LottoDispenser(int buyMoney) {
+    this.money = new Money(buyMoney);
     lottos = generateLottos(money.calculateBuyLottoAmount());
   }
 

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import utility.StringUtility;
 
 public class WinningNumber {
 
@@ -15,13 +14,10 @@ public class WinningNumber {
 
   private final List<LottoNumber> lottoNumbers;
 
-  public WinningNumber(String inputWinningNumber) {
+  public WinningNumber(List<Integer> inputWinningNumber) {
     validateWinningNumber(inputWinningNumber);
-    String[] winningNumbers = inputWinningNumber.split(",");
-    List<Integer> parsedWinningNumbers = Arrays.stream(winningNumbers)
-        .map(((winningNumber) -> Integer.parseInt(winningNumber.trim())))
-        .toList();
-    lottoNumbers = parsedWinningNumbers.stream().map(LottoNumber::new).toList();
+    lottoNumbers = inputWinningNumber.stream()
+        .map(LottoNumber::new).toList();
   }
 
   public boolean isContain(LottoNumber lottoNumber) {
@@ -29,18 +25,10 @@ public class WinningNumber {
         .anyMatch(lottoNumber::equals);
   }
 
-  private void validateWinningNumber(String inputWinningNumber) {
+  private void validateWinningNumber(List<Integer> inputWinningNumber) {
     validateIsEmpty(inputWinningNumber);
-    String[] winningNumbers = inputWinningNumber.split(",");
-    validateSizeCheck(winningNumbers);
-    for (int i = 0; i < winningNumbers.length; i++) {
-      winningNumbers[i] = winningNumbers[i].trim();
-      validateIsNumber(winningNumbers[i]);
-    }
-    List<Integer> parsedWinningNumbers = Arrays.stream(winningNumbers)
-        .map((Integer::parseInt))
-        .toList();
-    validateDuplication(parsedWinningNumbers);
+    validateSizeCheck(inputWinningNumber);
+    validateDuplication(inputWinningNumber);
   }
 
   private void validateDuplication(List<Integer> lottoNumbers) {
@@ -50,20 +38,14 @@ public class WinningNumber {
     }
   }
 
-  private static void validateSizeCheck(String[] winningNumbers) {
-    if (winningNumbers.length != LOTTO_LENGTH) {
+  private void validateSizeCheck(List<Integer> winningNumbers) {
+    if (winningNumbers.size() != LOTTO_LENGTH) {
       throw new LottoException(INVALID_WINNING_NUMBER);
     }
   }
 
-  private static void validateIsEmpty(String inputWinningNumber) {
-    if (inputWinningNumber == null) {
-      throw new LottoException(INVALID_WINNING_NUMBER);
-    }
-  }
-
-  private void validateIsNumber(String winningNumber) {
-    if (!StringUtility.isNumber(winningNumber)) {
+  private void validateIsEmpty(List<Integer> lottoNumbers) {
+    if (lottoNumbers == null) {
       throw new LottoException(INVALID_WINNING_NUMBER);
     }
   }
