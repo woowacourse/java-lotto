@@ -10,12 +10,12 @@ public class LottoGenerateService {
 
     private static final Integer PRICE = 1000;
 
-    public Lottos generateLottos(int purchaseAmount, NumbersStrategy strategy) {
+    public Lottos generateLottos(int purchaseAmount, LottoNumbersGenerator generator) {
         validatePurchaseAmount(purchaseAmount);
         int count = purchaseAmount / PRICE;
 
         List<Lotto> lottos = IntStream.range(0, count)
-            .mapToObj(repeat -> new Lotto(strategy.get()))
+            .mapToObj(repeat -> new Lotto(generator.generate()))
             .toList();
         return new Lottos(lottos);
     }

@@ -29,7 +29,7 @@ class LottoGenerateServiceTest {
     @DisplayName("번호 생성 전략에 알맞는 번호로 된 로또를 생성한다.")
     @Test
     void generate_valid_numbers() {
-        Lottos lottos = service.generateLottos(2000, new SequencedTestStrategy());
+        Lottos lottos = service.generateLottos(2000, new TestLottoNumbersGenerator());
         List<Lotto> allLottos = lottos.getLottos();
 
         assertAll(
@@ -40,12 +40,12 @@ class LottoGenerateServiceTest {
         );
     }
 
-    static class SequencedTestStrategy implements NumbersStrategy {
+    static class TestLottoNumbersGenerator implements LottoNumbersGenerator {
 
         private int next = 1;
 
         @Override
-        public List<Integer> get() {
+        public List<Integer> generate() {
             List<Integer> generated = IntStream.range(next, next + 6)
                 .boxed()
                 .toList();
