@@ -3,7 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -32,7 +32,7 @@ class WinningResultTest {
 
         @DisplayName("손해 여부를 올바르게 계산한다.")
         @Test
-        void isDamage() {
+        void isLoss() {
             // given
             Map<LottoRank, Integer> lottoRanks = Map.of(LottoRank.FAIL, 3);
 
@@ -40,7 +40,7 @@ class WinningResultTest {
             WinningResult winningResult = new WinningResult(lottoRanks);
 
             // then
-            assertThat(winningResult.isDamage()).isTrue();
+            assertThat(winningResult.isLoss()).isTrue();
         }
 
         @DisplayName("수익률을 올바르게 계산한다.")

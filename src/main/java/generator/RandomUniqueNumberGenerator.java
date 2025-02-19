@@ -1,6 +1,6 @@
 package generator;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.ArrayList;
 import java.util.List;
 

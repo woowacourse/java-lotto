@@ -1,6 +1,6 @@
 package view.input;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.Arrays;
 import java.util.List;
 

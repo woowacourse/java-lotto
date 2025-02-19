@@ -1,4 +1,4 @@
-package constans;
+package error;
 
 public enum ErrorType {
 

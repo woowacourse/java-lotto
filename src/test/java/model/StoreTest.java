@@ -1,6 +1,5 @@
 package model;
 
-import static model.LottoRank.FIRST_PLACE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static testfixture.LottoNumberFixture.convertToLottoNumbers;
@@ -11,22 +10,25 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class LottoMachineTest {
+class StoreTest {
 
     @Nested
     @DisplayName("유효한 경우의 테스트")
     class ValidCases {
 
-        @DisplayName("로또 머신이 로또를 발급한다.")
+        @DisplayName("구매한 로또를 반환한다.")
         @Test
-        void issueLottos() {
+        void purchaseLottos() {
             // given
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
+            Store store = new Store(lottoMachine);
+            PurchaseAmount purchaseAmount = new PurchaseAmount(1000);
 
-            Lotto expectedLotto = new Lotto(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
+            List<LottoNumber> lottoNumbers = convertToLottoNumbers(1, 2, 3, 4, 5, 6);
+            Lotto expectedLotto = new Lotto(lottoNumbers);
 
             // when
-            List<Lotto> lottos = lottoMachine.issueLottos(1);
+            List<Lotto> lottos = store.purchaseLottos(purchaseAmount);
 
             // then
             assertSoftly(softly -> {
@@ -38,21 +40,27 @@ class LottoMachineTest {
             });
         }
 
-        @DisplayName("로또 머신이 로또의 순위를 알려준다.")
+
+        @DisplayName("당첨 결과를 반환한다.")
         @Test
-        void checkWinningRank() {
+        void calculateWinningResult() {
             // given
             LottoMachine lottoMachine = new LottoMachine(new MockNumberGenerator());
+            Store store = new Store(lottoMachine);
 
             Lotto lotto = new Lotto(convertToLottoNumbers(1, 2, 3, 4, 5, 6));
+            List<Lotto> lottos = List.of(lotto);
+
             WinningNumbers winningNumbers =
                 new WinningNumbers(convertToLottoNumbers(1, 2, 3, 4, 5, 6), LottoNumber.of(7));
 
             // when
-            LottoRank lottoRank = lottoMachine.checkWinningRank(lotto, winningNumbers);
+            WinningResult winningResult = store.calculateWinningResult(winningNumbers, lottos);
 
             // then
-            assertThat(lottoRank).isEqualTo(FIRST_PLACE);
+            assertThat(winningResult.getLottoRanks()
+                .get(LottoRank.FIRST_PLACE))
+                .isEqualTo(1);
         }
     }
 }

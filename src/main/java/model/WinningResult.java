@@ -1,6 +1,6 @@
 package model;
 
-import constans.ErrorType;
+import error.ErrorType;
 import java.util.Map;
 
 public class WinningResult {
@@ -43,7 +43,7 @@ public class WinningResult {
         return calculateTotalLottoCount() * Lotto.LOTTO_PRICE;
     }
 
-    public boolean isDamage() {
+    public boolean isLoss() {
         return calculateRateOfRevenue() < 1;
     }
 

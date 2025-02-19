@@ -3,7 +3,7 @@ package model;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import constans.ErrorType;
+import error.ErrorType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,12 +23,11 @@ class LottoNumberTest {
             int number = 1;
 
             // when
-            LottoNumber actual = new LottoNumber(number);
+            LottoNumber actual = LottoNumber.of(number);
 
             // then
             assertThat(actual.getNumber()).isEqualTo(number);
         }
-
     }
 
     @Nested
@@ -40,7 +39,7 @@ class LottoNumberTest {
         @ValueSource(ints = {Lotto.LOTTO_NUMBER_START_INCLUSIVE - 1, Lotto.LOTTO_NUMBER_END_INCLUSIVE + 1})
         void validateRange(final int inclusive) {
             // given & when & then
-            assertThatThrownBy(() -> new LottoNumber(inclusive))
+            assertThatThrownBy(() -> LottoNumber.of(inclusive))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorType.LOTTO_NUMBER_RANGE.getMessage());
         }
