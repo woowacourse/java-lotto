@@ -45,4 +45,8 @@ public class LottoNumbers {
                 "values=" + values +
                 '}';
     }
+
+    public static LottoNumbers from(List<Integer> values) {
+        return new LottoNumbers(values);
+    }
 }
