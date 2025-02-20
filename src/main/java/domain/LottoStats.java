@@ -1,17 +1,16 @@
 package domain;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 public class LottoStats {
+    private static final int PERCENTAGE = 100;
+    private static final int ROUND_DECIMAL = 100;
+
     private final Map<Rank, Integer> ranks;
 
-    public LottoStats() {
-        ranks = new TreeMap<>();
-    }
 
-    public void addLottoRankCount(Rank lottoRank){
-        ranks.put(lottoRank, ranks.getOrDefault(lottoRank, 0) + 1);
+    public LottoStats(Map<Rank,Integer> lottoRanks) {
+        ranks = lottoRanks;
     }
 
     public long getTotalPrize() {
@@ -22,25 +21,15 @@ public class LottoStats {
         return totalPrize;
     }
 
-    public String toString() {
-        StringBuilder stats = new StringBuilder();
-        for (Rank lottoRank : Rank.values()) {
-            stats.append(getStatus(lottoRank));
-        }
-        return stats.toString();
-    }
-
-    private String getStatus(Rank lottoRank) {
-        if (lottoRank == Rank.NONE) return "";
-        return lottoRank.getMessage() +
-                getRankCount(lottoRank) + "개\n";
+    public int getStatusCount(Rank lottoRank) {
+        return getRankCount(lottoRank);
     }
 
     public Integer getRankCount(Rank lottoRank) {
-        return ranks.getOrDefault(lottoRank, 0);
+        return ranks.getOrDefault(lottoRank, Rank.DEFAULT_COUNT);
     }
 
     public String getEarningRate(int purchaseAmount) {
-        return String.format("%.2f", Math.floor(1. * getTotalPrize() / purchaseAmount * 100) / 100);
+        return String.format("%.2f", Math.floor(1. * getTotalPrize() / purchaseAmount * PERCENTAGE) / ROUND_DECIMAL);
     }
 }
