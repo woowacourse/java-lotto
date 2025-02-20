@@ -1,10 +1,8 @@
-package model;
+package domain;
 
 import static error.ErrorMessage.DUPLICATE_NUMBERS_FOUND;
 import static error.ErrorMessage.INVALID_LOTTO_COUNT;
-import static error.ErrorMessage.NUMBER_OUT_OF_RANGE;
 
-import dto.LottoDto;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,17 +10,17 @@ import java.util.Set;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<LottoNumber> numbers;
     private PrizeTier prizeTier = null;
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(List<LottoNumber> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
-    public int countMatches(List<Integer> winningNumbers) {
-        Set<Integer> lottoNumbers = new HashSet<>(this.numbers);
-        Set<Integer> winningLottoNumbers = new HashSet<>(winningNumbers);
+    public int countMatches(List<LottoNumber> winningNumbers) {
+        Set<LottoNumber> lottoNumbers = new HashSet<>(this.numbers);
+        Set<LottoNumber> winningLottoNumbers = new HashSet<>(winningNumbers);
         lottoNumbers.retainAll(winningLottoNumbers);
         return lottoNumbers.size();
     }
@@ -41,38 +39,29 @@ public class Lotto {
         return this.prizeTier == tier;
     }
 
-    public boolean isBonusMatched(int bonusNumber) {
+    public boolean isBonusMatched(LottoNumber bonusNumber) {
         return numbers.contains(bonusNumber);
     }
 
-    public LottoDto toDto() {
-        return new LottoDto(new ArrayList<>(numbers));
+    public List<LottoNumber> getNumbers() {
+        return new ArrayList<>(numbers);
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<LottoNumber> numbers) {
         validateDuplicateNumbers(numbers);
-        validateNumbersRange(numbers);
         validateNumbersCount(numbers);
     }
 
-    private void validateNumbersCount(List<Integer> numbers) {
+    private void validateNumbersCount(List<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(INVALID_LOTTO_COUNT.getMessage());
         }
     }
 
-    private void validateDuplicateNumbers(List<Integer> numbers) {
-        Set<Integer> numSet = new HashSet<>(numbers);
+    private void validateDuplicateNumbers(List<LottoNumber> numbers) {
+        Set<LottoNumber> numSet = new HashSet<>(numbers);
         if (numSet.size() != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_NUMBERS_FOUND.getMessage());
-        }
-    }
-
-    private void validateNumbersRange(List<Integer> numbers) {
-        boolean hasAnyNumberOutOfRange = numbers.stream()
-            .anyMatch(number -> number < 1 || number > 45);
-        if (hasAnyNumberOutOfRange) {
-            throw new IllegalArgumentException(NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 }

@@ -8,9 +8,7 @@ public enum ErrorMessage {
     INVALID_LOTTO_COUNT("로또 숫자는 6개여야 합니다."),
     DUPLICATE_NUMBERS_FOUND("중복된 숫자가 있습니다."),
     PURCHASE_AMOUNT_INVALID("구입 금액은 1000원 단위로만 가능합니다."),
-    INPUT_MUST_BE_NUMERIC("숫자만 입력할 수 있습니다."),
-    NEGATIVE_NUMBER_NOT_ALLOWED("음수는 입력할 수 없습니다.");
-
+    INPUT_MUST_BE_NUMERIC("숫자만 입력할 수 있습니다.");
     private final String message;
 
     ErrorMessage(String message) {

@@ -1,16 +1,14 @@
-package model;
+package domain;
 
-import dto.LottoDto;
-import dto.LottosDto;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    private final List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
-    public void addLotto(Lotto lotto) {
-        lottos.add(lotto);
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public void rankAll(WinningLotto winningLotto) {
@@ -30,10 +28,7 @@ public class Lottos {
             .sum();
     }
 
-    public LottosDto toDto() {
-        List<LottoDto> lottoDtos = lottos.stream()
-            .map(Lotto::toDto)
-            .toList();
-        return new LottosDto(lottoDtos);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

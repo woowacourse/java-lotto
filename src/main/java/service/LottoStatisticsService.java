@@ -2,16 +2,16 @@ package service;
 
 import static java.util.stream.Collectors.toMap;
 
+import domain.Lottos;
+import domain.PrizeTier;
+import dto.LottoStatisticsDto;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
-import model.Lottos;
-import model.PrizeTier;
-import model.Statistics;
 
-public class StatisticsService {
+public class LottoStatisticsService {
 
-    public Statistics produceStatistics(Lottos lottos, int purchaseAmount) {
+    public LottoStatisticsDto produceStatistics(Lottos lottos, int purchaseAmount) {
         Map<PrizeTier, Integer> prizeCounts = getPrizeTierCounts(lottos);
         long totalPrize = lottos.calculateTotalPrize();
         return createStatistics(prizeCounts, purchaseAmount, totalPrize);
@@ -22,13 +22,13 @@ public class StatisticsService {
             .collect(toMap(Function.identity(), lottos::countTiers));
     }
 
-    private Statistics createStatistics(
+    private LottoStatisticsDto createStatistics(
         Map<PrizeTier, Integer> prizeCounts,
         int purchaseAmount,
         long totalPrize) {
         if (purchaseAmount == 0) {
-            return new Statistics(prizeCounts, 0);
+            return new LottoStatisticsDto(prizeCounts, 0);
         }
-        return new Statistics(prizeCounts, (double) totalPrize / purchaseAmount);
+        return new LottoStatisticsDto(prizeCounts, (double) totalPrize / purchaseAmount);
     }
 }
