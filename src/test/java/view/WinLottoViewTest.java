@@ -1,8 +1,11 @@
 package view;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static view.PurchaseView.POSITIVE_NUMBER_EXCEPTION;
+import static view.ResultView.NUMBER_BOUND_EXCEPTION;
+import static view.ResultView.NUMBER_COUNT_EXCEPTION;
+import static view.ResultView.NUMBER_DUPLICATE_EXCEPTION;
 
-import constant.ErrorMessage;
 import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +24,7 @@ class WinLottoViewTest {
         // when & then
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_COUNT_EXCEPTION);
+                .hasMessage(NUMBER_COUNT_EXCEPTION);
     }
 
     @ParameterizedTest
@@ -35,7 +38,7 @@ class WinLottoViewTest {
         // when & then
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.POSITIVE_NUMBER_EXCEPTION);
+                .hasMessage(POSITIVE_NUMBER_EXCEPTION);
     }
 
     @Test
@@ -49,7 +52,7 @@ class WinLottoViewTest {
         // when & then
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_BOUND_EXCEPTION);
+                .hasMessage(NUMBER_BOUND_EXCEPTION);
     }
 
     @Test
@@ -63,6 +66,6 @@ class WinLottoViewTest {
         // when & then
         assertThatThrownBy(() -> winLottoView.readWinNumbers())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NUMBER_DUPLICATE_EXCEPTION);
+                .hasMessage(NUMBER_DUPLICATE_EXCEPTION);
     }
 }
