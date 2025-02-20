@@ -1,11 +1,9 @@
 package domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RankTest {
 
@@ -26,7 +24,29 @@ class RankTest {
 
         assertThat(Rank.fromResult(2, true)).isEqualTo(Rank.NONE);
         assertThat(Rank.fromResult(2, false)).isEqualTo(Rank.NONE);
+    }
 
+    @Test
+    void NONE인_경우_false를_반환한다() {
+        Rank rank = Rank.NONE;
+        assertThat(rank.isNotNone()).isEqualTo(false);
+    }
 
+    @Test
+    void NONE이_아닌_경우_false를_반환한다() {
+        Rank rank = Rank.FIFTH;
+        assertThat(rank.isNotNone()).isEqualTo(true);
+    }
+
+    @Test
+    void SECOND인_경우_true를_반환한다() {
+        Rank rank = Rank.SECOND;
+        assertThat(rank.isSecond()).isEqualTo(true);
+    }
+
+    @Test
+    void SECOND가_아닌_경우_false를_반환한다() {
+        Rank rank = Rank.FIFTH;
+        assertThat(rank.isSecond()).isEqualTo(false);
     }
 }

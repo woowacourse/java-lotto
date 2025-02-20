@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
     @DisplayName("로또 당첨결과 테스트")
@@ -20,5 +21,15 @@ class LottoTest {
         assertThat(lotto.getRank(new WinningLotto(List.of(1, 2, 3, 7, 8, 9), 10))).isEqualTo(Rank.FIFTH);
         assertThat(lotto.getRank(new WinningLotto(List.of(1, 2, 9, 10, 11, 12), 13))).isEqualTo(Rank.NONE);
         assertThat(lotto.getRank(new WinningLotto(List.of(7, 8, 9, 10, 11, 12), 13))).isEqualTo(Rank.NONE);
+    }
+
+    @Test
+    void 로또_생성_예외_테스트() {
+        assertThatThrownBy(() -> {
+            new Lotto(List.of(1,2,3,4,5,5));
+        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            new Lotto(List.of(1,2,3,4,5));
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }
