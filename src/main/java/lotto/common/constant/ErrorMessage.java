@@ -8,7 +8,8 @@ public enum ErrorMessage {
     ERROR_MONEY_LESS_THEN_STANDARD("로또를 구매하려면 " + LOTTO_PRICE + "원이상 필요합니다."),
     ERROR_NOT_DIVIDED_BY_STANDARD("돈이 " + LOTTO_PRICE + "원으로 나누어떨어지지 않습니다"),
     ERROR_DUPLICATED_BONUS_NUMBER("보너스 번호가 중복됩니다."),
-    ERROR_NOT_NUMBER_TYPE("숫자가 아닙니다.");
+    ERROR_NOT_NUMBER_TYPE("숫자가 아닙니다."),
+    ERROR_INVALID_INPUT("유효하지 않은 입력값입니다.");
 
     private static final String PREFIX = "[ERROR]";
 

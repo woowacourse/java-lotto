@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import static lotto.common.constant.ErrorMessage.*;
 import static lotto.domain.MatchInfo.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -39,7 +40,7 @@ class MatchInfoTest {
         assertThat(MatchInfo.getMatchInfo(5, true)).isEqualTo(MATCH_BONUS);
     }
 
-    @DisplayName("유효하지 않은 입력값에 대해 NO_MATCH를 반환한다")
+    @DisplayName("당첨되지 않은 경우, 예외를 반환한다")
     @ParameterizedTest
     @CsvSource({
         "-1, false",
@@ -47,6 +48,8 @@ class MatchInfoTest {
         "8, true"
     })
     void test_ReturnNoMatch_InvalidInput(int matchCount, boolean hasBonus) {
-        assertThat(MatchInfo.getMatchInfo(matchCount, hasBonus)).isEqualTo(NO_MATCH);
+        assertThatThrownBy(() -> MatchInfo.getMatchInfo(matchCount, hasBonus))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ERROR_INVALID_INPUT.getMessage());
     }
 }

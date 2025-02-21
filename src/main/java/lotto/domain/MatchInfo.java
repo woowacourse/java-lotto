@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import static lotto.common.constant.BusinessRule.*;
+import static lotto.common.constant.ErrorMessage.*;
 
 import java.util.Arrays;
 
@@ -36,10 +37,13 @@ public enum MatchInfo {
     }
 
     public static MatchInfo getMatchInfo(int matchNumber, boolean bonus) {
+        if (matchNumber < 0 || matchNumber > 6) {
+            throw new IllegalArgumentException(ERROR_INVALID_INPUT.getMessage());
+        }
+
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
-
         return Arrays.stream(values())
             .filter(s -> s.number == matchNumber)
             .findFirst()
