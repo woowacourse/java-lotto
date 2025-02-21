@@ -1,11 +1,11 @@
-package domain;
+package domain.strategy;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class LottoRandomGenerator {
+public class LottoRandomGeneratorStrategy implements LottoGenerateStrategy {
 
     private final int LOTTO_NUMBER_SIZE = 6;
     private final int LOTTO_NUMBER_START = 1;
@@ -13,10 +13,11 @@ public class LottoRandomGenerator {
 
     private final Random random;
 
-    public LottoRandomGenerator() {
+    public LottoRandomGeneratorStrategy() {
         random = new Random();
     }
 
+    @Override
     public List<Integer> generateNumbers() {
         Set<Integer> numbers = new HashSet<>();
         while (numbers.size() != LOTTO_NUMBER_SIZE) {

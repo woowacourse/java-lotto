@@ -2,7 +2,6 @@ package service;
 
 import domain.BonusNumber;
 import domain.Lotto;
-import domain.LottoBuyResultFormatter;
 import domain.LottoDispenser;
 import domain.WinningCalculateFormatter;
 import domain.WinningCase;
@@ -15,7 +14,7 @@ public class MockingLottoService extends LottoService {
     private final WinningCalculateFormatter winningCalculateFormatter;
 
     public MockingLottoService(WinningCalculateFormatter winningCalculateFormatter) {
-        super(winningCalculateFormatter, new LottoBuyResultFormatter());
+        super();
         this.winningCalculateFormatter = winningCalculateFormatter;
     }
 

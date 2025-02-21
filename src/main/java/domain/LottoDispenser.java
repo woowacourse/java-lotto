@@ -1,5 +1,6 @@
 package domain;
 
+import domain.strategy.LottoGenerateStrategy;
 import exception.LottoException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,10 +16,12 @@ public class LottoDispenser {
 
     private final int buyMoney;
     private final List<Lotto> lottos;
+    private LottoGenerateStrategy lottoGenerateStrategy;
 
-    public LottoDispenser(String buyMoneyInput, LottoBuyResultFormatter lottoBuyResultFormatter) {
+    public LottoDispenser(String buyMoneyInput, LottoGenerateStrategy lottoRandomGenerator) {
         validateLottoDispenser(buyMoneyInput);
         this.buyMoney = Integer.parseInt(buyMoneyInput);
+        this.lottoGenerateStrategy = lottoRandomGenerator;
         int lottoCount = Integer.parseInt(buyMoneyInput) / LOTTO_MONEY_UNIT;
         lottos = generateLottos(lottoCount);
     }
@@ -42,10 +45,9 @@ public class LottoDispenser {
     }
 
     private List<Lotto> generateLottos(int lottoCount) {
-        LottoRandomGenerator lottoRandomGenerator = new LottoRandomGenerator();
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(lottoRandomGenerator.generateNumbers()));
+            lottos.add(new Lotto(lottoGenerateStrategy.generateNumbers()));
         }
         return lottos;
     }

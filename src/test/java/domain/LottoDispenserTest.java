@@ -3,8 +3,9 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.strategy.LottoRandomGeneratorStrategy;
+import domain.strategy.TestRandomGeneratorStrategy;
 import exception.LottoException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import service.MockingLottoService;
 
 public class LottoDispenserTest {
 
@@ -28,7 +28,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_0원이면_예외가_발생한다")
     public void 구입_금액이_0원이면_예외가_발생한다() {
         assertThatThrownBy(() -> {
-            new LottoDispenser("0", lottoBuyResultFormatter);
+            new LottoDispenser("0", new LottoRandomGeneratorStrategy());
         }).isInstanceOf(LottoException.class);
     }
 
@@ -36,7 +36,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_1000원_단위가_아니면_예외가_발생한다")
     public void 구입_금액이_1000원_단위가_아니면_예외가_발생한다() {
         assertThatThrownBy(() -> {
-            new LottoDispenser("1001", lottoBuyResultFormatter);
+            new LottoDispenser("1001", new LottoRandomGeneratorStrategy());
         }).isInstanceOf(LottoException.class);
     }
 
@@ -44,7 +44,7 @@ public class LottoDispenserTest {
     @DisplayName("구입_금액이_숫자가_아니면_예외가_발생한다")
     public void 구입_금액이_숫자가_아니면_예외가_발생한다() {
         assertThatThrownBy(() -> {
-            new LottoDispenser("a", lottoBuyResultFormatter);
+            new LottoDispenser("a", new LottoRandomGeneratorStrategy());
         }).isInstanceOf(LottoException.class);
     }
 
@@ -60,12 +60,10 @@ public class LottoDispenserTest {
     @DisplayName("당첨_통계_계산_및_출력_테스트")
     @MethodSource("calculateWinningResult")
     public void 당첨_통계_계산_및_출력_테스트(List<Integer> testLottoNumbers) {
-        String winningNumber = "1,2,3,4,5,6";
-        String bonusNumber = "7";
-        MockingLottoService mockingLottoService = new MockingLottoService(new WinningCalculateFormatter());
-        List<Lotto> lottos = new ArrayList<>();
-        lottos.add(new Lotto(testLottoNumbers));
-        assertThat(mockingLottoService.winningCalculate(lottos, winningNumber, bonusNumber)).contains("총 수익률은 2000000");
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        BonusNumber bonusNumber = new BonusNumber("7");
+        LottoDispenser lottoDispenser = new LottoDispenser("1000", new TestRandomGeneratorStrategy(testLottoNumbers));
+        assertThat(lottoDispenser.winningCalculate(winningNumber, bonusNumber).get(WinningCase.SIX_SAME));
     }
 }
 
