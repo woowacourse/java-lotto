@@ -26,7 +26,7 @@ public class RandomWrapperTest {
 
     @Test
     @DisplayName("Random 클래스의 무작위 생성은 시드값에 의해 결정된다.")
-    void learnRandomIntListWithSeed() {
+    void learn_RandomIntListWithSeed() {
         var min = LOTTO_MINIMUM;
         var max = LOTTO_MAXIMUM;
         var size = LOTTO_SIZE;
@@ -52,7 +52,7 @@ public class RandomWrapperTest {
     }
 
     @RepeatedTest(100)
-    void testRandomIntListProperties() {
+    void test_RandomIntListProperties() {
         var min = LOTTO_MINIMUM;
         var max = LOTTO_MAXIMUM;
         var size = LOTTO_SIZE;

@@ -2,15 +2,25 @@ package lotto.view;
 
 import static lotto.domain.MatchInfo.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import lotto.domain.Lotto;
 import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 
 public class OutputView {
+    public static final String REQUEST_BONUS = "보너스 볼을 입력해주세요.";
+    public static final String REQUEST_CASHIER = "구입금액을 입력해 주세요.";
+    public static final String REQUEST_WINNING_LOTTO = "지난 주 당첨 번호를 입력해 주세요.";
 
     public void print(String output) {
         System.out.println(output);
+    }
+    
+    public void printLottoPurchaseInfo(int number) {
+        System.out.println(number + "개를 구매했습니다.\n");
     }
 
     public void printStatics(Map<MatchInfo, Integer> map) {
@@ -18,13 +28,16 @@ public class OutputView {
         System.out.println("---------");
 
         for (MatchInfo key : MatchInfo.values()) {
-            if (key == NO_MATCH) {
+            if (isNoMatch(key))
                 break;
-            }
-            String output = key.getMatchData();
+            String output = key.toString();
             int count = map.getOrDefault(key, 0);
             System.out.println(output + count + "개");
         }
+    }
+
+    private boolean isNoMatch(MatchInfo key) {
+        return key == NO_MATCH;
     }
 
     public void printProfit(Profit profit) {
@@ -34,5 +47,12 @@ public class OutputView {
         }
 
         System.out.println(print);
+    }
+
+    public void printLottoList(List<Lotto> lottoList) {
+        String output = lottoList.stream()
+            .map(Lotto::toString)
+            .collect(Collectors.joining("\n"));
+        print(output);
     }
 }

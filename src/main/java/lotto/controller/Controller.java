@@ -1,100 +1,96 @@
 package lotto.controller;
 
+import static lotto.view.OutputView.*;
+
 import java.util.List;
 import java.util.Map;
 
 import lotto.common.utill.InputParser;
 import lotto.domain.Cashier;
-import lotto.domain.Lotto;
 import lotto.domain.MatchCount;
 import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 import lotto.domain.Wallet;
-import lotto.service.LottoService;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class Controller {
-    private final LottoService lottoService;
     private final InputView inputView;
     private final OutputView outputView;
 
-    public Controller(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public Controller(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoService = lottoService;
     }
 
     public void run() {
-        Cashier cashier = requestAmount();
-        Wallet wallet = new Wallet(cashier);
-        outputView.print(cashier.getLottoAmount() + "개를 구매했습니다.\n");
-        outputView.print(wallet.toString());
+        Cashier cashier = requestCashier();
+        int numberOfLotto = cashier.getNumberOfLotto();
+        Wallet wallet = generateWallet(numberOfLotto);
 
-        Lotto matchLotto = requestMatchLotto();
+        WinningLotto winningLotto = requestWinningLotto();
 
-        int bonus = requestBonus(matchLotto);
+        Map<MatchInfo, Integer> matchResult = displayMatchResult(wallet, winningLotto, cashier);
 
-        Map<MatchInfo, Integer> map = getMatchStatisticsMap(wallet, matchLotto, bonus);
-        outputView.printStatics(map);
+        displayProfit(cashier, matchResult);
+    }
 
-        Profit profit = lottoService.calculateProfit(map, cashier);
+    private Wallet generateWallet(int numberOfLotto) {
+        Wallet wallet = new Wallet(numberOfLotto);
+        displayPurchaseLottoInfo(numberOfLotto, wallet);
+        return wallet;
+    }
+
+    private void displayPurchaseLottoInfo(int numberOfLotto, Wallet wallet) {
+        outputView.printLottoPurchaseInfo(numberOfLotto);
+        outputView.printLottoList(wallet.getLottoList());
+    }
+
+    private Map<MatchInfo, Integer> displayMatchResult(Wallet wallet, WinningLotto winningLotto, Cashier cashier) {
+        List<MatchCount> matchCount = wallet.getMatchCountList(winningLotto);
+        Map<MatchInfo, Integer> matchResult = cashier.convertToMatchResult(matchCount);
+        outputView.printStatics(matchResult);
+        return matchResult;
+    }
+
+    private void displayProfit(Cashier cashier, Map<MatchInfo, Integer> matchResult) {
+        Profit profit = cashier.calculateProfit(matchResult);
         outputView.printProfit(profit);
     }
 
-    private int requestBonus(Lotto matchLotto) {
-        while (true) {
-            try {
-                int bonus = requestInt("보너스 볼을 입력해주세요.");
-                matchLotto.validateBonus(bonus);
-                return bonus;
-            } catch (IllegalArgumentException e) {
-                outputView.print(e.getMessage());
-            }
+    private Cashier requestCashier() {
+        try {
+            int money = requestNumber(REQUEST_CASHIER);
+            return new Cashier(money);
+        } catch (IllegalArgumentException e) {
+            outputView.print(e.getMessage());
+
         }
+        return requestCashier();
     }
 
-    private Map<MatchInfo, Integer> getMatchStatisticsMap(Wallet wallet, Lotto matchLotto,
-        int bonus) {
-        List<MatchCount> matchCount = wallet.matchCount(matchLotto, bonus);
-        return lottoService.convertToMap(matchCount);
-    }
-
-    private Cashier requestAmount() {
-        while (true) {
-            try {
-                int money = requestInt("구입금액을 입력해 주세요.");
-                return new Cashier(money);
-            } catch (IllegalArgumentException e) {
-                outputView.print(e.getMessage());
-            }
+    private int requestNumber(String output) {
+        try {
+            outputView.print(output);
+            String bonusInput = inputView.read();
+            return InputParser.parseToInt(bonusInput);
+        } catch (IllegalArgumentException e) {
+            outputView.print(e.getMessage());
         }
-
+        return requestNumber(output);
     }
 
-    private int requestInt(String output) {
-        while (true) {
-            try {
-                outputView.print(output);
-                String bonusInput = inputView.read();
-                return InputParser.parseToInt(bonusInput);
-            } catch (IllegalArgumentException e) {
-                outputView.print(e.getMessage());
-            }
+    private WinningLotto requestWinningLotto() {
+        try {
+            outputView.print(REQUEST_WINNING_LOTTO);
+            String winningNumberInput = inputView.read();
+            List<Integer> winningNumbers = InputParser.parseToList(winningNumberInput);
+            int bonus = requestNumber(REQUEST_BONUS);
+            return new WinningLotto(winningNumbers, bonus);
+        } catch (IllegalArgumentException e) {
+            outputView.print(e.getMessage());
         }
+        return requestWinningLotto();
     }
-
-    private Lotto requestMatchLotto() {
-        while (true) {
-            try {
-                outputView.print("지난 주 당첨 번호를 입력해 주세요.");
-                String winningNumberInput = inputView.read();
-                List<Integer> winningNumbers = InputParser.parseToList(winningNumberInput);
-                return new Lotto(winningNumbers);
-            } catch (IllegalArgumentException e) {
-                outputView.print(e.getMessage());
-            }
-        }
-    }
-
 }

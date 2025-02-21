@@ -16,7 +16,7 @@ public final class InputParser {
         try {
             return Integer.parseInt(str);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NOT_NUMBER_TYPE.getMessage());
+            throw new NumberFormatException(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
     }
 
@@ -28,7 +28,7 @@ public final class InputParser {
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NOT_NUMBER_TYPE.getMessage());
+            throw new NumberFormatException(ERROR_NOT_NUMBER_TYPE.getMessage());
         }
     }
 }
