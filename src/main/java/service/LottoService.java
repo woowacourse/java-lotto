@@ -1,26 +1,21 @@
 package service;
 
 import domain.BonusNumber;
-import domain.LottoBuyResultFormatter;
 import domain.LottoDispenser;
-import domain.WinningCalculateFormatter;
 import domain.WinningCase;
 import domain.WinningNumber;
+import domain.dto.WinningCalculateDto;
+import domain.strategy.LottoRandomGeneratorStrategy;
+import java.util.Collections;
 import java.util.Map;
 
 public class LottoService {
 
-    private final WinningCalculateFormatter winningCalculateFormatter;
-    private final LottoBuyResultFormatter lottoBuyResultFormatter;
-
-    public LottoService(WinningCalculateFormatter winningCalculateFormatter,
-                        LottoBuyResultFormatter lottoBuyResultFormatter) {
-        this.winningCalculateFormatter = winningCalculateFormatter;
-        this.lottoBuyResultFormatter = lottoBuyResultFormatter;
+    public LottoService() {
     }
 
     public LottoDispenser inputBuyLottoMoney(String inputBuyLottoMoney) {
-        return new LottoDispenser(inputBuyLottoMoney, lottoBuyResultFormatter);
+        return new LottoDispenser(inputBuyLottoMoney, new LottoRandomGeneratorStrategy());
     }
 
     public WinningNumber inputWinningNumber(String inputWinningNumber) {
@@ -31,16 +26,12 @@ public class LottoService {
         return new BonusNumber(inputBonusNumber);
     }
 
-    public String winningCalculate(LottoDispenser lottoDispenser, WinningNumber winningNumber,
-                                   BonusNumber bonusNumber) {
+    public WinningCalculateDto winningCalculate(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                                BonusNumber bonusNumber) {
         Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
         double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
-        return winningCalculateFormatter.winningResultFormatting(winningCalculateResult, earnMoneyRatio);
-    }
-
-    public String buyLottoResult(LottoDispenser lottoDispenser) {
-        return lottoBuyResultFormatter.formattingBuyLottoResult(lottoDispenser.getLottos());
+        return new WinningCalculateDto(Collections.unmodifiableMap(winningCalculateResult), earnMoneyRatio);
     }
 }
 

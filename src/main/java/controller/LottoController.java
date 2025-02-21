@@ -3,6 +3,7 @@ package controller;
 import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningNumber;
+import domain.dto.WinningCalculateDto;
 import service.LottoService;
 
 public class LottoController {
@@ -17,12 +18,8 @@ public class LottoController {
         return lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
 
-    public String formattingBuyLottoResult(LottoDispenser lottoDispenser) {
-        return lottoService.buyLottoResult(lottoDispenser);
-    }
-
-    public String formattingWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
-                                          BonusNumber bonusNumber) {
+    public WinningCalculateDto formattingWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                                       BonusNumber bonusNumber) {
         return lottoService.winningCalculate(lottoDispenser, winningNumber, bonusNumber);
     }
 
