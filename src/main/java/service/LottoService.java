@@ -4,9 +4,7 @@ import domain.BonusNumber;
 import domain.LottoDispenser;
 import domain.WinningCase;
 import domain.WinningNumber;
-import domain.dto.WinningCalculateDto;
 import domain.strategy.LottoRandomGeneratorStrategy;
-import java.util.Collections;
 import java.util.Map;
 
 public class LottoService {
@@ -26,12 +24,16 @@ public class LottoService {
         return new BonusNumber(inputBonusNumber);
     }
 
-    public WinningCalculateDto winningCalculate(LottoDispenser lottoDispenser, WinningNumber winningNumber,
-                                                BonusNumber bonusNumber) {
-        Map<WinningCase, Integer> winningCalculateResult = lottoDispenser.winningCalculate(winningNumber, bonusNumber);
+    public Map<WinningCase, Integer> winningCalculate(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                                      BonusNumber bonusNumber) {
+        return lottoDispenser.winningCalculate(winningNumber, bonusNumber);
+//        return new WinningCalculateDto(Collections.unmodifiableMap(winningCalculateResult), earnMoneyRatio);
+    }
+
+    public double calculateEarnMoneyRatio(LottoDispenser lottoDispenser,
+                                          Map<WinningCase, Integer> winningCalculateResult) {
         long earnMoney = lottoDispenser.calculateEarnMoney(winningCalculateResult);
-        double earnMoneyRatio = lottoDispenser.calculateEarnMoneyRatio(earnMoney);
-        return new WinningCalculateDto(Collections.unmodifiableMap(winningCalculateResult), earnMoneyRatio);
+        return lottoDispenser.calculateEarnMoneyRatio(earnMoney);
     }
 }
 

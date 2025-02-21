@@ -80,6 +80,6 @@ public class ClientApplication {
     private void printWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
                                     BonusNumber bonusNumber) {
         outputView.printWinningResult(
-                lottoController.formattingWinningResult(lottoDispenser, winningNumber, bonusNumber));
+                lottoController.winningResult(lottoDispenser, winningNumber, bonusNumber));
     }
 }

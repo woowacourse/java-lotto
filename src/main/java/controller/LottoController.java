@@ -2,8 +2,10 @@ package controller;
 
 import domain.BonusNumber;
 import domain.LottoDispenser;
+import domain.WinningCase;
 import domain.WinningNumber;
 import domain.dto.WinningCalculateDto;
+import java.util.Map;
 import service.LottoService;
 
 public class LottoController {
@@ -18,9 +20,12 @@ public class LottoController {
         return lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
 
-    public WinningCalculateDto formattingWinningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
-                                                       BonusNumber bonusNumber) {
-        return lottoService.winningCalculate(lottoDispenser, winningNumber, bonusNumber);
+    public WinningCalculateDto winningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                             BonusNumber bonusNumber) {
+        Map<WinningCase, Integer> winningCaseIntegerMap = lottoService.winningCalculate(lottoDispenser, winningNumber,
+                bonusNumber);
+        double earnMoneyRatio = lottoService.calculateEarnMoneyRatio(lottoDispenser, winningCaseIntegerMap);
+        return new WinningCalculateDto(winningCaseIntegerMap, earnMoneyRatio);
     }
 
     public WinningNumber inputWinningNumber(String inputWinningNumber) {
