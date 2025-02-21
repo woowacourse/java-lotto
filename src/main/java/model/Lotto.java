@@ -8,33 +8,19 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    public static final int PRICE = 1_000;
     private List<Integer> numbers;
-    private PrizeTier prizeTier = null;
 
     public Lotto(List<Integer> numbers) {
         validateNumbers(numbers);
         this.numbers = numbers;
     }
 
-    public int countMatches(List<Integer> winningNumbers) {
+    public int countMatches(Lotto lotto) {
         Set<Integer> numberSet = new HashSet<>(this.numbers);
-        Set<Integer> winningNumberSet = new HashSet<>(winningNumbers);
+        Set<Integer> winningNumberSet = new HashSet<>(lotto.numbers);
         numberSet.retainAll(winningNumberSet);
         return numberSet.size();
-    }
-
-    public void rankTier(WinningLotto winningLotto) {
-        int count = winningLotto.getMatchCount(numbers);
-        boolean isBonusMatched = winningLotto.isBonusMatched(numbers);
-        this.prizeTier = PrizeTier.getTier(count, isBonusMatched);
-    }
-
-    public int extractPrize() {
-        return prizeTier.getPrize();
-    }
-
-    public boolean isTierMatched(PrizeTier tier) {
-        return this.prizeTier == tier;
     }
 
     public boolean isBonusMatched(int bonusNumber) {
@@ -66,9 +52,13 @@ public class Lotto {
 
     private void validateNumbersRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < 1 || number > 45) {
-                throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
-            }
+            validateNumberRange(number);
+        }
+    }
+
+    private void validateNumberRange(Integer number) {
+        if (number < 1 || number > 45) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 }

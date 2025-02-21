@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-// 싱글톤 패턴 적용으로 인해 메서드 테스트 순서 고정 ㅠㅠ
 @TestMethodOrder(OrderAnnotation.class)
 class WinningLottoTest {
     static Stream<Arguments> provideBasicLottoAndInvalidBonusNumber() {

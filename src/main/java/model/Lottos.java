@@ -12,24 +12,14 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public void rankAll(WinningLotto winningLotto) {
+    public LottoResults evaluateLottos(WinningNumbers winningNumbers) {
+        List<LottoResult> lottoResults = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            lotto.rankTier(winningLotto);
+            LottoResult lottoResult = new LottoResult(lotto);
+            lottoResult.evaluateLotto(winningNumbers);
+            lottoResults.add(lottoResult);
         }
-    }
-
-    public int countTiers(PrizeTier prizeTier) {
-        return (int) lottos.stream()
-                .filter(lotto -> lotto.isTierMatched(prizeTier))
-                .count();
-    }
-
-    public long calculateTotalPrize() {
-        long totalPrize = 0;
-        for (Lotto lotto : lottos) {
-            totalPrize += lotto.extractPrize();
-        }
-        return totalPrize;
+        return new LottoResults(lottoResults);
     }
 
     public LottosDto toDto() {
