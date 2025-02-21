@@ -25,8 +25,10 @@ public enum WinningInfo {
 
     public static WinningInfo of(int matchedNumberCount, boolean isBonusMatched) {
         return Arrays.stream(values())
-                .filter(value -> value.getMatchedNumberCount() == matchedNumberCount
-                        && value.isBonusMatched() == isBonusMatched)
+                .filter(winningInfo -> matchedNumberCount == winningInfo.getMatchedNumberCount())
+                .filter(winningInfo -> (winningInfo.getMatchedNumberCount() == SECOND_PRIZE.getMatchedNumberCount() &&
+                        winningInfo.isBonusMatched() == isBonusMatched) ||
+                        (winningInfo.getMatchedNumberCount() != SECOND_PRIZE.getMatchedNumberCount()))
                 .findFirst()
                 .orElse(NONE);
     }
