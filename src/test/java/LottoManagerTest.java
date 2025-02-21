@@ -54,7 +54,7 @@ class LottoManagerTest {
 
         Money money = new Money(6000);
         long totalPrices = Arrays.stream(WinningInfo.values())
-                .mapToInt(WinningInfo::getPrice)
+                .mapToLong(WinningInfo::getPrice)
                 .sum();
         float expected = (float) totalPrices / 6000;
 

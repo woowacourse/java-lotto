@@ -15,9 +15,9 @@ public enum WinningInfo {
 
     private final int matchedNumberCount;
     private final boolean isBonusMatched;
-    private final int price;
+    private final long price;
 
-    WinningInfo(int matchedNumberCount, boolean isBonusMatched, int price) {
+    WinningInfo(int matchedNumberCount, boolean isBonusMatched, long price) {
         this.matchedNumberCount = matchedNumberCount;
         this.isBonusMatched = isBonusMatched;
         this.price = price;
@@ -45,7 +45,7 @@ public enum WinningInfo {
         return isBonusMatched;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 }
