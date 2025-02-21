@@ -5,7 +5,6 @@ import static lotto.common.constant.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
