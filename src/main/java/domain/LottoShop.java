@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import util.RandomNumbersGenerator;
 
-public class LottoManager {
+public class LottoShop {
     public LottoWallet generateLottos(final int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; ++i) {

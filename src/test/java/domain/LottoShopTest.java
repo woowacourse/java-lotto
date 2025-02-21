@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoManagerTest {
-    private LottoManager lottoManager;
+class LottoShopTest {
+    private LottoShop lottoShop;
     private final List<Lotto> lottos = List.of(
             new Lotto(List.of(1, 2, 3, 4, 5, 6)),
             new Lotto(List.of(1, 2, 3, 4, 5, 7)),
@@ -23,7 +23,7 @@ class LottoManagerTest {
 
     @BeforeEach
     void setup() {
-        lottoManager = new LottoManager();
+        lottoShop = new LottoShop();
     }
 
     @Test
@@ -33,7 +33,7 @@ class LottoManagerTest {
         int lottoCount = 2;
 
         // when
-        LottoWallet lottos = lottoManager.generateLottos(lottoCount);
+        LottoWallet lottos = lottoShop.generateLottos(lottoCount);
 
         // then
         assertThat(lottos.getLottoWallet()).hasSize(lottoCount);
