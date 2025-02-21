@@ -33,7 +33,7 @@ class LottoShopTest {
         int lottoCount = 2;
 
         // when
-        LottoWallet lottos = lottoShop.generateLottos(lottoCount);
+        LottoWallet lottos = lottoShop.buyLottos(lottoCount);
 
         // then
         assertThat(lottos.getLottoWallet()).hasSize(lottoCount);

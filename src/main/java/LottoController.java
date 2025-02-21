@@ -24,7 +24,7 @@ public class LottoController {
         final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
         outputView.printLottoCount(purchasableLottoCount);
 
-        LottoWallet lottoWallet = lottoShop.generateLottos(purchasableLottoCount);
+        LottoWallet lottoWallet = lottoShop.buyLottos(purchasableLottoCount);
         outputView.printLottos(lottoWallet);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
