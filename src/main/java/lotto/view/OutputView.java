@@ -18,7 +18,7 @@ public class OutputView {
     public void print(String output) {
         System.out.println(output);
     }
-
+    
     public void printLottoPurchaseInfo(int number) {
         System.out.println(number + "개를 구매했습니다.\n");
     }
@@ -28,13 +28,16 @@ public class OutputView {
         System.out.println("---------");
 
         for (MatchInfo key : MatchInfo.values()) {
-            if (key == NO_MATCH) {
+            if (isNoMatch(key))
                 break;
-            }
             String output = key.toString();
             int count = map.getOrDefault(key, 0);
             System.out.println(output + count + "개");
         }
+    }
+
+    private boolean isNoMatch(MatchInfo key) {
+        return key == NO_MATCH;
     }
 
     public void printProfit(Profit profit) {

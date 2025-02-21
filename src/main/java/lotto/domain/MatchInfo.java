@@ -37,10 +37,9 @@ public enum MatchInfo {
     }
 
     public static MatchInfo getMatchInfo(int matchNumber, boolean bonus) {
-        if (matchNumber < 0 || matchNumber > 6) {
+        if (isInvaildMatchNumber(matchNumber)) {
             throw new IllegalArgumentException(ERROR_INVALID_INPUT.getMessage());
         }
-
         if (isMatchBonus(matchNumber, bonus)) {
             return MATCH_BONUS;
         }
@@ -48,6 +47,10 @@ public enum MatchInfo {
             .filter(s -> s.number == matchNumber)
             .findFirst()
             .orElse(NO_MATCH);
+    }
+
+    private static boolean isInvaildMatchNumber(int matchNumber) {
+        return matchNumber < 0 || matchNumber > 6;
     }
 
     private static boolean isMatchBonus(int matchNumber, boolean bonus) {
