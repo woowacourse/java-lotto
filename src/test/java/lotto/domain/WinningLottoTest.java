@@ -16,32 +16,22 @@ import org.junit.jupiter.params.provider.MethodSource;
 class WinningLottoTest {
     private static final int defaultBonus = 10;
     private static final Lotto defaultLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-    private static final WinningLotto defaultWinningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6), defaultBonus);
 
     @Test
-    @DisplayName("로또는 당첨 번호를 비교하여 자신의 당첨 개수와 보너스 여부를 반환한다.")
-    void test_returnCorrect_MatchCount() {
-        var notBonus = defaultBonus + 1;
-        var correctCount = 5;
-
-        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, defaultBonus));
-        WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, notBonus), defaultBonus);
-
-        MatchCount count = lotto.matchCount(winningLotto);
-
-        assertThat(count.matchCount()).isEqualTo(correctCount);
-        assertThat(count.bonus()).isTrue();
-    }
-
-    @Test
-    @DisplayName("로또 보너스 번호는 지정된 로또 범위를 벗어날 경우, 예외를 발생한다.")
-    void error_WhenLottoBonusOverRange() {
+    @DisplayName("로또 보너스 번호는 지정된 로또 범위보다 클 경우, 예외를 발생한다.")
+    void error_LottoBonusMoreThenRange() {
         var bonusOverMAX = LOTTO_MAXIMUM + 1;
-        var bonusLessMIN = LOTTO_MINIMUM - 1;
 
         assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusOverMAX))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
+
+    }
+
+    @Test
+    @DisplayName("로또 보너스 번호는 지정된 로또 범위보다 작을 경우, 예외를 발생한다.")
+    void error_LottoBonusLessRange() {
+        var bonusLessMIN = LOTTO_MINIMUM - 1;
         assertThatThrownBy(() -> new WinningLotto(List.of(1, 2, 3, 4, 5, 6), bonusLessMIN))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ERROR_LOTTO_NUMBER_RANGE.getMessage());
@@ -58,7 +48,7 @@ class WinningLottoTest {
     @ParameterizedTest
     @MethodSource("matchWinningLottoTestParameters")
     @DisplayName("로또의 당첨 여부를 판단한다.")
-    void test_MatchWinningLotto_Correctly(WinningLotto winningLotto, int expected) {
+    void test_MatchWinningLottoCorrectly(WinningLotto winningLotto, int expected) {
         MatchCount count = defaultLotto.matchCount(winningLotto);
 
         assertThat(count.matchCount()).isEqualTo(expected);
