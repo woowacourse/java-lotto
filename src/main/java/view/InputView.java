@@ -19,7 +19,7 @@ public class InputView {
 
     public Money inputMoney() throws IOException {
         System.out.println("구입금액을 입력해 주세요.");
-        return Money.of(bufferedReader.readLine());
+        return Money.from(bufferedReader.readLine());
     }
 
     public WinningLotto inputWinningLotto() throws IOException {

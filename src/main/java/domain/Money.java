@@ -3,7 +3,7 @@ package domain;
 public class Money {
     private final int value;
 
-    public static Money of(final String number) {
+    public static Money from(final String number) {
         try {
             final int parsedNumber = Integer.parseInt(number.trim());
             return new Money(parsedNumber);

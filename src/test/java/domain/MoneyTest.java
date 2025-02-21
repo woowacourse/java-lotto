@@ -25,7 +25,7 @@ class MoneyTest {
     @CsvSource(value = {"100", "1000", "5000", "10000"})
     void not_exception_argv_is_only_number_string_when_static_ctor(final String input) {
         // when
-        Money money = Money.of(input);
+        Money money = Money.from(input);
 
         // then
         assertThat(money.getValue()).isEqualTo(Integer.parseInt(input));
@@ -39,7 +39,7 @@ class MoneyTest {
 
         // when & then
         assertThatThrownBy(() -> {
-            Money.of(input);
+            Money.from(input);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
