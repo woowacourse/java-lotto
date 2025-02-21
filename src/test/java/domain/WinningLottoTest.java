@@ -1,15 +1,9 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.LottoWallet;
-import domain.Money;
-import domain.WinningInfo;
-import domain.WinningLotto;
-import domain.WinningResult;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
