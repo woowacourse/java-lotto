@@ -4,16 +4,12 @@ import domain.Lotto;
 import domain.LottoWallet;
 import domain.WinningInfo;
 import domain.WinningResult;
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
-    }
-
     public void printLottos(LottoWallet lottoWallet) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoWallet.getLottoCount());
         for (Lotto lotto : lottoWallet.getLottoWallet()) {
             System.out.println(formatLottoMessage(lotto));
         }

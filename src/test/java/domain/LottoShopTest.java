@@ -27,15 +27,17 @@ class LottoShopTest {
     }
 
     @Test
-    @DisplayName("요구하는 로또 개수만큼 로또를 생성하여 반환한다")
-    void should_return_lotto_list_by_lotto_count() {
+    @DisplayName("로또 구매 금액으로 구매가능한 최대 개수만큼 로또를 생성하여 반환한다")
+    void should_return_lottoWallet_by_lotto_count() {
         // given
-        int lottoCount = 2;
+        int moneyValue = 2000;
+        Money money = new Money(moneyValue);
 
         // when
-        LottoWallet lottos = lottoShop.buyLottos(lottoCount);
+        LottoWallet lottoWallet = lottoShop.buyLottos(money);
 
         // then
-        assertThat(lottos.getLottoWallet()).hasSize(lottoCount);
+        int excepted = 2;
+        assertThat(lottoWallet.getLottoWallet()).hasSize(excepted);
     }
 }

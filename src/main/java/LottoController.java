@@ -21,10 +21,8 @@ public class LottoController {
 
     public void run() throws IOException {
         Money money = inputView.inputMoney();
-        final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
-        outputView.printLottoCount(purchasableLottoCount);
 
-        LottoWallet lottoWallet = lottoShop.buyLottos(purchasableLottoCount);
+        LottoWallet lottoWallet = lottoShop.buyLottos(money);
         outputView.printLottos(lottoWallet);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();

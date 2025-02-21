@@ -13,4 +13,8 @@ public class LottoWallet {
         return lottoWallet.stream()
                 .toList();
     }
+
+    public int getLottoCount() {
+        return lottoWallet.size();
+    }
 }
