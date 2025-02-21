@@ -27,4 +27,7 @@ public class WinningResult {
         return totalPrices;
     }
 
+    public float calculateRevenue(Money money) {
+        return (float)getTotalPrices() / money.getValue();
+    }
 }

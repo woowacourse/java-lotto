@@ -2,7 +2,6 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,24 +37,5 @@ class LottoManagerTest {
 
         // then
         assertThat(lottos.getLottoWallet()).hasSize(lottoCount);
-    }
-
-    @Test
-    @DisplayName("구매 금액과 로또 결과가 주어졌을 때 수익률을 정확히 계산한다")
-    void check_calculate_revenue_correctly() {
-        // given
-        WinningResult winningResult = winningLotto.calculateWinningResult(lottoWallet);
-
-        Money money = new Money(6000);
-        long totalPrices = Arrays.stream(WinningInfo.values())
-                .mapToLong(WinningInfo::getPrice)
-                .sum();
-        float expected = (float) totalPrices / 6000;
-
-        // when
-        float result = lottoManager.calculateRevenue(winningResult, money);
-
-        // then
-        assertThat(result).isEqualTo(expected);
     }
 }

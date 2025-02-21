@@ -65,4 +65,22 @@ class WinningResultTest {
         long expected = WinningInfo.FIRST_PRIZE.getPrice() * count;
         assertThat(result).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("로또 구입 금액이 주어졌을 때 수익률을 계산한다")
+    void should_return_revenue_given_money() {
+        // given
+        int moneyValue = 2000;
+        Money money = new Money(moneyValue);
+        WinningResult winningResult = new WinningResult();
+        winningResult.increaseCount(WinningInfo.FIFTH_PRIZE, 2);
+
+        // when
+        float result = winningResult.calculateRevenue(money);
+
+        // then
+        float excepted = (WinningInfo.FIFTH_PRIZE.getPrice() * 2) / moneyValue;
+        assertThat(result).isEqualTo(excepted);
+    }
+
 }

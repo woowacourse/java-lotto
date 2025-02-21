@@ -12,8 +12,4 @@ public class LottoManager {
         }
         return new LottoWallet(lottos);
     }
-
-    public float calculateRevenue(WinningResult winningResult, Money money) {
-        return (float) winningResult.getTotalPrices() / money.getValue();
-    }
 }
