@@ -12,6 +12,7 @@ import lotto.domain.MatchCount;
 import lotto.domain.MatchInfo;
 import lotto.domain.Profit;
 import lotto.domain.Wallet;
+import lotto.domain.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,11 +33,9 @@ public class Controller {
 
         outputView.printLottoList(wallet.getLottoList());
 
-        Lotto winningLotto = requestWinningLotto();
+        WinningLotto winningLotto = requestWinningLotto();
 
-        int bonus = requestBonus(winningLotto);
-
-        List<MatchCount> matchCount = wallet.getMatchCountList(winningLotto, bonus);
+        List<MatchCount> matchCount = wallet.getMatchCountList(winningLotto);
         Map<MatchInfo, Integer> matchResult = cashier.convertToMatchResult(matchCount);
         outputView.printStatics(matchResult);
 
@@ -44,7 +43,7 @@ public class Controller {
         outputView.printProfit(profit);
     }
 
-    private int requestBonus(Lotto winningLotto) {
+    private int requestBonus(WinningLotto winningLotto) {
         while (true) {
             try {
                 int bonus = requestNumber(REQUEST_BONUS);
@@ -80,13 +79,16 @@ public class Controller {
         }
     }
 
-    private Lotto requestWinningLotto() {
+    private WinningLotto requestWinningLotto() {
         while (true) {
             try {
                 outputView.print(REQUEST_WINNING_LOTTO);
                 String winningNumberInput = inputView.read();
                 List<Integer> winningNumbers = InputParser.parseToList(winningNumberInput);
-                return new Lotto(winningNumbers);
+
+                int bonus = requestNumber(REQUEST_BONUS);
+
+                return new WinningLotto(winningNumbers, bonus);
             } catch (IllegalArgumentException e) {
                 outputView.print(e.getMessage());
             }

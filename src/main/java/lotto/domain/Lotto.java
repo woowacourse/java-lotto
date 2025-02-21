@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 
 import lotto.common.utill.RandomWrapper;
 
-public record Lotto(List<Integer> numbers) {
+public class Lotto {
+    protected final List<Integer> numbers;
+
     public Lotto(List<Integer> numbers) {
         List<Integer> lottoNumbers = numbers.stream()
             .sorted()
@@ -46,44 +48,31 @@ public record Lotto(List<Integer> numbers) {
     }
 
     private void validateRange(List<Integer> numbers) {
-        for (int number : numbers) {
-            validateLottoNumberRange(number);
-        }
-    }
-
-    private void validateLottoNumberRange(int number) {
-        if (isNumberInRage(number)) {
+        if (numbers.stream().anyMatch(this::isNumberInRage)) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 
-    private boolean isNumberInRage(int number) {
+    protected boolean isNumberInRage(int number) {
         return number < LOTTO_MINIMUM || number > LOTTO_MAXIMUM;
     }
-
-    public MatchCount matchCount(Lotto winningLotto, int bonus) {
-        int count = (int)winningLotto.numbers().stream()
+    
+    public MatchCount matchCount(WinningLotto winningLotto) {
+        int count = (int)winningLotto.getLottoNumbers().stream()
             .filter(numbers::contains)
             .count();
 
-        boolean isBonus = isContainsBonus(bonus);
+        boolean isBonus = isContainsBonus(winningLotto.getBonus());
 
         return new MatchCount(count, isBonus);
-    }
-
-    public void validateBonus(int bonus) {
-        validateLottoNumberRange(bonus);
-        validateDuplicatedBonus(bonus);
     }
 
     public boolean isContainsBonus(int bonus) {
         return numbers.contains(bonus);
     }
 
-    private void validateDuplicatedBonus(int bonus) {
-        if (isContainsBonus(bonus)) {
-            throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER.getMessage());
-        }
+    public List<Integer> getLottoNumbers() {
+        return numbers;
     }
 
     @Override

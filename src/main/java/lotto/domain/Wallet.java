@@ -14,9 +14,9 @@ public class Wallet {
             .forEach(lottoList::add);
     }
 
-    public List<MatchCount> getMatchCountList(Lotto winningLotto, int bonus) {
+    public List<MatchCount> getMatchCountList(WinningLotto winningLotto) {
         return lottoList.stream()
-            .map(lotto -> lotto.matchCount(winningLotto, bonus))
+            .map(lotto -> lotto.matchCount(winningLotto))
             .toList();
     }
 

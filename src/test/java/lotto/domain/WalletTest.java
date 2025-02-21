@@ -13,10 +13,10 @@ class WalletTest {
     @Test
     void test_MatchCountListHasCorrectSize() {
         var size = 5;
-        Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
+        WinningLotto winningLotto = new WinningLotto(List.of(6, 5, 4, 3, 2, 1), 7);
         Wallet wallet = new Wallet(size);
 
-        List<MatchCount> matchCounts = wallet.getMatchCountList(lotto, 7);
+        List<MatchCount> matchCounts = wallet.getMatchCountList(winningLotto);
 
         assertThat(matchCounts).hasSize(size);
     }
