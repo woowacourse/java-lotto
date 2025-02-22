@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -13,9 +15,9 @@ public enum WinningInfo {
 
     private final int matchedNumberCount;
     private final boolean isBonusMatched;
-    private final int price;
+    private final long price;
 
-    WinningInfo(int matchedNumberCount, boolean isBonusMatched, int price) {
+    WinningInfo(int matchedNumberCount, boolean isBonusMatched, long price) {
         this.matchedNumberCount = matchedNumberCount;
         this.isBonusMatched = isBonusMatched;
         this.price = price;
@@ -23,15 +25,16 @@ public enum WinningInfo {
 
     public static WinningInfo of(int matchedNumberCount, boolean isBonusMatched) {
         return Arrays.stream(values())
-                .filter(value -> value.getMatchedNumberCount() == matchedNumberCount
-                        && value.isBonusMatched() == isBonusMatched)
+                .filter(winningInfo -> matchedNumberCount == winningInfo.getMatchedNumberCount())
+                .filter(winningInfo -> (winningInfo.getMatchedNumberCount() == SECOND_PRIZE.getMatchedNumberCount() &&
+                        winningInfo.isBonusMatched() == isBonusMatched) ||
+                        (winningInfo.getMatchedNumberCount() != SECOND_PRIZE.getMatchedNumberCount()))
                 .findFirst()
                 .orElse(NONE);
     }
 
     public static List<WinningInfo> getSortedValues() {
         return Arrays.stream(values())
-                .filter(v -> v != WinningInfo.NONE)
                 .sorted(Comparator.comparing(WinningInfo::getPrice))
                 .toList();
     }
@@ -44,7 +47,7 @@ public enum WinningInfo {
         return isBonusMatched;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 }

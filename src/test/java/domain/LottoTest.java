@@ -1,3 +1,5 @@
+package domain;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -80,7 +82,7 @@ class LottoTest {
         Money money = new Money(1000);
 
         // when
-        int lottoCount = Lotto.countPurchasableLottosByMoney(money);
+        int lottoCount = Lotto.calculatePurchasableLottoCount(money);
 
         // then
         assertThat(lottoCount).isEqualTo(1);
@@ -93,7 +95,7 @@ class LottoTest {
         Money money = new Money(1500);
 
         // when & then
-        assertThatThrownBy(() -> Lotto.countPurchasableLottosByMoney(money))
+        assertThatThrownBy(() -> Lotto.calculatePurchasableLottoCount(money))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

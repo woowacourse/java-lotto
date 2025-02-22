@@ -1,29 +1,34 @@
+import domain.Lotto;
+import domain.LottoShop;
+import domain.LottoWallet;
+import domain.Money;
+import domain.WinningLotto;
+import domain.WinningResult;
 import java.io.IOException;
-import java.util.List;
+import view.InputView;
+import view.OutputView;
 
 public class LottoController {
-    private InputView inputView;
-    private OutputView outputView;
-    private LottoManager lottoManager;
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoShop lottoShop;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoManager lottoManager) {
+    public LottoController(InputView inputView, OutputView outputView, LottoShop lottoShop) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.lottoManager = lottoManager;
+        this.lottoShop = lottoShop;
     }
 
     public void run() throws IOException {
         Money money = inputView.inputMoney();
-        final int purchasableLottoCount = Lotto.countPurchasableLottosByMoney(money);
-        outputView.printLottoCount(purchasableLottoCount);
 
-        List<Lotto> lottos = lottoManager.generateLottos(purchasableLottoCount);
-        outputView.printLottos(lottos);
+        LottoWallet lottoWallet = lottoShop.buyLottos(money);
+        outputView.printLottos(lottoWallet);
 
         WinningLotto winningLotto = inputView.inputWinningLotto();
 
-        WinningResult winningResult = lottoManager.calculateWinningResult(lottos, winningLotto);
+        WinningResult winningResult = winningLotto.calculateWinningResult(lottoWallet);
         outputView.printWinningResult(winningResult);
-        outputView.printRevenue(lottoManager.calculateRevenue(winningResult, money));
+        outputView.printRevenue(winningResult.calculateRevenue(money));
     }
 }

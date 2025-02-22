@@ -1,14 +1,16 @@
-import java.util.List;
+package view;
+
+import domain.Lotto;
+import domain.LottoWallet;
+import domain.WinningInfo;
+import domain.WinningResult;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public void printLottoCount(int count) {
-        System.out.printf("%d개를 구매했습니다.\n", count);
-    }
-
-    public void printLottos(List<Lotto> lottos) {
-        for (Lotto lotto : lottos) {
+    public void printLottos(LottoWallet lottoWallet) {
+        System.out.printf("%d개를 구매했습니다.\n", lottoWallet.getLottoCount());
+        for (Lotto lotto : lottoWallet.getLottoWallet()) {
             System.out.println(formatLottoMessage(lotto));
         }
     }
@@ -26,16 +28,26 @@ public class OutputView {
         stringBuilder.append("---------\n");
         for (WinningInfo winningInfo : WinningInfo.getSortedValues()) {
             stringBuilder.append(formatWinningInfoMessage(winningInfo));
-            stringBuilder.append(String.format(" - %d개\n", winningResult.getCount(winningInfo)));
+            stringBuilder.append(formatWinningResultMessage(winningResult, winningInfo));
         }
         System.out.println(stringBuilder);
     }
 
     private String formatWinningInfoMessage(WinningInfo winningInfo) {
+        if (winningInfo == WinningInfo.NONE) {
+            return "";
+        }
         if (winningInfo == WinningInfo.SECOND_PRIZE) {
             return String.format("%d개 일치, 보너스 볼 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
         }
         return String.format("%d개 일치 (%d원)", winningInfo.getMatchedNumberCount(), winningInfo.getPrice());
+    }
+    
+    private String formatWinningResultMessage(WinningResult winningResult, WinningInfo winningInfo) {
+        if (winningInfo == WinningInfo.NONE) {
+            return "";
+        }
+        return String.format(" - %d개\n", winningResult.getCount(winningInfo));
     }
 
     public void printRevenue(float revenue) {
