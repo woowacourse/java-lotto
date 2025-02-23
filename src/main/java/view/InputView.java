@@ -4,24 +4,29 @@ import java.util.Scanner;
 
 public class InputView {
 
-    private final static Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+    private final OutputView outputView;
 
-    public static String inputBuyLottoMoney() {
-        OutputView.printBuyLottoMoney();
+    public InputView(OutputView outputView) {
+        this.outputView = outputView;
+        scanner = new Scanner(System.in);
+    }
+
+    public String inputBuyLottoMoney() {
         return input();
     }
 
-    private static String input() {
+    private String input() {
         return scanner.nextLine();
     }
 
-    public static String inputWinningNumber() {
-        OutputView.printInputWinningNumber();
+    public String inputWinningNumber() {
+        outputView.printInputWinningNumber();
         return input();
     }
 
-    public static String inputBonusNumber() {
-        OutputView.printInputBonusNumber();
+    public String inputBonusNumber() {
+        outputView.printInputBonusNumber();
         return input();
     }
 }

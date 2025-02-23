@@ -8,6 +8,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static final String INVALID_NUMBER_RANGE = "로또 숫자는 1부터 45까지 가능합니다.";
     private static final int LOTTO_NUMBER_END = 45;
     private static final int LOTTO_NUMBER_START = 1;
+
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {

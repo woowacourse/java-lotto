@@ -1,6 +1,5 @@
 package domain;
 
-import domain.formatter.LottoBuyResultFormatter;
 import exception.LottoException;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +10,7 @@ public class Lotto {
     private static final String INVALID_LOTTO_SIZE = "로또 번호는 6개여야 합니다.";
     private static final String DUPLICATE_LOTTO_NUMBERS = "로또 번호는 중복될 수 없습니다!";
     private static final int LOTTO_LENGTH = 6;
+
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> lottoNumbers) {
@@ -42,7 +42,7 @@ public class Lotto {
                 .anyMatch(lottoNumber -> bonusNumber.isContain(lottoNumber));
     }
 
-    public String buyNumber() {
-        return LottoBuyResultFormatter.formatNumbers(lottoNumbers);
+    public List<LottoNumber> lottoNumbers() {
+        return lottoNumbers;
     }
 }

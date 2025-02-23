@@ -1,8 +1,9 @@
 package domain;
 
-import domain.formatter.LottoBuyResultFormatter;
+import domain.strategy.LottoGenerateStrategy;
 import exception.LottoException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,14 +11,17 @@ import utility.StringUtility;
 
 public class LottoDispenser {
 
-    private final int LOTTO_MONEY_UNIT = 1000;
     private final String INVALID_BUY_MONEY = "유효하지 않은 구매 금액입니다.";
-    private final List<Lotto> lottos;
-    private final int buyMoney;
+    private final int LOTTO_MONEY_UNIT = 1000;
 
-    public LottoDispenser(String buyMoneyInput) {
+    private final int buyMoney;
+    private final List<Lotto> lottos;
+    private LottoGenerateStrategy lottoGenerateStrategy;
+
+    public LottoDispenser(String buyMoneyInput, LottoGenerateStrategy lottoRandomGenerator) {
         validateLottoDispenser(buyMoneyInput);
         this.buyMoney = Integer.parseInt(buyMoneyInput);
+        this.lottoGenerateStrategy = lottoRandomGenerator;
         int lottoCount = Integer.parseInt(buyMoneyInput) / LOTTO_MONEY_UNIT;
         lottos = generateLottos(lottoCount);
     }
@@ -43,7 +47,7 @@ public class LottoDispenser {
     private List<Lotto> generateLottos(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
-            lottos.add(new Lotto(LottoRandomGenerator.generateNumbers()));
+            lottos.add(new Lotto(lottoGenerateStrategy.generateNumbers()));
         }
         return lottos;
     }
@@ -73,7 +77,7 @@ public class LottoDispenser {
         return ((double) (earnMoney / buyMoney) * 100) / 100;
     }
 
-    public String buyLottoResult() {
-        return LottoBuyResultFormatter.formattingBuyLottoResult(lottos);
+    public List<Lotto> getLottos() {
+        return Collections.unmodifiableList(lottos);
     }
 }

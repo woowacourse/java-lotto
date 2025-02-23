@@ -25,6 +25,16 @@ public class WinningNumberTest {
         }).isInstanceOf(LottoException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5, 6", "1,2,3,4,5,6 "})
+    @DisplayName("유효하지 않은 당첨번호")
+    void 유효하지_않은_당첨_번호(String numbers) {
+        Assertions.assertThatThrownBy(() -> {
+            new WinningNumber(numbers);
+        }).isInstanceOf(LottoException.class);
+    }
+
+
     @DisplayName("당첨_번호는_1_45_사이여야_합니다")
     @ParameterizedTest
     @ValueSource(strings = {"0,2,3,4,5,44", "1,2,3,4,5,46"})

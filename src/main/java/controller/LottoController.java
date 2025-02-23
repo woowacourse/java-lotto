@@ -1,5 +1,11 @@
 package controller;
 
+import domain.BonusNumber;
+import domain.LottoDispenser;
+import domain.WinningCase;
+import domain.WinningNumber;
+import domain.dto.WinningCalculateDto;
+import java.util.Map;
 import service.LottoService;
 
 public class LottoController {
@@ -10,23 +16,23 @@ public class LottoController {
         this.lottoService = lottoService;
     }
 
-    public void inputBuyLottoMoney(String inputBuyLottoMoney) {
-        lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
+    public LottoDispenser inputBuyLottoMoney(String inputBuyLottoMoney) {
+        return lottoService.inputBuyLottoMoney(inputBuyLottoMoney);
     }
 
-    public String formattingBuyLottoResult() {
-        return lottoService.buyLottoResult();
+    public WinningCalculateDto winningResult(LottoDispenser lottoDispenser, WinningNumber winningNumber,
+                                             BonusNumber bonusNumber) {
+        Map<WinningCase, Integer> winningCaseIntegerMap = lottoService.winningCalculate(lottoDispenser, winningNumber,
+                bonusNumber);
+        double earnMoneyRatio = lottoService.calculateEarnMoneyRatio(lottoDispenser, winningCaseIntegerMap);
+        return new WinningCalculateDto(winningCaseIntegerMap, earnMoneyRatio);
     }
 
-    public String formattingWinningResult() {
-        return lottoService.winningCalculate();
+    public WinningNumber inputWinningNumber(String inputWinningNumber) {
+        return lottoService.inputWinningNumber(inputWinningNumber);
     }
 
-    public void inputWinningNumber(String inputWinningNumber) {
-        lottoService.inputWinningNumber(inputWinningNumber);
-    }
-
-    public void inputBonusNumber(String inputBonusNumber) {
-        lottoService.inputBonusNumber(inputBonusNumber);
+    public BonusNumber inputBonusNumber(String inputBonusNumber) {
+        return lottoService.inputBonusNumber(inputBonusNumber);
     }
 }

@@ -1,4 +1,4 @@
-package domain.formatter;
+package domain;
 
 public class WinningCaseFormatter {
 
