@@ -57,6 +57,14 @@ public class WinningLotto {
         }
     }
 
+
+    public LottoMatch compareLotto(Lotto lotto) {
+        int winningCount = lotto.calculateMatchCount(winningNumbers);
+        boolean bonusMatches = lotto.cotainsNumber(bonusNumber);
+        return LottoMatch.calculateLotto(winningCount, bonusMatches);
+    }
+
+
     public List<Integer> getWinningNumbers() {
         return winningNumbers;
     }

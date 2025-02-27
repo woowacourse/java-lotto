@@ -48,7 +48,7 @@ public class Buyer {
         }
 
         for (Lotto lotto : lottos) {
-            LottoMatch matchedLotto = lotto.compareLotto(winningLotto);
+            LottoMatch matchedLotto = winningLotto.compareLotto(lotto);
             result.put(matchedLotto, result.get(matchedLotto) + 1);
         }
         return result;
